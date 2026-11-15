@@ -49,7 +49,7 @@ function OptionItems({ items, onAction, testId }: Pick<GlassOptionsMenuProps, "i
 function OptionLabel({ item, testId }: { item: GlassOption; testId: string }) {
   return <>
     {item.icon && <GlassEmblem data-test-id={`${testId}-icon-${item.id}`} aria-hidden="true" className="size-5 text-inherit [&_svg]:size-3">{item.icon}</GlassEmblem>}
-    <span data-test-id={`${testId}-label-${item.id}`} className="min-w-0 flex-1 whitespace-normal text-start">
+    <span data-test-id={`${testId}-label-${item.id}`} className={glass.optionLabel}>
       <span data-test-id={`${testId}-text-${item.id}`} className="block">{item.label}</span>
       {item.description && <span data-test-id={`${testId}-description-${item.id}`} className="mt-0.5 block text-[10px] text-muted-foreground">{item.description}</span>}
     </span>
