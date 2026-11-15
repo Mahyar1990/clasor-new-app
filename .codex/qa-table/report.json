@@ -1,0 +1,37 @@
+{
+  "attachedSearchGroup": true,
+  "searchButtonAndEnter": true,
+  "appearance": {
+    "headerFont": 14,
+    "recordFont": 12,
+    "actionWidth": 128,
+    "bodyActionWidth": 128
+  },
+  "fixedHeaderDelta": 0,
+  "bodyScrollDelta": 180,
+  "keyboardScroll": true,
+  "search": true,
+  "noResults": true,
+  "directDelete": true,
+  "menuActions": true,
+  "reset": true,
+  "widths": [
+    {
+      "width": 360,
+      "scroll": 360
+    },
+    {
+      "width": 640,
+      "scroll": 640
+    },
+    {
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "width": 1440,
+      "scroll": 1440
+    }
+  ],
+  "errors": []
+}

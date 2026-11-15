@@ -1,0 +1,34 @@
+{
+  "tableSelection": true,
+  "normal": "18px",
+  "compact": "12px",
+  "states": true,
+  "consistentPermission": true,
+  "stepperPreservesInput": true,
+  "explicitCommit": true,
+  "partialRecovery": true,
+  "independentIdentities": true,
+  "widths": [
+    {
+      "width": 360,
+      "scroll": 360
+    },
+    {
+      "width": 640,
+      "scroll": 640
+    },
+    {
+      "width": 700,
+      "scroll": 700
+    },
+    {
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "width": 1440,
+      "scroll": 1440
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,55 @@
+import { chooseSelect } from "../qa/select-option.mjs";
+import { pathToFileURL } from 'node:url';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const { chromium } = await import(pathToFileURL(process.env.TEMP + '/clasor-design-qa/node_modules/playwright/index.mjs').href);
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errors = []; page.on('pageerror', error => errors.push(error.message));
+  await page.goto(process.env.QA_URL ?? 'http://localhost:3100', { waitUntil: 'networkidle' });
+  const data = page.locator('[data-catalogue=data]').locator('section').first(); const patterns = page.locator('[data-catalogue=patterns]');
+  const all = data.getByRole('checkbox').first(); await data.getByRole('checkbox').nth(1).click();
+  assert.equal(await all.getAttribute('aria-checked'), 'mixed');
+  await all.click(); assert.equal(await all.getAttribute('aria-checked'), 'true');
+  await data.getByRole('button', { name: 'پاک‌کردن انتخاب', exact: true }).click(); assert.equal(await all.getAttribute('aria-checked'), 'false');
+  const normal = await data.locator('tbody td').nth(1).evaluate(el => getComputedStyle(el).paddingTop);
+  await chooseSelect(page, page.getByRole('combobox', { name: 'تراکم جدول', exact: true }), 'compact');
+  const compact = await data.locator('tbody td').nth(1).evaluate(el => getComputedStyle(el).paddingTop);
+  assert.equal(normal, '18px'); assert.equal(compact, '12px');
+  const state = page.getByRole('combobox', { name: 'حالت جدول', exact: true });
+  for (const value of ['empty', 'loading', 'error']) { await chooseSelect(page, state, value); assert(await all.isDisabled()); }
+  await data.getByRole('button', { name: 'تلاش دوباره', exact: true }).click(); assert.equal(await data.getByRole('checkbox').count(), 4);
+  await chooseSelect(page, page.getByRole('combobox', { name: 'سناریوی نقش' }), 'guest');
+  assert(await patterns.getByRole('button', { name: 'درخواست تأیید', exact: true }).isDisabled());
+  await patterns.getByRole('button', { name: 'اقدام‌های نسخه نمایشی', exact: true }).click();
+  assert(await page.getByRole('menuitem', { name: 'درخواست تأیید', exact: true }).isDisabled());
+  await page.keyboard.press('Escape');
+  await chooseSelect(page, page.getByRole('combobox', { name: 'سناریوی نقش' }), 'editor');
+  await patterns.getByRole('button', { name: 'درخواست تأیید', exact: true }).click();
+  assert(await patterns.getByText('درخواست تأیید فقط شبیه‌سازی شد.', { exact: true }).count());
+  assert(await patterns.getByRole('button', { name: 'ادامه', exact: true }).isDisabled());
+  await page.getByRole('textbox', { name: 'عنوان نسخه', exact: false }).fill('نسخه آزمایشی');
+  await patterns.getByRole('button', { name: 'ادامه', exact: true }).click();
+  await page.getByRole('radio', { name: 'مبتنی بر نسخه ۱؛ با محتوای نسخه موجود', exact: true }).click();
+  await patterns.getByRole('button', { name: 'برگشت', exact: true }).click();
+  assert.equal(await page.getByRole('textbox', { name: 'عنوان نسخه', exact: false }).inputValue(), 'نسخه آزمایشی');
+  await patterns.getByRole('button', { name: 'ادامه', exact: true }).click();
+  assert.equal(await page.getByRole('radio', { name: 'مبتنی بر نسخه ۱؛ با محتوای نسخه موجود', exact: true }).getAttribute('aria-checked'), 'true');
+  await patterns.getByRole('button', { name: 'ادامه', exact: true }).click();
+  assert(await patterns.getByRole('button', { name: 'ایجاد نسخه نمونه', exact: true }).isVisible());
+  await patterns.getByRole('button', { name: 'ایجاد نسخه نمونه', exact: true }).click();
+  assert.equal(await patterns.getByRole('button', { name: 'ایجاد نسخه نمونه', exact: true }).count(), 0);
+  await patterns.getByRole('button', { name: 'ادامه بازکردن ویرایشگر نمونه', exact: true }).click();
+  assert(await patterns.getByText('نسخه «نسخه آزمایشی» در نمونه کامل شد؛ ذخیره‌سازی واقعی انجام نشد.', { exact: true }).count());
+  await patterns.getByRole('button', { name: 'نمایش تصمیم ثبت‌شده', exact: true }).click();
+  assert(await patterns.getByText('رضا موسوی', { exact: true }).count());
+  assert.equal(await patterns.locator('time').count(), 2);
+  const widths = [];
+  for (const width of [360, 640, 700, 1024, 1440]) { await page.setViewportSize({ width, height: 1000 }); widths.push(await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth }))); }
+  assert(widths.every(value => value.width === value.scroll));
+  await page.setViewportSize({ width: 360, height: 900 }); await page.locator('#data').scrollIntoViewIfNeeded(); await page.screenshot({ path: '.codex/qa-stage-e/table-mobile.png' });
+  assert.deepEqual(errors, []);
+  fs.writeFileSync('.codex/qa-stage-e/report.json', JSON.stringify({ tableSelection: true, normal, compact, states: true, consistentPermission: true, stepperPreservesInput: true, explicitCommit: true, partialRecovery: true, independentIdentities: true, widths, errors }, null, 2));
+  console.log('Stage E: table, selection, permission, stepper, recovery and approval context passed.');
+} finally { await browser.close(); }

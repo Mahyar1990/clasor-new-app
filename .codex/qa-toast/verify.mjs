@@ -1,0 +1,53 @@
+import { pathToFileURL } from 'node:url';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const { chromium } = await import(pathToFileURL(process.env.TEMP + '/clasor-design-qa/node_modules/playwright/index.mjs').href);
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errors = []; page.on('pageerror', error => errors.push(error.message));
+  await page.goto('http://localhost:3101', { waitUntil: 'networkidle' });
+  assert.equal(await page.locator('[data-slot=toast-viewport]').count(), 1);
+  await page.addScriptTag({ path: process.env.TEMP + '/clasor-design-qa/node_modules/axe-core/axe.min.js' });
+  const variants = [];
+  for (const label of ['Default', 'Success', 'Info', 'Warning', 'Error']) {
+    await page.getByRole('button', { name: label, exact: true }).click();
+    const notification = page.locator('[data-slot=toast]'); await notification.waitFor();
+    await page.waitForFunction(el => el.getBoundingClientRect().bottom <= innerHeight, await notification.elementHandle());
+    await notification.evaluate(async el => { await Promise.all(el.getAnimations().map(animation => animation.finished.catch(() => {}))); });
+    assert.equal(await notification.getAttribute('data-tone'), label.toLowerCase());
+    assert.equal(await notification.getAttribute('dir'), 'rtl');
+    assert((await notification.locator('[data-slot=toast-title]').innerText()).length > 0);
+    assert((await notification.locator('[data-slot=toast-description]').innerText()).length > 0);
+    assert.equal(await notification.locator('[data-slot=toast-icon]').count(), label === 'Default' ? 0 : 1);
+    assert.equal(await notification.getByRole('button').count(), 1);
+    const violations = await page.evaluate(async () => (await axe.run('[data-slot=toast]', { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(item => item.id));
+    assert.deepEqual(violations, []);
+    variants.push({ type: label, background: await notification.evaluate(el => getComputedStyle(el).backgroundColor), violations });
+    await notification.getByRole('button', { name: 'بستن پیام', exact: true }).click();
+    await notification.waitFor({ state: 'hidden' });
+  }
+  assert.equal(new Set(variants.map(item => item.background)).size, 5);
+  await page.getByRole('button', { name: 'Default', exact: true }).click();
+  await page.mouse.move(0, 0);
+  await page.locator('[data-slot=toast]').waitFor({ state: 'hidden', timeout: 9500 });
+  for (const label of ['Success', 'Warning', 'Error']) await page.getByRole('button', { name: label, exact: true }).click();
+  assert((await page.locator('[data-slot=toast]:not([data-limited])').count()) <= 3);
+  const front = page.locator('[data-slot=toast]').first();
+  await page.waitForFunction(el => el.getBoundingClientRect().bottom <= innerHeight, await front.elementHandle());
+  await front.evaluate(async el => { await Promise.all(el.getAnimations().map(animation => animation.finished.catch(() => {}))); });
+  await front.hover();
+  await page.locator('[data-slot=toast]').evaluateAll(async elements => { await Promise.all(elements.flatMap(el => el.getAnimations()).map(animation => animation.finished.catch(() => {}))); });
+  await page.screenshot({ path: '.codex/qa-toast/desktop.png' });
+  await page.setViewportSize({ width: 360, height: 900 });
+  const bounds = await page.locator('[data-slot=toast-viewport]').boundingBox();
+  assert(bounds.x >= 0 && bounds.x + bounds.width <= 360);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 360);
+  await page.screenshot({ path: '.codex/qa-toast/mobile.png' });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const transition = await page.locator('[data-slot=toast]').first().evaluate(el => getComputedStyle(el).transitionDuration);
+  assert(transition.split(',').every(value => parseFloat(value) < 0.001));
+  assert.deepEqual(errors, []);
+  fs.writeFileSync('.codex/qa-toast/report.json', JSON.stringify({ variants, singleHost: true, autoDismiss6500: true, stackingLimit: 3, mobileBounds: bounds, reducedMotion: transition, errors }, null, 2));
+  console.log('Toast: Default/Success/Info/Warning/Error, icons, semantic colors, RTL, close, timeout, stacking and axe passed.');
+} finally { await browser.close(); }

@@ -1,0 +1,18 @@
+{
+  "keyboardEndEnter": true,
+  "escapePreservesValue": true,
+  "focusReturn": true,
+  "disabled": true,
+  "invalid": true,
+  "placeholder": true,
+  "disabledOption": true,
+  "rtl": true,
+  "mobileBounds": {
+    "x": 40.39793014526367,
+    "y": 473.18701171875,
+    "width": 280.6020698547363,
+    "height": 127.365478515625
+  },
+  "axeViolations": [],
+  "errors": []
+}

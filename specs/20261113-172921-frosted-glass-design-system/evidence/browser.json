@@ -1,0 +1,162 @@
+[
+  {
+    "file": "index.html",
+    "width": 360,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "index.html",
+    "width": 360,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  },
+  {
+    "file": "index.html",
+    "width": 390,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "index.html",
+    "width": 390,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  },
+  {
+    "file": "index.html",
+    "width": 768,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "index.html",
+    "width": 768,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  },
+  {
+    "file": "index.html",
+    "width": 1440,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "index.html",
+    "width": 1440,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 360,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 360,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 390,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 390,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 768,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 768,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 1440,
+    "overflow": false,
+    "font": true,
+    "mode": "auto",
+    "background": "color(srgb 1 1 1 / 0.82)",
+    "blur": "blur(16px) saturate(1.1)",
+    "labels": false
+  },
+  {
+    "file": "clasor-design-system.html",
+    "width": 1440,
+    "overflow": false,
+    "font": true,
+    "mode": "solid",
+    "background": "rgb(255, 255, 255)",
+    "blur": "none",
+    "labels": false
+  }
+]

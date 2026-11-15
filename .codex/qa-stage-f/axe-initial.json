@@ -1,0 +1,577 @@
+[
+  {
+    "id": "aria-prohibited-attr",
+    "impact": "serious",
+    "tags": [
+      "cat.aria",
+      "wcag2a",
+      "wcag412",
+      "EN-301-549",
+      "EN-9.4.1.2",
+      "RGAAv4",
+      "RGAA-7.1.1"
+    ],
+    "description": "Ensure ARIA attributes are not prohibited for an element's role",
+    "help": "Elements must only use permitted ARIA attributes",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/aria-prohibited-attr?application=axeAPI",
+    "nodes": [
+      {
+        "any": [],
+        "all": [],
+        "none": [
+          {
+            "id": "aria-prohibited-attr",
+            "data": {
+              "role": null,
+              "nodeName": "span",
+              "messageKey": "noRoleSingular",
+              "prohibited": [
+                "aria-label"
+              ]
+            },
+            "relatedNodes": [],
+            "impact": "serious",
+            "message": "aria-label attribute cannot be used on \"span\" elements with no valid role attribute."
+          }
+        ],
+        "impact": "serious",
+        "html": "<span aria-label=\"نشان موقت کلاسور\" class=\"jsx-88dad0c697ef4f5a mark\">",
+        "target": [
+          ".mark"
+        ],
+        "failureSummary": "Fix all of the following:\n  aria-label attribute cannot be used on \"span\" elements with no valid role attribute."
+      }
+    ]
+  },
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": [
+      "cat.color",
+      "wcag2aa",
+      "wcag143",
+      "TTv5",
+      "TT13.c",
+      "EN-301-549",
+      "EN-9.1.4.3",
+      "ACT",
+      "RGAAv4",
+      "RGAA-3.2.1"
+    ],
+    "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+    "help": "Elements must meet minimum color contrast ratio thresholds",
+    "helpUrl": "https://dequeuniversity.com/rules/axe/4.14/color-contrast?application=axeAPI",
+    "nodes": [
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#9976c7",
+              "bgColor": "#eee5f8",
+              "contrastRatio": 2.98,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<a href=\"#colors\" aria-current=\"location\" class=\"jsx-88dad0c697ef4f5a\">",
+                "target": [
+                  "a[aria-current=\"location\"]"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 2.98 (foreground color: #9976c7, background color: #eee5f8, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">01</span>",
+        "target": [
+          "a[aria-current=\"location\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #9976c7, background color: #eee5f8, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">02</span>",
+        "target": [
+          "a[href$=\"#typography\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">03</span>",
+        "target": [
+          "a[href$=\"#geometry\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">04</span>",
+        "target": [
+          "a[href$=\"#buttons\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">05</span>",
+        "target": [
+          "a[href$=\"#inputs\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">06</span>",
+        "target": [
+          "a[href$=\"#status\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">07</span>",
+        "target": [
+          "a[href$=\"#navigation\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">08</span>",
+        "target": [
+          "a[href$=\"#data\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">09</span>",
+        "target": [
+          "a[href$=\"#feedback\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">10</span>",
+        "target": [
+          "a[href$=\"#overlays\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">11</span>",
+        "target": [
+          "a[href$=\"#patterns\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">12</span>",
+        "target": [
+          "a[href$=\"#accessibility\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#938c9b",
+              "bgColor": "#ffffff",
+              "contrastRatio": 3.24,
+              "fontSize": "8.3pt (11px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<aside aria-label=\"فهرست سیستم طراحی\" class=\"jsx-88dad0c697ef4f5a sidebar\">",
+                "target": [
+                  "aside"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<span class=\"jsx-88dad0c697ef4f5a number\">13</span>",
+        "target": [
+          "a[href$=\"#handoff\"] > .number"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.24 (foreground color: #938c9b, background color: #ffffff, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#7c7881",
+              "bgColor": "#ffffff",
+              "contrastRatio": 4.32,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<section class=\"min-w-0 rounded-lg border bg-card\">",
+                "target": [
+                  "div[data-catalogue=\"navigation\"] > .rounded-lg:nth-child(2)"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 4.32 (foreground color: #7c7881, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<button type=\"button\" data-orientation=\"horizontal\" data-activation-dire...=\"none\" aria-disabled=\"false\" tabindex=\"-1\" role=\"tab\" aria-selected=\"false\" id=\"base-ui-_R_2ah6mslrl...\" data-slot=\"tabs-trigger\" class=\"relative inline-flex...\">",
+        "target": [
+          "#base-ui-_R_2ah6mslrlb_"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.32 (foreground color: #7c7881, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "any": [
+          {
+            "id": "color-contrast",
+            "data": {
+              "fgColor": "#7c7881",
+              "bgColor": "#ffffff",
+              "contrastRatio": 4.32,
+              "fontSize": "10.5pt (14px)",
+              "fontWeight": "normal",
+              "messageKey": null,
+              "expectedContrastRatio": "4.5:1"
+            },
+            "relatedNodes": [
+              {
+                "html": "<section class=\"min-w-0 rounded-lg border bg-card\">",
+                "target": [
+                  "div[data-catalogue=\"navigation\"] > .rounded-lg:nth-child(2)"
+                ]
+              }
+            ],
+            "impact": "serious",
+            "message": "Element has insufficient color contrast of 4.32 (foreground color: #7c7881, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+          }
+        ],
+        "all": [],
+        "none": [],
+        "impact": "serious",
+        "html": "<button type=\"button\" data-orientation=\"horizontal\" data-activation-dire...=\"none\" aria-disabled=\"false\" tabindex=\"-1\" role=\"tab\" aria-selected=\"false\" id=\"base-ui-_R_3ah6mslrl...\" data-slot=\"tabs-trigger\" class=\"relative inline-flex...\">",
+        "target": [
+          "#base-ui-_R_3ah6mslrlb_"
+        ],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.32 (foreground color: #7c7881, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  }
+]

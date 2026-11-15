@@ -1,0 +1,40 @@
+{
+  "variants": [
+    {
+      "type": "Default",
+      "background": "rgb(255, 255, 255)",
+      "violations": []
+    },
+    {
+      "type": "Success",
+      "background": "rgb(237, 248, 241)",
+      "violations": []
+    },
+    {
+      "type": "Info",
+      "background": "rgb(238, 244, 255)",
+      "violations": []
+    },
+    {
+      "type": "Warning",
+      "background": "rgb(255, 247, 232)",
+      "violations": []
+    },
+    {
+      "type": "Error",
+      "background": "rgb(255, 240, 240)",
+      "violations": []
+    }
+  ],
+  "singleHost": true,
+  "autoDismiss6500": true,
+  "stackingLimit": 3,
+  "mobileBounds": {
+    "x": 16,
+    "y": 884,
+    "width": 328,
+    "height": 0
+  },
+  "reducedMotion": "1e-05s",
+  "errors": []
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "file": "index.html",
+    "check": "menu opens and focuses first item",
+    "pass": true
+  },
+  {
+    "file": "index.html",
+    "check": "Escape closes and returns focus",
+    "pass": true
+  },
+  {
+    "file": "index.html",
+    "check": "prefers-reduced-transparency",
+    "supported": true,
+    "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+  },
+  {
+    "file": "index.html",
+    "check": "forced-colors",
+    "supported": true,
+    "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+  },
+  {
+    "file": "index.html",
+    "check": "prefers-reduced-motion",
+    "supported": true,
+    "computed": "{\"blur\":\"blur(16px) saturate(1.1)\",\"background\":\"color(srgb 1 1 1 / 0.82)\"}"
+  },
+  {
+    "file": "clasor-design-system.html",
+    "check": "menu opens and focuses first item",
+    "pass": true
+  },
+  {
+    "file": "clasor-design-system.html",
+    "check": "Escape closes and returns focus",
+    "pass": true
+  },
+  {
+    "file": "clasor-design-system.html",
+    "check": "prefers-reduced-transparency",
+    "supported": true,
+    "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+  },
+  {
+    "file": "clasor-design-system.html",
+    "check": "forced-colors",
+    "supported": true,
+    "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+  },
+  {
+    "file": "clasor-design-system.html",
+    "check": "prefers-reduced-motion",
+    "supported": true,
+    "computed": "{\"blur\":\"blur(16px) saturate(1.1)\",\"background\":\"color(srgb 1 1 1 / 0.82)\"}"
+  }
+]

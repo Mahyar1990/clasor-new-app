@@ -1,0 +1,307 @@
+{
+  "version": "0.3.0",
+  "date": "2026-11-13",
+  "status": "implemented-validation-incomplete",
+  "historicalV02": {
+    "version": "0.2.0",
+    "date": "2026-10-31",
+    "contrast": [
+      {
+        "pair": "action-white",
+        "ratio": 5.11,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "pair": "secondary-white",
+        "ratio": 6.67,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "pair": "input-border",
+        "ratio": 3.24,
+        "threshold": 3,
+        "pass": true
+      },
+      {
+        "pair": "success",
+        "ratio": 6.3,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "pair": "warning",
+        "ratio": 6.09,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "pair": "danger",
+        "ratio": 5.79,
+        "threshold": 4.5,
+        "pass": true
+      },
+      {
+        "pair": "info",
+        "ratio": 6.02,
+        "threshold": 4.5,
+        "pass": true
+      }
+    ],
+    "htmlDuplicateIds": 0,
+    "reactVerification": "lint, production build and 23 existing logic tests passed; browser checked at 360/390/768/1440, no document overflow; controls 32/36/44 and dialog radius20 measured.",
+    "staticExportVerification": "rebuilt with embedded fonts and JS; no browser visual pass claimed for standalone export.",
+    "evidence": ".codex/qa-reference-style"
+  },
+  "current": {
+    "browser": "Microsoft Edge headless Chromium on Windows",
+    "viewports": [
+      360,
+      390,
+      768,
+      1440
+    ],
+    "modes": [
+      "auto",
+      "solid"
+    ],
+    "results": [
+      {
+        "file": "index.html",
+        "width": 360,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "index.html",
+        "width": 360,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      },
+      {
+        "file": "index.html",
+        "width": 390,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "index.html",
+        "width": 390,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      },
+      {
+        "file": "index.html",
+        "width": 768,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "index.html",
+        "width": 768,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      },
+      {
+        "file": "index.html",
+        "width": 1440,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "index.html",
+        "width": 1440,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 360,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 360,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 390,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 390,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 768,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 768,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 1440,
+        "overflow": false,
+        "font": true,
+        "mode": "auto",
+        "background": "color(srgb 1 1 1 / 0.82)",
+        "blur": "blur(16px) saturate(1.1)",
+        "labels": false
+      },
+      {
+        "file": "clasor-design-system.html",
+        "width": 1440,
+        "overflow": false,
+        "font": true,
+        "mode": "solid",
+        "background": "rgb(255, 255, 255)",
+        "blur": "none",
+        "labels": false
+      }
+    ],
+    "evidence": "../specs/20261113-172921-frosted-glass-design-system/evidence/",
+    "contrast": {
+      "measured": null,
+      "result": "not verified",
+      "limitation": "Paired pixel sampling across all fixtures and states has not been executed."
+    },
+    "limitations": [
+      "Firefox runtime checks not executed (executable available).",
+      "Full keyboard/focus, unsupported-filter and performance checks pending; menu Escape/focus return and reduced-transparency/forced-colors emulations passed.",
+      "Screenshots show the composition, not exhaustive per-state or contrast acceptance."
+    ],
+    "commands": {
+      "tokens:check": "pass: 117 tokens",
+      "build": "pass",
+      "lint": "fails in unchanged ds-bundle: 164 errors, 1897 warnings"
+    },
+    "interactionEvidence": [
+      {
+        "file": "index.html",
+        "check": "menu opens and focuses first item",
+        "pass": true
+      },
+      {
+        "file": "index.html",
+        "check": "Escape closes and returns focus",
+        "pass": true
+      },
+      {
+        "file": "index.html",
+        "check": "prefers-reduced-transparency",
+        "supported": true,
+        "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+      },
+      {
+        "file": "index.html",
+        "check": "forced-colors",
+        "supported": true,
+        "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+      },
+      {
+        "file": "index.html",
+        "check": "prefers-reduced-motion",
+        "supported": true,
+        "computed": "{\"blur\":\"blur(16px) saturate(1.1)\",\"background\":\"color(srgb 1 1 1 / 0.82)\"}"
+      },
+      {
+        "file": "clasor-design-system.html",
+        "check": "menu opens and focuses first item",
+        "pass": true
+      },
+      {
+        "file": "clasor-design-system.html",
+        "check": "Escape closes and returns focus",
+        "pass": true
+      },
+      {
+        "file": "clasor-design-system.html",
+        "check": "prefers-reduced-transparency",
+        "supported": true,
+        "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+      },
+      {
+        "file": "clasor-design-system.html",
+        "check": "forced-colors",
+        "supported": true,
+        "computed": "{\"blur\":\"none\",\"background\":\"rgb(255, 255, 255)\"}"
+      },
+      {
+        "file": "clasor-design-system.html",
+        "check": "prefers-reduced-motion",
+        "supported": true,
+        "computed": "{\"blur\":\"blur(16px) saturate(1.1)\",\"background\":\"color(srgb 1 1 1 / 0.82)\"}"
+      }
+    ]
+  },
+  "scope": "Historical standalone catalogue evidence retained after retirement; current React migration checks are recorded in the feature quickstart."
+}

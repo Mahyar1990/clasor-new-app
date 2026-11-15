@@ -1,0 +1,33 @@
+{
+  "tabs": true,
+  "pagination": true,
+  "dialogFocusTrap": true,
+  "destructiveSafeFocus": true,
+  "sheet": true,
+  "menuFocusReturn": true,
+  "toastDismiss": true,
+  "tooltipFocus": true,
+  "widths": [
+    {
+      "width": 360,
+      "scroll": 360
+    },
+    {
+      "width": 640,
+      "scroll": 640
+    },
+    {
+      "width": 700,
+      "scroll": 700
+    },
+    {
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "width": 1440,
+      "scroll": 1440
+    }
+  ],
+  "errors": []
+}

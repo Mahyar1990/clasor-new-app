@@ -1,0 +1,100 @@
+/* Semantic mappings and documented additions; source values live in tokens.json. */
+:root {
+  color-scheme: light;
+  --background: var(--clasor-color-surface-canvas);
+  --foreground: var(--clasor-color-text-primary);
+  --card: var(--clasor-color-surface-default);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: var(--clasor-color-action-primary);
+  --primary-foreground: var(--clasor-color-action-on-primary);
+  --primary-hover: var(--clasor-color-action-hover);
+  --primary-pressed: var(--clasor-color-action-pressed);
+  --secondary: var(--clasor-color-neutral-100);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--clasor-color-neutral-50);
+  --muted-foreground: var(--clasor-color-text-secondary);
+  --accent: var(--clasor-color-brand-50);
+  --accent-foreground: var(--primary);
+  --destructive: var(--clasor-color-semantic-danger-text);
+  --destructive-foreground: var(--clasor-color-neutral-0);
+  --border: var(--clasor-border-subtle);
+  --input: var(--clasor-border-control);
+  --ring: var(--primary);
+  --radius: var(--clasor-radius-8);
+  --surface-outer: var(--clasor-color-surface-outer);
+  --brand-display: var(--clasor-color-brand-600);
+  --success: var(--clasor-color-semantic-success-text);
+  --success-surface: var(--clasor-color-semantic-success-surface);
+  --success-border: var(--clasor-color-semantic-success-border);
+  --warning: var(--clasor-color-semantic-warning-text);
+  --warning-surface: var(--clasor-color-semantic-warning-surface);
+  --warning-border: var(--clasor-color-semantic-warning-border);
+  --info: var(--clasor-color-semantic-info-text);
+  --info-surface: var(--clasor-color-semantic-info-surface);
+  --info-border: var(--clasor-color-semantic-info-border);
+  --danger: var(--destructive);
+  --danger-surface: var(--clasor-color-semantic-danger-surface);
+  --danger-border: var(--clasor-color-semantic-danger-border);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--clasor-color-neutral-50);
+  --sidebar-accent-foreground: var(--primary);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  /* Additions extracted from the reference CSS; not source JSON tokens. */
+  --control-height: var(--clasor-size-control-medium);
+  --row-padding: 14px;
+  --clasor-shadow-floating: 0 4px 16px #1d1c2208, 0 1px 3px #1d1c2206;
+  --clasor-shadow-dialog: 0 20px 60px #1d1c221a;
+  --shadow-toast: 0 8px 28px #1d1c2220;
+  --overlay-backdrop: #1d1c2247;
+  --overlay-blur: 2px;
+  --z-menu: 80;
+  --z-dialog: 90;
+  --z-toast: 100;
+  --icon-size: 18px;
+  --icon-stroke: 1.5;
+}
+
+[data-density="compact"] {
+  --control-height: 32px;
+  --row-padding: 10px;
+}
+
+[data-density="comfortable"] {
+  --control-height: var(--clasor-size-control-medium);
+  --row-padding: 14px;
+}
+
+/* Theme variables consumed by Tailwind; no component selectors. */
+:root {
+  --glass-tint: var(--clasor-color-neutral-0);
+  --glass-fallback: var(--card);
+  --glass-text: var(--foreground);
+  --glass-field-text: var(--color-gray-800);
+  --glass-error: var(--destructive);
+}
+.dark {
+  color-scheme: dark;
+  --background: var(--clasor-color-neutral-950);
+  --foreground: var(--clasor-color-neutral-100);
+  --card: var(--clasor-color-neutral-900);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --muted: var(--clasor-color-neutral-800);
+  --muted-foreground: var(--clasor-color-neutral-400);
+  --border: var(--clasor-color-neutral-700);
+  --input: var(--clasor-color-neutral-500);
+  --glass-tint: var(--clasor-color-neutral-900);
+  --glass-fallback: var(--clasor-color-neutral-900);
+  --glass-text: var(--clasor-color-neutral-100);
+  --glass-field-text: var(--color-gray-100);
+  --glass-error: #f87171;
+}
+:root { --material-canvas: radial-gradient(ellipse at 10% 15%, #b294ed66, transparent 55%), radial-gradient(ellipse at 90% 30%, #345f9455, transparent 55%), linear-gradient(135deg, var(--clasor-color-brand-100), var(--background)); }

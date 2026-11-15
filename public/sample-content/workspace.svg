@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Workspace concept</title><desc id="desc">A fictional document workspace with navigation, a search bar, folders and document rows.</desc>
+  <rect width="1200" height="760" fill="#F6F5F8"/>
+  <rect x="40" y="40" width="1120" height="680" rx="20" fill="#FFF" stroke="#DED9E5"/>
+  <path d="M920 40V720M40 130H920" stroke="#DED9E5"/>
+  <rect x="958" y="76" width="42" height="42" rx="12" fill="#7446B2"/>
+  <text x="1014" y="105" font-family="Arial,sans-serif" font-size="24" fill="#241E2D">Clasor</text>
+  <rect x="950" y="170" width="180" height="50" rx="8" fill="#F7F3FC"/>
+  <text x="980" y="201" font-family="Arial,sans-serif" font-size="16" fill="#7446B2">My documents</text>
+  <text x="980" y="262" font-family="Arial,sans-serif" font-size="16" fill="#645A70">Shared with me</text>
+  <text x="980" y="322" font-family="Arial,sans-serif" font-size="16" fill="#645A70">Repositories</text>
+  <text x="84" y="96" font-family="Arial,sans-serif" font-size="14" fill="#645A70">PERSONAL WORKSPACE / DESIGN CONCEPT</text>
+  <text x="84" y="192" font-family="Arial,sans-serif" font-size="30" font-weight="bold" fill="#241E2D">A place for every idea.</text>
+  <rect x="84" y="230" width="640" height="48" rx="8" fill="#F6F5F8" stroke="#DED9E5"/>
+  <text x="106" y="260" font-family="Arial,sans-serif" font-size="15" fill="#645A70">Search your documents...</text>
+  <rect x="744" y="230" width="130" height="48" rx="8" fill="#FFF" stroke="#DED9E5"/>
+  <text x="778" y="260" font-family="Arial,sans-serif" font-size="15" fill="#7446B2">Filters</text>
+  <g fill="#F7F3FC" stroke="#DED9E5"><rect x="84" y="312" width="380" height="74" rx="10"/><rect x="484" y="312" width="390" height="74" rx="10"/></g>
+  <g font-family="Arial,sans-serif" font-size="17" fill="#7446B2"><text x="108" y="356">Project notes</text><text x="508" y="356">Research &amp; references</text></g>
+  <g stroke="#DED9E5"><path d="M84 430H874M84 506H874M84 582H874M84 658H874"/></g>
+  <g fill="#F7F3FC" stroke="#DED9E5"><rect x="94" y="446" width="36" height="42" rx="6"/><rect x="94" y="522" width="36" height="42" rx="6"/><rect x="94" y="598" width="36" height="42" rx="6"/></g>
+  <g font-family="Arial,sans-serif" font-size="16" fill="#352D3F"><text x="152" y="472">Getting started with a new project</text><text x="152" y="548">Ideas worth remembering</text><text x="152" y="624">A shared memory for the team</text></g>
+  <g font-family="Arial,sans-serif" font-size="12" fill="#645A70"><text x="760" y="472">Draft</text><text x="760" y="548">Approved</text><text x="760" y="624">Draft</text></g>
+</svg>

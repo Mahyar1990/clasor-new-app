@@ -1,0 +1,64 @@
+import { pathToFileURL } from 'node:url';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const { chromium } = await import(pathToFileURL(process.env.TEMP + '/clasor-design-qa/node_modules/playwright/index.mjs').href);
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errors = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto(process.env.QA_URL ?? 'http://localhost:3101', { waitUntil: 'networkidle' });
+  const trigger = page.locator('[data-sidebar=trigger]');
+  const panel = page.locator('#catalogue-sidebar');
+  assert.equal(await page.getByRole('main').count(), 1);
+  assert.equal(await panel.locator('nav a').count(), 13);
+  const expanded = await panel.boundingBox();
+  assert.equal(expanded.width, 246); assert.equal(expanded.x + expanded.width, 1440);
+  await page.screenshot({ path: '.codex/qa-sidebar/desktop.png' });
+  await trigger.click();
+  await page.waitForFunction(() => document.getElementById('catalogue-sidebar').getBoundingClientRect().width === 64);
+  assert.equal(await trigger.getAttribute('aria-expanded'), 'false');
+  for (const link of await panel.locator('nav a').all()) assert(await link.getAttribute('aria-label'));
+  assert.equal(await panel.locator('nav a > span:visible').count(), 0);
+  await page.screenshot({ path: '.codex/qa-sidebar/collapsed.png' });
+  await page.keyboard.press('Control+b');
+  await page.waitForFunction(() => document.getElementById('catalogue-sidebar').getBoundingClientRect().width === 246);
+  await panel.locator('a[href="#inputs"]').click();
+  await page.waitForFunction(() => document.querySelector('a[href="#inputs"][aria-current=location]'));
+  assert((await page.locator('#inputs').boundingBox()).y >= 78);
+  await page.addScriptTag({ path: process.env.TEMP + '/clasor-design-qa/node_modules/axe-core/axe.min.js' });
+  const audit = async selector => page.evaluate(async selector => (await axe.run(selector, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa'] } })).violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.failureSummary) })), selector);
+  const desktopAudit = await audit('.clasor'); assert.deepEqual(desktopAudit, []);
+  const widths = [];
+  for (const width of [360, 639, 640, 1023, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.waitForFunction(() => (innerWidth < 1024) === (document.querySelector('[data-slot=sidebar-container]') === null));
+    widths.push(await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth })));
+  }
+  assert(widths.every(v => v.width === v.scroll));
+  await page.setViewportSize({ width: 360, height: 700 });
+  await trigger.click();
+  const dialog = page.getByRole('dialog'); await dialog.waitFor();
+  await dialog.evaluate(async el => { await Promise.all(el.getAnimations().map(a => a.finished.catch(() => {}))); });
+  assert.equal(await dialog.locator('nav a').count(), 13);
+  const mobile = await dialog.boundingBox();
+  assert(mobile.x >= 0 && mobile.x + mobile.width <= 360); assert.equal(mobile.width, 288);
+  const mobileAudit = await audit('[role=dialog]'); assert.deepEqual(mobileAudit, []);
+  await page.screenshot({ path: '.codex/qa-sidebar/mobile.png' });
+  for (let i = 0; i < 18; i++) { await page.keyboard.press('Tab'); assert(await dialog.evaluate(el => el.contains(document.activeElement))); }
+  await page.keyboard.press('Escape'); await dialog.waitFor({ state: 'hidden' });
+  assert(await trigger.evaluate(el => el === document.activeElement));
+  await trigger.click(); await dialog.waitFor();
+  await dialog.locator('a[href="#inputs"]').click(); await dialog.waitFor({ state: 'hidden' });
+  assert.equal(new URL(page.url()).hash, '#inputs');
+  assert((await page.locator('#inputs').boundingBox()).y >= 58);
+  await trigger.click(); await dialog.waitFor();
+  assert.equal(await dialog.locator('a[href="#inputs"]').getAttribute('aria-current'), 'location');
+  const content = dialog.locator('[data-slot=sidebar-content]');
+  const scroll = await content.evaluate(el => ({ height: el.clientHeight, scroll: el.scrollHeight }));
+  assert(scroll.scroll > scroll.height);
+  await dialog.locator('a[href="#handoff"]').scrollIntoViewIfNeeded();
+  await dialog.getByRole('button', { name: 'بستن', exact: true }).click(); await dialog.waitFor({ state: 'hidden' });
+  assert.deepEqual(errors, []);
+  fs.writeFileSync('.codex/qa-sidebar/report.json', JSON.stringify({ expanded, collapsedWidth: 64, mobile, widths, desktopAudit, mobileAudit, keyboardShortcut: true, focusTrapAndRestore: true, mobileNavigation: true, independentScroll: scroll, errors }, null, 2));
+  console.log('Sidebar: desktop collapse, shortcut, RTL, mobile navigation, focus, scroll, breakpoints and axe passed.');
+} finally { await browser.close(); }

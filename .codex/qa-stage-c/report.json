@@ -1,0 +1,43 @@
+{
+  "checks": [
+    "empty/whitespace validation, focus, retained input and local success",
+    "Base UI select, RTL radio arrows, Space checkbox/switch, indeterminate and native FormData",
+    "loading retains label, announces busy and prevents a duplicate click",
+    "local file selection, type and size rejection, clearing and focus restoration",
+    "unique ids, existing descriptions, readonly vs disabled",
+    "32/40/48 desktop control heights",
+    "no document overflow at 360/640/700/1024/1440",
+    "44px coarse pointer Button"
+  ],
+  "widths": [
+    {
+      "width": 360,
+      "scroll": 360
+    },
+    {
+      "width": 640,
+      "scroll": 640
+    },
+    {
+      "width": 700,
+      "scroll": 700
+    },
+    {
+      "width": 1024,
+      "scroll": 1024
+    },
+    {
+      "width": 1440,
+      "scroll": 1440
+    }
+  ],
+  "sizes": [
+    32,
+    40,
+    48
+  ],
+  "hover": "rgb(96, 54, 149)",
+  "pressed": "rgb(77, 43, 120)",
+  "errors": [],
+  "mutations": []
+}

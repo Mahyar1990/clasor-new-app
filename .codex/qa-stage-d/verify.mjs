@@ -1,0 +1,51 @@
+import { pathToFileURL } from 'node:url';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const { chromium } = await import(pathToFileURL(process.env.TEMP + '/clasor-design-qa/node_modules/playwright/index.mjs').href);
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
+try {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  const errors = []; page.on('pageerror', error => errors.push(error.message));
+  await page.goto(process.env.QA_URL ?? 'http://localhost:3100', { waitUntil: 'networkidle' });
+  const first = page.getByRole('tab', { name: 'جزئیات', exact: true });
+  await first.focus(); await page.keyboard.press('ArrowLeft');
+  assert.equal(await page.getByRole('tab', { name: 'نسخه‌ها', exact: true }).getAttribute('aria-selected'), 'true');
+  await page.keyboard.press('End'); assert.equal(await page.getByRole('tab', { name: 'فعالیت‌ها' }).getAttribute('aria-selected'), 'true');
+  await page.keyboard.press('Home'); assert.equal(await first.getAttribute('aria-selected'), 'true');
+  assert(await page.getByRole('button', { name: 'صفحه قبل', exact: true }).isDisabled());
+  await page.getByRole('button', { name: 'صفحه 5', exact: true }).click();
+  assert(await page.getByRole('button', { name: 'صفحه بعد', exact: true }).isDisabled());
+  const confirm = page.getByRole('button', { name: 'تأیید نمونه', exact: true });
+  await confirm.click(); const dialog = page.getByRole('dialog'); await dialog.waitFor();
+  assert.equal(await dialog.getAttribute('dir'), 'rtl');
+  for (let i = 0; i < 8; i++) { await page.keyboard.press('Tab'); await page.waitForFunction(el => el.contains(document.activeElement), await dialog.elementHandle()); }
+  await page.keyboard.press('Escape'); await dialog.waitFor({ state: 'hidden' });
+  assert(await confirm.evaluate(el => document.activeElement === el));
+  const deletion = page.getByRole('button', { name: 'حذف در نمونه', exact: true });
+  await deletion.click(); const alert = page.getByRole('alertdialog'); await alert.waitFor();
+  assert(await alert.getByRole('button', { name: 'انصراف' }).evaluate(el => document.activeElement === el));
+  await page.mouse.click(5, 5); assert(await alert.isVisible());
+  await page.keyboard.press('Escape'); await alert.waitFor({ state: 'hidden' });
+  const details = page.getByRole('button', { name: 'جزئیات سند نمونه', exact: true });
+  await details.click(); const sheet = page.getByRole('dialog'); await sheet.waitFor();
+  await page.waitForFunction(el => Math.abs(el.getBoundingClientRect().x) < 0.1, await sheet.elementHandle()); const box = await sheet.boundingBox(); assert(Math.abs(box.x) < 0.1); assert(Math.abs(box.width - 400) < 0.1);
+  await sheet.getByRole('button', { name: 'بستن', exact: true }).click(); await sheet.waitFor({ state: 'hidden' });
+  assert(await details.evaluate(el => document.activeElement === el));
+  const menuButton = page.getByRole('button', { name: 'اقدام‌های راهنمای همکاری', exact: true });
+  await menuButton.click(); const menu = page.getByRole('menu'); await menu.waitFor();
+  await page.keyboard.press('ArrowDown'); await page.keyboard.press('Escape'); await menu.waitFor({ state: 'hidden' });
+  assert(await menuButton.evaluate(el => document.activeElement === el));
+  await page.getByRole('button', { name: 'Default', exact: true }).click();
+  await page.getByRole('button', { name: 'بستن پیام', exact: true }).click();
+  await page.getByRole('button', { name: 'بستن پیام', exact: true }).waitFor({ state: 'hidden' });
+  const help = page.getByRole('button', { name: 'راهنمای پیام', exact: true });
+  await help.focus(); await page.keyboard.press('Shift+Tab'); await page.keyboard.press('Tab'); await page.getByRole('tooltip').waitFor(); await page.keyboard.press('Escape');
+  const widths = [];
+  for (const width of [360, 640, 700, 1024, 1440]) { await page.setViewportSize({ width, height: 1000 }); widths.push(await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth }))); }
+  assert(widths.every(value => value.width === value.scroll));
+  await page.setViewportSize({ width: 360, height: 900 }); await details.click();
+  assert((await page.getByRole('dialog').boundingBox()).width <= 360); await page.screenshot({ path: '.codex/qa-stage-d/sheet-mobile.png' });
+  await page.keyboard.press('Escape'); assert.deepEqual(errors, []);
+  fs.writeFileSync('.codex/qa-stage-d/report.json', JSON.stringify({ tabs: true, pagination: true, dialogFocusTrap: true, destructiveSafeFocus: true, sheet: true, menuFocusReturn: true, toastDismiss: true, tooltipFocus: true, widths, errors }, null, 2));
+  console.log('Stage D: navigation, focus, overlays, toast and responsive checks passed.');
+} finally { await browser.close(); }

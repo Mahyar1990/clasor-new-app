@@ -1,0 +1,87 @@
+{
+  "results": [
+    {
+      "width": 360,
+      "scroll": 360,
+      "contentWidth": 360,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 639,
+      "scroll": 639,
+      "contentWidth": 639,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 640,
+      "scroll": 640,
+      "contentWidth": 640,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 641,
+      "scroll": 641,
+      "contentWidth": 641,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 699,
+      "scroll": 699,
+      "contentWidth": 699,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 700,
+      "scroll": 700,
+      "contentWidth": 700,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 701,
+      "scroll": 701,
+      "contentWidth": 701,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 1023,
+      "scroll": 1023,
+      "contentWidth": 1023,
+      "primary": "#7446b2",
+      "sidebar": "static"
+    },
+    {
+      "width": 1024,
+      "scroll": 1024,
+      "contentWidth": 778,
+      "primary": "#7446b2",
+      "sidebar": "fixed"
+    },
+    {
+      "width": 1025,
+      "scroll": 1025,
+      "contentWidth": 779,
+      "primary": "#7446b2",
+      "sidebar": "fixed"
+    },
+    {
+      "width": 1440,
+      "scroll": 1440,
+      "contentWidth": 1194,
+      "primary": "#7446b2",
+      "sidebar": "fixed"
+    }
+  ],
+  "interaction": {
+    "padding": "8px",
+    "hash": "#typography",
+    "reduced": "1e-05s"
+  },
+  "errors": []
+}

@@ -1,0 +1,915 @@
+{
+  "name": "Clasor design system",
+  "version": "0.3.0",
+  "status": "design-concept",
+  "direction": "rtl",
+  "language": "fa",
+  "scope": "Live React design system: shared components, tokens and material contracts. No API or authorization changes.",
+  "sourceAudit": {
+    "version": 3,
+    "features": 81,
+    "coreScenarios": 20,
+    "accessScenarios": 20,
+    "issues": 24
+  },
+  "brand": {
+    "reference": "#8C66E0",
+    "primaryAction": "#8056CB",
+    "method": "Reference sample.webp; approximate sampled pixels. Darker action foreground pairing preserves white text contrast."
+  },
+  "components": [
+    {
+      "id": "button",
+      "previewAnchor": "#buttons",
+      "variants": [
+        "primary",
+        "secondary",
+        "quiet",
+        "destructive",
+        "icon"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "pressed",
+        "focus",
+        "disabled",
+        "loading"
+      ],
+      "rules": [
+        "One primary action per decision area.",
+        "Use a native button; aria-label for icon-only controls.",
+        "Loading blocks duplicate submission and retains a visible label.",
+        "Disabled reason is persistent outside the control."
+      ],
+      "auditIssueRefs": [
+        "UX07",
+        "UX12",
+        "UX22",
+        "UX24"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Applicable; preserve existing native semantics and documented behavior.",
+        "hover": "Applicable; preserve existing native semantics and documented behavior.",
+        "pressed": "Applicable; preserve existing native semantics and documented behavior.",
+        "focus-visible": "Applicable; preserve existing native semantics and documented behavior.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Applicable; preserve existing native semantics and documented behavior.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Applicable; preserve existing native semantics and documented behavior."
+      }
+    },
+    {
+      "id": "text-field",
+      "previewAnchor": "#inputs",
+      "variants": [
+        "text",
+        "search",
+        "readonly",
+        "textarea"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "invalid",
+        "disabled",
+        "readonly"
+      ],
+      "rules": [
+        "Persistent label; placeholder is supplementary.",
+        "Connect help/error with aria-describedby.",
+        "Set aria-invalid and retain entered values after failure.",
+        "Validation errors must identify the field and corrective action."
+      ],
+      "auditIssueRefs": [
+        "UX14",
+        "UX15"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Applicable; preserve existing native semantics and documented behavior.",
+        "hover": "Applicable; preserve existing native semantics and documented behavior.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Applicable; preserve existing native semantics and documented behavior.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Applicable; preserve existing native semantics and documented behavior.",
+        "disabled": "Applicable; preserve existing native semantics and documented behavior."
+      }
+    },
+    {
+      "id": "select",
+      "previewAnchor": "#inputs",
+      "variants": [
+        "single"
+      ],
+      "states": [
+        "default",
+        "focus",
+        "disabled"
+      ],
+      "rules": [
+        "Use native select in this concept.",
+        "Role selection in the preview is local and illustrative."
+      ],
+      "auditIssueRefs": [
+        "UX03"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui",
+        "popupPreset": "floating"
+      },
+      "stateApplicability": {
+        "default": "Applicable; preserve existing native semantics and documented behavior.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Applicable; preserve existing native semantics and documented behavior.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Applicable; preserve existing native semantics and documented behavior."
+      }
+    },
+    {
+      "id": "choice",
+      "previewAnchor": "#inputs",
+      "variants": [
+        "checkbox",
+        "radio",
+        "switch"
+      ],
+      "states": [
+        "unchecked",
+        "checked",
+        "focus",
+        "disabled"
+      ],
+      "rules": [
+        "Use native input controls with explicit accessible labels.",
+        "Represent a switch with a checkbox and role switch.",
+        "Radio buttons share a name for mutually exclusive values."
+      ],
+      "auditIssueRefs": [
+        "UX12",
+        "UX22"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Applicable; preserve existing native semantics and documented behavior.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Applicable; preserve existing native semantics and documented behavior."
+      }
+    },
+    {
+      "id": "file-input",
+      "previewAnchor": "#inputs",
+      "variants": [
+        "single-file"
+      ],
+      "states": [
+        "empty",
+        "selected",
+        "invalid",
+        "disabled"
+      ],
+      "rules": [
+        "Preview only displays the locally selected file name.",
+        "No upload or network transmission.",
+        "Production must state allowed file types and limits before selection."
+      ],
+      "auditIssueRefs": [
+        "UX15"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Applicable; preserve existing native semantics and documented behavior.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Applicable; preserve existing native semantics and documented behavior.",
+        "disabled": "Applicable; preserve existing native semantics and documented behavior."
+      }
+    },
+    {
+      "id": "badge",
+      "previewAnchor": "#status",
+      "variants": [
+        "approval",
+        "visibility",
+        "latest",
+        "role"
+      ],
+      "states": [
+        "draft",
+        "pending",
+        "approved",
+        "rejected",
+        "private",
+        "link",
+        "public",
+        "latest"
+      ],
+      "rules": [
+        "Approval, visibility and latest are independent dimensions.",
+        "Do not infer public accessibility from approved/latest.",
+        "Role badges use neutral colors; no implied permission authority.",
+        "Always include a text label; color alone is insufficient."
+      ],
+      "auditIssueRefs": [
+        "UX03",
+        "UX20"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "identity",
+      "previewAnchor": "#status",
+      "variants": [
+        "named",
+        "unknown"
+      ],
+      "states": [
+        "available",
+        "missing"
+      ],
+      "rules": [
+        "Separate creator, editor, requester and decision maker.",
+        "Missing identity displays an explicit fallback, never undefined.",
+        "All preview identities are fictional."
+      ],
+      "auditIssueRefs": [
+        "UX04",
+        "UX23"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "tabs",
+      "previewAnchor": "#navigation",
+      "variants": [
+        "underline"
+      ],
+      "states": [
+        "selected",
+        "unselected",
+        "focus"
+      ],
+      "rules": [
+        "One tab in tab sequence.",
+        "ArrowLeft advances in RTL; ArrowRight goes back.",
+        "Home and End select the first and last tab.",
+        "aria-controls, aria-selected and tabpanel labels stay synchronized."
+      ],
+      "auditIssueRefs": [
+        "UX08",
+        "UX12"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Applicable; preserve existing native semantics and documented behavior.",
+        "selected": "Applicable; preserve existing native semantics and documented behavior.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "breadcrumb",
+      "previewAnchor": "#navigation",
+      "variants": [
+        "inline"
+      ],
+      "states": [
+        "link",
+        "current"
+      ],
+      "rules": [
+        "Current segment is aria-current page.",
+        "Match page heading, active navigation and path.",
+        "Mirror directional chevrons, not document icons."
+      ],
+      "auditIssueRefs": [
+        "UX08"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "pagination",
+      "previewAnchor": "#navigation",
+      "variants": [
+        "numbered"
+      ],
+      "states": [
+        "current",
+        "available",
+        "disabled"
+      ],
+      "rules": [
+        "Mark current page with aria-current page.",
+        "Disable previous at first page and next at last page.",
+        "Preview changes current page indicator only, not table data."
+      ],
+      "auditIssueRefs": [],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Applicable; preserve existing native semantics and documented behavior."
+      }
+    },
+    {
+      "id": "data-table",
+      "previewAnchor": "#data",
+      "variants": [
+        "comfortable",
+        "compact"
+      ],
+      "states": [
+        "default",
+        "selected",
+        "partial-selection",
+        "empty",
+        "loading",
+        "error"
+      ],
+      "rules": [
+        "Use name for mixed object lists, not category name.",
+        "Long names wrap; retain complete essential information.",
+        "Provide selected count and select-all indeterminate state.",
+        "Preserve table semantics; contain horizontal overflow at narrow widths."
+      ],
+      "auditIssueRefs": [
+        "UX04",
+        "UX05",
+        "UX09"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Applicable; preserve existing native semantics and documented behavior.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Applicable; preserve existing native semantics and documented behavior.",
+        "loading": "Applicable; preserve existing native semantics and documented behavior.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "action-menu",
+      "previewAnchor": "#data",
+      "variants": [
+        "anchored"
+      ],
+      "states": [
+        "closed",
+        "open",
+        "focused",
+        "disabled-item"
+      ],
+      "rules": [
+        "Label each trigger with row context.",
+        "ArrowUp/Down navigate enabled items. Escape closes and returns focus.",
+        "Disabled destructive item includes persistent reason."
+      ],
+      "auditIssueRefs": [
+        "UX07",
+        "UX12",
+        "UX22"
+      ],
+      "material": {
+        "preset": "floating",
+        "forbiddenNesting": [
+          "chrome",
+          "floating"
+        ],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "feedback",
+      "previewAnchor": "#feedback",
+      "variants": [
+        "success",
+        "warning",
+        "error",
+        "info"
+      ],
+      "states": [
+        "visible",
+        "recoverable"
+      ],
+      "rules": [
+        "Explain what happened, whether data was retained and what to do next.",
+        "Do not show a success message before persistence is confirmed in production.",
+        "Preview messages are demonstrations, not remote persistence."
+      ],
+      "auditIssueRefs": [
+        "UX14",
+        "UX15",
+        "UX16",
+        "UX17",
+        "UX21"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "system-state",
+      "previewAnchor": "#feedback",
+      "variants": [
+        "empty",
+        "permission-denied",
+        "partial-success",
+        "service-error"
+      ],
+      "states": [
+        "actionable"
+      ],
+      "rules": [
+        "Empty, forbidden and failed fetch are distinct states.",
+        "Partial success identifies the created object and the unfinished step.",
+        "Offer a relevant recovery action without implying data loss."
+      ],
+      "auditIssueRefs": [
+        "UX02",
+        "UX10",
+        "UX14",
+        "UX16",
+        "UX17"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "progress",
+      "previewAnchor": "#feedback",
+      "variants": [
+        "determinate",
+        "skeleton"
+      ],
+      "states": [
+        "running",
+        "complete",
+        "reduced-motion"
+      ],
+      "rules": [
+        "Progress exposes numeric state through native progress.",
+        "Avoid indefinite decorative animation.",
+        "Honor prefers-reduced-motion."
+      ],
+      "auditIssueRefs": [],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "dialog",
+      "previewAnchor": "#overlays",
+      "variants": [
+        "confirmation",
+        "destructive"
+      ],
+      "states": [
+        "closed",
+        "open",
+        "confirm",
+        "cancel"
+      ],
+      "rules": [
+        "Use native dialog with title, context and explicit action labels.",
+        "Escape closes; restore focus to trigger.",
+        "Explain changes to audience separately from approval.",
+        "For irreversible actions, safe action receives initial focus."
+      ],
+      "auditIssueRefs": [
+        "UX03",
+        "UX20"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "drawer",
+      "previewAnchor": "#overlays",
+      "variants": [
+        "details"
+      ],
+      "states": [
+        "closed",
+        "open"
+      ],
+      "rules": [
+        "Use a labelled modal dialog in this concept.",
+        "Keep context and key status dimensions visible.",
+        "Close via labelled action or Escape; return focus."
+      ],
+      "auditIssueRefs": [
+        "UX07"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "toast",
+      "previewAnchor": "#overlays",
+      "variants": [
+        "status"
+      ],
+      "states": [
+        "visible",
+        "dismissed"
+      ],
+      "rules": [
+        "Use role status and polite announcement.",
+        "Provide a close button.",
+        "Do not use an ephemeral message as the only record of critical decisions."
+      ],
+      "auditIssueRefs": [
+        "UX21"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "tooltip",
+      "previewAnchor": "#overlays",
+      "variants": [
+        "supplementary"
+      ],
+      "states": [
+        "hidden",
+        "hover",
+        "focus"
+      ],
+      "rules": [
+        "Connect trigger with aria-describedby.",
+        "Do not hide essential guidance only in a tooltip.",
+        "Trigger must retain an accessible label."
+      ],
+      "auditIssueRefs": [
+        "UX12"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Applicable; preserve existing native semantics and documented behavior.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Applicable; preserve existing native semantics and documented behavior.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "permission-action",
+      "previewAnchor": "#patterns",
+      "variants": [
+        "direct-approval",
+        "request-approval",
+        "blocked"
+      ],
+      "states": [
+        "enabled",
+        "disabled-with-reason"
+      ],
+      "rules": [
+        "All entry points for the same action use the same resolved permission.",
+        "Only illustrative observed scenarios: manager direct; editor request; writer own-version request; guest blocked.",
+        "This is not a full authorization matrix or a server enforcement rule.",
+        "Revalidate final permissions with product owner before implementation."
+      ],
+      "auditIssueRefs": [
+        "UX22",
+        "UX24"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "stepper",
+      "previewAnchor": "#patterns",
+      "variants": [
+        "linear-explicit-commit"
+      ],
+      "states": [
+        "current",
+        "complete",
+        "upcoming"
+      ],
+      "rules": [
+        "Next does not create a persisted object unless explicitly communicated.",
+        "Final commit label identifies the actual creation.",
+        "Explain whether the new version is empty or based on an existing version.",
+        "Show partial success and recovery rather than silent incomplete creation."
+      ],
+      "auditIssueRefs": [
+        "UX01",
+        "UX14",
+        "UX19"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    },
+    {
+      "id": "approval-context",
+      "previewAnchor": "#patterns",
+      "variants": [
+        "audit-metadata"
+      ],
+      "states": [
+        "pending",
+        "decided"
+      ],
+      "rules": [
+        "Show creator, last editor, requester and decider as separate labels.",
+        "Preserve decision context and timestamps in production.",
+        "Do not invent a separation-of-duties policy not established by the product."
+      ],
+      "auditIssueRefs": [
+        "UX23"
+      ],
+      "material": {
+        "preset": "solid",
+        "forbiddenNesting": [],
+        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "reactSource": "components/ui"
+      },
+      "stateApplicability": {
+        "default": "Not applicable to this component contract.",
+        "hover": "Not applicable to this component contract.",
+        "pressed": "Not applicable to this component contract.",
+        "focus-visible": "Not applicable to this component contract.",
+        "selected": "Not applicable to this component contract.",
+        "loading": "Not applicable to this component contract.",
+        "invalid": "Not applicable to this component contract.",
+        "disabled": "Not applicable to this component contract."
+      }
+    }
+  ],
+  "assets": {
+    "font": "Existing IRANYekan family copied from product assets; 400/500/700. Retain product font license obligations.",
+    "icons": "Existing lucide-react outline icons; inherited icon size/stroke tokens. Decorative icons remain aria-hidden."
+  },
+  "responsive": {
+    "640": "Single-column component specimens; reflow all prose and controls.",
+    "1024": "Documentation sidebar becomes horizontal navigation.",
+    "table": "Table may scroll inside its bounded container; document must not overflow."
+  },
+  "unknowns": [
+    "Full authorization precedence and server enforcement.",
+    "Final behavior and recovery contracts of broken editor services.",
+    "Final naming distinction between Office, Word and Excel.",
+    "Dark theme is not designed in v0.1."
+  ],
+  "visualReference": {
+    "file": "sample.webp",
+    "date": "2026-10-31",
+    "outer": "#EBECF0",
+    "canvas": "#F8F8F8",
+    "card": "#FFFFFF",
+    "cardRadius": 16,
+    "dialogRadius": 20,
+    "frameRadius": 24,
+    "controls": [
+      32,
+      36,
+      44
+    ],
+    "touchTarget": 44
+  },
+  "implementation": {
+    "source": "components/ui",
+    "materials": "lib/design-system/classes.ts",
+    "catalogue": "/",
+    "inventory": "lib/design-system/MATERIALS.md"
+  }
+}

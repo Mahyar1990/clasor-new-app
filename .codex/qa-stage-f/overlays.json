@@ -1,0 +1,18 @@
+{
+  "overlayAudits": [
+    {
+      "name": "تأیید نمونه",
+      "violations": []
+    },
+    {
+      "name": "حذف در نمونه",
+      "violations": []
+    },
+    {
+      "name": "جزئیات سند نمونه",
+      "violations": []
+    }
+  ],
+  "clipboardSuccessAndFallback": true,
+  "toastAutoDismiss6500": true
+}
