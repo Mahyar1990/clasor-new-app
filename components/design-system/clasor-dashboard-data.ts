@@ -12,6 +12,7 @@ export const dashboardRepositories = Array.from({ length: 24 }, (_, index) => ({
   id: `dashboard-repository-${index + 1}`,
   name: `${names[index % names.length]}${index >= names.length ? ` · ${new Intl.NumberFormat("fa").format(Math.floor(index / names.length) + 1)}` : ""}`,
   shared: index % 2 !== 0,
+  published: index % 4 === 0,
   role: ["مالک", "مدیر", "ویرایشگر"][index % 3],
   updatedAt: `2026-11-${String(14 - index % 12).padStart(2, "0")}T08:30:00Z`,
 }));

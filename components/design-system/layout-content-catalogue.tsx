@@ -6,6 +6,7 @@ import { SolidDataTable, type SolidColumn } from "@/components/ui/SolidDataTable
 import { SolidForm, type SolidFormValues } from "@/components/ui/SolidForm";
 import { CatalogueProfileMenu, GlassOverlayCatalogue } from "@/components/design-system/glass-overlay-catalogue";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassOptionsCatalogue } from "@/components/design-system/glass-options-catalogue";
 import { GlassScrollCatalogue } from "@/components/design-system/glass-scroll-catalogue";
 import { DocumentTableCatalogue } from "@/components/design-system/document-table-catalogue";
 import { GlassIdentityCatalogue } from "@/components/design-system/glass-identity-catalogue";
@@ -68,7 +69,7 @@ export function LayoutContentCatalogue() {
       </GlassCard>
       <div data-test-id="layout-content-catalogue-div-9" className="isolate overflow-hidden rounded-xl border [&_[data-test-id=layout-root]]:min-h-0 [&_[data-test-id=layout-main]]:min-h-0 [&_[data-test-id=layout-header]]:static [&_[data-test-id=layout-sidebar]]:static">
         <AppLayout density={compact ? "compact" : "comfortable"} title="نمونه چیدمان کلاسور" contentAs="section" profile={<CatalogueProfileMenu />}>
-          <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /></div>
+          <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /><GlassOptionsCatalogue /></div>
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
             <GlassIdentityCatalogue />
             <GlassScrollCatalogue />

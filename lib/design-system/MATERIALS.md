@@ -52,6 +52,10 @@ The dashboard consumes column kinds directly; it no longer sets private action w
 
 [DocumentTableCatalogue](../../components/design-system/document-table-catalogue.tsx) renders a long title, bounded creator column, padded glass action menu and local details dialog on both `/design-system/data` and `/design-system/layout`. The layout catalogue also demonstrates caption visibility, compact density, glass/solid appearance and dark mode. The data section includes selectable tables with single and multiple actions.
 
+## Record options menus
+
+`GlassOptionsMenu` reuses the floating 30% tint/12px blur surface, a subtle glass heading and reflective icon tiles. Items are 36px tall on desktop and at least 44px on narrow layouts, with 12px labels, reserved hover borders and semantic destructive coloring. Submenus use the same material and Base UI positioning; content scrolls within the available viewport. Solid/contrast preferences, forced colors and reduced motion continue to use the shared primitive contracts. See [navigation](NAVIGATION.md) for the menu API and source-aligned fixture ownership.
+
 ## Behavior and verification
 
 Base UI retains focus trapping/restoration, Escape/outside dismissal, keyboard selection and scroll locking. Portals preserve local dark previews through `usePortalTheme`. Public wrapper IDs are retained on rendered trigger elements through `withTestId`.

@@ -9,13 +9,16 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { SolidDataTable } from "@/components/ui/SolidDataTable";
 import { Button } from "@/components/ui/button";
 import { GlassModal } from "@/components/ui/GlassModal";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
+import { documentOptions } from "@/components/design-system/clasor-document-options";
+import { ClasorOptionPreview, type ClasorOptionSelection } from "@/components/design-system/clasor-option-preview";
 import LoadMore from "@/components/workspace/load-more";
 import { getLoadedItems } from "@/lib/workspace/documents";
 import type { DashboardDocument } from "@/components/design-system/clasor-dashboard-data";
 
 function DocumentList({ documents }: { documents: DashboardDocument[] }) {
   const [count, setCount] = useState(10);
+  const [selection, setSelection] = useState<ClasorOptionSelection | null>(null);
   const [opened, setOpened] = useState<DashboardDocument | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const result = getLoadedItems(documents, count);
@@ -26,14 +29,15 @@ function DocumentList({ documents }: { documents: DashboardDocument[] }) {
         { id: "name", label: "نام سند", render: row => <Button data-test-id={`dashboard-document-open-${row.id}`} variant="ghost" className="h-auto min-h-11 px-2 md:min-h-7 max-w-full justify-start whitespace-normal text-start" onClick={() => setOpened(row)}><GlassEmblem data-test-id={`dashboard-document-icon-${row.id}`} className="size-6"><FileText aria-hidden="true" className="size-3.5" /></GlassEmblem>{row.title}</Button> },
         { id: "creator", label: "نام سازنده", kind: "metadata", render: row => row.creator },
         { id: "actions", label: "عملیات", kind: "actions", render: row => <div data-test-id={`dashboard-document-actions-${row.id}`} className="flex items-center justify-end">
-          <DropdownMenu><DropdownMenuTrigger data-test-id={`dashboard-document-menu-${row.id}`} render={<Button data-test-id={`dashboard-document-menu-${row.id}`} variant="glass" size="icon" aria-label={`عملیات ${row.title}`} />}><Ellipsis aria-hidden="true" /></DropdownMenuTrigger>
-            <DropdownMenuContent dir="rtl"><DropdownMenuItem data-test-id={`dashboard-document-details-${row.id}`} onClick={() => setOpened(row)}>مشاهده جزئیات</DropdownMenuItem></DropdownMenuContent>
-          </DropdownMenu>
+          <GlassOptionsMenu testId={`dashboard-document-menu-${row.id}`} title={row.title} description={row.shared ? "گزینه‌های سند اشتراکی" : "گزینه‌های سند"} icon={<FileText />}
+            trigger={<Button data-test-id={`dashboard-document-menu-${row.id}`} variant="glass" size="icon" aria-label={`عملیات ${row.title}`}><Ellipsis aria-hidden="true" /></Button>}
+            items={documentOptions(row.shared)} onAction={(id, label) => setSelection({ id, label, name: row.title })} />
         </div> },
       ]} />
     </div>
     <LoadMore noun="سند" listRef={listRef} result={result} onLoadMore={() => setCount(result.nextCount)} />
     </GlassScrollArea>
+    <ClasorOptionPreview selection={selection} onClose={() => setSelection(null)} testId="dashboard-document-option-preview" />
     <GlassModal testId="dashboard-document-modal" open={!!opened} onOpenChange={open => { if (!open) setOpened(null); }} title={opened?.title ?? "مشاهده سند"} description="سند نمونه؛ بدون اتصال به حساب کلاسور">
       <p data-test-id="dashboard-document-modal-content" className="whitespace-pre-wrap text-sm leading-body">{opened?.content}</p>
     </GlassModal>

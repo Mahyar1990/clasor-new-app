@@ -487,7 +487,7 @@
           "chrome",
           "floating"
         ],
-        "rule": "RowActionMenu uses the glass icon-button surface; preserve its padded table cell, accessible name, Base UI focus behavior and local dark portal.",
+        "rule": "RowActionMenu uses the glass icon-button surface. GlassOptionsMenu adds record headings, reflective icons, nested options, disabled and destructive items through Base UI menus. Dashboard and overlays/layout catalogue share the component; preserve focus, local dark portals and accessibility opt-outs.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
