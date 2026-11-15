@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Info } from "lucide-react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
+import { GlassTabsCatalogue } from "@/components/design-system/glass-tabs-catalogue";
 import { ClasorTabs } from "@/components/ui/clasor-tabs"
 import { ClasorBreadcrumb } from "@/components/ui/clasor-breadcrumb"
 import { ClasorPagination } from "@/components/ui/clasor-pagination"
@@ -28,6 +29,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
       <ClasorTabs label="نمای سند" defaultValue="details" items={[{ value: "details", label: "جزئیات", content: "جزئیات راهنمای همکاری؛ شناسه DOC-1042." }, { value: "versions", label: "نسخه‌ها", content: "سه نسخه ساختگی برای نمایش ناوبری." }, { value: "activity", label: "فعالیت‌ها", content: "این رویدادها صرفاً نمایشی‌اند." }]} />
       <ClasorPagination page={page} pageCount={5} onPageChange={setPage} /><p data-test-id="navigation-catalogue-p-2" role="status" className="text-xs text-muted-foreground">صفحه نمایشی: {new Intl.NumberFormat("fa").format(page)}؛ داده جدول تغییر نمی‌کند.</p>
     </Sample>
+    <GlassTabsCatalogue />
     </>}
     {section === "feedback" && <>
     <SectionTitle id="feedback" title="بازخورد" number="10" />

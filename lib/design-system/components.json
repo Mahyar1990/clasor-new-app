@@ -309,12 +309,15 @@
       "id": "tabs",
       "previewAnchor": "#navigation",
       "variants": [
-        "underline"
+        "line",
+        "segmented"
       ],
       "states": [
         "selected",
         "unselected",
-        "focus"
+        "focus",
+        "hover",
+        "disabled"
       ],
       "rules": [
         "One tab in tab sequence.",
@@ -327,20 +330,20 @@
         "UX12"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "The segmented variant uses shared glass rail and active-surface contracts, with opaque and contrast fallbacks; line retains its minimal underline treatment.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
         "default": "Not applicable to this component contract.",
-        "hover": "Not applicable to this component contract.",
+        "hover": "Applicable; preserve shared navigation hover without changing selection.",
         "pressed": "Not applicable to this component contract.",
         "focus-visible": "Applicable; preserve existing native semantics and documented behavior.",
         "selected": "Applicable; preserve existing native semantics and documented behavior.",
         "loading": "Not applicable to this component contract.",
         "invalid": "Not applicable to this component contract.",
-        "disabled": "Not applicable to this component contract."
+        "disabled": "Applicable; skip disabled tabs during keyboard navigation."
       }
     },
     {
