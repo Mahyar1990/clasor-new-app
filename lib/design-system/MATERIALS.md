@@ -34,6 +34,16 @@ Both surfaces honor solid/contrast preferences and forced colors: gradients and 
 
 [GlassScrollArea](../../components/ui/GlassScrollArea.tsx) is a named, focusable Base UI scroll region with native viewport scrolling, a separate visible glass scrollbar, reserved content space and contained overscroll. Base UI owns thumb sizing and dragging. Each dashboard list has its own region; headings and tabs remain outside it. At desktop widths the two panels stretch equally to the available viewport height. Narrow layouts stack independently scrollable panels. Loading sentinels remain inside their respective scroll regions so cumulative loading follows each list's visible bottom. `/design-system/layout` demonstrates two independent areas and the glass icon button.
 
+## Compact density
+
+`AppLayout density="compact"` opts into the shared `compactLayout` contract. Body labels reduce from 14px to 12px, panel headings from 18px to 14px, major headings from 24px to 18px, and header titles from 20px to 16px. General metadata stays at 12px; repository date, role and status use an explicit 11px secondary line at the product owner’s request. Desktop controls use 32px height; mobile control defaults and dashboard tabs keep 44px targets. Table cells use 8px vertical padding, while header and content padding also decrease. This is scoped layout density, with no browser zoom or global token changes; portals retain their standard control sizing.
+
+The dashboard uses compact density with smaller icon tiles, row spacing, panel padding and a 200px desktop sidebar. Its viewport-filling panels and independent scrollbars remain intact. The layout catalogue includes a density toggle for direct comparison.
+
+## Column sizing
+
+`SolidColumn.width` sets a column width in pixels through a semantic colgroup. `SolidDataTable layout="fixed"` preserves these allocations and lets unspecified columns share the remaining space. Default layout remains automatic. The dashboard reserves 52px for the leftmost action column and 112px for the adjacent creator column; the document name fills the remainder and wraps without truncation. Action cells have 4px inline padding and align their control to the left edge in RTL. The layout catalogue demonstrates fixed column allocation with a 96px category column.
+
 ## Behavior and verification
 
 Base UI retains focus trapping/restoration, Escape/outside dismissal, keyboard selection and scroll locking. Portals preserve local dark previews through `usePortalTheme`. Public wrapper IDs are retained on rendered trigger elements through `withTestId`.

@@ -17,7 +17,7 @@ const initialRows: SampleRow[] = [
 const columns: [SolidColumn<SampleRow>, ...SolidColumn<SampleRow>[]] = [
   { id: "name", label: "نام و نام خانوادگی", render: row => row.name },
   { id: "email", label: "ایمیل", render: row => <bdi data-test-id="layout-content-catalogue-bdi-1">{row.email}</bdi> },
-  { id: "category", label: "دسته‌بندی", render: row => row.category },
+  { id: "category", label: "دسته‌بندی", width: 96, render: row => row.category },
 ];
 
 /** Catalogue-only composition; reusable components remain in components/ui. */
@@ -26,6 +26,7 @@ export function LayoutContentCatalogue() {
   const [disabled, setDisabled] = useState(false);
   const [dark, setDark] = useState(false);
   const [glassTable, setGlassTable] = useState(true);
+  const [compact, setCompact] = useState(false);
 
   function addRow(values: SolidFormValues) {
     setRows(current => [...current, {
@@ -42,6 +43,10 @@ export function LayoutContentCatalogue() {
         نمونهٔ AppLayout شامل GlassHeader، GlassSidebar، SolidDataTable و SolidForm؛ ثبت فرم یک ردیف به جدول همین نمونه اضافه می‌کند. داده‌ها با بارگذاری دوبارهٔ صفحه بازنشانی می‌شوند.
       </p>
       <GlassCard as="div" data-test-id="catalogue-glass-card" className="mb-4 flex flex-wrap items-center gap-4 p-3 text-sm">
+        <label data-test-id="catalogue-compact-label" className="flex min-h-11 cursor-pointer items-center gap-2">
+          <input type="checkbox" checked={compact} onChange={event => setCompact(event.target.checked)} data-test-id="catalogue-compact-toggle" className="size-4 accent-primary" />
+          چیدمان جمع‌وجور
+        </label>
         <label data-test-id="catalogue-glass-table-label" className="flex min-h-11 cursor-pointer items-center gap-2">
           <input type="checkbox" checked={glassTable} onChange={event => setGlassTable(event.target.checked)} data-test-id="catalogue-glass-table-toggle" className="size-4 accent-primary" />
           ردیف‌های شیشه‌ای جدول
@@ -56,12 +61,12 @@ export function LayoutContentCatalogue() {
         </label>
       </GlassCard>
       <div data-test-id="layout-content-catalogue-div-9" className="isolate overflow-hidden rounded-xl border [&_[data-test-id=layout-root]]:min-h-0 [&_[data-test-id=layout-main]]:min-h-0 [&_[data-test-id=layout-header]]:static [&_[data-test-id=layout-sidebar]]:static">
-        <AppLayout title="نمونه چیدمان کلاسور" contentAs="section" profile={<CatalogueProfileMenu />}>
+        <AppLayout density={compact ? "compact" : "comfortable"} title="نمونه چیدمان کلاسور" contentAs="section" profile={<CatalogueProfileMenu />}>
           <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /></div>
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
             <GlassIdentityCatalogue />
             <GlassScrollCatalogue />
-            <SolidDataTable appearance={glassTable ? "glass" : "solid"} caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
+            <SolidDataTable layout="fixed" appearance={glassTable ? "glass" : "solid"} caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
             <SolidForm disabled={disabled} onSubmit={addRow} />
           </div>
         </AppLayout>

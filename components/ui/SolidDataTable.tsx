@@ -5,6 +5,7 @@ import { GlassCard } from "@/components/ui/GlassCard";
 export interface SolidColumn<T> {
   id: string;
   label: string;
+  width?: number;
   render: (row: T) => ReactNode;
 }
 
@@ -16,6 +17,7 @@ export interface SolidDataTableProps<T> {
   emptyMessage?: string;
   testId?: string;
   appearance?: "solid" | "glass";
+  layout?: "auto" | "fixed";
 }
 
 /** Semantic table with a glass wrapper and an optional translucent data surface. */
@@ -24,6 +26,7 @@ export function SolidDataTable<T>({
   emptyMessage = "اطلاعاتی برای نمایش وجود ندارد.",
   testId = "solid-table",
   appearance = "solid",
+  layout = "auto",
 }: SolidDataTableProps<T>) {
   return (
     <GlassCard as="div"
@@ -34,10 +37,13 @@ export function SolidDataTable<T>({
       data-test-id={`${testId}-scroll`}
       className="max-w-full overflow-x-auto"
     >
-      <table data-test-id={testId} className="w-full min-w-[36rem] border-collapse text-start text-sm leading-body">
+      <table data-test-id={testId} className={`w-full min-w-[36rem] border-collapse text-start text-sm leading-body ${layout === "fixed" ? "table-fixed" : "table-auto"}`}>
         <caption data-test-id="SolidDataTable-caption-3" className="border-b border-white/30 px-4 py-3 text-start font-bold">
           {caption}
         </caption>
+        <colgroup data-test-id={`${testId}-columns`}>
+          {columns.map(column => <col data-test-id={`${testId}-column-${column.id}`} key={column.id} style={column.width ? { width: column.width } : undefined} />)}
+        </colgroup>
         <thead data-test-id="SolidDataTable-thead-4" className={appearance === "glass" ? glass.tableHeader : "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100"}>
           <tr data-test-id={`${testId}-header`}>
             {columns.map(column => (

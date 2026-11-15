@@ -1,3 +1,4 @@
+import { glass } from "@/lib/design-system/classes";
 import type { ReactNode } from "react";
 import { GlassHeader, type GlassHeaderProps } from "@/components/ui/GlassHeader";
 import { GlassSidebar, type GlassNavigationItem } from "@/components/ui/GlassSidebar";
@@ -8,15 +9,17 @@ export interface AppLayoutProps extends GlassHeaderProps {
   navigation?: readonly GlassNavigationItem[];
   sidebar?: ReactNode;
   contentAs?: "main" | "section";
+  density?: "comfortable" | "compact";
 }
 
 /** Template: glass chrome and content wrappers over a fixed mesh backdrop. */
-export function AppLayout({ children, title, logo, profile, navigation, sidebar, contentAs: Content = "main" }: AppLayoutProps) {
+export function AppLayout({ children, title, logo, profile, navigation, sidebar, contentAs: Content = "main", density = "comfortable" }: AppLayoutProps) {
   return (
     <div
       dir="rtl"
+      data-density={density}
       data-test-id="layout-root"
-      className={`relative isolate min-h-dvh bg-[image:var(--material-canvas)] p-4 text-foreground md:p-6 ${Content === "section" ? "[contain:paint]" : ""}`}
+      className={`relative isolate min-h-dvh bg-[image:var(--material-canvas)] p-4 text-foreground md:p-6 ${Content === "section" ? "[contain:paint]" : ""} ${density === "compact" ? glass.compactLayout : ""}`}
     >
       <div aria-hidden="true" data-test-id="layout-mesh" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[image:var(--material-canvas)]">
         <div data-test-id="AppLayout-div-3" className="absolute -top-24 -start-24 size-[32rem] rounded-full bg-[var(--clasor-color-brand-400)]/60 blur-3xl" />

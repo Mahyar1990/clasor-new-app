@@ -16,12 +16,12 @@ const groups = [
 ];
 
 function DashboardNavigation({ onNavigate }: { onNavigate?: () => void }) {
-  return <GlassCard as="div" data-test-id="dashboard-product-sidebar" className="p-3">
+  return <GlassCard as="div" data-test-id="dashboard-product-sidebar" className="p-2.5">
     <nav data-test-id="dashboard-product-navigation" aria-label="منوی نمونه کلاسور">
-      <a data-test-id="dashboard-current-page" href="#dashboard-overview" onClick={onNavigate} aria-current="page" className={`${glass.navigation} ${glass.current} flex min-h-11 items-center gap-3 px-3 text-sm text-primary`}>
+      <a data-test-id="dashboard-current-page" href="#dashboard-overview" onClick={onNavigate} aria-current="page" className={`${glass.navigation} ${glass.current} flex min-h-11 md:min-h-8 items-center gap-3 px-3 text-sm text-primary`}>
         <LayoutDashboard aria-hidden="true" className="size-5" />داشبورد
       </a>
-      {groups.map(group => <div data-test-id={`dashboard-nav-group-${group.title}`} key={group.title} className="mt-4">
+      {groups.map(group => <div data-test-id={`dashboard-nav-group-${group.title}`} key={group.title} className="mt-3">
         <p data-test-id={`dashboard-nav-heading-${group.title}`} className="mb-1 px-3 text-xs font-medium text-muted-foreground">{group.title}</p>
         <ul data-test-id={`dashboard-nav-items-${group.title}`} className="space-y-1">
           {group.items.map(({ label, icon: Icon }) => <li data-test-id={`dashboard-nav-item-${label}`} key={label}>
@@ -32,11 +32,11 @@ function DashboardNavigation({ onNavigate }: { onNavigate?: () => void }) {
         </ul>
       </div>)}
     </nav>
-    <div data-test-id="dashboard-sample-user" className="mt-5 flex items-center gap-2 border-t border-white/40 px-2 pt-4">
-      <GlassEmblem shape="avatar" data-test-id="dashboard-user-avatar" className="size-9 text-sm" aria-hidden="true">ک ن</GlassEmblem>
+    <div data-test-id="dashboard-sample-user" className="mt-4 flex items-center gap-2 border-t border-white/40 px-2 pt-3">
+      <GlassEmblem shape="avatar" data-test-id="dashboard-user-avatar" className="size-8 text-sm" aria-hidden="true">ک ن</GlassEmblem>
       <div data-test-id="dashboard-user-copy"><p data-test-id="dashboard-user-name" className="text-sm font-medium">کاربر نمونه</p><p data-test-id="dashboard-user-note" className="text-xs text-muted-foreground">حساب نمایشی</p></div>
     </div>
-    <Link data-test-id="dashboard-back-to-catalogue" href="/" className={`${glass.navigation} mt-3 flex min-h-11 items-center px-3 text-xs text-primary`}>بازگشت به سیستم طراحی</Link>
+    <Link data-test-id="dashboard-back-to-catalogue" href="/" className={`${glass.navigation} mt-2 flex min-h-11 md:min-h-8 items-center px-3 text-xs text-primary`}>بازگشت به سیستم طراحی</Link>
   </GlassCard>;
 }
 
