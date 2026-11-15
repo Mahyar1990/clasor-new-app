@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import { tableColumnWidth, type TableColumnKind } from "@/lib/design-system/table-contract";
 import { glass } from "@/lib/design-system/classes";
 import { GlassCard } from "@/components/ui/GlassCard";
 
@@ -6,6 +8,7 @@ export interface SolidColumn<T> {
   id: string;
   label: string;
   width?: number;
+  kind?: TableColumnKind;
   render: (row: T) => ReactNode;
 }
 
@@ -27,7 +30,7 @@ export function SolidDataTable<T>({
   emptyMessage = "اطلاعاتی برای نمایش وجود ندارد.",
   testId = "solid-table",
   appearance = "solid",
-  layout = "auto",
+  layout = columns.some(column => column.kind === "actions") ? "fixed" : "auto",
 }: SolidDataTableProps<T>) {
   return (
     <GlassCard as="div"
@@ -43,12 +46,12 @@ export function SolidDataTable<T>({
           {caption}
         </caption>
         <colgroup data-test-id={`${testId}-columns`}>
-          {columns.map(column => <col data-test-id={`${testId}-column-${column.id}`} key={column.id} style={column.width ? { width: column.width } : undefined} />)}
+          {columns.map(column => <col data-test-id={`${testId}-column-${column.id}`} key={column.id} style={{ width: tableColumnWidth(column) }} />)}
         </colgroup>
         <thead data-test-id="SolidDataTable-thead-4" className={appearance === "glass" ? glass.tableHeader : "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100"}>
           <tr data-test-id={`${testId}-header`}>
             {columns.map(column => (
-              <th data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className={`border-b py-3 ps-4 pe-4 text-start font-bold ${appearance === "glass" ? "border-white/50 shadow-[inset_0_-1px_0_rgb(130_90_175/0.08)]" : "border-slate-200 dark:border-slate-700"}`}>
+              <th data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className={cn(glass.tableCell, "border-b font-bold", appearance === "glass" ? "border-white/50 shadow-[inset_0_-1px_0_rgb(130_90_175/0.08)]" : "border-slate-200 dark:border-slate-700", column.kind === "actions" && glass.tableActionCell)}>
                 {column.label}
               </th>
             ))}
@@ -64,8 +67,8 @@ export function SolidDataTable<T>({
                 className={appearance === "glass" ? glass.tableRow : "border-b border-slate-200 bg-white last:border-b-0 hover:bg-slate-100 focus-within:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800 dark:focus-within:bg-slate-800"}
               >
                 {columns.map(column => (
-                  <td data-test-id={`SolidDataTable-td-9-${String(column.id)}`} key={column.id} className="max-w-sm py-3 ps-4 pe-4 text-start align-middle wrap-anywhere">
-                    {column.render(row)}
+                  <td data-test-id={`SolidDataTable-td-9-${String(column.id)}`} key={column.id} className={cn(glass.tableCell, "max-w-sm", column.kind === "actions" && glass.tableActionCell)}>
+                    {column.kind === "actions" ? <div data-test-id={`${testId}-actions-${rowId}`} className={glass.tableActions}>{column.render(row)}</div> : column.render(row)}
                   </td>
                 ))}
               </tr>

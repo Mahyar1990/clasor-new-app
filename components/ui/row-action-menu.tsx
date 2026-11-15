@@ -8,7 +8,7 @@ export function RowActionMenu({ rowLabel, items, open, defaultOpen, onOpenChange
   const id = useId()
   const trigger = useRef<HTMLButtonElement>(null)
   return <div data-test-id="row-action-menu-div-1"><DropdownMenu open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
-    <DropdownMenuTrigger data-test-id="row-action-menu-dropdownmenutrigger-2" ref={trigger} render={<IconButton data-test-id="row-action-menu-dropdownmenutrigger-2" aria-label={`اقدام‌های ${rowLabel}`} variant="ghost" />}><MoreHorizontal aria-hidden="true" /></DropdownMenuTrigger>
+    <DropdownMenuTrigger data-test-id="row-action-menu-dropdownmenutrigger-2" ref={trigger} render={<IconButton data-test-id="row-action-menu-dropdownmenutrigger-2" aria-label={`اقدام‌های ${rowLabel}`} variant="glass" />}><MoreHorizontal aria-hidden="true" /></DropdownMenuTrigger>
     <DropdownMenuContent dir="rtl" align="end" finalFocus={fallbackFocusRef ? () => trigger.current?.isConnected ? trigger.current : fallbackFocusRef.current ?? true : undefined} className="min-w-52 max-w-[calc(100vw-2rem)] border shadow-floating">
       {items.map((item, index) => <DropdownMenuItem key={item.id} disabled={!!item.disabledReason} aria-describedby={item.disabledReason ? `${id}-${index}` : undefined} variant={item.destructive ? "destructive" : "default"} onClick={item.onSelect} className="min-h-10 whitespace-normal break-words">{item.label}</DropdownMenuItem>)}
     </DropdownMenuContent>

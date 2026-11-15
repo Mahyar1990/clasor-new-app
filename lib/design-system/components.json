@@ -445,7 +445,7 @@
       "material": {
         "preset": "solid",
         "forbiddenNesting": [],
-        "rule": "DataTable retains its existing material. SolidDataTable defaults to solid rows and offers appearance=glass for a translucent header and rows over one blurred wrapper; the layout catalogue and dashboard demonstrate it.",
+        "rule": "Shared table-contract.ts and classes.ts own flexible content, 112px metadata, 76px single actions and 16px inline cell padding. Custom multiple actions default to 128px. Glass operation triggers and document examples appear in both data and layout catalogues.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -487,7 +487,7 @@
           "chrome",
           "floating"
         ],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "RowActionMenu uses the glass icon-button surface; preserve its padded table cell, accessible name, Base UI focus behavior and local dark portal.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {

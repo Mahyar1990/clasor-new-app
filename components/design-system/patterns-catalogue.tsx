@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useId, useRef, useState } from "react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
+import { DocumentTableCatalogue } from "@/components/design-system/document-table-catalogue";
 import { DataTable } from "@/components/ui/data-table"
 import { ApprovalBadge, VisibilityBadge, LatestBadge } from "@/components/ui/status-badge"
 import { SelectField } from "@/components/ui/select-field"
@@ -48,8 +49,8 @@ function SearchableTableExample() {
     <DataTable id={tableId} toolbar={<div data-test-id="patterns-catalogue-div-2" className="space-y-3"><div data-test-id="patterns-catalogue-div-3" className="flex flex-wrap items-center gap-3"><div data-test-id="patterns-catalogue-div-4" className="min-w-0 flex-1 basis-64"><TableSearch ref={search} tableId={tableId} label="جست‌وجو در جدول نمونه" placeholder="نام سند را جست‌وجو کنید" value={query} onValueChange={value => { setQuery(value); setSelected([]) }} onSearch={value => { setQuery(value); setSelected([]); setMessage(value.trim() ? `نتایج جست‌وجوی «${value}» در جدول نمایش داده شد.` : "همه ردیف‌های موجود در جدول نمایش داده شدند.") }} /></div><Button data-test-id="patterns-catalogue-button-5" variant="outline" onClick={() => { setItems(searchableRows); setQuery(""); setSelected([]); setMessage("۱۸ ردیف نمونه بازیابی شدند.") }}>بازنشانی نمونه جدول</Button></div><p data-test-id="patterns-catalogue-p-6" role="status" className="text-xs text-muted-foreground">نمایش {new Intl.NumberFormat("fa").format(filtered.length)} از {new Intl.NumberFormat("fa").format(items.length)} ردیف نمونه</p></div>}
       label="جدول جست‌وجوپذیر نمونه" rows={filtered} maxHeight={320} selectedIds={selected} onSelectionChange={setSelected} getRowId={row => row.id} rowLabel={row => row.name} emptyMessage={query ? "نتیجه‌ای برای این جست‌وجو پیدا نشد؛ نام یا شناسه دیگری وارد کنید." : "همه ردیف‌های نمونه حذف شده‌اند؛ با بازنشانی، آن‌ها را بازیابی کنید."} columns={[
       { id: "name", label: "نام", render: row => <span data-test-id="patterns-catalogue-span-7" className="font-medium">{row.name}</span> },
-      { id: "approval", label: "تأیید", render: row => <ApprovalBadge status={row.approval} /> },
-      { id: "visibility", label: "دسترسی", render: row => <VisibilityBadge visibility={row.visibility} /> },
+      { id: "approval", label: "تأیید", kind: "metadata", render: row => <ApprovalBadge status={row.approval} /> },
+      { id: "visibility", label: "دسترسی", kind: "metadata", render: row => <VisibilityBadge visibility={row.visibility} /> },
     ]} renderActions={row => <div data-test-id="patterns-catalogue-div-8" className="flex items-center gap-2"><RowActionMenu fallbackFocusRef={search} rowLabel={row.name} items={[{ id: "view", label: "مشاهده مشخصات نمونه", onSelect: () => setMessage(`مشخصات نمونه: ${row.name}`) }, { id: "delete", label: "حذف ردیف نمونه", destructive: true, onSelect: () => remove(row) }]} /><IconButton data-test-id="patterns-catalogue-iconbutton-9" variant="ghost" aria-label={`حذف ردیف ${row.name}`} onClick={() => remove(row)}><Trash2 aria-hidden="true" /></IconButton></div>} />
     <p data-test-id="patterns-catalogue-p-10" role="status" className="break-words text-xs leading-body text-muted-foreground">{message}</p>
   </Sample></div>
@@ -60,13 +61,14 @@ export function DataCatalogue() {
   const [state, setState] = useState<"ready" | "empty" | "loading" | "error">("ready")
   const [message, setMessage] = useState("داده‌ها ساختگی و ثابت‌اند.")
   return <div data-test-id="patterns-catalogue-div-11" className="space-y-5 pt-10" data-catalogue="data"><SectionTitle id="data" title="داده و جدول" number="09" />
+    <DocumentTableCatalogue />
     <Sample title="فهرست خوانا، انتخاب مشخص" description="انتخاب همه فقط همین سه ردیف محلی را شامل می‌شود؛ اسکرول افقی داخل ظرف جدول باقی می‌ماند.">
       <div data-test-id="patterns-catalogue-div-12" className="grid gap-4 sm:grid-cols-2"><SelectField data-test-id="patterns-catalogue-selectfield-13" label="تراکم جدول" value={density} onValueChange={value => setDensity(value as typeof density)} options={[{ value: "comfortable", label: "راحت" }, { value: "compact", label: "فشرده" }]} /><SelectField data-test-id="patterns-catalogue-selectfield-14" label="حالت جدول" value={state} onValueChange={value => { setState(value as typeof state); setSelected([]) }} options={[{ value: "ready", label: "دارای داده" }, { value: "empty", label: "خالی" }, { value: "loading", label: "بارگذاری" }, { value: "error", label: "خطا" }]} /></div>
       <DataTable label="اسناد نمونه" rows={state === "empty" ? [] : rows} state={state} density={density} selectedIds={selected} onSelectionChange={setSelected} getRowId={row => row.id} rowLabel={row => row.name} onRetry={() => setState("ready")} columns={[
         { id: "name", label: "نام", render: row => <span data-test-id="patterns-catalogue-span-15" className="font-medium">{row.name}</span> },
-        { id: "approval", label: "تأیید", render: row => <ApprovalBadge status={row.approval} /> },
-        { id: "visibility", label: "دسترسی", render: row => <VisibilityBadge visibility={row.visibility} /> },
-        { id: "version", label: "نسخه", render: () => <LatestBadge status="latest" /> },
+        { id: "approval", label: "تأیید", kind: "metadata", render: row => <ApprovalBadge status={row.approval} /> },
+        { id: "visibility", label: "دسترسی", kind: "metadata", render: row => <VisibilityBadge visibility={row.visibility} /> },
+        { id: "version", label: "نسخه", kind: "metadata", render: () => <LatestBadge status="latest" /> },
       ]} actions={row => [{ id: "view", label: "دیدن نمونه", onSelect: () => setMessage(`نمایش «${row.name}» فقط شبیه‌سازی شد.`) }]} />
       <p data-test-id="patterns-catalogue-p-16" role="status" className="text-xs text-muted-foreground">{message}</p>
     </Sample>

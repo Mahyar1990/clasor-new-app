@@ -9,6 +9,9 @@ const active = "bg-white/30 backdrop-blur-md border-white/40 shadow-sm font-medi
 const emblem = `${panel} relative isolate inline-grid size-11 shrink-0 place-items-center overflow-hidden border-white/70 font-semibold text-primary shadow-[0_4px_12px_rgb(100_65_155/0.15),inset_0_1px_0_rgb(255_255_255/0.95),inset_0_-2px_3px_rgb(112_71_167/0.12)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-linear-to-br before:from-white/70 before:via-white/10 before:to-purple-300/30 dark:text-purple-200 dark:border-white/35 dark:before:from-white/30 dark:before:to-purple-400/15 opaque:before:hidden! forced-colors:before:hidden!`;
 
 export const glass = {
+  tableCell: "px-4 py-3 text-start align-middle wrap-anywhere",
+  tableActionCell: "px-4 text-end",
+  tableActions: "flex max-w-full flex-wrap items-center justify-end gap-2",
   compactLayout: "[--clasor-font-size-14:0.75rem] [--clasor-font-size-16:0.8125rem] [--text-lg:0.875rem] [--clasor-font-size-20:1rem] [--clasor-font-size-24:1.125rem] [--control-height:2.75rem]! md:[--control-height:2rem]! [&_table_th]:py-2 [&_table_td]:py-2 [&_table_caption]:py-2 [&_[data-test-id=layout-header]]:min-h-13 [&_[data-test-id=layout-header]]:gap-3 [&_[data-test-id=layout-header]]:px-4 [&_[data-test-id=layout-header]]:py-2 [&_[data-test-id=GlassHeader-span-3]]:size-8 [&_[data-test-id=GlassHeader-span-3]_svg]:size-5 [&_[data-test-id=layout-main]]:p-3 md:[&_[data-test-id=layout-main]]:p-3",
   panel,
   emblem,

@@ -24,7 +24,7 @@ Updated: 2026-11-14 (Asia/Tehran). Implementation checkpoint: `d124673`. This is
 | Catalogue geometry and shell-specific utilities | [catalogue-layout.ts](../components/design-system/catalogue-layout.ts), [workspace-styles.ts](../components/workspace/workspace-styles.ts), [wireframe-styles.ts](../components/wireframes/wireframe-styles.ts) | Static Tailwind classes owned by the consuming view; no global selector stylesheet |
 | Input, Select, button and validation | [CONTROLS.md](../lib/design-system/CONTROLS.md), [SolidForm](../components/ui/SolidForm.tsx) | [Select](../components/ui/select.tsx), [input](../components/ui/input.tsx), [button](../components/ui/button.tsx) |
 | Overlay, navigation and focus | [NAVIGATION.md](../lib/design-system/NAVIGATION.md), [GlassModal](../components/ui/GlassModal.tsx), [GlassDropdown](../components/ui/GlassDropdown.tsx) | [portal theme](../hooks/use-portal-theme.ts), [render IDs](../lib/design-system/test-id.ts) |
-| Tables and composite flows | [PATTERNS.md](../lib/design-system/PATTERNS.md), [SolidDataTable](../components/ui/SolidDataTable.tsx) | [DataTable](../components/ui/data-table.tsx) |
+| Tables and composite flows | [Column contract](../lib/design-system/table-contract.ts), [PATTERNS.md](../lib/design-system/PATTERNS.md), [SolidDataTable](../components/ui/SolidDataTable.tsx) | [DataTable](../components/ui/data-table.tsx) |
 | Workspace list loading | [LoadMore](../components/workspace/load-more.tsx), [list session](../components/workspace/list-session.tsx) | AGENTS.md: batches of 10, cumulative append, 600ms mock latency |
 | Document semantics and mutations | [mutations.ts](../lib/workspace/mutations.ts), [documents.ts](../lib/workspace/documents.ts) | `test/workspace-*.test.mjs`; approval, version and access remain independent |
 | Structural enforcement | [check-design-system.mjs](../scripts/check-design-system.mjs), [eslint config](../eslint.config.mjs) | [VALIDATION.md](../lib/design-system/VALIDATION.md), package scripts |
@@ -44,6 +44,6 @@ Updated: 2026-11-14 (Asia/Tehran). Implementation checkpoint: `d124673`. This is
 
 ## Updating this context
 
-Change implementation and its owning contract together. Add new UI examples through `app/page.tsx`. Re-run the required checks and record the actual revision and scope; keep older evidence labeled as historical. This index and linked current summaries are the RAG entry points; do not create a second conflicting agent guide.
+Change implementation and its owning contract together. Add new UI examples through `app/page.tsx`. Shared document-column geometry and glass actions are demonstrated in `components/design-system/document-table-catalogue.tsx` on `/design-system/data` and `/design-system/layout`; dashboard columns consume the shared kinds. Re-run the required checks and record the actual revision and scope; keep older evidence labeled as historical. This index and linked current summaries are the RAG entry points; do not create a second conflicting agent guide.
 
 For documentation changes, run `node scripts/update-spec-index.mjs --check` and `node scripts/check-doc-links.mjs`. After adding/removing source specifications, regenerate the single index with `node scripts/update-spec-index.mjs`; do not restore a parallel index in docs.

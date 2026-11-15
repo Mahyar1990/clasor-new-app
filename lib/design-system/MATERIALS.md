@@ -40,9 +40,17 @@ Both surfaces honor solid/contrast preferences and forced colors: gradients and 
 
 The dashboard uses compact density with smaller icon tiles, row spacing, panel padding and a 200px desktop sidebar. Its viewport-filling panels and independent scrollbars remain intact. The layout catalogue includes a density toggle for direct comparison.
 
-## Column sizing
+## Column sizing and action controls
 
-`SolidColumn.width` sets a column width in pixels through a semantic colgroup. `SolidDataTable layout="fixed"` preserves these allocations and lets unspecified columns share the remaining space. Default layout remains automatic. The dashboard reserves 76px for the leftmost action column and 112px for the adjacent creator column; the document name fills the remainder and wraps without truncation. Header cells and action data cells have 16px inline padding and align their control to the left edge in RTL. The layout catalogue demonstrates fixed column allocation with a 96px category column. `hideCaption` visually hides the semantic caption while preserving the table name; the dashboard uses this with the accessible label «فهرست سندها» so no extra title appears above its column headers.
+[table-contract.ts](table-contract.ts) owns the shared geometry: `TABLE_ACTION_WIDTH=76`, `TABLE_METADATA_WIDTH=112` and `TABLE_MULTI_ACTION_WIDTH=128`. Both table compositions consume it. A column's `kind="metadata"` reserves 112px; `kind="actions"` reserves 76px in `SolidDataTable`, enables fixed layout by default and aligns its header and content to the inline end (left in RTL). Content columns without a width fill the remainder. `width` can override a column allocation. Keep actions last in the column sequence.
+
+`classes.ts` owns `tableCell`, `tableActionCell` and `tableActions`: 16px inline padding on headers/data/action cells, left alignment of operations in RTL and wrapping full document titles. Do not remove cell padding to move an action toward the edge. A 76px operation column accommodates a 44px mobile control and 16px padding on each side. `DataTable` uses the same 76px single-menu column; custom `renderActions` defaults to 128px for multiple controls and can explicitly request a wider allocation through `actionColumnWidth`. Its metadata columns also accept `kind`/`width` and it retains selection, sticky header and loading/error states.
+
+`RowActionMenu` uses the shared glass icon button. Base UI owns menu keyboard navigation, dismissal, focus restoration and local dark portals. Preserve disabled reasons and the trigger's accessible name.
+
+The dashboard consumes column kinds directly; it no longer sets private action widths or cell-padding selectors. Its document label is «نام سند» and the semantic caption is hidden with `hideCaption`, retaining the accessible name «فهرست سندها». Generic mixed-object tables may still use «نام». `DataTable` also hides its caption visually while preserving its accessible table name.
+
+[DocumentTableCatalogue](../../components/design-system/document-table-catalogue.tsx) renders a long title, bounded creator column, padded glass action menu and local details dialog on both `/design-system/data` and `/design-system/layout`. The layout catalogue also demonstrates caption visibility, compact density, glass/solid appearance and dark mode. The data section includes selectable tables with single and multiple actions.
 
 ## Behavior and verification
 

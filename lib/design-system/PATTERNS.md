@@ -1,3 +1,7 @@
+## Shared table column contract — 2026/11/15
+
+Current table geometry lives in `table-contract.ts` and shared `classes.ts` utilities. Metadata columns default to 112px, single actions to 76px with 16px padding on each side; content gets the remaining width. Both SolidDataTable and DataTable consume this contract. Custom multiple actions retain 128px by default. The new document table catalogue is rendered on the data and layout pages with a long title, hidden semantic caption and working glass menu/dialog. Dashboard-only width/padding overrides have been removed. See [materials](MATERIALS.md) for the current API; the older stage sections below are historical.
+
 ## Dashboard glass table and identity surfaces — 2026/11/15
 
 `SolidDataTable` accepts `appearance="glass"` for a graduated translucent header and alternating translucent rows; its default remains `solid`. Semantics, stable row IDs, scroll region and action focus are preserved. `GlassEmblem` supplies reusable logo/folder tiles and circular avatars. Both are demonstrated on `/design-system/layout` with a local dark preview; the dashboard consumes these shared components directly. See [materials](MATERIALS.md) for the appearance and accessibility contract.
