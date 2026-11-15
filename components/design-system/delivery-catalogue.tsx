@@ -1,20 +1,25 @@
+import Link from "next/link"
+import { catalogueSections, catalogueHref } from "@/components/design-system/catalogue-sections"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
 import { componentCoverage } from "@/lib/design-system/coverage"
-export default function DeliveryCatalogue() {
+export default function DeliveryCatalogue({ section = "accessibility" }: { section?: "accessibility" | "handoff" }) {
   return <div data-test-id="delivery-catalogue-div-1" className="space-y-5 pt-10" data-catalogue="delivery">
     <p data-test-id="delivery-catalogue-p-2" className="text-sm text-muted-foreground">متریال مشترک نسخه ۰.۳ روی کامپوننت‌های واقعی اعمال شده است؛ بررسی کامل دسترس‌پذیری تأیید نشده است.</p>
-    <SectionTitle id="accessibility" title="دسترس‌پذیری" number="12" />
+    {section === "accessibility" && <>
+    <SectionTitle id="accessibility" title="دسترس‌پذیری" number="13" />
     <Sample title="خوانا، قابل پیمایش، قابل اصلاح" description="این راهنما همراه نمونه‌هاست؛ موفقیت build به‌تنهایی تأیید دسترس‌پذیری نیست.">
       <ul data-test-id="delivery-catalogue-ul-3" className="list-inside list-disc space-y-3 text-sm leading-body text-muted-foreground"><li data-test-id="delivery-catalogue-li-4">با Tab حرکت کنید؛ کنترل‌ها نام دارند و فوکوس قابل مشاهده است. راهنمای ضروری با tooltip پنهان نمی‌شود.</li><li data-test-id="delivery-catalogue-li-5">در تب‌های RTL، جهت چپ بعدی و جهت راست قبلی است؛ Home و End به دو سر فهرست می‌روند.</li><li data-test-id="delivery-catalogue-li-6">در لایه‌ها Escape و انصراف را امتحان کنید؛ فوکوس به زمینه برمی‌گردد و تصمیم مخرب از اقدام امن شروع می‌شود.</li><li data-test-id="delivery-catalogue-li-7">خطای فرم نزدیک فیلد است، مقدار را نگه می‌دارد و راه اصلاح دارد. رنگ تنها حامل وضعیت نیست.</li><li data-test-id="delivery-catalogue-li-8">حالت کاهش حرکت دستگاه رعایت می‌شود؛ پیشرفت مقدار دارد و جدول داخل ظرف خودش اسکرول می‌شود.</li></ul>
       <p data-test-id="delivery-catalogue-p-9" className="rounded-md border bg-muted p-3 text-xs leading-body">بررسی خودکار ساختار، صفحه‌کلید و مرورگر اجرا می‌شود. آزمون انسانی یکپارچه با صفحه‌خوان هنوز تأیید نشده و برای تحویل محصول واقعی لازم است.</p>
     </Sample>
-    <SectionTitle id="handoff" title="تحویل طراحی" number="13" />
+    </>}
+    {section === "handoff" && <>
+    <SectionTitle id="handoff" title="تحویل طراحی" number="14" />
     <Sample title="۲۲ قرارداد، یک کتابخانه قابل استفاده" description="پایه‌ها و ترکیب‌ها در components/ui؛ داده و قاب نمایش جدا در components/design-system. نشان کلاسور موقت است.">
       <p data-test-id="delivery-catalogue-p-10" className="text-sm leading-body text-muted-foreground">هر قرارداد را باز کنید تا کاربرد، props، حالت‌ها، رفتار صفحه‌کلید و ارجاع UX آن را ببینید. قطعه‌کدهای دارای handler باید داخل Client Component استفاده شوند. نام‌ها، مجوزها و اقدام‌های این کاتالوگ ساختگی‌اند.</p>
       <div data-test-id="delivery-catalogue-div-11" className="divide-y rounded-md border">{componentCoverage.map(component => <details data-test-id={`delivery-catalogue-details-12-${String(component.id)}`} key={component.id} id={`contract-${component.id}`} className="min-w-0 p-4">
         <summary data-test-id={`delivery-catalogue-summary-13-${String(component.id)}`} className="cursor-pointer break-words text-sm font-medium"><bdi data-test-id={`delivery-catalogue-bdi-14-${String(component.id)}`}>{component.name}</bdi><span data-test-id={`delivery-catalogue-span-15-${String(component.id)}`} className="ms-2 text-xs text-success">پیاده‌سازی شده</span></summary>
         <div data-test-id={`delivery-catalogue-div-16-${String(component.id)}`} className="mt-4 space-y-3 text-sm leading-body">
-          <p data-test-id={`delivery-catalogue-p-17-${String(component.id)}`}>{component.usage}؛ <a data-test-id={`delivery-catalogue-a-18-${String(component.id)}`} className="underline underline-offset-4" href={component.previewAnchor}>مشاهده نمونه</a></p>
+          <p data-test-id={`delivery-catalogue-p-17-${String(component.id)}`}>{component.usage}؛ <Link data-test-id={`delivery-catalogue-a-18-${String(component.id)}`} className="underline underline-offset-4" href={`${catalogueHref(catalogueSections.find(item => `#${item.id}` === component.previewAnchor)!.id)}${component.previewAnchor}`}>مشاهده نمونه</Link></p>
           <p data-test-id={`delivery-catalogue-p-19-${String(component.id)}`} className="text-muted-foreground">نامناسب برای: {component.avoid}</p>
           <p data-test-id={`delivery-catalogue-p-20-${String(component.id)}`}>صفحه‌کلید: {component.keyboard}</p>
           <p data-test-id={`delivery-catalogue-p-21-${String(component.id)}`} className="text-xs">متریال: <bdi data-test-id={`delivery-catalogue-bdi-22-${String(component.id)}`}>{component.material.preset}</bdi></p>
@@ -24,5 +29,6 @@ export default function DeliveryCatalogue() {
       </details>)}</div>
       <p data-test-id="delivery-catalogue-p-46" className="text-xs leading-body text-muted-foreground">محدوده: سیستم طراحی روشن و فارسی. تم تیره، مجوز قطعی، اتصال سرویس، آپلود و انتشار محصول خارج از این تحویل‌اند. جزئیات تفاوت‌های مرجع در گزارش‌های lib/design-system ثبت شده‌اند.</p>
     </Sample>
+    </>}
   </div>
 }

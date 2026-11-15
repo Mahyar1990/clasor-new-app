@@ -1,6 +1,5 @@
 "use client"
 import { useState } from "react"
-import { DataCatalogue } from "@/components/design-system/patterns-catalogue"
 import { Info } from "lucide-react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
 import { ClasorTabs } from "@/components/ui/clasor-tabs"
@@ -16,20 +15,22 @@ import { HelpTooltip } from "@/components/ui/help-tooltip"
 import { toast } from "@/components/ui/toast"
 import { Button } from "@/components/ui/button"
 import { IconButton } from "@/components/ui/icon-button"
-function Examples() {
+function Examples({ section }: { section: "navigation" | "feedback" | "overlays" }) {
   const [page, setPage] = useState(1)
   const [progress, setProgress] = useState(45)
   const [event, setEvent] = useState("هنوز اقدامی انجام نشده است.")
   function log(message: string) { setEvent(`${message} — فقط در این نمونه؛ بدون ذخیره‌سازی.`) }
   return <div data-test-id="navigation-catalogue-div-1" className="space-y-5 pt-10" data-catalogue="navigation">
-    <SectionTitle id="navigation" title="ناوبری" number="07" />
+    {section === "navigation" && <>
+    <SectionTitle id="navigation" title="ناوبری" number="08" />
     <Sample title="مسیر، تب و صفحه‌بندی" description="هر الگو وظیفه جدا دارد؛ صفحه‌بندی این نمونه فقط شماره صفحه را تغییر می‌دهد.">
-      <ClasorBreadcrumb items={[{ id: "home", label: "کتابخانه", href: "#colors" }, { id: "team", label: "اسناد گروه", href: "#navigation" }, { id: "current", label: "راهنمای همکاری" }]} />
+      <ClasorBreadcrumb items={[{ id: "home", label: "کتابخانه", href: "/" }, { id: "team", label: "اسناد گروه", href: "#navigation" }, { id: "current", label: "راهنمای همکاری" }]} />
       <ClasorTabs label="نمای سند" defaultValue="details" items={[{ value: "details", label: "جزئیات", content: "جزئیات راهنمای همکاری؛ شناسه DOC-1042." }, { value: "versions", label: "نسخه‌ها", content: "سه نسخه ساختگی برای نمایش ناوبری." }, { value: "activity", label: "فعالیت‌ها", content: "این رویدادها صرفاً نمایشی‌اند." }]} />
       <ClasorPagination page={page} pageCount={5} onPageChange={setPage} /><p data-test-id="navigation-catalogue-p-2" role="status" className="text-xs text-muted-foreground">صفحه نمایشی: {new Intl.NumberFormat("fa").format(page)}؛ داده جدول تغییر نمی‌کند.</p>
     </Sample>
-    <DataCatalogue />
-    <SectionTitle id="feedback" title="بازخورد" number="09" />
+    </>}
+    {section === "feedback" && <>
+    <SectionTitle id="feedback" title="بازخورد" number="10" />
     <div data-test-id="navigation-catalogue-div-3" className="grid gap-4 lg:grid-cols-2">{(["success", "warning", "error", "info"] as const).map(tone => <Feedback key={tone} tone={tone} title={{ success: "نمونه موفقیت", warning: "نیاز به بررسی", error: "انجام نشد", info: "اطلاعات بیشتر" }[tone]} description="این پیام نمونه است. جزئیات را بررسی کنید و سپس ادامه دهید." dataRetained={tone === "error" ? true : undefined} />)}</div>
     <div data-test-id="navigation-catalogue-div-4" className="grid gap-4 lg:grid-cols-2">
       <SystemState state={{ kind: "empty", title: "هنوز سندی نیست", description: "پس از افزودن سند، فهرست اینجا نمایش داده می‌شود." }} onRecovery={() => log("نمونه افزودن سند")} />
@@ -38,7 +39,9 @@ function Examples() {
       <SystemState state={{ kind: "service-error", title: "دریافت اطلاعات انجام نشد", description: "دریافت مجدد را امتحان کنید؛ این خطا نمونه است.", dataRetained: true, recoveryLabel: "تلاش دوباره" }} onRecovery={() => log("نمونه تلاش مجدد")} />
     </div>
     <Sample title="پیشرفت مشخص" description="مقدار عددی و پایان معلوم؛ بدون انیمیشن بی‌پایان برای پیشرفت."><ProgressIndicator label="آماده‌سازی نمونه" value={progress} /><Button data-test-id="navigation-catalogue-button-5" variant="outline" onClick={() => setProgress(value => value === 100 ? 0 : Math.min(100, value + 25))}>{progress === 100 ? "شروع دوباره نمونه" : "پیشروی نمونه"}</Button><LoadingSkeleton /></Sample>
-    <SectionTitle id="overlays" title="لایه و پیام" number="10" />
+    </>}
+    {section === "overlays" && <>
+    <SectionTitle id="overlays" title="لایه و پیام" number="11" />
     <Sample title="تصمیم روشن، بازگشت به زمینه" description="Escape و انصراف فوکوس را برمی‌گردانند؛ کلیک بیرون تأیید مخرب را نمی‌بندد.">
       <div data-test-id="navigation-catalogue-div-6" className="flex flex-wrap items-start gap-4">
         <ConfirmationDialog trigger={<Button data-test-id="navigation-catalogue-button-7" variant="outline">تأیید نمونه</Button>} title="تأیید محتوای نمونه" description="تأیید محتوا نوع دسترسی مخاطبان را تغییر نمی‌دهد. این اقدام فقط نمایشی است." targetName="راهنمای همکاری — نسخه ۱" confirmLabel="تأیید محتوای نمونه" onConfirm={() => log("محتوای نمونه تأیید شد")} />
@@ -59,6 +62,7 @@ function Examples() {
       ].map(example => <Button data-test-id={`navigation-catalogue-button-16-${String(example.type)}`} key={example.type} variant="outline" onClick={() => toast.add({ type: example.type === "default" ? undefined : example.type, title: example.title, description: example.description, priority: "low" })}>{example.label}</Button>)}</div>
       <p data-test-id="navigation-catalogue-p-17" className="text-xs leading-body text-muted-foreground">حالت پیش‌فرض خنثی است؛ موفقیت، اطلاعات، هشدار و خطا با آیکون و رنگ مستقل نمایش داده می‌شوند. پیام گذرا تنها سابقه یک تصمیم مهم نیست.</p>
     </Sample>
+    </>}
   </div>
 }
-export default function NavigationCatalogue() { return <Examples /> }
+export default function NavigationCatalogue({ section = "navigation" }: { section?: "navigation" | "feedback" | "overlays" }) { return <Examples section={section} /> }

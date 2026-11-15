@@ -31,7 +31,7 @@ Updated: 2026-11-14 (Asia/Tehran). Implementation checkpoint: `d124673`. This is
 
 ## State and limits to retain
 
-- The live catalogue is `/`; `/workspace` and `/wireframes` consume the shared UI. The standalone `clasor-design-system/` package is retired. `ds-bundle/` and Playwright captures are generated artifacts.
+- The live catalogue starts at `/` (colors); its 14 sections have separate pages at `/design-system/[section]`, including `/design-system/layout` for glass layout and controls. Menu entries and route IDs are owned by `components/design-system/catalogue-sections.ts`. `/workspace` and `/wireframes` consume the shared UI. The standalone `clasor-design-system/` package is retired. `ds-bundle/` and Playwright captures are generated artifacts.
 - `docs` retains current handoff, usability guidance and this retrieval map. `specs/INDEX.md` is the sole index for task and feature history. Duplicate screenshot aliases have been removed; retained feature evidence is historical, not a current visual baseline.
 - Main wrappers, fields and controls are glass. Table data rows may stay opaque. `SolidForm` and `SolidDataTable` retain their public names; those names do not require opaque outer surfaces.
 - Use the existing shadcn Base UI family. Native `<select>` is forbidden in authored React; Base UI's hidden form inputs remain valid implementation details.

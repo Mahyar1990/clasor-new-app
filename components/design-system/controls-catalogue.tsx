@@ -28,7 +28,7 @@ function SectionTitle({ id, title, description, number, children }: { id: string
 }
 const roles = [{ value: "writer", label: "نویسنده" }, { value: "editor", label: "ویرایشگر" }, { value: "guest", label: "مهمان" }]
 
-export default function ControlsCatalogue() {
+export default function ControlsCatalogue({ section = "buttons" }: { section?: "buttons" | "inputs" | "status" }) {
   const [loading, setLoading] = useState(false)
   const [actions, setActions] = useState(0)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -48,7 +48,8 @@ export default function ControlsCatalogue() {
     timer.current = setTimeout(() => { setLoading(false); setActions(value => value + 1); inFlight.current = false }, 1200)
   }
   return <div data-test-id="controls-catalogue-div-12" className="space-y-5 pt-10" data-catalogue="controls">
-    <SectionTitle id="buttons" title="دکمه و اقدام" description="یک اقدام روشن، در اندازه و جای مناسب" number="04"><MousePointer2 className="size-5" aria-hidden="true" /></SectionTitle>
+    {section === "buttons" && <>
+    <SectionTitle id="buttons" title="دکمه و اقدام" description="یک اقدام روشن، در اندازه و جای مناسب" number="05"><MousePointer2 className="size-5" aria-hidden="true" /></SectionTitle>
     <Sample title="هر اقدام، یک تأکید مشخص" description="اصلی، حاشیه‌دار و آرام؛ عملیات مخرب با نام صریح از هم جدا می‌شوند.">
       <div data-test-id="controls-catalogue-div-13" className="flex flex-wrap items-center gap-3">
         <Button data-test-id="controls-catalogue-button-14" onClick={simulateAction} loading={loading} loadingLabel="شبیه‌سازی ذخیره در حال اجراست"><Plus aria-hidden="true" />ایجاد سند</Button>
@@ -65,7 +66,9 @@ export default function ControlsCatalogue() {
       <Sample title="انتظار و محدودیت قابل فهم" description="برچسب در انتظار باقی می‌ماند و علت غیرفعال‌بودن همیشه قابل خواندن است."><div data-test-id="controls-catalogue-div-26" className="flex flex-wrap items-start gap-5"><Button data-test-id="controls-catalogue-button-27" loading loadingLabel="نمونه دکمه در حال ذخیره">ذخیره تغییرات</Button><div data-test-id="controls-catalogue-div-28"><Button data-test-id="controls-catalogue-button-29" disabled disabledReason="برای تأیید، ابتدا یک نسخه انتخاب کنید.">تأیید نسخه</Button></div></div></Sample>
     </div>
 
-    <SectionTitle id="inputs" title="ورودی و انتخاب" description="عنوان دائمی، راهنمای نزدیک و خطای قابل اصلاح" number="05"><SlidersHorizontal className="size-5" aria-hidden="true" /></SectionTitle>
+    </>}
+    {section === "inputs" && <>
+    <SectionTitle id="inputs" title="ورودی و انتخاب" description="عنوان دائمی، راهنمای نزدیک و خطای قابل اصلاح" number="06"><SlidersHorizontal className="size-5" aria-hidden="true" /></SectionTitle>
     <div data-test-id="controls-catalogue-div-30" className="grid items-start gap-5 lg:grid-cols-2">
       <Sample title="از ورودی تا بازبینی" description="اعتبارسنجی محلی است؛ خطا مقدار واردشده را پاک نمی‌کند.">
         <form data-test-id="controls-catalogue-form-31" className="space-y-5" noValidate onSubmit={event => {
@@ -111,7 +114,9 @@ export default function ControlsCatalogue() {
       </Sample>
     </div>
 
-    <SectionTitle id="status" title="وضعیت و هویت" description="تأیید، دسترسی، نسخه و نقش؛ چهار معنای مستقل" number="06"><UsersRound className="size-5" aria-hidden="true" /></SectionTitle>
+    </>}
+    {section === "status" && <>
+    <SectionTitle id="status" title="وضعیت و هویت" description="تأیید، دسترسی، نسخه و نقش؛ چهار معنای مستقل" number="07"><UsersRound className="size-5" aria-hidden="true" /></SectionTitle>
     <Sample title="وضعیت را با متن بخوانید" description="تأییدشدن به معنی عمومی‌بودن نیست؛ آخرین نسخه هم مجوز ایجاد نمی‌کند.">
       <div data-test-id="controls-catalogue-div-48" className="grid gap-5 sm:grid-cols-[100px_1fr]">
         <span data-test-id="controls-catalogue-span-49" className="text-xs text-muted-foreground">تأیید محتوا</span><div data-test-id="controls-catalogue-div-50" className="flex flex-wrap gap-2">{(["draft", "pending", "approved", "rejected"] as const).map(status => <ApprovalBadge key={status} status={status} />)}</div>
@@ -123,5 +128,6 @@ export default function ControlsCatalogue() {
     <Sample title="هر هویت، یک جای مشخص" description="نام‌های زیر ساختگی‌اند. نقش و مجوز از نام یا تصویر شخص نتیجه‌گیری نمی‌شوند.">
       <div data-test-id="controls-catalogue-div-57" className="grid gap-6 sm:grid-cols-2"><div data-test-id="controls-catalogue-div-58" className="space-y-3"><p data-test-id="controls-catalogue-p-59" className="text-xs text-muted-foreground">هویت مشخص</p><Identity identity={{ kind: "known", id: "sample-1", name: "نیلوفر احمدی" }} /></div><div data-test-id="controls-catalogue-div-60" className="space-y-3"><p data-test-id="controls-catalogue-p-61" className="text-xs text-muted-foreground">هویت ثبت‌نشده</p><Identity identity={{ kind: "unknown", label: "هویت نامشخص" }} /></div></div>
     </Sample>
+    </>}
   </div>
 }

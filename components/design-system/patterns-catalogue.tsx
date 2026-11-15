@@ -59,7 +59,7 @@ export function DataCatalogue() {
   const [density, setDensity] = useState<"comfortable" | "compact">("comfortable")
   const [state, setState] = useState<"ready" | "empty" | "loading" | "error">("ready")
   const [message, setMessage] = useState("داده‌ها ساختگی و ثابت‌اند.")
-  return <div data-test-id="patterns-catalogue-div-11" className="space-y-5 pt-10" data-catalogue="data"><SectionTitle id="data" title="داده و جدول" number="08" />
+  return <div data-test-id="patterns-catalogue-div-11" className="space-y-5 pt-10" data-catalogue="data"><SectionTitle id="data" title="داده و جدول" number="09" />
     <Sample title="فهرست خوانا، انتخاب مشخص" description="انتخاب همه فقط همین سه ردیف محلی را شامل می‌شود؛ اسکرول افقی داخل ظرف جدول باقی می‌ماند.">
       <div data-test-id="patterns-catalogue-div-12" className="grid gap-4 sm:grid-cols-2"><SelectField data-test-id="patterns-catalogue-selectfield-13" label="تراکم جدول" value={density} onValueChange={value => setDensity(value as typeof density)} options={[{ value: "comfortable", label: "راحت" }, { value: "compact", label: "فشرده" }]} /><SelectField data-test-id="patterns-catalogue-selectfield-14" label="حالت جدول" value={state} onValueChange={value => { setState(value as typeof state); setSelected([]) }} options={[{ value: "ready", label: "دارای داده" }, { value: "empty", label: "خالی" }, { value: "loading", label: "بارگذاری" }, { value: "error", label: "خطا" }]} /></div>
       <DataTable label="اسناد نمونه" rows={state === "empty" ? [] : rows} state={state} density={density} selectedIds={selected} onSelectionChange={setSelected} getRowId={row => row.id} rowLabel={row => row.name} onRetry={() => setState("ready")} columns={[
@@ -90,7 +90,7 @@ export function PatternsCatalogue() {
   const permission = fixtures[role]
   const actionProps = { permission, onDirectApproval: () => setMessage("تأیید مستقیم فقط شبیه‌سازی شد."), onRequestApproval: () => setMessage("درخواست تأیید فقط شبیه‌سازی شد.") }
   const context: Context = decided ? { ...contextBase, status: "decided", decision: { by: { kind: "known", id: "person-4", name: "رضا موسوی" }, at: "2026-10-21T10:30:00Z", outcome: "approved" } } : { ...contextBase, status: "pending" }
-  return <div data-test-id="patterns-catalogue-div-17" className="space-y-5 pt-10" data-catalogue="patterns"><SectionTitle id="patterns" title="الگوهای ترکیبی" number="11" />
+  return <div data-test-id="patterns-catalogue-div-17" className="space-y-5 pt-10" data-catalogue="patterns"><SectionTitle id="patterns" title="الگوهای ترکیبی" number="12" />
     <Sample title="یک نتیجه مجوز، چند ورودی هماهنگ" description="نقش به مجوز تبدیل نمی‌شود؛ این انتخاب‌گر فقط چهار fixture مشاهده‌شده را بارگذاری می‌کند. نویسنده در نسخه خود با درخواست ادامه می‌دهد.">
       <SelectField data-test-id="patterns-catalogue-selectfield-18" label="سناریوی نقش" value={role} onValueChange={setRole} options={[{ value: "manager", label: "مدیر" }, { value: "editor", label: "ویرایشگر" }, { value: "writer", label: "نویسنده در نسخه خود" }, { value: "guest", label: "مهمان" }]} />
       <div data-test-id="patterns-catalogue-div-19" className="flex flex-wrap items-start gap-5"><div data-test-id="patterns-catalogue-div-20"><PermissionAction {...actionProps} /></div><RowActionMenu rowLabel="نسخه نمایشی" items={[permissionActionItem(actionProps)]} /></div><p data-test-id="patterns-catalogue-p-21" role="status" className="text-sm leading-body text-muted-foreground">{message}</p>

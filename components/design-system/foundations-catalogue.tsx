@@ -6,16 +6,15 @@ import { MaterialPreference } from "@/components/design-system/material-preferen
 import { MaterialShowcase } from "@/components/design-system/material-showcase";
 
 
-import { useEffect, useState, type ReactNode, type CSSProperties } from "react";
+import { useState, type ReactNode, type CSSProperties } from "react";
 import Link from "next/link";
 import { Layers, Palette, Type, Ruler, Copy, Check, Info, CircleAlert, CheckCircle2, ShieldCheck } from "lucide-react";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CatalogueSidebar, CatalogueSidebarToggle } from "@/components/design-system/catalogue-sidebar";
+import { catalogueSections, type CatalogueSection } from "@/components/design-system/catalogue-sections";
 import tokens from "@/lib/design-system/tokens.json";
 
-const sections = ["رنگ و هویت", "تایپوگرافی و نوشتار", "فاصله و هندسه", "دکمه و اقدام", "ورودی و انتخاب", "وضعیت و هویت", "ناوبری", "داده و جدول", "بازخورد", "لایه و پیام", "الگوهای ترکیبی", "دسترس‌پذیری", "تحویل طراحی"];
-const sectionAnchors = ["colors", "typography", "geometry", "buttons", "inputs", "status", "navigation", "data", "feedback", "overlays", "patterns", "accessibility", "handoff"];
 const brand = Object.entries(tokens.color.brand).sort(([a], [b]) => Number(a) - Number(b));
 const neutralSteps = ["0", "50", "100", "200", "400", "600", "800", "900"] as const;
 const meanings = [
@@ -25,21 +24,8 @@ const meanings = [
   { key: "info", title: "اطلاع‌رسانی", description: "راهنمایی و اطلاعات بیشتر", icon: Info },
 ] as const;
 
-export default function FoundationsCatalogue({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSection] = useState(0);
-  useEffect(() => {
-    let frame = 0;
-    function update() {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        let active = 0;
-        sectionAnchors.forEach((id, index) => { if ((document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= 160) active = index; });
-        setActiveSection(active);
-      });
-    }
-    update(); window.addEventListener("scroll", update, { passive: true });
-    return () => { window.removeEventListener("scroll", update); cancelAnimationFrame(frame); };
-  }, []);
+export default function FoundationsCatalogue({ children, section = "colors" }: { children?: ReactNode; section?: CatalogueSection }) {
+  const activeSection = catalogueSections.findIndex(item => item.id === section);
   const [previewSpace, setPreviewSpace] = useState<"8" | "16" | "24" | "32">("24");
   const [copied, setCopied] = useState("");
   const [message, setMessage] = useState("برای کپی کد رنگ، روی نمونه کلیک کنید.");
@@ -49,13 +35,14 @@ export default function FoundationsCatalogue({ children }: { children: ReactNode
   }
   return (
     <div data-test-id="foundations-catalogue-div-1" lang="fa" dir="rtl" className={cn("clasor", glass.canvas, catalogueLayout)}>
-      <a data-test-id="foundations-catalogue-a-2" className="skip" href="#colors">رفتن به محتوای اصلی</a>
+      <a data-test-id="foundations-catalogue-a-2" className="skip" href="#catalogue-content">رفتن به محتوای اصلی</a>
       <TooltipProvider><SidebarProvider style={{ "--sidebar-width": "232px", "--sidebar-width-icon": "64px" } as CSSProperties}>
-        <CatalogueSidebar sections={sections} anchors={sectionAnchors} activeSection={activeSection} onNavigate={setActiveSection} />
+        <CatalogueSidebar activeSection={section} />
         <SidebarInset className="min-w-0">
-        <header data-test-id="foundations-catalogue-header-3" className={cn("topbar", glass.panel)} data-material-surface="chrome"><div data-test-id="foundations-catalogue-div-4" className="flex min-w-0 items-center gap-3"><CatalogueSidebarToggle /><div data-test-id="foundations-catalogue-div-5">سیستم طراحی <span data-test-id="foundations-catalogue-span-6">/</span> {activeSection < 3 ? "مبانی" : "کامپوننت‌ها"} <span data-test-id="foundations-catalogue-span-7">/</span><b data-test-id="foundations-catalogue-b-8">{sections[activeSection]}</b></div></div><MaterialPreference /></header>
-          <div data-test-id="foundations-catalogue-div-9" className="content [&_[id]]:scroll-mt-24">
-        <MaterialShowcase />
+        <header data-test-id="foundations-catalogue-header-3" className={cn("topbar", glass.panel)} data-material-surface="chrome"><div data-test-id="foundations-catalogue-div-4" className="flex min-w-0 items-center gap-3"><CatalogueSidebarToggle /><div data-test-id="foundations-catalogue-div-5">سیستم طراحی <span data-test-id="foundations-catalogue-span-6">/</span> {activeSection < 3 ? "مبانی" : "کامپوننت‌ها"} <span data-test-id="foundations-catalogue-span-7">/</span><b data-test-id="foundations-catalogue-b-8">{catalogueSections[activeSection].title}</b></div></div><MaterialPreference /></header>
+          <div data-test-id="foundations-catalogue-div-9" id="catalogue-content" tabIndex={-1} className="content [&_[id]]:scroll-mt-24">
+        {section === "colors" && <>
+
         <section data-test-id="foundations-catalogue-section-10" className="hero" aria-labelledby="page-title"><div data-test-id="foundations-catalogue-div-11"><span data-test-id="foundations-catalogue-span-12" className="eyebrow"><span data-test-id="foundations-catalogue-span-13" className="dot" />مبانی یک تجربه یکپارچه</span><h1 data-test-id="foundations-catalogue-h1-14" id="page-title">یک زبان روشن<br data-test-id="foundations-catalogue-br-15" /> برای <em data-test-id="foundations-catalogue-em-16">کلاسور.</em></h1><p data-test-id="foundations-catalogue-p-17">زبانی مشترک برای ساخت تجربه‌های روشن و منسجم.<br data-test-id="foundations-catalogue-br-18" />شیشه مات برای ناوبری، سطح خوانا برای محتوا و رنگ تأکیدی بنفش.</p><div data-test-id="foundations-catalogue-div-19" className="tags"><span data-test-id="foundations-catalogue-span-20">نسخه ۰.۳.۰</span><span data-test-id="foundations-catalogue-span-21">تم روشن</span><span data-test-id="foundations-catalogue-span-22">طراحی برای فارسی</span></div></div><div data-test-id="foundations-catalogue-div-23" className="art" role="img" aria-label="رنگ اصلی کلاسور، کد 8C66E0"><div data-test-id="foundations-catalogue-div-24" className="art-grid" /><div data-test-id="foundations-catalogue-div-25" className="art-top"><span data-test-id="foundations-catalogue-span-26">رنگ اصلی برند</span><Layers size={22} aria-hidden="true" /></div><div data-test-id="foundations-catalogue-div-27" className="art-name">کلاسور<span data-test-id="foundations-catalogue-span-28">فضایی برای نظم دادن به ایده‌ها</span></div><div data-test-id="foundations-catalogue-div-29" className="art-bottom"><bdi data-test-id="foundations-catalogue-bdi-30">#8C66E0</bdi><span data-test-id="foundations-catalogue-span-31">Brand / 600</span></div></div></section>
         <nav data-test-id="foundations-catalogue-nav-32" aria-labelledby="design-previews-title" className="mb-6 rounded-xl border border-border bg-card p-5">
           <h2 data-test-id="foundations-catalogue-h2-33" id="design-previews-title" className="text-base font-medium">وایرفریم و نمونه صفحات</h2>
@@ -75,7 +62,8 @@ export default function FoundationsCatalogue({ children }: { children: ReactNode
         <section data-test-id="foundations-catalogue-section-81" className={cn("specimen", glass.panel)} aria-labelledby="usage-title"><header data-test-id="foundations-catalogue-header-82"><div data-test-id="foundations-catalogue-div-83"><h3 data-test-id="foundations-catalogue-h3-84" id="usage-title">هر رنگ، یک نقش مشخص</h3><p data-test-id="foundations-catalogue-p-85">رنگ را بر اساس کاربرد انتخاب کنید</p></div><Layers size={18} aria-hidden="true" /></header><div data-test-id="foundations-catalogue-div-86" className="usage-body">{[{ title: "اقدام اصلی", token: "action.primary", color: tokens.color.brand[700].$value }, { title: "سطح پیش‌فرض", token: "surface.default", color: tokens.color.neutral[0].$value }, { title: "متن اصلی", token: "text.primary", color: tokens.color.neutral[900].$value }].map(item => <div data-test-id={`foundations-catalogue-div-87-${String(item.token)}`} className="usage-row" key={item.token}><span data-test-id={`foundations-catalogue-span-88-${String(item.token)}`} style={{ background: item.color }} /><b data-test-id={`foundations-catalogue-b-89-${String(item.token)}`}>{item.title}</b><code data-test-id={`foundations-catalogue-code-90-${String(item.token)}`}>{item.token}</code></div>)}</div></section></div>
         <section data-test-id="foundations-catalogue-section-91" className={cn("specimen", glass.panel)} aria-labelledby="semantic-title"><header data-test-id="foundations-catalogue-header-92"><div data-test-id="foundations-catalogue-div-93"><h3 data-test-id="foundations-catalogue-h3-94" id="semantic-title">رنگ‌های معنایی</h3><p data-test-id="foundations-catalogue-p-95">یک معنای روشن، همراه با متن و آیکون؛ فراتر از رنگ</p></div><code data-test-id="foundations-catalogue-code-96">SEMANTIC COLORS</code></header><div data-test-id="foundations-catalogue-div-97" className="semantic-grid">{meanings.map(({ key, title, description, icon: Icon }) => { const color = tokens.color.semantic[key]; return <div data-test-id={`foundations-catalogue-div-98-${String(key)}`} key={key} className="semantic-card" style={{ background: color.surface.$value, color: color.text.$value, borderColor: color.border.$value }}><Icon size={22} aria-hidden="true" /><h4 data-test-id={`foundations-catalogue-h4-99-${String(key)}`}>{title}</h4><p data-test-id={`foundations-catalogue-p-100-${String(key)}`}>{description}</p><button className={cn(glass.nativeButton)} data-test-id={`foundations-catalogue-button-101-${String(key)}`} onClick={() => copy(color.text.$value)} aria-label={`کپی رنگ متن ${title}`}><code data-test-id={`foundations-catalogue-code-102-${String(key)}`}>{color.text.$value}</code><Copy size={13} aria-hidden="true" /></button></div>; })}</div></section>
         <div data-test-id="foundations-catalogue-div-103" className="principle"><ShieldCheck size={22} aria-hidden="true" /><div data-test-id="foundations-catalogue-div-104"><b data-test-id="foundations-catalogue-b-105">رنگ، تنها حامل معنا نیست.</b><p data-test-id="foundations-catalogue-p-106">وضعیت‌ها را همیشه با متن یا آیکون همراه کنید تا پیام برای همه قابل درک باشد.</p></div><span data-test-id="foundations-catalogue-span-107">اصل طراحی کلاسور</span></div>
-        <section data-test-id="foundations-catalogue-section-108" className="typography-section" aria-labelledby="typography-title">
+        </>}
+        {section === "typography" && <section data-test-id="foundations-catalogue-section-108" className="typography-section" aria-labelledby="typography-title">
           <div data-test-id="foundations-catalogue-div-109" className="section-heading" id="typography"><span data-test-id="foundations-catalogue-span-110" className="heading-icon"><Type size={21} aria-hidden="true" /></span><div data-test-id="foundations-catalogue-div-111"><h2 data-test-id="foundations-catalogue-h2-112" id="typography-title">تایپوگرافی و نوشتار</h2><p data-test-id="foundations-catalogue-p-113">خوانایی فارسی، سلسله‌مراتب روشن و کلمه‌های دقیق</p></div><bdi data-test-id="foundations-catalogue-bdi-114">FOUNDATIONS / 02</bdi></div>
           <section data-test-id="foundations-catalogue-section-115" className={cn("specimen", glass.panel)} aria-labelledby="font-title">
             <header data-test-id="foundations-catalogue-header-116"><div data-test-id="foundations-catalogue-div-117"><h3 data-test-id="foundations-catalogue-h3-118" id="font-title">حروفی برای روشن‌تر گفتن</h3><p data-test-id="foundations-catalogue-p-119">ایران‌یکان؛ خانواده نوشتاری کلاسور</p></div><code data-test-id="foundations-catalogue-code-120">IRANYekan / LOCAL FONT</code></header>
@@ -106,7 +94,8 @@ export default function FoundationsCatalogue({ children }: { children: ReactNode
           </div>
           <div data-test-id="foundations-catalogue-div-199" className="principle"><Type size={22} aria-hidden="true" /><div data-test-id="foundations-catalogue-div-200"><b data-test-id="foundations-catalogue-b-201">خوانایی، قبل از تزئین.</b><p data-test-id="foundations-catalogue-p-202">فاصله خطوط بدنه ۱٫۸، برچسب ۱٫۵ و عنوان ۱٫۵ است؛ متن بلند باید آزادانه به خط بعد برود.</p></div><span data-test-id="foundations-catalogue-span-203">اصل نوشتار کلاسور</span></div>
         </section>
-        <section data-test-id="foundations-catalogue-section-204" className="geometry-section" aria-labelledby="geometry-title">
+        }
+        {section === "geometry" && <section data-test-id="foundations-catalogue-section-204" className="geometry-section" aria-labelledby="geometry-title">
           <div data-test-id="foundations-catalogue-div-205" className="section-heading" id="geometry"><span data-test-id="foundations-catalogue-span-206" className="heading-icon"><Ruler size={21} aria-hidden="true" /></span><div data-test-id="foundations-catalogue-div-207"><h2 data-test-id="foundations-catalogue-h2-208" id="geometry-title">فاصله و هندسه</h2><p data-test-id="foundations-catalogue-p-209">ریتمی منظم برای فاصله‌ها، گوشه‌ها و اندازه‌ها</p></div><bdi data-test-id="foundations-catalogue-bdi-210">FOUNDATIONS / 03</bdi></div>
           <section data-test-id="foundations-catalogue-section-211" className={cn("specimen", glass.panel)} aria-labelledby="spacing-title"><header data-test-id="foundations-catalogue-header-212"><div data-test-id="foundations-catalogue-div-213"><h3 data-test-id="foundations-catalogue-h3-214" id="spacing-title">مقیاس فاصله‌گذاری</h3><p data-test-id="foundations-catalogue-p-215">فاصله‌های مشخص برای یک چیدمان قابل تکرار</p></div><span data-test-id="foundations-catalogue-span-216" className="tag">۱۲ مقدار پایه</span></header>
             <div data-test-id="foundations-catalogue-div-217" className="spacing-scale">{Object.entries(tokens.space).sort(([a], [b]) => Number(a) - Number(b)).map(([step, token]) => <div data-test-id={`foundations-catalogue-div-218-${String(step)}`} className="space-item" key={step}><div data-test-id={`foundations-catalogue-div-219-${String(step)}`} className="space-track" aria-hidden="true"><span data-test-id={`foundations-catalogue-span-220-${String(step)}`} style={{ height: token.$value.value }} />{step === "0" && <i data-test-id={`foundations-catalogue-i-221-${String(step)}`} />}</div><bdi data-test-id={`foundations-catalogue-bdi-222-${String(step)}`}>{step}</bdi><code data-test-id={`foundations-catalogue-code-223-${String(step)}`}>space.{step}</code></div>)}</div>
@@ -126,8 +115,10 @@ export default function FoundationsCatalogue({ children }: { children: ReactNode
           </div>
           <div data-test-id="foundations-catalogue-div-303" className="principle"><Ruler size={22} aria-hidden="true" /><div data-test-id="foundations-catalogue-div-304"><b data-test-id="foundations-catalogue-b-305">فاصله‌ها، رابطه می‌سازند.</b><p data-test-id="foundations-catalogue-p-306">اجزای مرتبط را نزدیک نگه دارید و برای جداکردن گروه‌ها، از فاصله بیشتر در همین مقیاس استفاده کنید.</p></div><span data-test-id="foundations-catalogue-span-307">اصل هندسه کلاسور</span></div>
         </section>
+        }
+        {section === "layout" && <MaterialShowcase />}
         {children}
-        <footer data-test-id="foundations-catalogue-footer-308" className="page-footer"><span data-test-id="foundations-catalogue-span-309">کلاسور · کتابخانه طراحی</span><span data-test-id="foundations-catalogue-span-310">۱۳ بخش تکمیل شد — کتابخانه طراحی ۰.۲.۰</span><bdi data-test-id="foundations-catalogue-bdi-311">DESIGNED WITH INTENT.</bdi></footer>
+        <footer data-test-id="foundations-catalogue-footer-308" className="page-footer"><span data-test-id="foundations-catalogue-span-309">کلاسور · کتابخانه طراحی</span><span data-test-id="foundations-catalogue-span-310">۱۴ بخش — کتابخانه طراحی ۰.۳.۰</span><bdi data-test-id="foundations-catalogue-bdi-311">DESIGNED WITH INTENT.</bdi></footer>
           </div>
         </SidebarInset>
       </SidebarProvider></TooltipProvider>
