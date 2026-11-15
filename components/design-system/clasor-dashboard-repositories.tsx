@@ -20,7 +20,7 @@ function RepositoryList({ repositories }: { repositories: DashboardRepository[] 
   return <>
     <GlassScrollArea data-test-id="dashboard-repositories-scroll" label="فهرست مخزن‌ها">
     <div data-test-id="dashboard-repositories-grid" ref={listRef} className="grid grid-cols-1 gap-2">
-      {result.rows.map(repository => <button key={repository.id} data-test-id={`dashboard-repository-${repository.id}`} data-load-more-item onClick={() => setOpened(repository)} className={`${glass.nativeButton} flex w-full min-w-0 items-center gap-2 p-2.5 text-start`}>
+      {result.rows.map(repository => <button key={repository.id} data-test-id={`dashboard-repository-${repository.id}`} data-load-more-item onClick={() => setOpened(repository)} className={`${glass.nativeButton} flex w-full min-w-0 items-center gap-2 px-4 py-2.5 text-start`}>
         <GlassEmblem data-test-id={`dashboard-repository-icon-${repository.id}`} className="size-8"><FolderOpen aria-hidden="true" className="size-5" /></GlassEmblem>
         <span data-test-id={`dashboard-repository-top-${repository.id}`} className="min-w-0 flex-1 space-y-1">
           <span data-test-id={`dashboard-repository-name-${repository.id}`} className="block break-words text-sm font-bold">{repository.name}</span>
