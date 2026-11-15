@@ -25,6 +25,12 @@ Decision: Use [Uroo UI](https://github.com/uroo-dev/uroo-ui) as an organizationa
 Alternatives: Adopting its Tailwind v3 stack conflicts with the host's existing Tailwind v4 environment.
 The [Memorables gallery](https://memorabl.es/inspiration/glassmorphism) is visual exploration, not an accessibility or component contract source.
 
+### Additional reference — 2026-11-15
+
+Added at the project owner's request: [Liquid Glass React by rdev](https://github.com/rdev/liquid-glass-react), a React implementation of an Apple-inspired liquid glass effect. Use it as a visual and technical reference for refraction, edge highlights, configurable frosting and interaction effects. Its README notes partial effect support in Safari and Firefox, where displacement is not visible.
+
+This reference was added after the original research; it is not evidence that the current design used this library. No package, code or assets have been imported. Adoption or changes to the current material contract remain separate implementation work.
+
 ## 5. Accessibility and compositing
 Decision: Use opaque fallbacks by default and enhance with @supports; explicitly support reduced transparency, forced colors and reduced motion, plus a solid-material preview switch.
 Rationale: Blurred backgrounds vary; white highlights alone cannot establish control contrast. Validate actual composites over white, neutral gray, purple-tinted and deliberately busy fixtures.

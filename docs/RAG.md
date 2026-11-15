@@ -15,6 +15,7 @@ Updated: 2026-11-14 (Asia/Tehran). Implementation checkpoint: `d124673`. This is
 | Question | Primary source | Supporting context |
 | --- | --- | --- |
 | Shared glass classes and colors | [classes.ts](../lib/design-system/classes.ts), [theme.css](../lib/design-system/theme.css) | [MATERIALS.md](../lib/design-system/MATERIALS.md); component CSS was migrated to Tailwind |
+| Glass design references and inspiration | [Frosted Glass research](../specs/20261113-172921-frosted-glass-design-system/research.md) | Includes the later-added rdev/liquid-glass-react reference; references do not override the current material contract |
 | Base colors, spacing and typography | [tokens.json](../lib/design-system/tokens.json), [theme.css](../lib/design-system/theme.css) | [FOUNDATIONS.md](../lib/design-system/FOUNDATIONS.md) |
 | Atomic boundaries and source ownership | [ARCHITECTURE.md](../lib/design-system/ARCHITECTURE.md) | `components/ui` vs `components/design-system` vs `components/workspace` |
 | Layout and cards | [AppLayout](../components/ui/AppLayout.tsx), [GlassCard](../components/ui/GlassCard.tsx), [GlassSidebar](../components/ui/GlassSidebar.tsx) | [catalogue composition](../components/design-system/layout-content-catalogue.tsx) |
