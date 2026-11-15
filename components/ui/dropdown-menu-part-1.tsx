@@ -25,8 +25,9 @@ export function DropdownMenuContent({
   side = "bottom",
   sideOffset = 4,
   className,
+  surface = "frosted",
   ...props
-}: MenuPrimitive.Popup.Props &
+}: MenuPrimitive.Popup.Props & { surface?: "frosted" | "liquid" } &
   Pick<
     MenuPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
@@ -44,7 +45,8 @@ export function DropdownMenuContent({
         <MenuPrimitive.Popup data-test-id="dropdown-menu-part-1-menuprimitive-popup-5"
           data-slot="dropdown-menu-content"
           data-material-surface="floating"
-          className={cn("z-[var(--z-menu)] max-h-(--available-height) w-(--anchor-width) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 outline-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95", className, glass.floating)}
+          data-material-variant={surface}
+          className={cn("z-[var(--z-menu)] max-h-(--available-height) w-(--anchor-width) min-w-32 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 outline-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95", className, surface === "liquid" ? glass.liquidFloating : glass.floating)}
           {...props}
         />
       </MenuPrimitive.Positioner>

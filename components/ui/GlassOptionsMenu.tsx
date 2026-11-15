@@ -2,6 +2,7 @@
 
 import type { ReactElement, ReactNode } from "react";
 import { Fragment } from "react";
+import { cn } from "@/lib/utils";
 import { withTestId } from "@/lib/design-system/test-id";
 import { glass } from "@/lib/design-system/classes";
 import { GlassEmblem } from "@/components/ui/GlassEmblem";
@@ -35,7 +36,7 @@ function OptionItems({ items, onAction, testId }: Pick<GlassOptionsMenuProps, "i
       <DropdownMenuSubTrigger data-test-id={`${testId}-item-${item.id}`} disabled={item.disabled} className={glass.optionItem}>
         <OptionLabel item={item} testId={testId} />
       </DropdownMenuSubTrigger>
-      <DropdownMenuSubContent data-test-id={`${testId}-submenu-${item.id}`} dir="rtl" aria-label={item.label} className={glass.optionsPopup} sideOffset={6}>
+      <DropdownMenuSubContent data-test-id={`${testId}-submenu-${item.id}`} dir="rtl" aria-label={item.label} surface="liquid" className={cn(glass.optionsPopup, glass.optionsSubPopup)} sideOffset={6}>
         <OptionItems items={item.children} onAction={onAction} testId={testId} />
       </DropdownMenuSubContent>
     </DropdownMenuSub> : <DropdownMenuItem data-test-id={`${testId}-item-${item.id}`} disabled={item.disabled} aria-description={item.description}
@@ -59,7 +60,7 @@ function OptionLabel({ item, testId }: { item: GlassOption; testId: string }) {
 export function GlassOptionsMenu({ title, description, icon, trigger, items, onAction, testId }: GlassOptionsMenuProps) {
   return <DropdownMenu>
     <DropdownMenuTrigger data-test-id={testId} render={withTestId(trigger, testId)} />
-    <DropdownMenuContent data-test-id={`${testId}-popup`} dir="rtl" aria-label={`${description} ${title}`} className={glass.optionsPopup} align="end" sideOffset={8}>
+    <DropdownMenuContent data-test-id={`${testId}-popup`} dir="rtl" aria-label={`${description} ${title}`} surface="liquid" className={glass.optionsPopup} align="end" sideOffset={8}>
       <div data-test-id={`${testId}-heading`} className={glass.optionsHeader}>
         {icon && <GlassEmblem data-test-id={`${testId}-heading-icon`} className="size-6 [&_svg]:size-3.5" aria-hidden="true">{icon}</GlassEmblem>}
         <div data-test-id={`${testId}-heading-copy`} className="min-w-0">
