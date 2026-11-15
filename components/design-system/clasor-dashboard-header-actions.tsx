@@ -19,9 +19,9 @@ export function ClasorDashboardHeaderActions() {
   const [saved, setSaved] = useState(false);
   const titles: Record<string, string> = { admin: "پنل ادمین", requests: "لیست درخواست‌ها", feedback: "بازخورد", profile: "اطلاعات کاربر", logout: "خروج از حساب" };
   return <div data-test-id="dashboard-header-actions" className="flex flex-wrap justify-end gap-1 sm:gap-2">
-    {actions.map(({ id, label, icon: Icon }) => <Button data-test-id={`dashboard-header-${id}`} key={id} variant="outline" size="icon" aria-label={label} title={label} onClick={() => { setOpened(id); setSaved(false); }}><Icon aria-hidden="true" className="size-5" /></Button>)}
+    {actions.map(({ id, label, icon: Icon }) => <Button data-test-id={`dashboard-header-${id}`} key={id} variant="glass" size="icon" aria-label={label} title={label} onClick={() => { setOpened(id); setSaved(false); }}><Icon aria-hidden="true" className="size-5" /></Button>)}
     <DropdownMenu>
-      <DropdownMenuTrigger data-test-id="dashboard-header-user" render={<Button data-test-id="dashboard-header-user" variant="outline" size="icon" aria-label="حساب کاربر" title="حساب کاربر" />}><UserRound aria-hidden="true" className="size-5" /></DropdownMenuTrigger>
+      <DropdownMenuTrigger data-test-id="dashboard-header-user" render={<Button data-test-id="dashboard-header-user" variant="glass" size="icon" aria-label="حساب کاربر" title="حساب کاربر" />}><UserRound aria-hidden="true" className="size-5" /></DropdownMenuTrigger>
       <DropdownMenuContent dir="rtl" align="end">
         <DropdownMenuItem data-test-id="dashboard-header-profile" onClick={() => setOpened("profile")}>کاربر نمونه</DropdownMenuItem>
         <DropdownMenuItem data-test-id="dashboard-header-logout" onClick={() => setOpened("logout")}><LogOut aria-hidden="true" />خروج از حساب</DropdownMenuItem>

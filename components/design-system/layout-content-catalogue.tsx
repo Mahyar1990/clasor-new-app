@@ -6,6 +6,7 @@ import { SolidDataTable, type SolidColumn } from "@/components/ui/SolidDataTable
 import { SolidForm, type SolidFormValues } from "@/components/ui/SolidForm";
 import { CatalogueProfileMenu, GlassOverlayCatalogue } from "@/components/design-system/glass-overlay-catalogue";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassScrollCatalogue } from "@/components/design-system/glass-scroll-catalogue";
 import { GlassIdentityCatalogue } from "@/components/design-system/glass-identity-catalogue";
 
 type SampleRow = { id: string; name: string; email: string; category: string };
@@ -59,6 +60,7 @@ export function LayoutContentCatalogue() {
           <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /></div>
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
             <GlassIdentityCatalogue />
+            <GlassScrollCatalogue />
             <SolidDataTable appearance={glassTable ? "glass" : "solid"} caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
             <SolidForm disabled={disabled} onSubmit={addRow} />
           </div>

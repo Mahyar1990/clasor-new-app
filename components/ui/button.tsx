@@ -13,6 +13,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: glass.primary,
+        glass: glass.iconButton,
         outline: glass.secondary,
         secondary: glass.secondary,
         ghost: `${glass.control} text-primary`,

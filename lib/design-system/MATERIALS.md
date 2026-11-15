@@ -28,6 +28,12 @@ All visible selection controls use the existing shadcn/Base UI Select. Both trig
 
 Both surfaces honor solid/contrast preferences and forced colors: gradients and emblem reflections disappear, blur is disabled and system/fallback surfaces retain readable content. No pointer tracking or additional animation is introduced.
 
+## Icon controls and independent scrolling
+
+`Button variant="glass"` applies the same reflective emblem material to icon actions while preserving button focus, disabled and hover/press behavior. Dashboard header controls, document action buttons, document icon tiles and repository operation tiles use this family.
+
+[GlassScrollArea](../../components/ui/GlassScrollArea.tsx) is a named, focusable Base UI scroll region with native viewport scrolling, a separate visible glass scrollbar, reserved content space and contained overscroll. Base UI owns thumb sizing and dragging. Each dashboard list has its own region; headings and tabs remain outside it. At desktop widths the two panels stretch equally to the available viewport height. Narrow layouts stack independently scrollable panels. Loading sentinels remain inside their respective scroll regions so cumulative loading follows each list's visible bottom. `/design-system/layout` demonstrates two independent areas and the glass icon button.
+
 ## Behavior and verification
 
 Base UI retains focus trapping/restoration, Escape/outside dismissal, keyboard selection and scroll locking. Portals preserve local dark previews through `usePortalTheme`. Public wrapper IDs are retained on rendered trigger elements through `withTestId`.
