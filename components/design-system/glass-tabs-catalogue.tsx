@@ -9,7 +9,7 @@ export function GlassTabsCatalogue() {
   const [disabled, setDisabled] = useState(false);
   const [selected, setSelected] = useState<string | number | null>("all");
   return <div data-test-id="glass-tabs-catalogue" className="space-y-5">
-    <Sample title="تب‌بار شیشه‌ای بخش‌بندی‌شده" description="همان کامپوننت مشترک داشبورد؛ متن کامل، سطح فعال برجسته، فوکوس مستقل و پیمایش در عرض کم. نمای سطح بالای کاتالوگ حالت بدون شفافیت را فعال می‌کند.">
+    <Sample title="تب‌بار شیشه‌ای بخش‌بندی‌شده" description="همان کامپوننت مشترک داشبورد؛ ریل فرورفته، نور مورب روی تب فعال، لبه روشن و سایه شناوری؛ با متن کامل، فوکوس مستقل و پیمایش در عرض کم. نمای سطح بالای کاتالوگ حالت بدون شفافیت را فعال می‌کند.">
       <ClasorTabs variant="segmented" label="نمونه تب‌های سندها" defaultValue="mine" items={[
         { value: "mine", label: "سندهای من", content: "اسناد شخصی نمونه؛ انتخاب این بخش روی تب‌های مخزن‌ها اثری ندارد." },
         { value: "shared", label: "سندهای اشتراکی", content: "اسناد اشتراکی نمونه؛ داده‌ای از حساب واقعی خوانده نمی‌شود." },
