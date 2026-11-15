@@ -20,11 +20,11 @@ export function GlassOptionsCatalogue() {
   ];
   return <section data-test-id="glass-options-catalogue" aria-labelledby="glass-options-title" className="space-y-4">
     <h3 data-test-id="glass-options-title" id="glass-options-title" className="text-lg font-bold">گزینه‌های شیشه‌ای سند و مخزن</h3>
-    <p data-test-id="glass-options-description" className="text-sm text-muted-foreground">سطح Liquid Glass با انعکاس نور و لبهٔ عدسی‌مانند؛ منوی اصلی ۲۰۸ و زیرمنو ۱۶۰ پیکسل، با فونت ۱۱ پیکسلی. همان کامپوننت مشترک داشبورد.</p>
+    <p data-test-id="glass-options-description" className="text-sm text-muted-foreground">پس‌زمینهٔ شفاف با ته‌رنگ ۱۵٪ و محوشدگی ملایم ۶ پیکسل؛ رنگ و شکل‌های پشت منو دیده می‌شوند. منوی اصلی ۲۰۸ و زیرمنو ۱۶۰ پیکسل است.</p>
     <label data-test-id="glass-options-dark-label" className="flex min-h-11 items-center gap-2 text-sm">
       <input data-test-id="glass-options-dark-toggle" type="checkbox" checked={dark} onChange={event => setDark(event.target.checked)} className="size-4 accent-primary" />پیش‌نمایش تاریک منوها
     </label>
-    <div data-test-id="glass-options-examples" className={`${dark ? "dark scheme-dark bg-slate-950/80" : "scheme-light"} grid gap-3 rounded-xl p-4 text-foreground sm:grid-cols-2`}>
+    <div data-test-id="glass-options-examples" className={`${dark ? "dark scheme-dark bg-slate-950/80" : "scheme-light"} grid gap-3 rounded-xl bg-[linear-gradient(125deg,rgba(96,165,250,0.22),transparent_40%,rgba(167,139,250,0.22))] p-4 text-foreground sm:grid-cols-2`}>
       {examples.map(example => <GlassCard data-test-id={`glass-options-example-${example.id}`} key={example.id} className="flex min-w-0 items-center justify-between gap-3 p-4">
         <div data-test-id={`glass-options-copy-${example.id}`} className="min-w-0"><p data-test-id={`glass-options-type-${example.id}`} className="text-xs text-muted-foreground">{example.description}</p><p data-test-id={`glass-options-name-${example.id}`} className="mt-1 text-sm font-medium">{example.name}</p></div>
         <GlassOptionsMenu testId={`catalogue-options-${example.id}`} title={example.name} description={example.description} icon={example.icon} items={example.items}
