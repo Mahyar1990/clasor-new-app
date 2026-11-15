@@ -1,0 +1,57 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { Menu, LayoutDashboard, FileText, FolderOpen, Users, Building2, Globe, ShieldCheck, Bookmark, Archive, Share2 } from "lucide-react";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { Button } from "@/components/ui/button";
+import { glass } from "@/lib/design-system/classes";
+
+const groups = [
+  { title: "اسناد شخصی", items: [{ label: "سندهای من", icon: FileText }, { label: "سندهای اشتراکی", icon: Users }] },
+  { title: "مدیریت مخزن‌ها", items: [{ label: "مخزن‌های من", icon: FolderOpen }, { label: "مخزن‌های اشتراکی", icon: Users }, { label: "مخزن‌های نشان‌شده", icon: Bookmark }, { label: "مخزن‌های بایگانی‌شده", icon: Archive }, { label: "مخزن‌های منتشرشده", icon: Share2 }] },
+  { title: "مدیریت", items: [{ label: "مدیریت دامنه", icon: Globe }, { label: "مدیریت سازمانی", icon: Building2 }, { label: "پنل ادمین", icon: ShieldCheck }] },
+];
+
+function DashboardNavigation({ onNavigate }: { onNavigate?: () => void }) {
+  return <GlassCard as="div" data-test-id="dashboard-product-sidebar" className="p-3">
+    <nav data-test-id="dashboard-product-navigation" aria-label="منوی نمونه کلاسور">
+      <a data-test-id="dashboard-current-page" href="#dashboard-overview" onClick={onNavigate} aria-current="page" className={`${glass.navigation} ${glass.current} flex min-h-11 items-center gap-3 px-3 text-sm text-primary`}>
+        <LayoutDashboard aria-hidden="true" className="size-5" />داشبورد
+      </a>
+      {groups.map(group => <div data-test-id={`dashboard-nav-group-${group.title}`} key={group.title} className="mt-4">
+        <p data-test-id={`dashboard-nav-heading-${group.title}`} className="mb-1 px-3 text-xs font-medium text-muted-foreground">{group.title}</p>
+        <ul data-test-id={`dashboard-nav-items-${group.title}`} className="space-y-1">
+          {group.items.map(({ label, icon: Icon }) => <li data-test-id={`dashboard-nav-item-${label}`} key={label}>
+            <Button data-test-id={`dashboard-nav-button-${label}`} variant="ghost" disabled title="این صفحه در نمونه‌های بعدی اضافه می‌شود" className="w-full justify-start text-xs disabled:opacity-60">
+              <Icon aria-hidden="true" className="size-4" />{label}
+            </Button>
+          </li>)}
+        </ul>
+      </div>)}
+    </nav>
+    <div data-test-id="dashboard-sample-user" className="mt-5 flex items-center gap-2 border-t border-white/40 px-2 pt-4">
+      <span data-test-id="dashboard-user-avatar" className="grid size-9 shrink-0 place-items-center rounded-full bg-primary/10 text-sm text-primary">ک ن</span>
+      <div data-test-id="dashboard-user-copy"><p data-test-id="dashboard-user-name" className="text-sm font-medium">کاربر نمونه</p><p data-test-id="dashboard-user-note" className="text-xs text-muted-foreground">حساب نمایشی</p></div>
+    </div>
+    <Link data-test-id="dashboard-back-to-catalogue" href="/" className={`${glass.navigation} mt-3 flex min-h-11 items-center px-3 text-xs text-primary`}>بازگشت به سیستم طراحی</Link>
+  </GlassCard>;
+}
+
+export function ClasorDashboardSidebar() {
+  const [open, setOpen] = useState(false);
+  return <>
+    <div data-test-id="dashboard-desktop-navigation" className="hidden md:block"><DashboardNavigation /></div>
+    <div data-test-id="dashboard-mobile-navigation" className="md:hidden">
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger data-test-id="dashboard-mobile-menu" render={<Button data-test-id="dashboard-mobile-menu" variant="outline" className="w-full justify-start" />}><Menu aria-hidden="true" />منوی کلاسور</SheetTrigger>
+        <SheetContent data-test-id="dashboard-mobile-sheet" side="right" dir="rtl" className="overflow-y-auto p-4">
+          <SheetTitle>منوی کلاسور</SheetTitle>
+          <SheetDescription>داشبورد و بخش‌های نمونه مدیریت اسناد</SheetDescription>
+          <DashboardNavigation onNavigate={() => setOpen(false)} />
+        </SheetContent>
+      </Sheet>
+    </div>
+  </>;
+}

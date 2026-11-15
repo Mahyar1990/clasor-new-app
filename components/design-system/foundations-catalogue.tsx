@@ -24,7 +24,7 @@ const meanings = [
   { key: "info", title: "اطلاع‌رسانی", description: "راهنمایی و اطلاعات بیشتر", icon: Info },
 ] as const;
 
-export default function FoundationsCatalogue({ children, section = "colors" }: { children?: ReactNode; section?: CatalogueSection }) {
+export default function FoundationsCatalogue({ children, section = "colors" }: { children?: ReactNode; section?: CatalogueSection | "clasor-pages" }) {
   const activeSection = catalogueSections.findIndex(item => item.id === section);
   const [previewSpace, setPreviewSpace] = useState<"8" | "16" | "24" | "32">("24");
   const [copied, setCopied] = useState("");
@@ -39,7 +39,7 @@ export default function FoundationsCatalogue({ children, section = "colors" }: {
       <TooltipProvider><SidebarProvider style={{ "--sidebar-width": "232px", "--sidebar-width-icon": "64px" } as CSSProperties}>
         <CatalogueSidebar activeSection={section} />
         <SidebarInset className="min-w-0">
-        <header data-test-id="foundations-catalogue-header-3" className={cn("topbar", glass.panel)} data-material-surface="chrome"><div data-test-id="foundations-catalogue-div-4" className="flex min-w-0 items-center gap-3"><CatalogueSidebarToggle /><div data-test-id="foundations-catalogue-div-5">سیستم طراحی <span data-test-id="foundations-catalogue-span-6">/</span> {activeSection < 3 ? "مبانی" : "کامپوننت‌ها"} <span data-test-id="foundations-catalogue-span-7">/</span><b data-test-id="foundations-catalogue-b-8">{catalogueSections[activeSection].title}</b></div></div><MaterialPreference /></header>
+        <header data-test-id="foundations-catalogue-header-3" className={cn("topbar", glass.panel)} data-material-surface="chrome"><div data-test-id="foundations-catalogue-div-4" className="flex min-w-0 items-center gap-3"><CatalogueSidebarToggle /><div data-test-id="foundations-catalogue-div-5">سیستم طراحی <span data-test-id="foundations-catalogue-span-6">/</span> {section === "clasor-pages" ? "پیش‌نمایش محصول" : activeSection < 3 ? "مبانی" : "کامپوننت‌ها"} <span data-test-id="foundations-catalogue-span-7">/</span><b data-test-id="foundations-catalogue-b-8">{section === "clasor-pages" ? "نمونه صفحات کلاسور" : catalogueSections[activeSection].title}</b></div></div><MaterialPreference /></header>
           <div data-test-id="foundations-catalogue-div-9" id="catalogue-content" tabIndex={-1} className="content [&_[id]]:scroll-mt-24">
         {section === "colors" && <>
 
@@ -49,6 +49,7 @@ export default function FoundationsCatalogue({ children, section = "colors" }: {
           <p data-test-id="foundations-catalogue-p-34" className="mt-1 text-sm text-muted-foreground">طرح تعاملی صفحات و نمونه قابل مرور مدیریت اسناد را ببینید.</p>
           <div data-test-id="foundations-catalogue-div-35" className="mt-4 flex flex-wrap gap-3">
             {[
+              { href: "/clasor-pages", label: "نمونه صفحات کلاسور" },
               { href: "/wireframes", label: "وایرفریم تعاملی" },
               { href: "/workspace/documents", label: "نمونه اسناد من" },
               { href: "/workspace/shared", label: "نمونه اشتراکی‌ها" },

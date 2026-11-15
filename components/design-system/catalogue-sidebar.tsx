@@ -6,6 +6,7 @@ import { catalogueSections, catalogueHref, type CatalogueSection } from "@/compo
 import { Layers, Palette, Type, Ruler, MousePointer2, SlidersHorizontal, UsersRound, Navigation, Table2, MessageCircle, PanelsTopLeft, Workflow, Accessibility, PackageCheck } from "lucide-react"
 import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarMenuBadge, SidebarTrigger, useSidebar } from "@/components/ui/sidebar"
 
+import { CatalogueSamplesNavigation } from "@/components/design-system/catalogue-samples-navigation";
 
 const icons = [Palette, Type, Ruler, Layers, MousePointer2, SlidersHorizontal, UsersRound, Navigation, Table2, MessageCircle, PanelsTopLeft, Workflow, Accessibility, PackageCheck]
 const sidebarId = "catalogue-sidebar"
@@ -15,7 +16,7 @@ export function CatalogueSidebarToggle() {
   return <SidebarTrigger data-test-id="catalogue-sidebar-sidebartrigger-1" aria-label="باز و بسته کردن فهرست" aria-controls={sidebarId} aria-expanded={isMobile ? openMobile : open} className="shrink-0" />
 }
 
-export function CatalogueSidebar({ activeSection }: { activeSection: CatalogueSection }) {
+export function CatalogueSidebar({ activeSection }: { activeSection: CatalogueSection | "clasor-pages" }) {
   const { isMobile, setOpenMobile } = useSidebar()
   return <Sidebar id={sidebarId} side="right" dir="rtl" collapsible="icon" aria-label="فهرست سیستم طراحی" role="complementary">
     <SidebarHeader className="p-4 group-data-[collapsible=icon]:p-2">
@@ -38,6 +39,7 @@ export function CatalogueSidebar({ activeSection }: { activeSection: CatalogueSe
           </SidebarMenu></nav>
         </SidebarGroupContent>
       </SidebarGroup>
+      <CatalogueSamplesNavigation active={activeSection === "clasor-pages"} />
     </SidebarContent>
     <SidebarFooter className="border-t p-4 text-xs leading-body text-muted-foreground group-data-[collapsible=icon]:hidden"><p data-test-id="catalogue-sidebar-p-14">نسخه پیش‌نمایش طراحی</p><p data-test-id="catalogue-sidebar-p-15">فارسی، روشن و راست‌به‌چپ</p><p data-test-id="catalogue-sidebar-p-16">نشان بالا موقت است.</p></SidebarFooter>
   </Sidebar>

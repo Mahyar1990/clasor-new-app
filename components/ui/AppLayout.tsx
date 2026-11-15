@@ -6,11 +6,12 @@ import { GlassCard } from "@/components/ui/GlassCard";
 export interface AppLayoutProps extends GlassHeaderProps {
   children: ReactNode;
   navigation?: readonly GlassNavigationItem[];
+  sidebar?: ReactNode;
   contentAs?: "main" | "section";
 }
 
 /** Template: glass chrome and content wrappers over a fixed mesh backdrop. */
-export function AppLayout({ children, title, logo, profile, navigation, contentAs: Content = "main" }: AppLayoutProps) {
+export function AppLayout({ children, title, logo, profile, navigation, sidebar, contentAs: Content = "main" }: AppLayoutProps) {
   return (
     <div
       dir="rtl"
@@ -31,7 +32,7 @@ export function AppLayout({ children, title, logo, profile, navigation, contentA
       </a>
       <GlassHeader title={title} logo={logo} profile={profile} />
       <div data-test-id="AppLayout-div-7" className="mt-4 grid min-w-0 items-start gap-4 md:grid-cols-[15rem_minmax(0,1fr)] md:gap-6">
-        <GlassSidebar items={navigation} />
+        {sidebar ?? <GlassSidebar items={navigation} />}
         <GlassCard as={Content}
           id="layout-main"
           tabIndex={-1}
