@@ -42,7 +42,7 @@ The dashboard uses compact density with smaller icon tiles, row spacing, panel p
 
 ## Column sizing
 
-`SolidColumn.width` sets a column width in pixels through a semantic colgroup. `SolidDataTable layout="fixed"` preserves these allocations and lets unspecified columns share the remaining space. Default layout remains automatic. The dashboard reserves 52px for the leftmost action column and 112px for the adjacent creator column; the document name fills the remainder and wraps without truncation. Action cells have 4px inline padding and align their control to the left edge in RTL. The layout catalogue demonstrates fixed column allocation with a 96px category column.
+`SolidColumn.width` sets a column width in pixels through a semantic colgroup. `SolidDataTable layout="fixed"` preserves these allocations and lets unspecified columns share the remaining space. Default layout remains automatic. The dashboard reserves 76px for the leftmost action column and 112px for the adjacent creator column; the document name fills the remainder and wraps without truncation. Header cells and action data cells have 16px inline padding and align their control to the left edge in RTL. The layout catalogue demonstrates fixed column allocation with a 96px category column. `hideCaption` visually hides the semantic caption while preserving the table name; the dashboard uses this with the accessible label «فهرست سندها» so no extra title appears above its column headers.
 
 ## Behavior and verification
 

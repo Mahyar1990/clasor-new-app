@@ -11,6 +11,7 @@ export interface SolidColumn<T> {
 
 export interface SolidDataTableProps<T> {
   caption: string;
+  hideCaption?: boolean;
   columns: readonly [SolidColumn<T>, ...SolidColumn<T>[]];
   rows: readonly T[];
   getRowId: (row: T) => string;
@@ -22,7 +23,7 @@ export interface SolidDataTableProps<T> {
 
 /** Semantic table with a glass wrapper and an optional translucent data surface. */
 export function SolidDataTable<T>({
-  caption, columns, rows, getRowId,
+  caption, columns, rows, getRowId, hideCaption = false,
   emptyMessage = "اطلاعاتی برای نمایش وجود ندارد.",
   testId = "solid-table",
   appearance = "solid",
@@ -38,7 +39,7 @@ export function SolidDataTable<T>({
       className="max-w-full overflow-x-auto"
     >
       <table data-test-id={testId} className={`w-full min-w-[36rem] border-collapse text-start text-sm leading-body ${layout === "fixed" ? "table-fixed" : "table-auto"}`}>
-        <caption data-test-id="SolidDataTable-caption-3" className="border-b border-white/30 px-4 py-3 text-start font-bold">
+        <caption data-test-id="SolidDataTable-caption-3" className={hideCaption ? "sr-only" : "border-b border-white/30 px-4 py-3 text-start font-bold"}>
           {caption}
         </caption>
         <colgroup data-test-id={`${testId}-columns`}>

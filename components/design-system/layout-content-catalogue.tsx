@@ -27,6 +27,7 @@ export function LayoutContentCatalogue() {
   const [dark, setDark] = useState(false);
   const [glassTable, setGlassTable] = useState(true);
   const [compact, setCompact] = useState(false);
+  const [hideCaption, setHideCaption] = useState(false);
 
   function addRow(values: SolidFormValues) {
     setRows(current => [...current, {
@@ -43,6 +44,10 @@ export function LayoutContentCatalogue() {
         نمونهٔ AppLayout شامل GlassHeader، GlassSidebar، SolidDataTable و SolidForm؛ ثبت فرم یک ردیف به جدول همین نمونه اضافه می‌کند. داده‌ها با بارگذاری دوبارهٔ صفحه بازنشانی می‌شوند.
       </p>
       <GlassCard as="div" data-test-id="catalogue-glass-card" className="mb-4 flex flex-wrap items-center gap-4 p-3 text-sm">
+        <label data-test-id="catalogue-caption-label" className="flex min-h-11 cursor-pointer items-center gap-2">
+          <input type="checkbox" checked={hideCaption} onChange={event => setHideCaption(event.target.checked)} data-test-id="catalogue-caption-toggle" className="size-4 accent-primary" />
+          پنهان کردن عنوان بالای جدول
+        </label>
         <label data-test-id="catalogue-compact-label" className="flex min-h-11 cursor-pointer items-center gap-2">
           <input type="checkbox" checked={compact} onChange={event => setCompact(event.target.checked)} data-test-id="catalogue-compact-toggle" className="size-4 accent-primary" />
           چیدمان جمع‌وجور
@@ -66,7 +71,7 @@ export function LayoutContentCatalogue() {
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
             <GlassIdentityCatalogue />
             <GlassScrollCatalogue />
-            <SolidDataTable layout="fixed" appearance={glassTable ? "glass" : "solid"} caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
+            <SolidDataTable hideCaption={hideCaption} layout="fixed" appearance={glassTable ? "glass" : "solid"} caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
             <SolidForm disabled={disabled} onSubmit={addRow} />
           </div>
         </AppLayout>
