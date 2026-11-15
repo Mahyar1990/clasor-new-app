@@ -20,7 +20,7 @@ export function GlassOptionsCatalogue() {
   ];
   return <section data-test-id="glass-options-catalogue" aria-labelledby="glass-options-title" className="space-y-4">
     <h3 data-test-id="glass-options-title" id="glass-options-title" className="text-lg font-bold">گزینه‌های شیشه‌ای سند و مخزن</h3>
-    <p data-test-id="glass-options-description" className="text-sm text-muted-foreground">منوی چندسطحی با آیکون‌های شیشه‌ای، گزینه‌های غیرفعال و اقدام‌های حساس؛ همان کامپوننتی که در داشبورد استفاده می‌شود.</p>
+    <p data-test-id="glass-options-description" className="text-sm text-muted-foreground">منوی جمع‌وجور با عرض ۲۰۸ پیکسل، متن ۱۱ پیکسلی و آیکون‌های کوچک شیشه‌ای؛ همان کامپوننت داشبورد با زیرمنو و گزینه‌های غیرفعال.</p>
     <label data-test-id="glass-options-dark-label" className="flex min-h-11 items-center gap-2 text-sm">
       <input data-test-id="glass-options-dark-toggle" type="checkbox" checked={dark} onChange={event => setDark(event.target.checked)} className="size-4 accent-primary" />پیش‌نمایش تاریک منوها
     </label>

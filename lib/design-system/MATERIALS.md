@@ -54,7 +54,7 @@ The dashboard consumes column kinds directly; it no longer sets private action w
 
 ## Record options menus
 
-`GlassOptionsMenu` reuses the floating 30% tint/12px blur surface, a subtle glass heading and reflective icon tiles. Items are 36px tall on desktop and at least 44px on narrow layouts, with 12px labels, reserved hover borders and semantic destructive coloring. Submenus use the same material and Base UI positioning; content scrolls within the available viewport. Solid/contrast preferences, forced colors and reduced motion continue to use the shared primitive contracts. See [navigation](NAVIGATION.md) for the menu API and source-aligned fixture ownership.
+`GlassOptionsMenu` reuses the floating 30% tint/12px blur surface, a subtle glass heading and reflective icon tiles. The compact popup is 208px wide (previously 288px), with 11px labels, 28px minimum desktop rows and 36px minimum narrow-layout rows. Icon tiles are 20px with 12px glyphs; the heading uses a 24px tile, 11px title, 10px context label and 6px padding. Main menus and submenus share these dimensions, reserved hover borders and semantic destructive coloring. Submenus use the same material and Base UI positioning; content scrolls within the available viewport. Solid/contrast preferences, forced colors and reduced motion continue to use the shared primitive contracts. See [navigation](NAVIGATION.md) for the menu API and source-aligned fixture ownership.
 
 ## Behavior and verification
 

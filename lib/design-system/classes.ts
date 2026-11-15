@@ -9,9 +9,9 @@ const active = "bg-white/30 backdrop-blur-md border-white/40 shadow-sm font-medi
 const emblem = `${panel} relative isolate inline-grid size-11 shrink-0 place-items-center overflow-hidden border-white/70 font-semibold text-primary shadow-[0_4px_12px_rgb(100_65_155/0.15),inset_0_1px_0_rgb(255_255_255/0.95),inset_0_-2px_3px_rgb(112_71_167/0.12)] before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-linear-to-br before:from-white/70 before:via-white/10 before:to-purple-300/30 dark:text-purple-200 dark:border-white/35 dark:before:from-white/30 dark:before:to-purple-400/15 opaque:before:hidden! forced-colors:before:hidden!`;
 
 export const glass = {
-  optionsPopup: "w-72 max-w-[calc(100vw-1.5rem)] min-w-60 rounded-xl p-1.5 text-xs",
-  optionsHeader: "mb-1.5 flex items-center gap-2.5 rounded-lg border border-white/40 bg-white/10 p-2.5 opaque:bg-[var(--glass-fallback)]! forced-colors:bg-[Canvas]! forced-colors:border-[CanvasText]!",
-  optionItem: "min-h-11 gap-2 px-2 py-0.5 text-xs md:min-h-9",
+  optionsPopup: "w-52 max-w-[calc(100vw-1.5rem)] min-w-48 rounded-lg p-1 text-[11px] leading-4",
+  optionsHeader: "mb-1 flex items-center gap-2 rounded-lg border border-white/40 bg-white/10 p-1.5 opaque:bg-[var(--glass-fallback)]! forced-colors:bg-[Canvas]! forced-colors:border-[CanvasText]!",
+  optionItem: "min-h-9 gap-1.5 px-1.5 py-0.5 text-[11px] leading-4 md:min-h-7 [&>svg]:size-3",
   tableCell: "px-4 py-3 text-start align-middle wrap-anywhere",
   tableActionCell: "px-4 text-end",
   tableActions: "flex max-w-full flex-wrap items-center justify-end gap-2",
