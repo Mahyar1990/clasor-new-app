@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { glass } from "@/lib/design-system/classes";
 import { GlassCard } from "@/components/ui/GlassCard";
 
 export interface SolidColumn<T> {
@@ -14,13 +15,15 @@ export interface SolidDataTableProps<T> {
   getRowId: (row: T) => string;
   emptyMessage?: string;
   testId?: string;
+  appearance?: "solid" | "glass";
 }
 
-/** Organism: glass wrapper and opaque data rows in a keyboard-scrollable region. */
+/** Semantic table with a glass wrapper and an optional translucent data surface. */
 export function SolidDataTable<T>({
   caption, columns, rows, getRowId,
   emptyMessage = "اطلاعاتی برای نمایش وجود ندارد.",
   testId = "solid-table",
+  appearance = "solid",
 }: SolidDataTableProps<T>) {
   return (
     <GlassCard as="div"
@@ -35,10 +38,10 @@ export function SolidDataTable<T>({
         <caption data-test-id="SolidDataTable-caption-3" className="border-b border-white/30 px-4 py-3 text-start font-bold">
           {caption}
         </caption>
-        <thead data-test-id="SolidDataTable-thead-4" className="bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100">
+        <thead data-test-id="SolidDataTable-thead-4" className={appearance === "glass" ? glass.tableHeader : "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100"}>
           <tr data-test-id={`${testId}-header`}>
             {columns.map(column => (
-              <th data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className="border-b border-slate-200 py-3 ps-4 pe-4 text-start font-bold dark:border-slate-700">
+              <th data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className={`border-b py-3 ps-4 pe-4 text-start font-bold ${appearance === "glass" ? "border-white/50 shadow-[inset_0_-1px_0_rgb(130_90_175/0.08)]" : "border-slate-200 dark:border-slate-700"}`}>
                 {column.label}
               </th>
             ))}
@@ -51,7 +54,7 @@ export function SolidDataTable<T>({
               <tr
                 key={rowId}
                 data-test-id={`${testId}-row-${rowId}`}
-                className="border-b border-slate-200 bg-white last:border-b-0 hover:bg-slate-100 focus-within:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800 dark:focus-within:bg-slate-800"
+                className={appearance === "glass" ? glass.tableRow : "border-b border-slate-200 bg-white last:border-b-0 hover:bg-slate-100 focus-within:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800 dark:focus-within:bg-slate-800"}
               >
                 {columns.map(column => (
                   <td data-test-id={`SolidDataTable-td-9-${String(column.id)}`} key={column.id} className="max-w-sm py-3 ps-4 pe-4 text-start align-middle wrap-anywhere">
@@ -62,7 +65,7 @@ export function SolidDataTable<T>({
             );
           })}
           {rows.length === 0 && (
-            <tr data-test-id={`${testId}-empty`} className="bg-white dark:bg-slate-900">
+            <tr data-test-id={`${testId}-empty`} className={appearance === "glass" ? glass.tableRow : "bg-white dark:bg-slate-900"}>
               <td data-test-id="SolidDataTable-td-11" colSpan={columns.length} className="px-4 py-8 text-center">{emptyMessage}</td>
             </tr>
           )}

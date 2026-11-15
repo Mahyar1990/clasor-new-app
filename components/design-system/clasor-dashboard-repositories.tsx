@@ -3,6 +3,7 @@
 import { DashboardTabs } from "@/components/design-system/clasor-dashboard-tabs";
 import { useRef, useState } from "react";
 import { FolderOpen, Ellipsis, Clock3 } from "lucide-react";
+import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { GlassModal } from "@/components/ui/GlassModal";
 import { glass } from "@/lib/design-system/classes";
@@ -18,7 +19,7 @@ function RepositoryList({ repositories }: { repositories: DashboardRepository[] 
   return <>
     <div data-test-id="dashboard-repositories-grid" ref={listRef} className="grid grid-cols-1 gap-3">
       {result.rows.map(repository => <button key={repository.id} data-test-id={`dashboard-repository-${repository.id}`} data-load-more-item onClick={() => setOpened(repository)} className={`${glass.nativeButton} flex w-full min-w-0 items-center gap-3 p-4 text-start`}>
-        <span data-test-id={`dashboard-repository-icon-${repository.id}`} className="grid size-11 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary"><FolderOpen aria-hidden="true" className="size-6" /></span>
+        <GlassEmblem data-test-id={`dashboard-repository-icon-${repository.id}`}><FolderOpen aria-hidden="true" className="size-6" /></GlassEmblem>
         <span data-test-id={`dashboard-repository-top-${repository.id}`} className="min-w-0 flex-1 space-y-2">
           <span data-test-id={`dashboard-repository-name-${repository.id}`} className="block break-words text-sm font-bold">{repository.name}</span>
           <span data-test-id={`dashboard-repository-footer-${repository.id}`} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">

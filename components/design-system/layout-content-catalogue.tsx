@@ -6,6 +6,7 @@ import { SolidDataTable, type SolidColumn } from "@/components/ui/SolidDataTable
 import { SolidForm, type SolidFormValues } from "@/components/ui/SolidForm";
 import { CatalogueProfileMenu, GlassOverlayCatalogue } from "@/components/design-system/glass-overlay-catalogue";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassIdentityCatalogue } from "@/components/design-system/glass-identity-catalogue";
 
 type SampleRow = { id: string; name: string; email: string; category: string };
 const initialRows: SampleRow[] = [
@@ -23,6 +24,7 @@ export function LayoutContentCatalogue() {
   const [rows, setRows] = useState(initialRows);
   const [disabled, setDisabled] = useState(false);
   const [dark, setDark] = useState(false);
+  const [glassTable, setGlassTable] = useState(true);
 
   function addRow(values: SolidFormValues) {
     setRows(current => [...current, {
@@ -39,6 +41,10 @@ export function LayoutContentCatalogue() {
         نمونهٔ AppLayout شامل GlassHeader، GlassSidebar، SolidDataTable و SolidForm؛ ثبت فرم یک ردیف به جدول همین نمونه اضافه می‌کند. داده‌ها با بارگذاری دوبارهٔ صفحه بازنشانی می‌شوند.
       </p>
       <GlassCard as="div" data-test-id="catalogue-glass-card" className="mb-4 flex flex-wrap items-center gap-4 p-3 text-sm">
+        <label data-test-id="catalogue-glass-table-label" className="flex min-h-11 cursor-pointer items-center gap-2">
+          <input type="checkbox" checked={glassTable} onChange={event => setGlassTable(event.target.checked)} data-test-id="catalogue-glass-table-toggle" className="size-4 accent-primary" />
+          ردیف‌های شیشه‌ای جدول
+        </label>
         <label data-test-id="layout-content-catalogue-label-5" className="flex min-h-11 cursor-pointer items-center gap-2">
           <input type="checkbox" checked={dark} onChange={event => setDark(event.target.checked)} data-test-id="catalogue-solid-dark" className="size-4 accent-primary" />
           نمایش فرم و جدول در حالت تاریک
@@ -52,7 +58,8 @@ export function LayoutContentCatalogue() {
         <AppLayout title="نمونه چیدمان کلاسور" contentAs="section" profile={<CatalogueProfileMenu />}>
           <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /></div>
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
-            <SolidDataTable caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
+            <GlassIdentityCatalogue />
+            <SolidDataTable appearance={glassTable ? "glass" : "solid"} caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
             <SolidForm disabled={disabled} onSubmit={addRow} />
           </div>
         </AppLayout>

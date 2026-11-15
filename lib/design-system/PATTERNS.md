@@ -1,3 +1,7 @@
+## Dashboard glass table and identity surfaces — 2026/11/15
+
+`SolidDataTable` accepts `appearance="glass"` for a graduated translucent header and alternating translucent rows; its default remains `solid`. Semantics, stable row IDs, scroll region and action focus are preserved. `GlassEmblem` supplies reusable logo/folder tiles and circular avatars. Both are demonstrated on `/design-system/layout` with a local dark preview; the dashboard consumes these shared components directly. See [materials](MATERIALS.md) for the appearance and accessibility contract.
+
 ## ترکیب‌های جاری — ۲۰۲۶/۱۱/۱۴
 
 [GlassCard](../../components/ui/GlassCard.tsx) سطح مشترک و [AppLayout](../../components/ui/AppLayout.tsx) ترکیب آن با هدر، سایدبار و Mesh ثابت است. [SolidDataTable](../../components/ui/SolidDataTable.tsx) و [SolidForm](../../components/ui/SolidForm.tsx) نام عمومی خود را نگه داشته‌اند، اما قاب‌هایشان شیشه‌ای است؛ ردیف دادهٔ جدول می‌تواند مات بماند.

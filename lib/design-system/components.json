@@ -291,7 +291,7 @@
       "material": {
         "preset": "solid",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Identity keeps its existing avatar behavior; GlassEmblem supplies glass tile/avatar surfaces demonstrated in the layout catalogue with dark and opaque fallbacks.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -444,7 +444,7 @@
       "material": {
         "preset": "solid",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "DataTable retains its existing material. SolidDataTable defaults to solid rows and offers appearance=glass for a translucent header and rows over one blurred wrapper; the layout catalogue and dashboard demonstrate it.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {

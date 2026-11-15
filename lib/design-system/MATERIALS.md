@@ -9,7 +9,7 @@ The live catalogue at `/` renders the library in `components/ui`. The old standa
 - Only `tokens.css` (generated values) and `theme.css` (semantic/theme variables) remain as CSS in this directory. The six component/reference/material stylesheets were migrated and removed.
 - `classes.ts` contains static Tailwind contracts for surfaces, fields, selection, button variants, navigation, focus and accessibility opt-outs. `app/globals.css` defines `glass-enabled` and `opaque` variants; it does not import global component selector stylesheets.
 - Catalogue-only geometry is consumed at its root from `components/design-system/catalogue-layout.ts`. Nested shell utilities live in `workspace-styles.ts` / `wireframe-styles.ts` beside their consumers. Existing route geometry and catalogue scoped styles are layered as components so Tailwind utilities control appearance.
-- `GlassCard` is the shared semantic surface; AppLayout composes it with GlassHeader and GlassSidebar. Forms retain native form semantics; tables retain readable opaque data rows.
+- `GlassCard` is the shared semantic surface; AppLayout composes it with GlassHeader and GlassSidebar. Forms retain native form semantics; tables retain semantic data rows with solid and opt-in glass appearances.
 - Small primitives stay in `components/ui`; catalogue compositions and sample data stay in `components/design-system`.
 
 ## Appearance
@@ -19,6 +19,14 @@ Panels and popups use 30% tint, 12px backdrop blur, a 40% white border, and a sm
 Idle text fields use white at 40%, a gray border and inset shadow. Dark fields use white at 10%. Focus adds a purple border/ring; errors keep a distinct semantic border. Primary actions use purple at 60% and 80% on hover. Ordinary secondary actions use white at 50%, a visible border and base shadow. Small ghost controls use white at 10% and 20% on hover. Enabled buttons lift 2px on hover and reset on press.
 
 All visible selection controls use the existing shadcn/Base UI Select. Both trigger and popup are glass. Menu/sidebar hover uses white at 20%, blur, a 30% white border and shadow. Active navigation uses white at 30%. Transparent borders reserve space before hover.
+
+## Identity and table surfaces
+
+[GlassEmblem](../../components/ui/GlassEmblem.tsx) owns the shared logo/folder tile and circular avatar surface. It uses the 30% panel tint and 12px blur with a diagonal specular layer, white edge and restrained purple inset/drop shadows. The avatar shape is the only circular variant. Sizes and accessible naming belong to the consumer. The header and dashboard consume this same component.
+
+[SolidDataTable](../../components/ui/SolidDataTable.tsx) preserves its opaque default for existing consumers. `appearance="glass"` enables a softly graduated header and translucent, subtly alternating data rows over the blurred wrapper; individual rows do not add blur layers. Hover and keyboard focus brighten the row without moving it. The dashboard uses this appearance. The layout catalogue demonstrates glass/solid switching and local dark mode alongside the identity surfaces.
+
+Both surfaces honor solid/contrast preferences and forced colors: gradients and emblem reflections disappear, blur is disabled and system/fallback surfaces retain readable content. No pointer tracking or additional animation is introduced.
 
 ## Behavior and verification
 
