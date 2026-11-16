@@ -1,3 +1,9 @@
+## Follow-up controls - 2026/11/16
+
+UploadProgress announces an explicit success status beside the meter at 100%; retry and cancel remain disabled after completion. PathPicker uses the shared Breadcrumb primitives, RTL chevron separators and aria-current on the selected destination. Both updated states are rendered in DialogPatternsCatalogue.
+
+RecordGroup(title, description?, children, testId) is a shared glass composition with a named section, shared header and a logical start accent. It visually groups related records without merging their identities, content or actions. The independent example and the interactive version groups are available on the overlays/layout catalogue pages.
+
 ## کنترل‌های دیالوگ جمع‌وجور — ۲۰۲۶/۱۱/۱۶
 
 - `UploadProgress(name, value, cancelled?, onRetry, onCancel)` از ProgressIndicator بومی و قرارداد شیشه‌ای استفاده می‌کند. نام فایل، درصد و دکمه‌های آیکونی تلاش مجدد/لغو نام دارند؛ در ۱۰۰٪ هر دو غیرفعال‌اند. زمان‌بندی در مصرف‌کننده است. نمونه مخزن شبیه‌سازی محلی با cleanup هنگام لغو، تلاش مجدد و unmount دارد؛ فایل یک بار در پایان اضافه می‌شود.

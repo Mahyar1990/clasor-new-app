@@ -1,3 +1,11 @@
+## Request, file and version follow-up - 2026/11/16
+
+Request rows contain separate sibling controls for opening details and accepting/rejecting a pending request; decision controls also remain in the detail page. Inline decisions retain focus on the row opener.
+
+Repository file rows show upload date and source-aligned download, publish, rename and delete actions. Rename/publication/delete use the existing single-modal navigation. Uploaded files retain their local File payload for download; fixture downloads use the local sample PDF. No account or remote file operation is performed.
+
+Version creation collects only the version number. A fresh version starts empty; cloning retains the source snapshot. Creation leaves the current document content unchanged. Content can be edited only through the separate edit action. Same-number draft/approved snapshots appear under one RecordGroup heading while retaining independent status, content, IDs and menus. Groups use cumulative loading in batches of ten version numbers.
+
 ## دیالوگ‌های داشبورد کلاسور — قرارداد جاری ۲۰۲۶/۱۱/۱۶
 
 این بخش بر توصیف‌های قدیمی پیش‌نمایش داشبورد مقدم است. مدل تاریخی `/workspace` در این تغییر بازنویسی نشده است.

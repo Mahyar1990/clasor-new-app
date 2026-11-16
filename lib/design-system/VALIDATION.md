@@ -1,3 +1,15 @@
+## Request/file/version follow-up - 2026/11/16
+
+Evidence: working tree on `feat/refine-request-file-version-flows`, based on `0978cce`.
+
+- ui:check passed for 176 React files; lint and TypeScript passed. All 30 existing workspace/preview-version tests passed. Documentation links, specification index and diff whitespace checks passed.
+- Local browser checks covered inline accept/reject without opening a viewer, retained detail decisions, focus after inline decisions, file upload dates, source-aligned menus, rename/publication/delete, download filename, upload success status and record persistence after reopening.
+- Same-number snapshots share a group while retaining different content; creating a version has no content field, starts empty and leaves prior content intact; the separate editor remains functional. Breadcrumb separators and ancestor navigation passed.
+- RTL widths 320/390, dark file-menu portals, standalone catalogue examples, completed upload disabled states, solid and forced-color surfaces, reduced motion and horizontal overflow were checked. No runtime errors were recorded.
+- npm run build was attempted and stopped at the previously reported Turbopack CSS internal port-bind permission error. Production build success is not claimed; no duplicate Next.js feedback report was submitted for this known environment issue.
+
+Data and actions remain local previews. These checks do not establish human screen-reader or complete accessibility acceptance.
+
 ## دیالوگ‌های جمع‌وجور و ناوبری داخلی — ۲۰۲۶/۱۱/۱۶
 
 شواهد روی working tree برنچ `feat/compact-navigable-record-dialogs` بر پایه `170a37e` ثبت شدند.
