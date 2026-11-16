@@ -1,6 +1,7 @@
 "use client";
+import { OptionsButton } from "@/components/ui/OptionsButton";
 import { useRef, useState } from "react";
-import { FolderOpen, Ellipsis, RotateCcw, LogOut } from "lucide-react";
+import { FolderOpen, RotateCcw, LogOut } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
@@ -32,7 +33,7 @@ function Experience() {
       <div data-test-id="repository-options-name-copy" className="min-w-0 flex-1"><h2 data-test-id="repository-options-name" className="wrap-anywhere text-sm font-semibold">{repo.name}</h2><p data-test-id="repository-options-state" className="mt-1 text-xs text-muted-foreground">{repo.deleted ? "حذف‌شده در نمونه" : repo.left ? "عضویت پایان‌یافته در نمونه" : repo.archived ? "بایگانی‌شده" : "فعال"} · {repo.bookmarked ? "نشان‌شده" : "بدون نشان"} · {repo.members.length} عضو</p></div>
       <div data-test-id="repository-options-role" className="w-36"><SelectField data-test-id="repo-preview-role-select" label="نقش نمایشی شما" value={repo.role} options={[{ value: "مالک", label: "مالک" }, { value: "مدیر", label: "مدیر" }, { value: "ویرایشگر", label: "ویرایشگر" }]} onValueChange={value => setRepo(current => ({ ...current, role: value as PreviewRole }))} /></div>
       <GlassOptionsMenu testId="repository-options-menu" title={repo.name} description={`گزینه‌های مخزن · ${repo.role}`} icon={<FolderOpen />} items={activeOptions} triggerRef={menuRef}
-        trigger={<Button data-test-id="repository-options-menu" variant="glass" size="icon" aria-label="گزینه‌های مخزن نمونه" disabled={repo.deleted || repo.left}><Ellipsis aria-hidden="true" /></Button>}
+        trigger={<OptionsButton data-test-id="repository-options-menu" aria-label="گزینه‌های مخزن نمونه" disabled={repo.deleted || repo.left} />}
         onAction={(id, label) => setSelection({ id, label, trigger: menuRef.current })} />
     </GlassCard>
     <p data-test-id="repository-options-status" role="status" className="min-h-4 text-xs text-success">{notice}</p>

@@ -1,5 +1,6 @@
 "use client";
 import { ClasorTabs } from "@/components/ui/clasor-tabs";
+import { FormActions } from "@/components/ui/FormActions";
 import { Button } from "@/components/ui/button";
 import { TextareaField } from "@/components/ui/text-field";
 import { useDialogNavigation } from "@/components/ui/DialogNavigation";
@@ -12,7 +13,7 @@ function RequestViewer({ item }: { item: PreviewRecord }) {
   const { back } = useDialogNavigation();
   const current = repo.requests.find(record => record.id === item.id) ?? item;
   function decide(status: string) { setRepo(value => ({ ...value, requests: value.requests.map(record => record.id === item.id ? { ...record, status } : record) })); back(); }
-  return <div data-test-id="repo-request-viewer" className="space-y-3"><p data-test-id="repo-request-viewer-meta" className="text-xs text-muted-foreground">{item.detail} · ویرایش: {item.editedAt} · نسخه {item.version} · {item.kind === "draft" ? "پیش‌نویس" : "تأییدشده"}</p><TextareaField data-test-id="repo-request-content" label="محتوای نسخه" value={item.content ?? ""} readOnly rows={7} />{current.status === "pending" && <div data-test-id="repo-request-viewer-actions" className="flex gap-2"><Button data-test-id="repo-request-viewer-accept" size="sm" onClick={() => decide("accepted")}>تأیید درخواست</Button><Button data-test-id="repo-request-viewer-reject" variant="outline" size="sm" onClick={() => decide("rejected")}>رد درخواست</Button></div>}</div>;
+  return <div data-test-id="repo-request-viewer" className="space-y-3"><p data-test-id="repo-request-viewer-meta" className="text-xs text-muted-foreground">{item.detail} · ویرایش: {item.editedAt} · نسخه {item.version} · {item.kind === "draft" ? "پیش‌نویس" : "تأییدشده"}</p><TextareaField data-test-id="repo-request-content" label="محتوای نسخه" value={item.content ?? ""} readOnly rows={7} />{current.status === "pending" && <FormActions data-test-id="repo-request-viewer-actions"><Button data-test-id="repo-request-viewer-accept" size="sm" onClick={() => decide("accepted")}>تأیید درخواست</Button><Button data-test-id="repo-request-viewer-reject" variant="outline" size="sm" onClick={() => decide("rejected")}>رد درخواست</Button></FormActions>}</div>;
 }
 function RequestList({ kind }: { kind: string }) {
   const { repo, setRepo } = useRepositoryPreview();

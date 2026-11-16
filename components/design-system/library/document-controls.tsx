@@ -1,9 +1,9 @@
 "use client";
+import { OptionsButton } from "@/components/ui/OptionsButton";
 import { useRef } from "react";
-import { Ellipsis, FileText, FolderOpen, Bookmark } from "lucide-react";
+import { FileText, FolderOpen, Bookmark } from "lucide-react";
 import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { documentOptions } from "../clasor-document-options";
 import type { DocumentPreview } from "../document-dialogs/model";
@@ -23,6 +23,6 @@ export function DocumentName({ document, onOpen }: { document: DocumentPreview; 
 export function DocumentActions({ document, onAction, editable, publicationControls = false }: { document: DocumentPreview; onAction: DocumentAction; editable?: boolean; publicationControls?: boolean }) {
   const trigger = useRef<HTMLButtonElement>(null);
   return <GlassOptionsMenu testId={`dashboard-document-menu-${document.id}`} title={document.title} description={document.kind === "folder" ? "گزینه‌های دسته‌بندی" : "گزینه‌های سند"} icon={document.kind === "folder" ? <FolderOpen /> : <FileText />} triggerRef={node => { trigger.current = node; }}
-    trigger={<Button data-test-id={`dashboard-document-menu-${document.id}`} variant="plain" size="icon-sm" aria-label={`عملیات ${document.title}`}><Ellipsis aria-hidden="true" /></Button>}
+    trigger={<OptionsButton data-test-id={`dashboard-document-menu-${document.id}`} aria-label={`عملیات ${document.title}`} />}
     items={document.kind === "folder" ? [{ id: "edit-document", label: "ویرایش دسته‌بندی" }, { id: "move", label: "انتقال دسته‌بندی" }, { id: "delete", label: "حذف دسته‌بندی", destructive: true }] : documentOptions(editable === undefined ? document.shared : !editable, { bookmarked: document.bookmarked, publicationControls })} onAction={(id, label) => onAction({ recordId: document.id, id, label, trigger: trigger.current })} />;
 }

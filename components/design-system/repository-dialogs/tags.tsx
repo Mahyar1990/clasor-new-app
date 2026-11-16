@@ -1,5 +1,6 @@
 "use client";
 import { TagManager } from "@/components/ui/TagManager";
+import { FormActions } from "@/components/ui/FormActions";
 import { Button } from "@/components/ui/button";
 import { useDialogNavigation } from "@/components/ui/DialogNavigation";
 import { useRepositoryPreview } from "./context";
@@ -8,7 +9,7 @@ function ConfirmTag({ tag, confirm }: { tag: string; confirm: () => void }) {
   const { back } = useDialogNavigation();
   return <div data-test-id="repo-delete-tag-confirm" className="space-y-3">
     <p data-test-id="repo-delete-tag-description" className="text-xs">تگ «{tag}» از مخزن و همهٔ سندهای آن حذف شود؟</p>
-    <div data-test-id="repo-delete-tag-actions" className="flex gap-2"><Button data-test-id="repo-delete-tag-cancel" variant="outline" onClick={back}>انصراف</Button><Button data-test-id="repo-delete-tag-submit" variant="destructive" onClick={() => { confirm(); back(); }}>حذف تگ</Button></div>
+    <FormActions data-test-id="repo-delete-tag-actions"><Button data-test-id="repo-delete-tag-cancel" variant="outline" onClick={back}>انصراف</Button><Button data-test-id="repo-delete-tag-submit" variant="destructive" onClick={() => { confirm(); back(); }}>حذف تگ</Button></FormActions>
   </div>;
 }
 export function RepositoryTags() {

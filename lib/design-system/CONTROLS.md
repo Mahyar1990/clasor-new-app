@@ -1,3 +1,11 @@
+## Integrated search and aligned actions — 2026/11/16
+
+CompactSearch now renders one continuous field: its optional title/content Select is inside the field and Apply touches the input edge. `glass.searchGroup/searchMode/searchInput/searchApply` own the shared surfaces and separators, with a visible group focus ring and local dark/opaque/forced-color support. Base UI still handles the Select popup and keyboard behavior.
+
+`FormActions` gives related buttons one wrapping flex row, consistent heights and explicit gaps instead of margins on independent inline buttons. Key generation/save use it before and after generated values appear; request, tag-confirmation and activity actions reuse it. TextField's optional action slot places an input and its action on the same control row, leaving validation messages underneath. TagManager uses this slot; invitation/member/access add controls match the associated field height.
+
+`OptionsButton` has one fixed variant/size and preserves explicit public IDs and Base UI render refs. The structural guard rejects newly authored Button/IconButton three-dot variants outside this shared component. Representative vertical record groups, options and aligned action rows are rendered through app/page.tsx on layout/overlays.
+
 ## Compact search, repository tags and batch controls — 2026/11/16
 
 `CompactSearch` is a bounded native search form with an Apply button and Enter submission. Its optional Base UI Select places title/content mode beside the document query. Draft text/mode are separate from applied query state; creation controls occupy a different row. Filter dialogs no longer duplicate the search-mode field. Folder-only filtering clears/disables content type and template constraints; bookmark/template descriptions explain their effect on results.

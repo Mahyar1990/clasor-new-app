@@ -23,8 +23,7 @@ export function TagManager({ value, onValueChange, testId, onDelete }: { value: 
   return <div data-test-id={testId} className="space-y-2">
     <p data-test-id={`${testId}-help`} className="text-xs text-muted-foreground">تگ‌های این مخزن را بسازید؛ هنگام تنظیم تگ سندها از همین فهرست استفاده می‌شود.</p>
     <div data-test-id={`${testId}-create-row`} className="flex items-start gap-2">
-      <div data-test-id={`${testId}-field`} className="min-w-0 flex-1"><TextField ref={nameInput} data-test-id={`${testId}-name`} label="نام تگ" maxLength={80} value={name} error={error} onValueChange={value => { setName(value); setError(""); }} onKeyDown={event => { if (event.key === "Enter") { event.preventDefault(); create(); } }} /></div>
-      <Button data-test-id={`${testId}-add`} type="button" size="sm" variant="outline" className="mt-7" onClick={create}><Plus aria-hidden="true" />ایجاد تگ</Button>
+      <div data-test-id={`${testId}-field`} className="min-w-0 flex-1"><TextField ref={nameInput} data-test-id={`${testId}-name`} label="نام تگ" maxLength={80} value={name} error={error} onValueChange={value => { setName(value); setError(""); }} action={<Button data-test-id={`${testId}-add`} type="button" size="sm" variant="outline" onClick={create}><Plus aria-hidden="true" />ایجاد تگ</Button>} onKeyDown={event => { if (event.key === "Enter") { event.preventDefault(); create(); } }} /></div>
     </div>
     <GlassScrollArea data-test-id={`${testId}-scroll`} label="تگ‌های مخزن" className={value.length > 4 ? "h-44" : "max-h-44"}>
       <ul ref={list} data-test-id={`${testId}-list`} className="space-y-1">

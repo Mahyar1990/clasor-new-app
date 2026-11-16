@@ -1,3 +1,13 @@
+## Catalogue route streaming — 2026/11/16
+
+The catalogue section route now awaits params inside a page-local Suspense boundary. This satisfies Instant Navigation with Cache Components/Partial Prefetching, while retaining static section samples, metadata and notFound validation. Shared-layout boundaries alone cannot cover a client navigation below that layout.
+
+## Document search disclosure — 2026/11/16
+
+Document search/filter controls start closed. The visible Search and Filter button exposes aria-expanded/aria-controls; opening focuses the search input. The revealed section is the first child of the list region, immediately followed by the table/outline scroll area. Creation, view controls, selection, sort and result summaries stay above this section rather than between it and the data.
+
+Both the toggle and the panel's Close control remove the section, clear draft/applied search and filters, and restore focus to the toggle. Clearing on close intentionally avoids invisible active restrictions. Sorting and explicit record selection remain intact. The same browser composition is used on personal/shared documents, repository workspaces and catalogue examples.
+
 ## Repository workspace — 2026/11/16
 
 Selecting a repository card navigates to `/clasor-pages/repositories/[repositoryId]`. The dynamic route resolves asynchronous Next params inside Suspense. It renders the repository's image, metadata and options above a shared document browser. Back returns to the corresponding repository list. Invalid/deleted/left repositories show an unavailable state; a stable page-title ref provides focus fallback after header operations remove the card.

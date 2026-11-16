@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Plus, KeyRound, Trash2 } from "lucide-react";
 import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
+import { FormActions } from "@/components/ui/FormActions";
 import { CopyField } from "@/components/ui/CopyField";
 import { useDialogNavigation } from "@/components/ui/DialogNavigation";
 import { glass } from "@/lib/design-system/classes";
@@ -16,17 +17,21 @@ function CreateKey() {
   const [generated, setGenerated] = useState("");
   return <form data-test-id="repo-key-form" className="space-y-3" onSubmit={event => {
     event.preventDefault();
+    if (!name.trim() || !generated) return;
     setRepo(current => ({ ...current, keys: [...current.keys, { id: crypto.randomUUID(), name: name.trim(), value: `DEMO-PUBLIC-${generated}`, detail: "کلید نمایشی" }] }));
     back();
   }}>
     <TextField data-test-id="repo-key-name" label="نام کلید" value={name} required onValueChange={setName} />
-    <Button data-test-id="repo-key-generate" type="button" variant="outline" onClick={() => setGenerated(crypto.randomUUID())}><KeyRound aria-hidden="true" />تولید کلید نمایشی</Button>
+
     {generated && <>
       <CopyField testId="repo-new-public-key" label="کلید عمومی" value={`DEMO-PUBLIC-${generated}`} />
       <CopyField testId="repo-new-private-key" label="کلید خصوصی" value={`DEMO-PRIVATE-${generated}`} secret />
       <p data-test-id="repo-key-warning" className="text-xs text-warning">کلید خصوصی فقط در همین مرحله نمایش داده می‌شود. این کلیدها نمایشی و غیرقابل استفاده‌اند.</p>
     </>}
-    <Button data-test-id="repo-key-save" type="submit" disabled={!name.trim() || !generated}>ثبت کلید نمونه</Button>
+    <FormActions data-test-id="repo-key-actions">
+      <Button data-test-id="repo-key-generate" type="button" variant="outline" onClick={() => setGenerated(crypto.randomUUID())}><KeyRound aria-hidden="true" />تولید کلید نمایشی</Button>
+      <Button data-test-id="repo-key-save" type="submit" disabled={!name.trim() || !generated}>ثبت کلید نمونه</Button>
+    </FormActions>
   </form>;
 }
 function DeleteKey({ item }: { item: PreviewRecord }) {

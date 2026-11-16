@@ -1,3 +1,9 @@
+## Unified record options and compact vertical versions — 2026/11/16
+
+`OptionsButton` is the single three-dot control for repository/document/version/file/member/group menus, catalogue examples and RowActionMenu. `glass.recordOptions` owns its 32px geometry, full opacity, visible border, stronger neutral foreground and light/dark base; normal focus, hover, disabled and transparency opt-outs remain shared Button behavior. Individual records no longer override its variant, size or opacity. This supersedes the earlier faded tile-control treatment below.
+
+RecordGroup now stacks snapshots vertically with one shared version heading and separators. `glass.versionRow` and `glass.recordActions` keep the menu in normal flow, reserve an inset at both edges and prevent long metadata from colliding with it. Rows retain plain content surfaces and compact inline metadata. The earlier side-by-side version layout below is historical and superseded.
+
 ## Repository cards and row feedback — 2026/11/16
 
 Repository tiles now use `glass.repositoryTile`: a clearer thin edge, slightly stronger flat tint and restrained shadow separate adjacent cards without adding another backdrop filter. `RepositoryImage` displays the selected image in a consistent thumbnail area, with a local default illustration for empty/failed images. The options control remains visible for touch/keyboard users with a smaller, quieter surface. It is independent of the card's navigation action.

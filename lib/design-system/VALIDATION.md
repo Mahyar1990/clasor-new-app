@@ -1,3 +1,16 @@
+## Unified options, compact versions and search disclosure — 2026/11/16
+
+Evidence: working tree on `fix/compact-search-and-dialog-controls`, based on `5478d26`.
+
+- ui:check passed for 217 React files; lint and TypeScript passed. All 43 existing workspace, preview-version and library tests passed. Structural validation now rejects ad hoc three-dot Button/IconButton controls outside OptionsButton.
+- Browser checks passed for initially hidden search/filter controls, disclosure state, focus, integrated title/content selection, attached Apply geometry and Enter, immediate adjacency to table/outline, filter application, close/clear/reset, and 320/390px overflow. Sort and explicit selection retain their independent state.
+- Record-menu geometry and computed materials matched between repository, document and version controls. Version snapshots stack vertically, retain shared numbering and independent actions/content, and reserve menu insets. Key generation/save share one aligned row in both generated/ungenerated states. Captures were visually reviewed.
+- Local dark search/Select/menu portals, tag input/action alignment with validation errors, tree reuse, solid mode, forced colors, reduced motion and mobile key dialogs passed. Alignment measurements wait for the standard two-pixel hover lift to settle. Public IDs and composed Base UI refs remain preserved.
+- A final console sweep exposed instant-shell-url-data on the catalogue route: Page awaited params outside a page-local Suspense boundary. Moving the read into the streamed section fixed the application error; all six route checks, four internal catalogue navigations and the shared table menu then passed without runtime/console errors. This is a documented migration requirement, not retained as a new framework defect. A legacy forced-colors test now checks that no pseudo-element is painted (including content:none), rather than requiring a particular display value for a nonexistent pseudo-element.
+- npm run build was attempted with escalation and encountered the already reported Turbopack CSS worker port-bind permission failure. A successful production build is not claimed. The final feedback audit retained no new qualifying Next issue beyond this known environment limitation.
+
+All account/source data remains untouched; tests use local fixtures. Scripts and screenshots stay outside the repository. Automated checks do not establish human screen-reader acceptance or complete accessibility certification. Remote publication is explicitly authorized for this request; branch synchronization is verified separately after committing.
+
 ## Repository workspaces, master tags and batch actions — 2026/11/16
 
 Evidence: working tree on `feat/repository-workspace-and-bulk-documents`, based on `5f80c17`.

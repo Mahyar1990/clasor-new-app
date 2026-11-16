@@ -1,6 +1,7 @@
 "use client";
+import { OptionsButton } from "@/components/ui/OptionsButton";
 import { useState } from "react";
-import { FolderOpen, Ellipsis } from "lucide-react";
+import { FolderOpen } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { DialogSection } from "@/components/ui/DialogSection";
 import { GlassTile } from "@/components/ui/GlassTile";
@@ -25,8 +26,8 @@ function Patterns() {
   return <GlassPreviewFrame title="فهرست‌های کلاسور؛ سطح ساده، کارت مربعی و ساخت مرحله‌ای" testId="library-patterns-catalogue">
     <GlassCard data-test-id="catalogue-flat-nesting" className="p-3"><DialogSection testId="catalogue-flat-section" title="گروه داخلی بدون شیشهٔ تکراری"><p data-test-id="catalogue-flat-copy" className="text-xs text-muted-foreground">سطح اصلی شیشه‌ای است؛ گروه‌های داخل آن با فاصله و جداکننده تعریف می‌شوند.</p></DialogSection></GlassCard>
     <div data-test-id="library-patterns-tiles" className="grid max-w-sm grid-cols-2 gap-2">
-      <GlassTile testId="catalogue-square-tile" media={<RepositoryImage testId="catalogue-repository-photo" image="/repositories/sample-cover.svg" name="مستندات محصول" className="h-full w-full" />} title="مستندات محصول" icon={<FolderOpen />} metadata="مالک · فعال" actions={<Button data-test-id="catalogue-square-actions" variant="plain" size="icon-sm" className="size-6! bg-white/35 shadow-none! opacity-80 hover:opacity-100 [&_svg]:size-3.5!" aria-label="عملیات مخزن نمونه" onClick={() => setNotice("کارت و عملیات آن دو کنترل مستقل‌اند.")}><Ellipsis aria-hidden="true" /></Button>} onOpen={() => setNotice("مشاهدهٔ اطلاعات مخزن نمونه")} />
-      <GlassTile testId="catalogue-default-tile" title="راهنمای تیم" icon={<FolderOpen />} media={<RepositoryImage testId="catalogue-repository-default" name="راهنمای تیم" className="h-full w-full" />} metadata="تصویر پیش‌فرض" actions={<Button data-test-id="catalogue-default-actions" variant="plain" size="icon-sm" aria-label="عملیات نمونهٔ پیش‌فرض" onClick={() => setNotice("تصویر پیش‌فرض برای مخزن بدون تصویر نمایش داده می‌شود.")}><Ellipsis aria-hidden="true" /></Button>} onOpen={() => setNotice("نمونهٔ کارت با تصویر پیش‌فرض")} />
+      <GlassTile testId="catalogue-square-tile" media={<RepositoryImage testId="catalogue-repository-photo" image="/repositories/sample-cover.svg" name="مستندات محصول" className="h-full w-full" />} title="مستندات محصول" icon={<FolderOpen />} metadata="مالک · فعال" actions={<OptionsButton data-test-id="catalogue-square-actions" aria-label="عملیات مخزن نمونه" onClick={() => setNotice("کارت و عملیات آن دو کنترل مستقل‌اند.")} />} onOpen={() => setNotice("مشاهدهٔ اطلاعات مخزن نمونه")} />
+      <GlassTile testId="catalogue-default-tile" title="راهنمای تیم" icon={<FolderOpen />} media={<RepositoryImage testId="catalogue-repository-default" name="راهنمای تیم" className="h-full w-full" />} metadata="تصویر پیش‌فرض" actions={<OptionsButton data-test-id="catalogue-default-actions" aria-label="عملیات نمونهٔ پیش‌فرض" onClick={() => setNotice("تصویر پیش‌فرض برای مخزن بدون تصویر نمایش داده می‌شود.")} />} onOpen={() => setNotice("نمونهٔ کارت با تصویر پیش‌فرض")} />
     </div>
     <RepositorySkeletons testId="catalogue-repository-skeletons" />
     <p data-test-id="library-patterns-notice" role="status" className="text-xs">{notice}</p>

@@ -34,7 +34,7 @@ export function DocumentAccess({ blocked = false }: { blocked?: boolean }) {
       }}>
         <TextField data-test-id="doc-access-username" ref={input} label="شناسهٔ پادی" required value={name} onValueChange={setName} />
         {!blocked && <SelectField data-test-id="doc-access-role" label="نقش دسترسی" options={roles} value={role} onValueChange={setRole} />}
-        <Button data-test-id="doc-access-add" type="submit" disabled={!name.trim()} size="sm">افزودن</Button>
+        <Button className="h-[var(--control-height)]" data-test-id="doc-access-add" type="submit" disabled={!name.trim()} size="sm">افزودن</Button>
       </form>
     <p data-test-id="doc-access-message" role="status" className="text-xs text-success">{message}</p>
     <PreviewList testId="doc-access-list" items={records} noun="کاربر" render={person => <div data-test-id={`doc-access-person-${person.id}`} className={`${glass.contentSurface} flex items-center justify-between gap-2 p-2`}>

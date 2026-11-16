@@ -1,3 +1,11 @@
+## Compact control follow-up — 2026/11/16
+
+Version snapshots are vertically stacked again under their canonical version number; same-number draft and approved content remain independent. Inline status/creator/date/public/latest labels reduce height, while options stay in normal flow with reserved padding. There is no absolute menu over the row text. OptionsButton is shared across every record menu, including files, members and groups.
+
+Repository-key generation and registration share one FormActions row below generated values, keeping their geometry aligned before/after generation. Submission requires both a nonempty name and generated key. Shared action rows and TextField action slots also address related dialog alignment rather than maintaining isolated offsets. These changes retain local demo-key semantics.
+
+Search disclosure and integrated-field behavior in NAVIGATION.md/CONTROLS.md supersede the previous always-visible search row. Existing cumulative list loading, multi-sort, ownership, tags and ten-item selection rules remain in force.
+
 ## Repository-scoped documents, tags and group mutations — 2026/11/16
 
 Every library document now has a repositoryId. The provider derives document sharing scope from current repository metadata and excludes deleted/left repositories. Clicking a tile opens its own workspace, not the information dialog. A repository workspace reuses document search/filter, sort, table/outline, creation and menus. New records inherit the current repository and category; at the aggregate personal root they use the personal repository. Template choices are limited to the destination repository. New repositories start with no documents.

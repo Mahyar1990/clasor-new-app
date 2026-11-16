@@ -1,13 +1,13 @@
 "use client";
 
+import { OptionsButton } from "@/components/ui/OptionsButton";
 import { useRouter } from "next/navigation";
 import { RepositoryImage } from "@/components/ui/RepositoryImage";
 import { useRef, useState } from "react";
-import { FolderOpen, Ellipsis, Bookmark } from "lucide-react";
+import { FolderOpen, Bookmark } from "lucide-react";
 import { DashboardTabs } from "./clasor-dashboard-tabs";
 import { GlassScrollArea } from "@/components/ui/GlassScrollArea";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
-import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { formatDocumentDate, getLoadedItems } from "@/lib/workspace/documents";
 import LoadMore from "@/components/workspace/load-more";
@@ -33,7 +33,7 @@ export function RepositoryList({ repositories, onAction }: { repositories: Repos
       {result.rows.map(repository => <div data-test-id={`repository-tile-wrap-${repository.id}`} data-load-more-item key={repository.id}>
         <GlassTile testId={`dashboard-repository-card-${repository.id}`} title={repository.name} icon={<FolderOpen />} media={<RepositoryImage testId={`repository-image-${repository.id}`} image={repository.preview.image} name={repository.name} className="h-full w-full" />} onOpen={() => router.push(`/clasor-pages/repositories/${encodeURIComponent(repository.id)}`)} metadata={<><span data-test-id={`dashboard-repository-role-${repository.id}`}>{repository.role}</span><span data-test-id={`dashboard-repository-date-${repository.id}`}>{formatDocumentDate(repository.updatedAt)}</span>{repository.preview.bookmarked && <Bookmark data-test-id={`dashboard-repository-bookmarked-${repository.id}`} aria-label="نشان‌شده" className="size-3 text-primary" />}</>} actions={
         <GlassOptionsMenu testId={`dashboard-repository-action-${repository.id}`} title={repository.name} description={`گزینه‌های مخزن · ${repository.role}`} icon={<FolderOpen />} triggerRef={node => { if (node) triggers.current.set(repository.id, node); else triggers.current.delete(repository.id); }}
-          trigger={<Button data-test-id={`dashboard-repository-action-${repository.id}`} variant="plain" size="icon-sm" className="size-6! bg-white/35 text-slate-600 shadow-none! opacity-80 hover:opacity-100 dark:bg-slate-900/45 dark:text-slate-200 [&_svg]:size-3.5!" aria-label={`عملیات مخزن ${repository.name}`}><Ellipsis aria-hidden="true" /></Button>}
+          trigger={<OptionsButton data-test-id={`dashboard-repository-action-${repository.id}`} aria-label={`عملیات مخزن ${repository.name}`} />}
           items={repositoryActionItems(repository.preview)}
           onAction={(id, label) => onAction({ recordId: repository.id, id, label, trigger: triggers.current.get(repository.id) ?? null })} />} />
       </div>)}

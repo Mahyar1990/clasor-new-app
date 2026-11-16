@@ -1,8 +1,9 @@
 "use client";
+import { OptionsButton } from "@/components/ui/OptionsButton";
 import { useState } from "react";
 import { TextField, TextareaField, SearchField } from "@/components/ui/text-field";
 import { CheckboxField } from "@/components/ui/choice-field";
-import { Ellipsis } from "lucide-react";
+
 import { glass } from "@/lib/design-system/classes";
 import { Button } from "@/components/ui/button";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
@@ -38,6 +39,6 @@ export function Groups() {
   return <div data-test-id="repo-share-groups" className="space-y-3">
     <Button data-test-id="repo-group-create" size="sm" disabled={!canManage} onClick={() => push("ایجاد گروه", <GroupEditor />)}>ایجاد گروه</Button>
     <SearchField data-test-id="repo-groups-search" label="جستجوی گروه" value={query} onValueChange={setQuery} />
-    <PreviewList key={query} testId="repo-groups-list" noun="گروه" items={repo.groups.filter(item => item.name.includes(query))} render={group => <div data-test-id={`repo-group-${group.id}`} className={glass.compactRecord}><div data-test-id={`repo-group-copy-${group.id}`} className="min-w-0 flex-1"><p data-test-id={`repo-group-title-${group.id}`} className="truncate text-xs">{group.name}</p><p data-test-id={`repo-group-meta-${group.id}`} className="text-[10px] text-muted-foreground">{group.memberIds?.length ?? 0} عضو · {group.description || "بدون توضیحات"}</p></div><GlassOptionsMenu testId={`repo-group-menu-${group.id}`} title={`عملیات ${group.name}`} description="گزینه‌های گروه" trigger={<Button data-test-id={`repo-group-menu-${group.id}`} variant="glass" size="icon" aria-label={`عملیات ${group.name}`}><Ellipsis aria-hidden="true" /></Button>} items={[{ id: "edit", label: "ویرایش گروه", disabled: !canManage }, { id: "delete", label: "حذف گروه", destructive: true, disabled: !canManage }]} onAction={(id, _label, trigger) => push(id === "edit" ? "ویرایش گروه" : "حذف گروه", id === "edit" ? <GroupEditor group={group} /> : <GroupDelete group={group} />, trigger)} /></div>} />
+    <PreviewList key={query} testId="repo-groups-list" noun="گروه" items={repo.groups.filter(item => item.name.includes(query))} render={group => <div data-test-id={`repo-group-${group.id}`} className={glass.compactRecord}><div data-test-id={`repo-group-copy-${group.id}`} className="min-w-0 flex-1"><p data-test-id={`repo-group-title-${group.id}`} className="truncate text-xs">{group.name}</p><p data-test-id={`repo-group-meta-${group.id}`} className="text-[10px] text-muted-foreground">{group.memberIds?.length ?? 0} عضو · {group.description || "بدون توضیحات"}</p></div><GlassOptionsMenu testId={`repo-group-menu-${group.id}`} title={`عملیات ${group.name}`} description="گزینه‌های گروه" trigger={<OptionsButton data-test-id={`repo-group-menu-${group.id}`} aria-label={`عملیات ${group.name}`} />} items={[{ id: "edit", label: "ویرایش گروه", disabled: !canManage }, { id: "delete", label: "حذف گروه", destructive: true, disabled: !canManage }]} onAction={(id, _label, trigger) => push(id === "edit" ? "ویرایش گروه" : "حذف گروه", id === "edit" ? <GroupEditor group={group} /> : <GroupDelete group={group} />, trigger)} /></div>} />
   </div>;
 }

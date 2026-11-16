@@ -1,6 +1,7 @@
 "use client";
+import { OptionsButton } from "@/components/ui/OptionsButton";
 import { useEffect, useRef, useState } from "react";
-import { FileText, Plus, Ellipsis } from "lucide-react";
+import { FileText, Plus } from "lucide-react";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
 import { useDialogNavigation } from "@/components/ui/DialogNavigation";
 import { FileActionPage, downloadFile } from "./file-actions";
@@ -39,7 +40,7 @@ export function RepositoryFiles() {
         <p data-test-id={`repo-file-name-${item.id}`} className="break-words text-xs font-medium">{item.name}</p>
         <p data-test-id={`repo-file-meta-${item.id}`} className="text-[10px] text-muted-foreground">{item.detail} · آپلود: {item.uploadedAt}{item.published ? " · عمومی" : ""}</p>
       </div>
-      <GlassOptionsMenu testId={`repo-file-menu-${item.id}`} title={item.name} description="عملیات فایل" trigger={<Button data-test-id={`repo-file-menu-${item.id}`} variant="glass" size="icon" aria-label={`عملیات فایل ${item.name}`}><Ellipsis aria-hidden="true" /></Button>} items={[
+      <GlassOptionsMenu testId={`repo-file-menu-${item.id}`} title={item.name} description="عملیات فایل" trigger={<OptionsButton data-test-id={`repo-file-menu-${item.id}`} aria-label={`عملیات فایل ${item.name}`} />} items={[
         { id: "download", label: "دانلود فایل" },
         { id: "publish", label: "عمومی کردن فایل", disabled: item.published },
         { id: "edit", label: "ویرایش فایل" }, { id: "delete", label: "حذف فایل", destructive: true },

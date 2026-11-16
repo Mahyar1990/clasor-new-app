@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { ClasorTabs } from "@/components/ui/clasor-tabs";
 import { TextareaField } from "@/components/ui/text-field";
+import { FormActions } from "@/components/ui/FormActions";
 import { Button } from "@/components/ui/button";
 import { DestructiveDialog } from "@/components/ui/confirmation-dialog";
 import { glass } from "@/lib/design-system/classes";
@@ -26,11 +27,11 @@ function ActivityCard({ item, focusRef }: { item: Activity; focusRef: React.RefO
       <TextareaField data-test-id={`doc-activity-answer-input-${item.id}`} label="پاسخ شما" rows={3} value={reply} onValueChange={setReply} />
       <Button data-test-id={`doc-activity-answer-save-${item.id}`} size="sm" disabled={!reply.trim()} onClick={() => { update({ answer: reply.trim() }); setAnswering(false); replyButton.current?.focus(); }}>ثبت پاسخ نمونه</Button>
     </div>}
-    <div data-test-id={`doc-activity-actions-${item.id}`} className="flex flex-wrap gap-2">
+    <FormActions data-test-id={`doc-activity-actions-${item.id}`}>
       {item.kind === "questions" && item.state === "approved" && <Button data-test-id={`doc-activity-reply-${item.id}`} ref={replyButton} size="sm" variant="outline" onClick={() => setAnswering(!answering)}>{answering ? "انصراف" : "پاسخ به پرسش"}</Button>}
       {canManage && item.state === "pending" && <><Button data-test-id={`doc-activity-approve-${item.id}`} size="sm" onClick={() => update({ state: "approved" })}>تأیید</Button><Button data-test-id={`doc-activity-reject-${item.id}`} size="sm" variant="outline" onClick={() => update({ state: "rejected" })}>رد کردن</Button></>}
       {(canManage || item.name === "شما (نمونه)") && <DestructiveDialog title="حذف پیام" description="این پیام فقط از سند نمونه حذف می‌شود." targetName={item.body} confirmLabel="حذف پیام نمونه" fallbackFocusRef={focusRef} contentClassName={cn(glass.liquidFloating, glass.dialogCompact, glass.dialogConfirmation)} trigger={<Button data-test-id={`doc-activity-delete-${item.id}`} size="sm" variant="destructive-outline">حذف</Button>} onConfirm={() => setDocument(current => ({ ...current, activities: current.activities.filter(record => record.id !== item.id) }))} />}
-    </div>
+    </FormActions>
   </article>;
 }
 

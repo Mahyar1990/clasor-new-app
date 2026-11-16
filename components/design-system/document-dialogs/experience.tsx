@@ -1,7 +1,8 @@
 "use client";
+import { OptionsButton } from "@/components/ui/OptionsButton";
 
 import { useRef, useState } from "react";
-import { Ellipsis, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { GlassOptionsMenu, type GlassOption } from "@/components/ui/GlassOptionsMenu";
@@ -30,7 +31,7 @@ export function DocumentOptionsExperience() {
     <p data-test-id="document-options-scope-note" className="text-xs leading-relaxed text-muted-foreground">کنترل‌های انتشار در داشبورد اصلی مانند منبع غیرفعال‌اند؛ زمینهٔ «داخل مخزن · مالک» نمونهٔ همان دیالوگ‌ها را نمایش می‌دهد.</p>
     <GlassCard data-test-id="document-options-summary" className="flex items-center justify-between gap-3 p-3">
       <div data-test-id="document-options-copy" className="min-w-0 space-y-1"><h4 data-test-id="document-options-name" className="wrap-anywhere text-sm font-semibold">{document.title}</h4><p data-test-id="document-options-state" className="text-xs text-muted-foreground">{document.deleted ? "حذف‌شده در نمونه" : document.category} · {document.bookmarked ? "نشان‌شده" : "بدون نشان"}</p></div>
-      <GlassOptionsMenu testId="document-options-menu" triggerRef={menu} title={document.title} description="گزینه‌های سند نمونه" icon={<FileText />} items={items} trigger={<Button data-test-id="document-options-menu" variant="glass" size="icon" disabled={document.deleted} aria-label="عملیات سند نمونه"><Ellipsis aria-hidden="true" /></Button>} onAction={(id, label) => setSelection({ id, label, trigger: menu.current })} />
+      <GlassOptionsMenu testId="document-options-menu" triggerRef={menu} title={document.title} description="گزینه‌های سند نمونه" icon={<FileText />} items={items} trigger={<OptionsButton data-test-id="document-options-menu" disabled={document.deleted} aria-label="عملیات سند نمونه" />} onAction={(id, label) => setSelection({ id, label, trigger: menu.current })} />
     </GlassCard>
     <p data-test-id="document-options-status" role="status" className="text-xs text-success">{message}</p>
     <div data-test-id="document-options-gallery" className="grid gap-2 sm:grid-cols-2">
