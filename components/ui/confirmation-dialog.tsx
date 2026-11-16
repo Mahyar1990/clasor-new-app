@@ -32,7 +32,7 @@ function Confirmation({ destructive = false, trigger, title, description, target
   const Close = destructive ? AlertDialogCancel : DialogClose
   return <Root open={open ?? localOpen} onOpenChange={(value, details) => { if (busy) { details.cancel(); return } change(value) }} {...(!destructive ? { disablePointerDismissal: false } : {})}>
     <Trigger data-test-id="confirmation-dialog-trigger-1" ref={triggerRef} render={trigger} />
-    <Content dir="rtl" {...(!destructive ? { showCloseButton: false } : {})} initialFocus={cancelRef} finalFocus={() => triggerRef.current?.isConnected ? triggerRef.current : fallbackFocusRef?.current ?? true} className={`max-h-[calc(100dvh-2rem)] overflow-y-auto break-words ${contentClassName ?? ""}`}>
+    <Content themeAnchorRef={triggerRef} dir="rtl" {...(!destructive ? { showCloseButton: false } : {})} initialFocus={cancelRef} finalFocus={() => triggerRef.current?.isConnected ? triggerRef.current : fallbackFocusRef?.current ?? true} className={`max-h-[calc(100dvh-2rem)] overflow-y-auto break-words ${contentClassName ?? ""}`}>
       <Title>{title}</Title><Description>{description}</Description>
       <p data-test-id="confirmation-dialog-p-2" className="rounded-md border bg-muted p-3 text-sm leading-body">مورد: {targetName}</p>
       {(error || failure) && <p data-test-id="confirmation-dialog-p-3" role="alert" className="text-sm text-danger">{error || failure}</p>}

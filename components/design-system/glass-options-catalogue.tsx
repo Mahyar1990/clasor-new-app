@@ -1,5 +1,6 @@
 "use client";
 
+import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { Ellipsis, FileText, FolderOpen } from "lucide-react";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
@@ -23,10 +24,10 @@ export function GlassOptionsCatalogue() {
     <h3 data-test-id="glass-options-title" id="glass-options-title" className="text-lg font-bold">گزینه‌های شیشه‌ای سند و مخزن</h3>
     <p data-test-id="glass-options-description" className="text-sm text-muted-foreground">ته‌رنگ ۱۵٪ با محوشدگی ۱۰ پیکسل و لایهٔ ملایم زیر نوشته‌ها؛ رنگ پس‌زمینه حفظ می‌شود و متن‌های پشت کمتر مزاحم خواندن گزینه‌ها می‌شوند.</p>
     <label data-test-id="glass-options-dark-label" className="flex min-h-11 items-center gap-2 text-sm">
-      <input data-test-id="glass-options-dark-toggle" type="checkbox" checked={dark} onChange={event => setDark(event.target.checked)} className="size-4 accent-primary" />پیش‌نمایش تاریک منوها
+      <Checkbox data-test-id="glass-options-dark-toggle" aria-label="پیش‌نمایش تاریک منوها" checked={dark} onCheckedChange={checked => setDark(checked)} />پیش‌نمایش تاریک منوها
     </label>
     <label data-test-id="glass-options-busy-label" className="flex min-h-11 items-center gap-2 text-sm">
-      <input data-test-id="glass-options-busy-toggle" type="checkbox" checked={busyBackground} onChange={event => setBusyBackground(event.target.checked)} className="size-4 accent-primary" />زمینهٔ پرنوشته برای بررسی خوانایی
+      <Checkbox data-test-id="glass-options-busy-toggle" aria-label="زمینهٔ پرنوشته برای بررسی خوانایی" checked={busyBackground} onCheckedChange={checked => setBusyBackground(checked)} />زمینهٔ پرنوشته برای بررسی خوانایی
     </label>
     <div data-test-id="glass-options-examples" className={`${dark ? "dark scheme-dark bg-slate-950/80" : "scheme-light"} ${busyBackground ? "min-h-[30rem]" : ""} relative isolate grid content-start gap-3 rounded-xl bg-[linear-gradient(125deg,rgba(96,165,250,0.22),transparent_40%,rgba(167,139,250,0.22))] p-4 text-foreground sm:grid-cols-2`}>
       {busyBackground && <div data-test-id="glass-options-busy-background" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex flex-col justify-evenly overflow-hidden rounded-xl px-4 text-lg font-bold text-slate-950/75 dark:text-slate-100/75">

@@ -1,6 +1,7 @@
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
+import { glass } from "@/lib/design-system/classes";
 import { cn } from "cn"
 
 const badgeVariants = cva(
@@ -8,15 +9,15 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        default: glass.primary,
         secondary:
-          "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
+          glass.statusNeutral,
         destructive:
-          "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/20",
+          glass.statusDanger,
         outline:
-          "border-border text-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground",
+          glass.statusNeutral,
         ghost:
-          "hover:bg-muted hover:text-muted-foreground dark:hover:bg-muted/50",
+          glass.control,
         link: "text-primary underline-offset-4 hover:underline",
       },
     },
@@ -36,7 +37,7 @@ function Badge({
     defaultTagName: "span",
     props: mergeProps<"span">(
       { ...{ "data-test-id": "badge" },
-        className: cn(badgeVariants({ variant }), className),
+        className: cn(glass.statusSurface, badgeVariants({ variant }), className),
       },
       props
     ),

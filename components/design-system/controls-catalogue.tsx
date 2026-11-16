@@ -11,6 +11,8 @@ import { SelectField } from "@/components/ui/select-field"
 import { CheckboxField, RadioField, SwitchField } from "@/components/ui/choice-field"
 import { FileInput } from "@/components/ui/file-input"
 import { ApprovalBadge, VisibilityBadge, LatestBadge, RoleBadge } from "@/components/ui/status-badge"
+import { GlassControlStatesCatalogue } from "./glass-control-states-catalogue";
+import { GlassStatusStatesCatalogue } from "./glass-status-feedback-catalogue";
 import { Identity } from "@/components/ui/identity"
 
 function Sample({ title, description, children }: { title: string; description: string; children: ReactNode }) {
@@ -69,6 +71,7 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
     </>}
     {section === "inputs" && <>
     <SectionTitle id="inputs" title="ورودی و انتخاب" description="عنوان دائمی، راهنمای نزدیک و خطای قابل اصلاح" number="06"><SlidersHorizontal className="size-5" aria-hidden="true" /></SectionTitle>
+    <GlassControlStatesCatalogue />
     <div data-test-id="controls-catalogue-div-30" className="grid items-start gap-5 lg:grid-cols-2">
       <Sample title="از ورودی تا بازبینی" description="اعتبارسنجی محلی است؛ خطا مقدار واردشده را پاک نمی‌کند.">
         <form data-test-id="controls-catalogue-form-31" className="space-y-5" noValidate onSubmit={event => {
@@ -117,6 +120,7 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
     </>}
     {section === "status" && <>
     <SectionTitle id="status" title="وضعیت و هویت" description="تأیید، دسترسی، نسخه و نقش؛ چهار معنای مستقل" number="07"><UsersRound className="size-5" aria-hidden="true" /></SectionTitle>
+    <GlassStatusStatesCatalogue />
     <Sample title="وضعیت را با متن بخوانید" description="تأییدشدن به معنی عمومی‌بودن نیست؛ آخرین نسخه هم مجوز ایجاد نمی‌کند.">
       <div data-test-id="controls-catalogue-div-48" className="grid gap-5 sm:grid-cols-[100px_1fr]">
         <span data-test-id="controls-catalogue-span-49" className="text-xs text-muted-foreground">تأیید محتوا</span><div data-test-id="controls-catalogue-div-50" className="flex flex-wrap gap-2">{(["draft", "pending", "approved", "rejected"] as const).map(status => <ApprovalBadge key={status} status={status} />)}</div>

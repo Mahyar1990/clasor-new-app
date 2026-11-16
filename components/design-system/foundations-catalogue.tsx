@@ -34,7 +34,8 @@ export default function FoundationsCatalogue({ children, section = "colors" }: {
     catch { setCopied(""); setMessage(`کپی خودکار در دسترس نیست؛ کد ${value} را انتخاب و کپی کنید.`); }
   }
   return (
-    <div data-test-id="foundations-catalogue-div-1" lang="fa" dir="rtl" className={cn("clasor", glass.canvas, catalogueLayout)}>
+    <div data-test-id="foundations-catalogue-div-1" lang="fa" dir="rtl" className={cn("clasor relative isolate", glass.canvas, catalogueLayout)}>
+      <div data-test-id="catalogue-glass-backdrop" aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden opaque:hidden! forced-colors:hidden!"><div data-test-id="catalogue-glass-purple" className="absolute -top-32 start-0 size-[36rem] rounded-full bg-purple-300/50 blur-3xl" /><div data-test-id="catalogue-glass-blue" className="absolute top-1/3 end-0 size-[40rem] rounded-full bg-blue-300/30 blur-3xl" /></div>
       <a data-test-id="foundations-catalogue-a-2" className="skip" href="#catalogue-content">رفتن به محتوای اصلی</a>
       <TooltipProvider><SidebarProvider style={{ "--sidebar-width": "232px", "--sidebar-width-icon": "64px" } as CSSProperties}>
         <CatalogueSidebar activeSection={section} />

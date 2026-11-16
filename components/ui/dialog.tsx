@@ -3,6 +3,7 @@
 import { glass } from "@/lib/design-system/classes";
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
+import { usePortalTheme } from "@/hooks/use-portal-theme";
 import { cn } from "cn"
 
 import { Button } from "@/components/ui/button"
@@ -16,8 +17,9 @@ function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
   return <DialogPrimitive.Trigger data-test-id="dialog-dialogprimitive-trigger-1" data-slot="dialog-trigger" {...props} />
 }
 
-function DialogPortal({ ...props }: DialogPrimitive.Portal.Props) {
-  return <DialogPrimitive.Portal data-test-id="dialog-dialogprimitive-portal-2" data-slot="dialog-portal" {...props} />
+function DialogPortal({ className, themeAnchorRef, ...props }: DialogPrimitive.Portal.Props & { themeAnchorRef?: React.RefObject<HTMLElement | null> }) {
+  const theme = usePortalTheme(themeAnchorRef);
+  return <DialogPrimitive.Portal className={cn(theme, className)} data-test-id="dialog-dialogprimitive-portal-2" data-slot="dialog-portal" {...props} />
 }
 
 function DialogClose({ ...props }: DialogPrimitive.Close.Props) {
@@ -39,18 +41,20 @@ function DialogOverlay({
 
 function DialogContent({
   className,
+  themeAnchorRef,
   children,
   showCloseButton = true,
   ...props
 }: DialogPrimitive.Popup.Props & {
+  themeAnchorRef?: React.RefObject<HTMLElement | null>
   showCloseButton?: boolean
 }) {
   return (
-    <DialogPortal>
+    <DialogPortal themeAnchorRef={themeAnchorRef}>
       <DialogOverlay />
       <DialogPrimitive.Popup data-test-id="dialog-dialogprimitive-popup-5"
         data-slot="dialog-content"
-        className={cn("fixed top-1/2 start-1/2 z-[var(--z-dialog)] grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-[var(--clasor-motion-normal)] outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className, glass.panel)}
+        className={cn("fixed top-1/2 start-1/2 z-[var(--z-dialog)] grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-[var(--clasor-motion-normal)] outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", glass.floating, className)}
         {...props}
       >
         {children}

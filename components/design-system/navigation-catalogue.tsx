@@ -1,5 +1,7 @@
 "use client"
 import { useState } from "react"
+import { GlassFeedbackStatesCatalogue } from "./glass-status-feedback-catalogue";
+import { GlassLayerStatesCatalogue } from "./glass-layer-states-catalogue";
 import { Info } from "lucide-react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
 import { RepositoryDialogsCatalogue } from "@/components/design-system/repository-dialogs-catalogue";
@@ -35,6 +37,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
     </>}
     {section === "feedback" && <>
     <SectionTitle id="feedback" title="بازخورد" number="10" />
+    <GlassFeedbackStatesCatalogue />
     <div data-test-id="navigation-catalogue-div-3" className="grid gap-4 lg:grid-cols-2">{(["success", "warning", "error", "info"] as const).map(tone => <Feedback key={tone} tone={tone} title={{ success: "نمونه موفقیت", warning: "نیاز به بررسی", error: "انجام نشد", info: "اطلاعات بیشتر" }[tone]} description="این پیام نمونه است. جزئیات را بررسی کنید و سپس ادامه دهید." dataRetained={tone === "error" ? true : undefined} />)}</div>
     <div data-test-id="navigation-catalogue-div-4" className="grid gap-4 lg:grid-cols-2">
       <SystemState state={{ kind: "empty", title: "هنوز سندی نیست", description: "پس از افزودن سند، فهرست اینجا نمایش داده می‌شود." }} onRecovery={() => log("نمونه افزودن سند")} />
@@ -46,6 +49,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
     </>}
     {section === "overlays" && <>
     <SectionTitle id="overlays" title="لایه و پیام" number="11" />
+    <GlassLayerStatesCatalogue />
     <GlassOptionsCatalogue />
     <RepositoryDialogsCatalogue />
     <Sample title="تصمیم روشن، بازگشت به زمینه" description="Escape و انصراف فوکوس را برمی‌گردانند؛ کلیک بیرون تأیید مخرب را نمی‌بندد.">

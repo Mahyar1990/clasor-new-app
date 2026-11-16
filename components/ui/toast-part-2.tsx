@@ -1,5 +1,6 @@
 "use client";
 
+import { glass } from "@/lib/design-system/classes";
 import * as React from "react";
 import { Toast as ToastPrimitive } from "@base-ui/react/toast";
 import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "lucide-react";
@@ -10,25 +11,25 @@ export function ToastIcon({ type }: { type: string | undefined }) {
 
   if (type === "success") {
     icon = (
-      <CircleCheckIcon className="text-success" aria-hidden="true" />
+      <CircleCheckIcon className="text-current" aria-hidden="true" />
     )
   }
 
   if (type === "info") {
     icon = (
-      <InfoIcon className="text-info" aria-hidden="true" />
+      <InfoIcon className="text-current" aria-hidden="true" />
     )
   }
 
   if (type === "warning") {
     icon = (
-      <TriangleAlertIcon className="text-warning" aria-hidden="true" />
+      <TriangleAlertIcon className="text-current" aria-hidden="true" />
     )
   }
 
   if (type === "error") {
     icon = (
-      <OctagonXIcon className="text-destructive" aria-hidden="true" />
+      <OctagonXIcon className="text-current" aria-hidden="true" />
     )
   }
 
@@ -55,8 +56,9 @@ export function ToastIcon({ type }: { type: string | undefined }) {
 export function ToastList() {
   const { toasts } = ToastPrimitive.useToastManager()
 
+  const tones: Record<string, string> = { success: glass.statusSuccess, info: glass.statusInfo, warning: glass.statusWarning, error: glass.statusDanger };
   return toasts.map((toastItem) => (
-    <Toast key={toastItem.id} toast={toastItem} dir="rtl" data-tone={toastItem.type ?? "default"}>
+    <Toast key={toastItem.id} toast={toastItem} dir="rtl" data-tone={toastItem.type ?? "default"} className={`${toastItem.type ? tones[toastItem.type] ?? "" : ""} ${glass.toastSurface}`}>
       <ToastContent>
         <ToastIcon type={toastItem.type} />
         <div data-test-id={`toast-part-2-div-2-${String(toastItem.id)}`} className="flex min-w-0 flex-1 flex-col gap-1">

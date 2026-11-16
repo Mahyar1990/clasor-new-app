@@ -50,9 +50,9 @@
         "UX24"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Glass icon buttons share the reflective emblem surface. Preserve focus, hover/press, disabled states and opaque/forced-color fallbacks.",
+        "rule": "Shared primary, secondary, ghost, destructive and emblem contracts; retain focus, disabled and opaque fallbacks.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -94,9 +94,9 @@
         "UX15"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Visible 40% white idle field, 10% in dark mode, purple focus and semantic error; readonly remains selectable.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -129,9 +129,9 @@
         "UX03"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Glass trigger and floating portal with local theme; Base UI owns keyboard and form behavior.",
         "reactSource": "components/ui",
         "popupPreset": "floating"
       },
@@ -170,9 +170,9 @@
         "UX22"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Reflective checkbox/radio and switch track/thumb; selected and mixed states remain distinct in solid and forced colors.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -207,9 +207,9 @@
         "UX15"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Glass picker and local file summary; preserve validation, clear action and file-selection semantics.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -253,9 +253,9 @@
         "UX20"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Translucent semantic tint and text; approval, visibility, role and version remain independent.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -290,9 +290,9 @@
         "UX23"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Identity keeps its existing avatar behavior; GlassEmblem supplies glass tile/avatar surfaces demonstrated in the layout catalogue with dark and opaque fallbacks.",
+        "rule": "Avatar fallback and decorative tiles share GlassEmblem; images and accessible identity naming remain intact.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -333,7 +333,7 @@
       "material": {
         "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "The segmented variant uses shared glass rail and active-surface contracts, with opaque and contrast fallbacks; line retains its minimal underline treatment.",
+        "rule": "Default glass rail, line tabs with subtle selection, or segmented reflective rail; Base UI owns RTL keys.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -366,9 +366,9 @@
         "UX08"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "text",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Text links preserve hierarchy and current-page semantics; no decorative panel is required.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -400,9 +400,9 @@
       ],
       "auditIssueRefs": [],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Shared glass buttons and a distinct current page; this standalone example does not paginate workspace lists.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -443,9 +443,9 @@
         "UX09"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Shared table-contract.ts and classes.ts own flexible content, 112px metadata, 76px single actions and 16px inline cell padding. Custom multiple actions default to 128px. Glass operation triggers and document examples appear in both data and layout catalogues.",
+        "rule": "Glass wrapper and toolbar; data rows remain opaque by default, with optional glass appearance. Do not add per-cell blur.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -487,7 +487,7 @@
           "chrome",
           "floating"
         ],
-        "rule": "RowActionMenu uses the glass icon-button surface. GlassOptionsMenu adds record headings, reflective icons, nested options, disabled and destructive items through Base UI menus. Dashboard and overlays/layout catalogue share the component; preserve focus, local dark portals and accessibility opt-outs.",
+        "rule": "Shared frosted or liquid portal; compact menu and submenu preserve local theme, focus and disabled reasons.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -527,9 +527,9 @@
         "UX21"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Shared semantic glass tint, icon and explicit status text; never rely on color alone.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -568,9 +568,9 @@
         "UX17"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Shared panel and visible status/recovery action, preserving distinct empty, denied, partial and error outcomes.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -603,9 +603,9 @@
       ],
       "auditIssueRefs": [],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Native labeled progress with glass track/value; skeletons use a translucent highlight without backdrop blur per row.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -643,9 +643,9 @@
         "UX20"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "floating",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Shared floating frame and backdrop; compact liquid variant, section/footer and confirmations retain Base UI focus behavior.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -678,9 +678,9 @@
         "UX07"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "floating",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Floating glass sheet preserves local theme, RTL edge, scroll containment and focus restoration.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -713,9 +713,9 @@
         "UX21"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "floating",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Floating glass with semantic text/icon/border after the base surface; stronger dark tint protects labels over light pages.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -749,9 +749,9 @@
         "UX12"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "floating",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Glass floating surface; HelpTooltip resolves local theme from its trigger for focus and hover.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -788,9 +788,9 @@
         "UX24"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Render the existing shared button or menu for the supplied permission result; material never changes authorization.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -827,9 +827,9 @@
         "UX19"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Reflective current/complete/pending indicators and shared buttons; continue never commits implicitly.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {
@@ -862,9 +862,9 @@
         "UX23"
       ],
       "material": {
-        "preset": "solid",
+        "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Use solid inside another glass region; never blur rows, field interiors or reading content.",
+        "rule": "Glass property groups and shared identity/status components preserve independent decision metadata.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {

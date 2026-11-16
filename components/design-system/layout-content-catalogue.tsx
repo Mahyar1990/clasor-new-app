@@ -1,5 +1,6 @@
 "use client";
 
+import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { AppLayout } from "@/components/ui/AppLayout";
 import { SolidDataTable, type SolidColumn } from "@/components/ui/SolidDataTable";
@@ -48,23 +49,23 @@ export function LayoutContentCatalogue() {
       </p>
       <GlassCard as="div" data-test-id="catalogue-glass-card" className="mb-4 flex flex-wrap items-center gap-4 p-3 text-sm">
         <label data-test-id="catalogue-caption-label" className="flex min-h-11 cursor-pointer items-center gap-2">
-          <input type="checkbox" checked={hideCaption} onChange={event => setHideCaption(event.target.checked)} data-test-id="catalogue-caption-toggle" className="size-4 accent-primary" />
+          <Checkbox checked={hideCaption} onCheckedChange={checked => setHideCaption(checked)} data-test-id="catalogue-caption-toggle" aria-label="پنهان کردن عنوان بالای جدول" />
           پنهان کردن عنوان بالای جدول
         </label>
         <label data-test-id="catalogue-compact-label" className="flex min-h-11 cursor-pointer items-center gap-2">
-          <input type="checkbox" checked={compact} onChange={event => setCompact(event.target.checked)} data-test-id="catalogue-compact-toggle" className="size-4 accent-primary" />
+          <Checkbox checked={compact} onCheckedChange={checked => setCompact(checked)} data-test-id="catalogue-compact-toggle" aria-label="چیدمان جمع‌وجور" />
           چیدمان جمع‌وجور
         </label>
         <label data-test-id="catalogue-glass-table-label" className="flex min-h-11 cursor-pointer items-center gap-2">
-          <input type="checkbox" checked={glassTable} onChange={event => setGlassTable(event.target.checked)} data-test-id="catalogue-glass-table-toggle" className="size-4 accent-primary" />
+          <Checkbox checked={glassTable} onCheckedChange={checked => setGlassTable(checked)} data-test-id="catalogue-glass-table-toggle" aria-label="ردیف‌های شیشه‌ای جدول" />
           ردیف‌های شیشه‌ای جدول
         </label>
         <label data-test-id="layout-content-catalogue-label-5" className="flex min-h-11 cursor-pointer items-center gap-2">
-          <input type="checkbox" checked={dark} onChange={event => setDark(event.target.checked)} data-test-id="catalogue-solid-dark" className="size-4 accent-primary" />
+          <Checkbox checked={dark} onCheckedChange={checked => setDark(checked)} data-test-id="catalogue-solid-dark" aria-label="نمایش فرم و جدول در حالت تاریک" />
           نمایش فرم و جدول در حالت تاریک
         </label>
         <label data-test-id="layout-content-catalogue-label-7" className="flex min-h-11 cursor-pointer items-center gap-2">
-          <input type="checkbox" checked={disabled} onChange={event => setDisabled(event.target.checked)} data-test-id="catalogue-solid-disabled" className="size-4 accent-primary" />
+          <Checkbox checked={disabled} onCheckedChange={checked => setDisabled(checked)} data-test-id="catalogue-solid-disabled" aria-label="غیرفعال کردن فرم" />
           غیرفعال کردن فرم
         </label>
       </GlassCard>

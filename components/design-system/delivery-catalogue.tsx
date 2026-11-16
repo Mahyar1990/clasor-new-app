@@ -27,7 +27,7 @@ export default function DeliveryCatalogue({ section = "accessibility" }: { secti
           <pre data-test-id={`delivery-catalogue-pre-44-${String(component.id)}`} dir="ltr" className="whitespace-pre-wrap break-all rounded-md border bg-muted p-4 text-start text-xs"><code data-test-id={`delivery-catalogue-code-45-${String(component.id)}`}>{component.example}</code></pre>
         </div>
       </details>)}</div>
-      <p data-test-id="delivery-catalogue-p-46" className="text-xs leading-body text-muted-foreground">محدوده: سیستم طراحی روشن و فارسی. تم تیره، مجوز قطعی، اتصال سرویس، آپلود و انتشار محصول خارج از این تحویل‌اند. جزئیات تفاوت‌های مرجع در گزارش‌های lib/design-system ثبت شده‌اند.</p>
+      <p data-test-id="delivery-catalogue-p-46" className="text-xs leading-body text-muted-foreground">محدوده: سیستم طراحی فارسی با نمونه‌های روشن و تاریک. مجوز قطعی، اتصال سرویس، آپلود و انتشار محصول خارج از این تحویل‌اند؛ پذیرش انسانی صفحه‌خوان و کنتراست همه ترکیب‌ها هنوز تأیید نشده است. جزئیات تفاوت‌های مرجع در گزارش‌های lib/design-system ثبت شده‌اند.</p>
     </Sample>
     </>}
   </div>
