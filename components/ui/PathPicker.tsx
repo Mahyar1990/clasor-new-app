@@ -20,7 +20,7 @@ export function PathPicker({ nodes, value, onValueChange }: { nodes: PathNode[];
       </BreadcrumbList>
     </Breadcrumb>
     <p data-test-id="path-picker-selected" role="status" className="text-xs text-muted-foreground">مقصد انتخاب‌شده: {path.at(-1)?.name ?? "ریشهٔ مخزن"}</p>
-    <div data-test-id="path-picker-children" className={`${glass.panel} space-y-1 p-1`}>
+    <div data-test-id="path-picker-children" className={`${glass.contentSurface} space-y-1 p-1`}>
       {path.length > 0 && <Button data-test-id="path-picker-up" type="button" variant="ghost" size="sm" onClick={() => onValueChange(value.slice(0, -1))}>بازگشت به سطح قبل</Button>}
       {level.map(node => <Button data-test-id={`path-picker-node-${node.id}`} key={node.id} type="button" variant="ghost" className="w-full justify-start text-xs" onClick={() => onValueChange([...value, node.id])}><FolderOpen aria-hidden="true" />{node.name}<ChevronLeft aria-hidden="true" className="ms-auto" /></Button>)}
       {!level.length && <p data-test-id="path-picker-empty" className="p-3 text-xs text-muted-foreground">این دسته زیردسته‌ای ندارد.</p>}

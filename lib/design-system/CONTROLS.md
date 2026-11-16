@@ -1,3 +1,9 @@
+## Library controls — 2026/11/16
+
+`MultiSortEditor` accepts field options, ordered SortRules and onValueChange. Criteria are unique, independently ascending/descending and keyboard-reorderable with up/down buttons. A stable optional rule ID preserves control identity when changing its field. The Clasor composition exposes kind, name, priority, creation date and modification date; an empty criterion list preserves source order.
+
+`SelectField` forwards its explicit data-test-id to the visible trigger, not Base UI's hidden form inputs. Empty-value options display their own label. `Button variant="plain"` supports flat clickable data content while keeping keyboard focus and hover/pressed states. `GlassTile` keeps the main open action separate from its top-end options control. These controls have interactive catalogue examples through app/page.tsx on layout/overlays.
+
 ## Compact attachments - 2026/11/16
 
 AttachmentPicker(value, onValueChange, accept, maxFiles?, maxSizeBytes?, testId) is a controlled, compact composition. Items have stable IDs and File objects; accept is an extension suffix list. It validates the batch before appending, preserves existing items on errors and supports removing/replacing files. Removing returns focus to Add after the controlled value commits. A count, file names/sizes and associated error/help text are exposed; there is no drop-zone-sized card or remote upload.

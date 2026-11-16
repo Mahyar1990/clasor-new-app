@@ -37,7 +37,7 @@ export function DocumentAccess({ blocked = false }: { blocked?: boolean }) {
         <Button data-test-id="doc-access-add" type="submit" disabled={!name.trim()} size="sm">افزودن</Button>
       </form>
     <p data-test-id="doc-access-message" role="status" className="text-xs text-success">{message}</p>
-    <PreviewList testId="doc-access-list" items={records} noun="کاربر" render={person => <div data-test-id={`doc-access-person-${person.id}`} className={`${glass.panel} flex items-center justify-between gap-2 p-2`}>
+    <PreviewList testId="doc-access-list" items={records} noun="کاربر" render={person => <div data-test-id={`doc-access-person-${person.id}`} className={`${glass.contentSurface} flex items-center justify-between gap-2 p-2`}>
       <span data-test-id={`doc-access-person-name-${person.id}`} className="min-w-0 flex-1 wrap-anywhere text-xs">{person.name}</span>
       {!blocked && <div data-test-id={`doc-access-person-role-${person.id}`} className="w-24"><SelectField data-test-id={`doc-access-select-${person.id}`} label="نقش" value={person.role} options={roles} onValueChange={value => setDocument(current => ({ ...current, recipients: current.recipients.map(item => item.id === person.id ? { ...item, role: value } : item) }))} /></div>}
       <Button data-test-id={`doc-access-remove-${person.id}`} variant="destructive-outline" size="sm" onClick={() => push(blocked ? "برداشتن محدودیت" : "حذف دسترسی", <div data-test-id="doc-access-remove-confirm" className="space-y-3"><p data-test-id="doc-access-remove-target" className="text-xs">دسترسی «{person.name}» تغییر کند؟</p><Button data-test-id="doc-access-remove-submit" variant="destructive" onClick={() => { remove(person.id); back(); }}>تأیید</Button></div>)}>حذف</Button>

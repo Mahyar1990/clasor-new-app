@@ -51,7 +51,7 @@ export function SolidDataTable<T>({
         <thead data-test-id="SolidDataTable-thead-4" className={appearance === "glass" ? glass.tableHeader : "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100"}>
           <tr data-test-id={`${testId}-header`}>
             {columns.map(column => (
-              <th data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className={cn(glass.tableCell, "border-b font-bold", appearance === "glass" ? "border-white/50 shadow-[inset_0_-1px_0_rgb(130_90_175/0.08)]" : "border-slate-200 dark:border-slate-700", column.kind === "actions" && glass.tableActionCell)}>
+              <th data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className={cn(glass.tableCell, "border-b font-bold", appearance === "glass" ? "border-white/30" : "border-slate-200 dark:border-slate-700", column.kind === "actions" && glass.tableActionCell)}>
                 {column.label}
               </th>
             ))}

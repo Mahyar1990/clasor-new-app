@@ -1,3 +1,11 @@
+## Independent library pages and compact creation — 2026/11/16
+
+The Clasor sidebar links to `/clasor-pages/my-documents`, `/clasor-pages/shared-documents`, `/clasor-pages/my-repositories`, `/clasor-pages/shared-repositories`, `/clasor-pages/bookmarked-repositories`, `/clasor-pages/archived-repositories` and `/clasor-pages/published-repositories`. Each is a separate route with a shared layout/store and responsive full-width product shell. The dashboard remains its own page. Mobile selection closes the sidebar sheet.
+
+`CreationStepper compact` displays the current stage and count with a small progress track, preserves a screen-reader ordered stage list, supports Back and Cancel, and commits only at the last stage. Creation/filter dialogs capture a stable theme anchor for portals and restore focus. Source flows and local data limits are described in PATTERNS.md.
+
+Next cacheComponents can retain old route DOM in hidden React Activity trees. Browser checks scope record/control selectors to the visible route and wait for both the destination URL and heading after navigation; hidden cached instances are not duplicate visible controls.
+
 ## Header actions - 2026/11/16
 
 GlassModal accepts an optional `themeAnchorRef`, passed to usePortalTheme, to preserve a local theme when focus moves into a portal. Header dialogs use the persistent header group as this anchor. Standard Base UI dismissal/trapping/restoration remains responsible for modal behavior; sign-out supplies a stable fallback after removing its account trigger.

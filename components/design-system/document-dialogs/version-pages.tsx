@@ -19,7 +19,7 @@ export function VersionEditor({ version, clone = false }: { version?: DocumentVe
     event.preventDefault();
     const name = `نسخهٔ ${number.trim()}`;
     if (creating && document.versions.some(item => versionKey(item.name) === versionKey(name) && item.approval === "draft")) { setError("پیش‌نویسی با این شماره وجود دارد؛ آن را ویرایش کنید."); return; }
-    setDocument(current => { const versions = creating ? newDraft(current.versions, name, version?.content ?? "", crypto.randomUUID()) : editDraft(current.versions, version.id, content); return { ...current, versions, content: creating ? current.content : versions.find(item => item.approval === "draft")?.content ?? current.content }; }); back();
+    setDocument(current => { const versions = creating ? newDraft(current.versions, name, version?.content ?? "", crypto.randomUUID()) : editDraft(current.versions, version.id, content); return { ...current, updatedAt: new Date().toISOString(), versions, content: creating ? current.content : versions.find(item => item.approval === "draft")?.content ?? current.content }; }); back();
   }}>
     {creating && <TextField data-test-id="doc-version-number" label="شماره نسخه" value={number} onValueChange={setNumber} error={error} maxLength={40} required />}
     {version?.approval === "approved" && !clone && <p data-test-id="doc-version-edit-note" className="text-xs text-muted-foreground">تغییرات در پیش‌نویس هم‌شماره ذخیره می‌شوند؛ محتوای تأییدشده حفظ می‌شود.</p>}

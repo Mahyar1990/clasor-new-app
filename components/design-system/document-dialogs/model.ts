@@ -4,6 +4,15 @@ export interface DocumentRecipient { id: string; name: string; role: string }
 export interface DocumentVersion { id: string; name: string; content: string; approval: "draft" | "approved"; published: boolean; pending?: boolean; latest?: boolean; creator?: string; editedAt?: string }
 export interface DocumentActivity { id: string; name: string; body: string; kind: "comments" | "questions"; state: "approved" | "pending" | "rejected"; answer?: string }
 export interface DocumentPreview extends DashboardDocument {
+  kind?: "document" | "folder" | "template";
+  contentType?: string;
+  extension?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  parentId?: string;
+  keyId?: string;
+  formType?: string;
+  formDisplay?: string;
   categoryPath?: string[];
   description: string;
   order: number;

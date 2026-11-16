@@ -1,5 +1,6 @@
 "use client";
 
+import { GlassSurfaceContext } from "./glass-surface-context";
 import { cn } from "@/lib/utils";
 import type { ReactElement, ReactNode, RefObject } from "react";
 import { ModalLayerContext } from "@/hooks/use-modal-layer";
@@ -65,7 +66,7 @@ export function GlassModal({
             </Dialog.Close>
           </header>
           <div data-test-id={`${testId}-content`} data-dialog-body className="min-h-0 overflow-y-auto overscroll-contain p-4 md:p-6">
-            <ModalLayerContext.Provider value>{children}</ModalLayerContext.Provider>
+            <ModalLayerContext.Provider value><GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider></ModalLayerContext.Provider>
           </div>
           {footer && <footer data-test-id={`${testId}-footer`} className={glass.dialogFooter}>{footer}</footer>}
         </Dialog.Popup>

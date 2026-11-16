@@ -18,7 +18,7 @@ function ActivityCard({ item, focusRef }: { item: Activity; focusRef: React.RefO
   const replyButton = useRef<HTMLButtonElement>(null);
   const canManage = !document.shared;
   function update(patch: Partial<Activity>) { setDocument(current => ({ ...current, activities: current.activities.map(record => record.id === item.id ? { ...record, ...patch } : record) })); if (patch.state) focusRef.current?.focus(); }
-  return <article data-test-id={`doc-activity-${item.id}`} className={`${glass.panel} space-y-3 p-3`}>
+  return <article data-test-id={`doc-activity-${item.id}`} className={`${glass.contentSurface} space-y-3 p-3`}>
     <p data-test-id={`doc-activity-author-${item.id}`} className="text-xs font-semibold">{item.name}</p>
     <p data-test-id={`doc-activity-body-${item.id}`} className="whitespace-pre-wrap wrap-anywhere text-xs leading-relaxed">{item.body}</p>
     {item.answer && <div data-test-id={`doc-activity-answer-${item.id}`} className="rounded-lg border border-white/40 bg-white/15 p-2 text-xs leading-relaxed">پاسخ: {item.answer}</div>}

@@ -1,3 +1,26 @@
+## Library pages and surface grouping — 2026/11/16
+
+The dashboard and seven standalone library pages share the in-memory `LibraryProvider`. Search/filter/sort and active folders belong to each page; record mutations remain shared during client navigation. Reload resets mock data. No account mutation, real upload, backend storage or persistent encryption was introduced.
+
+Document search supports normalized Persian/Arabic letters and digits, title/content mode and current-category/all-repository scope. Filters combine kind, content type, every selected tag, template and bookmark; removable chips expose active constraints. Folder kind disables irrelevant content-type/template options. Filtering and sorting reset/cancel cumulative loads; lists append 10 records with skeletons and preserve existing nodes. Repository lists use compact square GlassTile cards, search and tile-shaped loading skeletons. Ownership/shared/archive/published scopes are distinct.
+
+Ordered multi-sort supports kind (folder/document), name, numeric priority, created date and modified date, with independent directions and stable ties. The default is kind, priority, name. Folder breadcrumbs support drill-down; moving excludes self/descendants and deleting a category handles descendants locally.
+
+Source public Clasor UI was inspected read-only. The local creation compositions follow these stage sequences:
+
+| Creation | Stages |
+| --- | --- |
+| Classic document | Type → title/description/priority → template → encryption key → version name |
+| File / Office document | Type (Office subtype/extension) → title/description/priority → version name |
+| Form document | Type → title/description/priority → form configuration → version name |
+| Template | Classic type → title/description/priority → version name |
+| Category | Title/description/priority → review |
+| Repository | Title/description → member POD IDs and individual roles → tags → optional image |
+
+The category review is an intentional compact step added for the requested stepped UX. Unlike the source's early repository creation, these previews commit atomically at the final stage, so cancellation leaves no partial record. New documents get one named draft and no invented approval history. Template content is copied only when selected; content editing stays in its separate dialog. Repositories start with an owner and the explicitly entered members.
+
+Same-number version snapshots share one RecordGroup heading and compact side-by-side draft/approved cells with independent menus. Public remains a label on approved state; independent snapshot content and actions remain intact. Groups, form sections, tags and file summaries are flat content on one glass master rather than nested glass panes. Independent examples for these patterns, filters, multi-sort, tiles and creation flows are rendered by app/page.tsx on layout/overlays.
+
 ## Header source mapping - 2026/11/16
 
 Read-only inspection of the available public Clasor frontend mapped the header controls to these fields and actions:

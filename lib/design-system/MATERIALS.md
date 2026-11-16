@@ -1,3 +1,11 @@
+## Surface hierarchy — 2026/11/16
+
+Apple's [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/) recommends avoiding stacked glass and grouping content with spacing. This revision keeps one glass shell per surface and flattens its content. This is a web interpretation, not native optical rendering.
+
+`GlassCard surface="auto"` reads `GlassSurfaceContext`: an outer card uses `glass.panel`; a nested card uses `glass.contentSurface` (no backdrop blur or drop shadow). `surface="glass"` and `surface="content"` are explicit overrides. Modal, sheet, alert-dialog, sidebar inset and product/workspace/wireframe shells establish context. Portals retain the existing local theme behavior.
+
+`DialogSection` uses spacing and separators. Record groups, table headings, selected-file summaries, tags, approval context and content emblems use restrained flat tint rather than another glass pane. Menus keep one 30% tint/12px blur surface and a plain separated header; labels no longer have individual glass pills. Fields, interactive controls and the approved tab bar retain their own visibility/focus contracts. Inner emblems use `insetEmblem`; standalone emblems retain their glass relief. Earlier descriptions of nested graduated headers or label pills below are historical and superseded by this section.
+
 ## iPhone-inspired controls - 2026/11/16
 
 The button/icon review used Apple's [Materials](https://developer.apple.com/design/human-interface-guidelines/materials), [Buttons](https://developer.apple.com/design/human-interface-guidelines/buttons) and [Liquid Glass introduction](https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/). The implemented web interpretation uses a brighter top edge, subtle inner rim, restrained depth and clear foreground symbols; it does not reproduce Apple's real-time native optical rendering.

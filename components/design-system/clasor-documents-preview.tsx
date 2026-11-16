@@ -7,7 +7,6 @@ import { AppLayout } from "@/components/ui/AppLayout";
 import { ClasorDashboardSidebar } from "@/components/design-system/clasor-dashboard-sidebar";
 import { ClasorDashboardDocuments } from "@/components/design-system/clasor-dashboard-documents";
 import { ClasorDashboardRepositories } from "@/components/design-system/clasor-dashboard-repositories";
-import { dashboardDocuments, dashboardRepositories } from "@/components/design-system/clasor-dashboard-data";
 
 export function ClasorDashboardPreview() {
   return <section data-test-id="clasor-documents-preview" aria-label="نمونه داشبورد کلاسور" className={dashboardViewport}>
@@ -20,8 +19,8 @@ export function ClasorDashboardPreview() {
           </div>
         </div>
         <div data-test-id="dashboard-content" className="grid min-h-0 min-w-0 gap-3 xl:flex-1 xl:grid-cols-2 xl:grid-rows-1">
-          <ClasorDashboardDocuments documents={dashboardDocuments} />
-          <ClasorDashboardRepositories repositories={dashboardRepositories} />
+          <ClasorDashboardDocuments />
+          <ClasorDashboardRepositories />
         </div>
       </AppLayout>
   </section>;

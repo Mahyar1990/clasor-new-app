@@ -1,4 +1,4 @@
-import { glass } from "@/lib/design-system/classes";
+import { GlassCard } from "./GlassCard";
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"
@@ -25,10 +25,10 @@ function Alert({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
   return (
-    <div data-test-id="alert-div-1"
+    <GlassCard as="div" data-test-id="alert-div-1"
       data-slot="alert"
       role="alert"
-      className={cn(glass.panel, alertVariants({ variant }), className)}
+      className={cn(alertVariants({ variant }), className)}
       {...props}
     />
   )

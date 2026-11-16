@@ -6,6 +6,7 @@ export interface PreviewRecord { id: string; name: string; role?: string; detail
 export interface RepositoryPreview {
   id: string;
   imageType?: string;
+  tags?: string[];
   name: string; description: string; image: string; role: PreviewRole; bookmarked: boolean; archived: boolean; deleted: boolean; left: boolean; published: boolean;
   members: PreviewRecord[]; groups: PreviewRecord[]; files: PreviewRecord[]; keys: PreviewRecord[]; requests: PreviewRecord[];
   joinLinks: { id: string; role: string; url: string; password: string; expiresAt: string }[];

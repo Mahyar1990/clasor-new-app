@@ -40,7 +40,7 @@ export function TagPicker({ label, value, options, onValueChange, testId, disabl
         </Badge>)}
         {!value.length && <p data-test-id={`${testId}-empty`} className="text-xs text-muted-foreground">برچسبی انتخاب نشده است.</p>}
       </div>
-      <div data-test-id={`${testId}-options`} className={`${glass.panel} grid max-h-48 gap-1 overflow-y-auto p-2 sm:grid-cols-2`} role="group" aria-label="برچسب‌های موجود">
+      <div data-test-id={`${testId}-options`} className={`${glass.contentSurface} grid max-h-48 gap-1 overflow-y-auto p-2 sm:grid-cols-2`} role="group" aria-label="برچسب‌های موجود">
         {available.map(tag => <label data-test-id={`${testId}-option-${tag}`} key={tag} className={`${glass.navigation} flex min-h-11 cursor-pointer items-center gap-2 px-2 text-xs`}>
           <Checkbox data-test-id={`${testId}-check-${tag}`} aria-label={tag} disabled={disabled} checked={value.includes(tag)} onCheckedChange={() => toggle(tag)} />{tag}
         </label>)}

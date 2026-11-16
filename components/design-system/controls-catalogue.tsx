@@ -1,7 +1,6 @@
 "use client"
 
-import { cn } from "@/lib/utils";
-import { glass } from "@/lib/design-system/classes";
+import { GlassCard } from "@/components/ui/GlassCard";
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import { MousePointer2, SlidersHorizontal, UsersRound, Plus, Trash2, Download, ArrowLeft, Save } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -19,10 +18,10 @@ import { GlassStatusStatesCatalogue } from "./glass-status-feedback-catalogue";
 import { Identity } from "@/components/ui/identity"
 
 function Sample({ title, description, children }: { title: string; description: string; children: ReactNode }) {
-  return <section data-test-id="controls-catalogue-section-1" className={cn("min-w-0 overflow-hidden rounded-lg border border-white/40 bg-white/30 shadow-sm backdrop-blur-md", glass.panel)}>
+  return <GlassCard data-test-id="controls-catalogue-section-1" className="min-w-0 overflow-hidden">
     <header data-test-id="controls-catalogue-header-2" className="border-b px-5 py-4"><h3 data-test-id="controls-catalogue-h3-3" className="text-sm font-medium">{title}</h3><p data-test-id="controls-catalogue-p-4" className="mt-1 text-xs leading-body text-muted-foreground">{description}</p></header>
     <div data-test-id="controls-catalogue-div-5" className="space-y-6 p-5 sm:p-6">{children}</div>
-  </section>
+  </GlassCard>
 }
 function SectionTitle({ id, title, description, number, children }: { id: string; title: string; description: string; number: string; children: ReactNode }) {
   return <div data-test-id="controls-catalogue-div-6" id={id} className="mb-5 flex scroll-mt-6 items-center gap-3 border-t pt-8">

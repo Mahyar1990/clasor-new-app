@@ -3,6 +3,7 @@
 import { glass } from "@/lib/design-system/classes";
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
+import { GlassSurfaceContext } from "./glass-surface-context";
 import { usePortalTheme } from "@/hooks/use-portal-theme";
 import { cn } from "cn"
 
@@ -57,7 +58,7 @@ function DialogContent({
         className={cn("fixed top-1/2 start-1/2 z-[var(--z-dialog)] grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-sm text-popover-foreground ring-1 ring-foreground/10 duration-[var(--clasor-motion-normal)] outline-none sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", glass.floating, className)}
         {...props}
       >
-        {children}
+        <GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider>
         {showCloseButton && (
           <DialogPrimitive.Close data-test-id="dialog-dialogprimitive-close-6"
             data-slot="dialog-close"

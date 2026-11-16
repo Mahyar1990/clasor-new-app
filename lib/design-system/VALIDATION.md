@@ -1,3 +1,15 @@
+## Flat surfaces and independent library pages — 2026/11/16
+
+Evidence: working tree on `feat/clasor-library-pages-and-flat-surfaces`, based on `eb94c0f`.
+
+- ui:check passed for 204 React files; lint and TypeScript passed. All 37 workspace, preview-version and library logic tests passed, including 7 new query/tree/repository tests. Documentation links, specification index and diff whitespace checks passed.
+- Browser checks passed on all seven library routes: visible active navigation, source-aligned document/template/category/repository creation, wizard Back retaining fields, template-content copy, atomic final creation, folder drill-down and all-category scope, search normalization, filter Apply/Cancel/chips, five-criterion sort and reorder, my/shared restrictions, square repository tiles and archive/restore state across navigation.
+- Same-number draft/approved snapshots were checked side by side with independent actions and no nested backdrop filter. Catalogue nested surfaces, creation/filter/select dark portals, focus restoration, solid mode, forced colors, reduced motion, 320/390px overflow, mobile multi-sort and mobile navigation passed. Workspace regression smoke passed; no runtime errors occurred in these checks.
+- The shared Select wrapper now forwards explicit test IDs to visible controls. Tests scope selectors to the visible route because cacheComponents retains previous pages in hidden Activity trees. This matches the installed Next documentation and is not treated as a framework defect.
+- npm run build was attempted during this request and hit the already reported Turbopack internal CSS worker port-bind permission failure. A successful production build is not claimed. The final feedback audit retained no new qualifying Next issue beyond that known environment limitation.
+
+Apple source references and implemented material hierarchy are in MATERIALS.md; source field/stage mapping and local state limits are in PATTERNS.md. Browser scripts and captures remain outside the repository. These checks do not establish human screen-reader or complete accessibility acceptance; no source-account write occurred.
+
 ## Refined glass header controls - 2026/11/16
 
 Evidence: working tree on `feat/refined-glass-header-controls`, based on `c563e58`.

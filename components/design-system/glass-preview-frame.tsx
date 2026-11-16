@@ -1,5 +1,6 @@
 "use client";
 
+import { GlassSurfaceContext } from "@/components/ui/glass-surface-context";
 import { useState, type ReactNode } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,7 +16,7 @@ export function GlassPreviewFrame({ title, testId, children }: { title: string; 
       </Button>
     </header>
     <div data-test-id={`${testId}-stage`} className={`${dark ? "dark scheme-dark bg-slate-950/80 text-slate-100" : "scheme-light bg-linear-to-br from-purple-200/40 to-sky-200/40"} min-w-0 space-y-5 p-4 sm:p-5`}>
-      {children}
+      <GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider>
     </div>
   </section>;
 }

@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost: `${glass.control} text-primary`,
         destructive: glass.destructive,
         "destructive-outline": glass.destructiveOutline,
+        plain: "border-transparent bg-transparent text-inherit enabled:hover:bg-white/10",
         link: "border-transparent text-primary underline-offset-4 enabled:hover:underline",
       },
       size: {

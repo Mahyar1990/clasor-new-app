@@ -3,6 +3,7 @@
 import { glass } from "@/lib/design-system/classes";
 import * as React from "react"
 import { Dialog as SheetPrimitive } from "@base-ui/react/dialog"
+import { GlassSurfaceContext } from "./glass-surface-context";
 import { usePortalTheme } from "@/hooks/use-portal-theme";
 import { cn } from "cn"
 
@@ -57,7 +58,7 @@ function SheetContent({
         className={cn("fixed z-[var(--z-dialog)] flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=bottom]:data-ending-style:translate-y-[2.5rem] data-[side=bottom]:data-starting-style:translate-y-[2.5rem] data-[side=left]:inset-y-0 ltr:data-[side=left]:start-0 rtl:data-[side=left]:end-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-e data-[side=left]:data-ending-style:translate-x-[-2.5rem]  data-[side=left]:data-starting-style:translate-x-[-2.5rem]  data-[side=right]:inset-y-0 ltr:data-[side=right]:end-0 rtl:data-[side=right]:start-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-s data-[side=right]:data-ending-style:translate-x-[2.5rem] rtl:data-[side=right]:data-ending-style:-translate-x-[2.5rem] data-[side=right]:data-starting-style:translate-x-[2.5rem] rtl:data-[side=right]:data-starting-style:-translate-x-[2.5rem] data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=top]:data-ending-style:translate-y-[-2.5rem] data-[side=top]:data-starting-style:translate-y-[-2.5rem] data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm", glass.floating, className)}
         {...props}
       >
-        {children}
+        <GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider>
         {showCloseButton && (
           <SheetPrimitive.Close data-test-id="sheet-sheetprimitive-close-6"
             data-slot="sheet-close"

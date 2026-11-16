@@ -10,24 +10,22 @@ import { Button } from "@/components/ui/button";
 import { glass } from "@/lib/design-system/classes";
 
 const groups = [
-  { title: "اسناد شخصی", items: [{ label: "سندهای من", icon: FileText }, { label: "سندهای اشتراکی", icon: Users }] },
-  { title: "مدیریت مخزن‌ها", items: [{ label: "مخزن‌های من", icon: FolderOpen }, { label: "مخزن‌های اشتراکی", icon: Users }, { label: "مخزن‌های نشان‌شده", icon: Bookmark }, { label: "مخزن‌های بایگانی‌شده", icon: Archive }, { label: "مخزن‌های منتشرشده", icon: Share2 }] },
-  { title: "مدیریت", items: [{ label: "مدیریت دامنه", icon: Globe }, { label: "مدیریت سازمانی", icon: Building2 }, { label: "پنل ادمین", icon: ShieldCheck }] },
+  { title: "اسناد شخصی", items: [{ id: "my-documents", label: "سندهای من", icon: FileText }, { id: "shared-documents", label: "سندهای اشتراکی", icon: Users }] },
+  { title: "مدیریت مخزن‌ها", items: [{ id: "my-repositories", label: "مخزن‌های من", icon: FolderOpen }, { id: "shared-repositories", label: "مخزن‌های اشتراکی", icon: Users }, { id: "bookmarked-repositories", label: "مخزن‌های نشان‌شده", icon: Bookmark }, { id: "archived-repositories", label: "مخزن‌های بایگانی‌شده", icon: Archive }, { id: "published-repositories", label: "مخزن‌های منتشرشده", icon: Share2 }] },
+  { title: "مدیریت", items: [{ id: "", label: "مدیریت دامنه", icon: Globe }, { id: "", label: "مدیریت سازمانی", icon: Building2 }, { id: "", label: "پنل ادمین", icon: ShieldCheck }] },
 ];
 
 function DashboardNavigation({ onNavigate, activePage = "dashboard" }: { onNavigate?: () => void; activePage?: string }) {
   return <GlassCard as="div" data-test-id="dashboard-product-sidebar" className="p-2.5">
     <nav data-test-id="dashboard-product-navigation" aria-label="منوی نمونه کلاسور">
-      <Link data-test-id="dashboard-current-page" href="/clasor-pages/dashboard" onClick={onNavigate} aria-current={activePage === "dashboard" ? "page" : undefined} className={`${glass.navigation} ${glass.current} flex min-h-11 md:min-h-8 items-center gap-3 px-3 text-sm text-primary`}>
+      <Link data-test-id="dashboard-current-page" href="/clasor-pages/dashboard" onClick={onNavigate} aria-current={activePage === "dashboard" ? "page" : undefined} className={`${glass.navigation} ${activePage === "dashboard" ? glass.current : ""} flex min-h-11 md:min-h-8 items-center gap-3 px-3 text-sm text-primary`}>
         <LayoutDashboard aria-hidden="true" className="size-5" />داشبورد
       </Link>
       {groups.map(group => <div data-test-id={`dashboard-nav-group-${group.title}`} key={group.title} className="mt-3">
         <p data-test-id={`dashboard-nav-heading-${group.title}`} className="mb-1 px-3 text-xs font-medium text-muted-foreground">{group.title}</p>
         <ul data-test-id={`dashboard-nav-items-${group.title}`} className="space-y-1">
-          {group.items.map(({ label, icon: Icon }) => <li data-test-id={`dashboard-nav-item-${label}`} key={label}>
-            <Button data-test-id={`dashboard-nav-button-${label}`} variant="ghost" disabled title="این صفحه در نمونه‌های بعدی اضافه می‌شود" className="w-full justify-start text-xs disabled:opacity-60">
-              <Icon aria-hidden="true" className="size-4" />{label}
-            </Button>
+          {group.items.map(({ id, label, icon: Icon }) => <li data-test-id={`dashboard-nav-item-${label}`} key={label}>
+            {id ? <Link data-test-id={`dashboard-nav-link-${id}`} href={`/clasor-pages/${id}`} onClick={onNavigate} aria-current={activePage === id ? "page" : undefined} className={`${glass.navigation} ${activePage === id ? glass.current : ""} flex min-h-11 md:min-h-8 items-center gap-3 px-3 text-xs`}><Icon aria-hidden="true" className="size-4" />{label}</Link> : <Button data-test-id={`dashboard-nav-button-${label}`} variant="plain" disabled title="این صفحه در نمونه‌های بعدی اضافه می‌شود" className="w-full justify-start text-xs disabled:opacity-60"><Icon aria-hidden="true" className="size-4" />{label}</Button>}
           </li>)}
         </ul>
       </div>)}

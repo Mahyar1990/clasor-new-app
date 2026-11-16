@@ -3,6 +3,7 @@ const systemColors = "forced-colors:bg-[Canvas]! forced-colors:text-[CanvasText]
 const opaque = `opaque:bg-[var(--glass-fallback)]! opaque:border-input opaque:backdrop-blur-none! ${systemColors}`;
 const interaction = `transition-all duration-200 enabled:hover:-translate-y-0.5 enabled:active:translate-y-0 enabled:hover:shadow-md enabled:hover:shadow-purple-500/20 disabled:translate-y-0 data-disabled:translate-y-0 aria-disabled:translate-y-0 motion-reduce:translate-y-0! ${systemColors}`;
 const panel = `rounded-lg border border-white/40 bg-[var(--glass-fallback)] text-[color:var(--glass-text)] shadow-[0_4px_16px_rgb(65_45_95/0.07),inset_0_1px_0_rgb(255_255_255/0.65)] dark:border-white/25 backdrop-blur-none glass-enabled:bg-[var(--glass-tint)]/30 glass-enabled:backdrop-blur-md ${opaque}`;
+const contentSurface = `shadow-none backdrop-blur-none rounded-lg border border-white/25 bg-white/10 text-[color:var(--glass-text)] dark:border-white/15 dark:bg-white/5 opaque:bg-[var(--glass-fallback)]! opaque:border-input ${systemColors}`;
 const navigation = `rounded-lg border border-transparent transition-all duration-200 hover:bg-white/20 hover:backdrop-blur-md hover:border-white/30 hover:shadow-sm focus-visible:bg-white/20 focus-visible:backdrop-blur-md data-highlighted:bg-white/20 data-highlighted:backdrop-blur-md data-highlighted:border-white/30 data-highlighted:shadow-sm ${opaque}`;
 const active = "bg-white/30 backdrop-blur-md border-white/40 shadow-sm font-medium";
 
@@ -33,27 +34,33 @@ export const glass = {
   destructiveOutline: `border-destructive/45 bg-[var(--glass-fallback)] text-destructive glass-enabled:bg-red-100/30 glass-enabled:backdrop-blur-md shadow-[0_1px_3px_rgb(140_30_50/0.08),inset_0_1px_0_rgb(255_255_255/0.65)] enabled:hover:glass-enabled:bg-red-100/50 dark:text-red-200 dark:border-red-300/40 dark:glass-enabled:bg-red-950/20 dark:enabled:hover:glass-enabled:bg-red-950/40 ${opaque}`,
 
   dialogCompact: "max-h-[min(46rem,calc(100dvh-2rem))] [&_[data-slot=button]]:text-xs [&_[role=tab]]:text-xs [&_[role=combobox]]:text-xs [&_[data-test-id=GlassModal-header-5]>button]:size-8 [--control-height:2.25rem] [&_[data-test-id=GlassModal-header-5]]:gap-3 [&_[data-test-id=GlassModal-header-5]]:p-4 [&_[data-test-id=GlassModal-dialog-title-7]]:text-base [&_[data-test-id=GlassModal-dialog-description-8]]:text-xs [&_[data-dialog-body]]:p-4 [&_[data-slot=input]]:text-xs [&_[data-slot=textarea]]:text-xs [&_label]:text-xs",
-  compactRecord: `${panel} flex items-center gap-2 px-2 py-1.5`,
-  dialogSection: `${panel} bg-white/20 p-3 dark:bg-slate-950/20`,
+  contentSurface,
+  compactRecord: `${contentSurface} flex items-center gap-2 px-2 py-1.5`,
+  dialogSection: "border-t border-white/25 pt-3 first:border-t-0 first:pt-0",
   dialogConfirmation: "fixed w-[calc(100%-2rem)] [&_[data-slot=alert-dialog-title]]:text-base [&_[data-slot=alert-dialog-description]]:text-xs",
   dialogFooter: "flex shrink-0 flex-wrap items-center justify-end gap-2 border-t border-white/40 bg-white/20 p-3 dark:bg-slate-950/25",
   liquidFloating,
+  menuFloating: `${liquidFloating} glass-enabled:bg-[var(--glass-tint)]/30 glass-enabled:backdrop-blur-md`,
   optionsPopup: "w-52 max-w-[calc(100vw-1.5rem)] min-w-48 rounded-lg p-1 text-[11px] leading-4",
   optionsSubPopup: "w-40 min-w-40",
-  optionsHeader: "mb-1 flex items-center gap-2 rounded-lg border border-white/40 bg-white/20 p-1.5 opaque:bg-[var(--glass-fallback)]! forced-colors:bg-[Canvas]! forced-colors:border-[CanvasText]!",
+  optionsHeader: "mb-1 flex items-center gap-2 border-b border-white/25 px-1.5 py-2",
+
   optionItem: "min-h-9 gap-1.5 px-1.5 py-0.5 text-[11px] leading-4 md:min-h-7 [&>svg]:size-3 dark:data-[variant=destructive]:text-red-200",
-  optionLabel: "min-w-0 flex-1 rounded-sm bg-white/20 px-1 py-0.5 text-start font-medium whitespace-normal dark:bg-slate-950/25 opaque:bg-transparent! forced-colors:bg-transparent!",
+  optionLabel: "min-w-0 flex-1 px-1 py-0.5 text-start font-medium whitespace-normal [text-shadow:0_1px_0_rgb(255_255_255/0.25)] dark:[text-shadow:none] opaque:[text-shadow:none]! forced-colors:[text-shadow:none]!",
+
   tableCell: "px-4 py-3 text-start align-middle wrap-anywhere",
   tableActionCell: "px-4 text-end",
   tableActions: "flex max-w-full flex-wrap items-center justify-end gap-2",
   compactLayout: "[--clasor-font-size-14:0.75rem] [--clasor-font-size-16:0.8125rem] [--text-lg:0.875rem] [--clasor-font-size-20:1rem] [--clasor-font-size-24:1.125rem] [--control-height:2.75rem]! md:[--control-height:2rem]! [&_table_th]:py-2 [&_table_td]:py-2 [&_table_caption]:py-2 [&_[data-test-id=layout-header]]:min-h-13 [&_[data-test-id=layout-header]]:gap-3 [&_[data-test-id=layout-header]]:px-4 [&_[data-test-id=layout-header]]:py-2 [&_[data-test-id=GlassHeader-span-3]]:size-8 [&_[data-test-id=GlassHeader-span-3]_svg]:size-5 [&_[data-test-id=layout-main]]:p-3 md:[&_[data-test-id=layout-main]]:p-3",
   panel,
   emblem,
+  insetEmblem: `inline-grid size-11 shrink-0 place-items-center border border-white/35 bg-white/10 font-semibold text-primary shadow-[inset_0_1px_0_rgb(255_255_255/0.5)] dark:border-white/20 dark:text-purple-200 opaque:bg-[var(--glass-fallback)]! opaque:shadow-none! ${systemColors}`,
   iconButton,
   scrollArea: "h-full w-full min-w-0 overflow-x-hidden overflow-y-auto overscroll-contain rounded-lg focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring",
   scrollTrack: `absolute inset-y-1 end-0 flex w-2 rounded-lg border border-white/30 bg-white/10 glass-enabled:backdrop-blur-md ${opaque}`,
   scrollThumb: "w-full min-h-6 rounded-lg border border-white/60 bg-purple-400/60 shadow-[inset_0_1px_0_rgb(255_255_255/0.7),0_1px_3px_rgb(88_58_130/0.15)] hover:bg-purple-500/70 active:bg-purple-500/80 forced-colors:bg-[Highlight]! forced-colors:border-[CanvasText]! forced-colors:shadow-none!",
-  tableHeader: `bg-[var(--glass-fallback)] text-[color:var(--glass-text)] glass-enabled:bg-white/30 glass-enabled:backdrop-blur-md glass-enabled:bg-linear-to-b glass-enabled:from-white/40 glass-enabled:to-purple-200/15 dark:glass-enabled:bg-white/10 dark:glass-enabled:from-white/15 dark:glass-enabled:to-purple-400/10 shadow-[inset_0_1px_0_rgb(255_255_255/0.7),0_1px_3px_rgb(88_58_130/0.08)] opaque:bg-none! ${opaque}`,
+  tableHeader: `bg-white/15 text-[color:var(--glass-text)] dark:bg-white/5 ${systemColors}`,
+
   tableRow: `border-b border-white/40 bg-[var(--glass-fallback)] text-[color:var(--glass-text)] last:border-b-0 glass-enabled:bg-white/10 even:glass-enabled:bg-white/20 hover:glass-enabled:bg-white/40 focus-within:glass-enabled:bg-white/40 dark:glass-enabled:bg-white/5 dark:even:glass-enabled:bg-white/10 dark:hover:glass-enabled:bg-white/20 dark:focus-within:glass-enabled:bg-white/20 transition-colors duration-200 motion-reduce:transition-none ${opaque}`,
   floating: `${panel} dark:glass-enabled:bg-slate-950/65 shadow-[0_24px_48px_rgb(0_0_0/0.2),inset_0_1px_rgb(255_255_255/0.5)]`,
   input: `rounded-md border border-gray-300/40 bg-[var(--glass-fallback)] text-[color:var(--glass-field-text)] shadow-inner backdrop-blur-none transition-all duration-200 glass-enabled:bg-white/40 glass-enabled:backdrop-blur-sm dark:glass-enabled:bg-white/10 enabled:hover:glass-enabled:bg-white/50 dark:enabled:hover:glass-enabled:bg-white/20 focus:glass-enabled:bg-white/50 dark:focus:glass-enabled:bg-white/20 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/50 focus:outline-none aria-invalid:border-[var(--glass-error)]! aria-invalid:ring-2 aria-invalid:ring-[var(--glass-error)]/40 disabled:cursor-not-allowed disabled:opacity-50 ${opaque}`,
