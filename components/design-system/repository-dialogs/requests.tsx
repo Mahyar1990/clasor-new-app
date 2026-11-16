@@ -16,7 +16,7 @@ function RequestList({ kind }: { kind: string }) {
 export function RepositoryRequests({ action }: { action: string }) {
   if (action === "document-requests") return <RequestList kind="access" />;
   if (action === "questions") return <RequestList kind="question" />;
-  return <ClasorTabs label="درخواست‌های مخزن" variant="segmented" defaultValue="draft" items={[
+  return <ClasorTabs label="درخواست‌های مخزن" defaultValue="draft" items={[
     { value: "draft", label: "پیش‌نویس‌های در انتظار تأیید", content: <RequestList kind="draft" /> },
     { value: "version", label: "نسخه‌های در انتظار عمومی شدن", content: <RequestList kind="version" /> },
   ]} />;

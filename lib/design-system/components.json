@@ -311,8 +311,7 @@
       "id": "tabs",
       "previewAnchor": "#navigation",
       "variants": [
-        "line",
-        "segmented"
+        "default"
       ],
       "states": [
         "selected",
@@ -334,7 +333,7 @@
       "material": {
         "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Default glass rail, line tabs with subtle selection, or segmented reflective rail; Base UI owns RTL keys.",
+        "rule": "One shared glass tab list and selected surface, based on the approved default preview. No line or segmented visual variants. Preserve Base UI keyboard navigation, local theme, responsive overflow and opaque fallbacks.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {

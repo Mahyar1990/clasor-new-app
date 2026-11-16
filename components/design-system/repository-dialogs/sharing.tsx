@@ -73,7 +73,7 @@ export function RepositoryPublication() {
 }
 export function RepositorySharing() {
   const { repo } = useRepositoryPreview();
-  return <ClasorTabs label="اشتراک گذاری مخزن" variant="segmented" defaultValue="people" items={[
+  return <ClasorTabs label="اشتراک گذاری مخزن" defaultValue="people" items={[
     { value: "people", label: "اشتراک گذاری", content: <Members /> },
     { value: "groups", label: "گروه‌ها", content: <Members groups /> },
     ...(repo.role !== "ویرایشگر" ? [{ value: "link", label: "لینک", content: <JoinLink data-test-id="repo-join-content" /> }] : []),

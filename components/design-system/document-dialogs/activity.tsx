@@ -53,7 +53,7 @@ export function DocumentActivities({ kind }: { kind: "comments" | "questions" })
       <Button data-test-id="doc-activity-send" type="submit" disabled={!body.trim()}>{kind === "comments" ? "ارسال نظر" : "ارسال پرسش"}</Button>
     </form>
     <p data-test-id="doc-activity-status" role="status" className="text-xs text-success">{message}</p>
-    <ClasorTabs label={kind === "comments" ? "نظرات سند" : "پرسش‌های سند"} variant="segmented" defaultValue="approved" items={[
+    <ClasorTabs label={kind === "comments" ? "نظرات سند" : "پرسش‌های سند"} defaultValue="approved" items={[
       { value: "approved", label: kind === "comments" ? "نظرات" : "پرسش‌ها", content: list("approved") },
       ...(!document.shared ? [{ value: "pending", label: "در انتظار تأیید", content: list("pending") }] : []),
     ]} />
