@@ -1,3 +1,11 @@
+## iPhone-inspired controls - 2026/11/16
+
+The button/icon review used Apple's [Materials](https://developer.apple.com/design/human-interface-guidelines/materials), [Buttons](https://developer.apple.com/design/human-interface-guidelines/buttons) and [Liquid Glass introduction](https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/). The implemented web interpretation uses a brighter top edge, subtle inner rim, restrained depth and clear foreground symbols; it does not reproduce Apple's real-time native optical rendering.
+
+`glassRelief` in classes.ts owns the shared edge/reflection treatment. GlassEmblem retains the 30% panel tint; Button's glass variant uses a lighter 20% control tint. The icon-button contract is separate from emblem geometry, so button sizes no longer inherit a decorative size/grid. Primary and secondary buttons retain their established tint and contrast, with more restrained drop shadows and clearer inset highlights. Pressed/selected, keyboard focus and disabled states remain visible. Solid mode, increased contrast, forced colors and reduced motion retain priority; reflections and glyph shadows disappear when transparency is disabled.
+
+Independent light/dark control examples are on `/design-system/buttons`; header dialog examples are on overlays/layout, and compact attachments are on inputs. The dashboard uses the same contracts.
+
 # Clasor glass contracts
 
 The live catalogue at `/` renders the library in `components/ui`. The old standalone HTML bundle is historical. Product, workspace and wireframe components share the same rules.

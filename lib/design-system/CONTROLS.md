@@ -1,3 +1,9 @@
+## Compact attachments - 2026/11/16
+
+AttachmentPicker(value, onValueChange, accept, maxFiles?, maxSizeBytes?, testId) is a controlled, compact composition. Items have stable IDs and File objects; accept is an extension suffix list. It validates the batch before appending, preserves existing items on errors and supports removing/replacing files. Removing returns focus to Add after the controlled value commits. A count, file names/sizes and associated error/help text are exposed; there is no drop-zone-sized card or remote upload.
+
+The feedback composition uses the source limits: six files, one MiB each; JPG, JPEG, PNG, WEBP, PDF, TXT, MPEG and MP4. A representative interactive example is rendered on the inputs catalogue, including selection, removal, limit and format/size errors.
+
 ## Follow-up controls - 2026/11/16
 
 UploadProgress announces an explicit success status beside the meter at 100%; retry and cancel remain disabled after completion. PathPicker uses the shared Breadcrumb primitives, RTL chevron separators and aria-current on the selected destination. Both updated states are rendered in DialogPatternsCatalogue.

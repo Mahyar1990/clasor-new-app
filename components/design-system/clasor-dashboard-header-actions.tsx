@@ -1,43 +1,47 @@
 "use client";
-
-import { useState } from "react";
-import { ShieldCheck, Bell, MessageSquare, UserRound, LogOut } from "lucide-react";
+import { useLayoutEffect, useRef, useState } from "react";
+import { ShieldCheck, Bell, MessageSquare, UserRound, LogOut, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { GlassModal } from "@/components/ui/GlassModal";
-import { TextareaField } from "@/components/ui/text-field";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-
-const actions = [
-  { id: "admin", label: "پنل ادمین", icon: ShieldCheck },
-  { id: "requests", label: "لیست درخواست‌ها", icon: Bell },
-  { id: "feedback", label: "بازخورد", icon: MessageSquare },
-] as const;
-
-export function ClasorDashboardHeaderActions() {
-  const [opened, setOpened] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState("");
-  const [saved, setSaved] = useState(false);
-  const titles: Record<string, string> = { admin: "پنل ادمین", requests: "لیست درخواست‌ها", feedback: "بازخورد", profile: "اطلاعات کاربر", logout: "خروج از حساب" };
-  return <div data-test-id="dashboard-header-actions" className="flex flex-wrap justify-end gap-1 sm:gap-2">
-    {actions.map(({ id, label, icon: Icon }) => <Button data-test-id={`dashboard-header-${id}`} key={id} variant="glass" size="icon" aria-label={label} title={label} onClick={() => { setOpened(id); setSaved(false); }}><Icon aria-hidden="true" className="size-5" /></Button>)}
-    <DropdownMenu>
-      <DropdownMenuTrigger data-test-id="dashboard-header-user" render={<Button data-test-id="dashboard-header-user" variant="glass" size="icon" aria-label="حساب کاربر" title="حساب کاربر" />}><UserRound aria-hidden="true" className="size-5" /></DropdownMenuTrigger>
-      <DropdownMenuContent dir="rtl" align="end">
-        <DropdownMenuItem data-test-id="dashboard-header-profile" onClick={() => setOpened("profile")}>کاربر نمونه</DropdownMenuItem>
-        <DropdownMenuItem data-test-id="dashboard-header-logout" onClick={() => setOpened("logout")}><LogOut aria-hidden="true" />خروج از حساب</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-    <GlassModal testId="dashboard-header-modal" open={opened !== null} onOpenChange={open => { if (!open) setOpened(null); }} title={titles[opened ?? ""] ?? "حساب کاربر"} description="پیش‌نمایش طراحی با داده‌های ساختگی">
-      {opened === "admin" && <p data-test-id="dashboard-admin-note" className="text-sm leading-body">صفحه پنل ادمین در نمونه‌های بعدی اضافه می‌شود.</p>}
-      {opened === "requests" && <p data-test-id="dashboard-requests-empty" className="text-sm leading-body">درخواستی برای پیوستن به مخزن‌های اشتراکی ندارید.</p>}
-      {opened === "profile" && <div data-test-id="dashboard-profile-details" className="space-y-2 text-sm"><p data-test-id="dashboard-profile-name">نام: کاربر نمونه</p><p data-test-id="dashboard-profile-account">نوع حساب: نمایشی</p></div>}
-      {opened === "logout" && <p data-test-id="dashboard-logout-note" className="text-sm leading-body">این حساب نمایشی است؛ حساب کلاسور شما در سایت اصلی تغییری نمی‌کند.</p>}
-      {opened === "feedback" && <form data-test-id="dashboard-feedback-form" className="space-y-4" onSubmit={event => { event.preventDefault(); setSaved(true); }}>
-        <TextareaField data-test-id="dashboard-feedback-text" label="بازخورد شما" value={feedback} onValueChange={value => { setFeedback(value); setSaved(false); }} rows={4} required />
-        <p data-test-id="dashboard-feedback-note" className="text-xs text-muted-foreground">این فرم فقط برای بررسی تجربه است؛ پیامی به سرویس ارسال نمی‌شود.</p>
-        <Button data-test-id="dashboard-feedback-submit" type="submit" disabled={!feedback.trim() || saved}>ثبت بازخورد نمونه</Button>
-        {saved && <p data-test-id="dashboard-feedback-status" role="status" className="text-sm text-success">بازخورد در همین پیش‌نمایش ثبت شد.</p>}
-      </form>}
-    </GlassModal>
+import { IconButton } from "@/components/ui/icon-button";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup } from "@/components/ui/dropdown-menu";
+import { HeaderDialog, type HeaderDialogKind } from "./header-dialogs/dialog";
+import { useStatusToast } from "@/components/ui/status-toast";
+import { initialHeaderInvitations, type HeaderInvitation } from "./header-dialogs/model";
+export function ClasorDashboardHeaderActions({ initialInvitations, isAdmin = true }: { initialInvitations?: HeaderInvitation[]; isAdmin?: boolean }) {
+  const [opened, setOpened] = useState<{ kind: HeaderDialogKind; trigger: HTMLElement | null } | null>(null);
+  const [items, setItems] = useState(initialInvitations ?? initialHeaderInvitations);
+  const [status, setStatus] = useState("");
+  const [signedOut, setSignedOut] = useState(false);
+  const headerGroup = useRef<HTMLDivElement>(null);
+  const toast = useStatusToast();
+  const userTrigger = useRef<HTMLButtonElement>(null);
+  const focusUser = useRef(false);
+  useLayoutEffect(() => { if (focusUser.current && !signedOut) { focusUser.current = false; userTrigger.current?.focus(); } }, [signedOut]);
+  const pending = items.filter(item => item.state === "pending").length;
+  function open(kind: HeaderDialogKind, origin: HTMLElement | null) { setOpened({ kind, trigger: origin }); setStatus(""); }
+  return <div data-test-id="dashboard-header-actions" ref={headerGroup} tabIndex={-1} className="flex flex-wrap items-center justify-end gap-1.5" role="group" aria-label="ابزارهای حساب کاربر">
+    {isAdmin && !signedOut && <Button data-test-id="dashboard-header-admin" nativeButton={false} render={<a data-test-id="dashboard-header-admin" href="https://clasor.pod.ir/panel-admin-clasor" target="_blank" rel="noreferrer" />} variant="glass" size="icon" aria-label="پنل ادمین کلاسور، بازشدن در تب جدید" title="پنل ادمین · تب جدید"><ShieldCheck aria-hidden="true" /></Button>}
+    {!signedOut && <>
+      <IconButton data-test-id="dashboard-header-requests" variant="glass" aria-label={`لیست درخواست‌ها، ${pending} دعوت`} title="لیست درخواست‌ها" aria-haspopup="dialog" aria-expanded={opened?.kind === "requests"} onClick={event => open("requests", event.currentTarget)}>
+        <Bell aria-hidden="true" />{pending > 0 && <span data-test-id="header-requests-indicator" aria-hidden="true" className="absolute end-1.5 top-1.5 size-1.5 rounded-full bg-purple-600 shadow-[0_0_0_2px_rgb(255_255_255/0.7)] dark:bg-purple-300" />}
+      </IconButton>
+      <IconButton data-test-id="dashboard-header-feedback" variant="glass" aria-label="ارسال نظر و بازخورد" title="بازخورد" aria-haspopup="dialog" aria-expanded={opened?.kind === "feedback"} onClick={event => open("feedback", event.currentTarget)}><MessageSquare aria-hidden="true" /></IconButton>
+      <DropdownMenu>
+        <DropdownMenuTrigger ref={userTrigger} data-test-id="dashboard-header-user" render={<IconButton data-test-id="dashboard-header-user" variant="glass" aria-label="حساب کاربر" title="حساب کاربر" />}><UserRound aria-hidden="true" /></DropdownMenuTrigger>
+        <DropdownMenuContent data-test-id="dashboard-header-account-menu" dir="rtl" align="end" surface="liquid" className="min-w-40 text-xs">
+          <DropdownMenuGroup data-test-id="dashboard-header-account-group">
+          <DropdownMenuLabel data-test-id="dashboard-header-profile" className="text-xs">کاربر نمونه</DropdownMenuLabel>
+          <DropdownMenuSeparator data-test-id="dashboard-header-account-separator" />
+          <DropdownMenuItem data-test-id="dashboard-header-logout" onClick={() => open("logout", userTrigger.current)}><LogOut aria-hidden="true" />خروج از حساب</DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>}
+    {signedOut && <Button data-test-id="dashboard-header-login" variant="outline" size="sm" onClick={() => { focusUser.current = true; setSignedOut(false); setStatus("به پیش‌نمایش خوش آمدید."); }}><LogIn aria-hidden="true" />ورود به پیش‌نمایش</Button>}
+    <span data-test-id="dashboard-header-status" role="status" className="sr-only">{status}</span>
+    {opened && <HeaderDialog key={opened.kind} kind={opened.kind} items={items} trigger={opened.trigger} fallbackFocusRef={headerGroup} close={() => setOpened(null)}
+      onDecision={(id, state) => { setItems(current => current.map(item => item.id === id ? { ...item, state } : item)); if (state === "rejected") toast.show("درخواست پیوستن رد شد."); }}
+      onFeedback={() => { setStatus("بازخورد شما در پیش‌نمایش ثبت شد."); toast.show("بازخورد شما در پیش‌نمایش ثبت شد.", { type: "success" }); setOpened(null); }}
+      onLogout={() => { setSignedOut(true); setOpened(null); setStatus("از حساب نمایشی خارج شدید."); }} />}
   </div>;
 }

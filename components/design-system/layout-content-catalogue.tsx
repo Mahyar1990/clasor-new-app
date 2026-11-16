@@ -8,6 +8,7 @@ import { SolidForm, type SolidFormValues } from "@/components/ui/SolidForm";
 import { CatalogueProfileMenu, GlassOverlayCatalogue } from "@/components/design-system/glass-overlay-catalogue";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { DocumentDialogsCatalogue } from "./document-dialogs-catalogue";
+import { HeaderActionsCatalogue } from "./header-actions-catalogue";
 import { RepositoryDialogsCatalogue } from "@/components/design-system/repository-dialogs-catalogue";
 import { GlassOptionsCatalogue } from "@/components/design-system/glass-options-catalogue";
 import { GlassScrollCatalogue } from "@/components/design-system/glass-scroll-catalogue";
@@ -74,7 +75,7 @@ export function LayoutContentCatalogue() {
         <AppLayout density={compact ? "compact" : "comfortable"} title="نمونه چیدمان کلاسور" contentAs="section" profile={<CatalogueProfileMenu />}>
           <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /><GlassOptionsCatalogue /></div>
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
-            <RepositoryDialogsCatalogue /><DocumentDialogsCatalogue />
+            <HeaderActionsCatalogue /><RepositoryDialogsCatalogue /><DocumentDialogsCatalogue />
             <GlassIdentityCatalogue />
             <GlassScrollCatalogue />
             <DocumentTableCatalogue />

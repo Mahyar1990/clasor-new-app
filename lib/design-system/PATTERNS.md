@@ -1,3 +1,18 @@
+## Header source mapping - 2026/11/16
+
+Read-only inspection of the available public Clasor frontend mapped the header controls to these fields and actions:
+
+| Control | Source structure | Local preview |
+| --- | --- | --- |
+| Invitation list | Repository name, role, reject/accept; accepted state has repository URL/copy and entry action | Fictional independent requests, cumulative batches of ten, decisions retained across reopening; one modal with Back to the list |
+| Feedback | Required content and optional files, six maximum, one MiB each, eight supported extensions | Compact text area and AttachmentPicker, fixed submit/cancel footer, inline validation and local success toast |
+| Account | User name and logout | Labeled dropdown; compact logout confirmation and local guest/resume state |
+| Admin | Navigation to /panel-admin-clasor | Labeled external navigation to Clasor in a new tab |
+
+No feedback subject/email/account-type fields are invented. The account metadata uses fictional identity. No source-account mutation, feedback request or attachment upload is sent. The accepted fixture's URL is under example.com; entry is disabled with an explicit reason until the repository interior has a designed preview. That limitation does not affect the source admin navigation.
+
+Header compositions have independent light/dark and empty-list examples on overlays/layout. Glass controls and attachment selection have independent buttons/inputs catalogue examples. Product-specific state stays in components/design-system/header-dialogs; reusable attachments and material contracts stay in components/ui and classes.ts.
+
 ## Request, file and version follow-up - 2026/11/16
 
 Request rows contain separate sibling controls for opening details and accepting/rejecting a pending request; decision controls also remain in the detail page. Inline decisions retain focus on the row opener.

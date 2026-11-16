@@ -1,3 +1,9 @@
+## Header actions - 2026/11/16
+
+GlassModal accepts an optional `themeAnchorRef`, passed to usePortalTheme, to preserve a local theme when focus moves into a portal. Header dialogs use the persistent header group as this anchor. Standard Base UI dismissal/trapping/restoration remains responsible for modal behavior; sign-out supplies a stable fallback after removing its account trigger.
+
+The account dropdown uses a labeled Menu.Group and the existing user name/logout structure. Header actions have accessible names, dialog expansion state, a pending-invitation indicator and consistent compact glass targets. The admin control preserves the source navigation to the original Clasor admin page in a new tab; it does not open a fabricated settings form.
+
 ## ناوبری داخلی دیالوگ — ۲۰۲۶/۱۱/۱۶
 
 `NavigableGlassModal` قرارداد GlassModal را حفظ می‌کند. فرزندان از `useDialogNavigation()` و توابع `push(title, content, origin?)` و `back()` استفاده می‌کنند. یک پنجره Base UI باقی می‌ماند؛ صفحات قبلی پنهان ولی mounted هستند تا تب، جستجو و فرم حفظ شوند. بازگشت، اسکرول و فوکوس trigger را بازیابی می‌کند؛ برای trigger حذف‌شده عنوان مقصد فوکوس می‌گیرد. Escape و بستن کل پنجره را می‌بندند؛ بازگشت فقط یک سطح را برمی‌گرداند. Base UI مالک focus trap، dismissal و scroll lock باقی می‌ماند.

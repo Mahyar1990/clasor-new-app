@@ -1,3 +1,16 @@
+## Refined glass header controls - 2026/11/16
+
+Evidence: working tree on `feat/refined-glass-header-controls`, based on `c563e58`.
+
+- ui:check passed for 183 React files; lint, TypeScript, documentation links, specification index and whitespace checks passed. All 30 existing workspace/preview-version tests passed.
+- Browser checks covered compact header control geometry, shared rim/reflection layers, the source admin target (not followed), feedback text validation, unsupported/oversized files, six-file limit, removal and focus, local success confirmation, cumulative invitation loading with existing nodes retained, reject/accept, accepted link and Back, retained decisions, logout cancellation and stable fallback focus.
+- Existing repository/document dialog regression checks also passed after the shared button/material change.
+- Widths 320/390, catalogue examples, pressed/disabled/keyboard states, local dark controls and dialog portals, solid mode, forced colors, reduced motion, focus containment, Escape/restoration and empty invitations passed. Tests waited for theme changes and visual transitions before inspecting styles. No runtime error or source-account write occurred in the final checks.
+- The account label was placed inside Menu.Group after an initial runtime check exposed the primitive's required context. Header dialogs now accept a stable theme anchor, preventing local preview themes from being lost when focus moves into portals.
+- npm run build was attempted and hit the previously reported Turbopack internal CSS port-bind permission failure. Production build success is not claimed; the feedback reporting pass retained no new qualifying issue beyond this already reported environment limitation.
+
+Browser captures and scripts remain temporary files outside the repository. These checks are not human screen-reader or complete accessibility acceptance. All feedback/invitation/logout state is a local design preview, not backend integration.
+
 ## Request/file/version follow-up - 2026/11/16
 
 Evidence: working tree on `feat/refine-request-file-version-flows`, based on `0978cce`.

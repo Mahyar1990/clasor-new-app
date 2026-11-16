@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode, RefObject } from "react";
 import { ModalLayerContext } from "@/hooks/use-modal-layer";
 import { usePortalTheme } from "@/hooks/use-portal-theme";
 import { withTestId } from "@/lib/design-system/test-id";
@@ -11,6 +11,7 @@ import { ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface GlassModalProps {
+  themeAnchorRef?: RefObject<HTMLElement | null>;
   title: string;
   description?: string;
   children: ReactNode;
@@ -30,10 +31,10 @@ export interface GlassModalProps {
 
 /** Organism: Base UI owns focus trapping, scroll lock and dismissal. */
 export function GlassModal({
-  title, description, children, trigger, open, defaultOpen, onOpenChange,
+  title, description, children, trigger, open, defaultOpen, onOpenChange, themeAnchorRef,
   testId = "glass-modal", size = "md", compact = false, surface = "frosted", footer, icon, finalFocus, onBack,
 }: GlassModalProps) {
-  const portalTheme = usePortalTheme();
+  const portalTheme = usePortalTheme(themeAnchorRef);
   return (
     <Dialog.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
       {trigger && <Dialog.Trigger render={withTestId(trigger, `${testId}-trigger`)} data-test-id={`${testId}-trigger`} />}

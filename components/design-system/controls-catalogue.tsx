@@ -12,6 +12,8 @@ import { CheckboxField, RadioField, SwitchField } from "@/components/ui/choice-f
 import { FileInput } from "@/components/ui/file-input"
 import { ApprovalBadge, VisibilityBadge, LatestBadge, RoleBadge } from "@/components/ui/status-badge"
 import { TagPickerCatalogue } from "./tag-picker-catalogue";
+import { GlassActionsCatalogue } from "./glass-actions-catalogue";
+import { AttachmentPickerCatalogue } from "./attachment-picker-catalogue";
 import { GlassControlStatesCatalogue } from "./glass-control-states-catalogue";
 import { GlassStatusStatesCatalogue } from "./glass-status-feedback-catalogue";
 import { Identity } from "@/components/ui/identity"
@@ -53,6 +55,7 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
   return <div data-test-id="controls-catalogue-div-12" className="space-y-5 pt-10" data-catalogue="controls">
     {section === "buttons" && <>
     <SectionTitle id="buttons" title="دکمه و اقدام" description="یک اقدام روشن، در اندازه و جای مناسب" number="05"><MousePointer2 className="size-5" aria-hidden="true" /></SectionTitle>
+    <GlassActionsCatalogue />
     <Sample title="هر اقدام، یک تأکید مشخص" description="اصلی، حاشیه‌دار و آرام؛ عملیات مخرب با نام صریح از هم جدا می‌شوند.">
       <div data-test-id="controls-catalogue-div-13" className="flex flex-wrap items-center gap-3">
         <Button data-test-id="controls-catalogue-button-14" onClick={simulateAction} loading={loading} loadingLabel="شبیه‌سازی ذخیره در حال اجراست"><Plus aria-hidden="true" />ایجاد سند</Button>
@@ -72,7 +75,7 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
     </>}
     {section === "inputs" && <>
     <SectionTitle id="inputs" title="ورودی و انتخاب" description="عنوان دائمی، راهنمای نزدیک و خطای قابل اصلاح" number="06"><SlidersHorizontal className="size-5" aria-hidden="true" /></SectionTitle>
-    <GlassControlStatesCatalogue /><TagPickerCatalogue />
+    <GlassControlStatesCatalogue /><TagPickerCatalogue /><AttachmentPickerCatalogue />
     <div data-test-id="controls-catalogue-div-30" className="grid items-start gap-5 lg:grid-cols-2">
       <Sample title="از ورودی تا بازبینی" description="اعتبارسنجی محلی است؛ خطا مقدار واردشده را پاک نمی‌کند.">
         <form data-test-id="controls-catalogue-form-31" className="space-y-5" noValidate onSubmit={event => {
