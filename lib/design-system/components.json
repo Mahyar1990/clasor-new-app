@@ -152,7 +152,8 @@
       "variants": [
         "checkbox",
         "radio",
-        "switch"
+        "switch",
+        "tags"
       ],
       "states": [
         "unchecked",
@@ -172,7 +173,7 @@
       "material": {
         "preset": "glass",
         "forbiddenNesting": [],
-        "rule": "Reflective checkbox/radio and switch track/thumb; selected and mixed states remain distinct in solid and forced colors.",
+        "rule": "Reflective checkbox/radio and switch track/thumb; selected and mixed states remain distinct in solid and forced colors. TagPicker uses searchable fixed checkbox options and removable glass chips.",
         "reactSource": "components/ui"
       },
       "stateApplicability": {

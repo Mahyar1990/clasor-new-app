@@ -21,7 +21,6 @@ function DashboardNavigation({ onNavigate, activePage = "dashboard" }: { onNavig
       <Link data-test-id="dashboard-current-page" href="/clasor-pages/dashboard" onClick={onNavigate} aria-current={activePage === "dashboard" ? "page" : undefined} className={`${glass.navigation} ${glass.current} flex min-h-11 md:min-h-8 items-center gap-3 px-3 text-sm text-primary`}>
         <LayoutDashboard aria-hidden="true" className="size-5" />داشبورد
       </Link>
-      <Link data-test-id="dashboard-repository-options-page" href="/clasor-pages/repository-options" onClick={onNavigate} aria-current={activePage === "repository-options" ? "page" : undefined} className={`${glass.navigation} ${glass.current} mt-1 flex min-h-11 items-center gap-3 px-3 text-xs md:min-h-8`}><FolderOpen aria-hidden="true" className="size-4" />دیالوگ‌های مخزن</Link>
       {groups.map(group => <div data-test-id={`dashboard-nav-group-${group.title}`} key={group.title} className="mt-3">
         <p data-test-id={`dashboard-nav-heading-${group.title}`} className="mb-1 px-3 text-xs font-medium text-muted-foreground">{group.title}</p>
         <ul data-test-id={`dashboard-nav-items-${group.title}`} className="space-y-1">

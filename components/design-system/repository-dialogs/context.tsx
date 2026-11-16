@@ -4,13 +4,14 @@ import { createContext, useContext, useState, type ReactNode, type Dispatch, typ
 export type PreviewRole = "مالک" | "مدیر" | "ویرایشگر";
 export interface PreviewRecord { id: string; name: string; role?: string; detail?: string; kind?: string; status?: string; value?: string }
 export interface RepositoryPreview {
+  id: string;
   name: string; description: string; image: string; role: PreviewRole; bookmarked: boolean; archived: boolean; deleted: boolean; left: boolean; published: boolean;
   members: PreviewRecord[]; groups: PreviewRecord[]; files: PreviewRecord[]; keys: PreviewRecord[]; requests: PreviewRecord[];
   notifications: Record<string, boolean>;
 }
 export function initialRepository(): RepositoryPreview {
   return {
-    name: "مستندات محصول", description: "راهنماها، تصمیم‌های طراحی و دانش مشترک تیم محصول", image: "purple", role: "مالک", bookmarked: false, archived: false, deleted: false, left: false, published: true,
+    id: "repository-sample", name: "مستندات محصول", description: "راهنماها، تصمیم‌های طراحی و دانش مشترک تیم محصول", image: "purple", role: "مالک", bookmarked: false, archived: false, deleted: false, left: false, published: true,
     members: Array.from({ length: 12 }, (_, i) => ({ id: `person-${i}`, name: `همکار نمونه ${i + 1}`, role: i === 0 ? "مالک" : "ویرایشگر", detail: `person${i + 1}@example.com` })),
     groups: [{ id: "design", name: "تیم طراحی", role: "ویرایشگر", detail: "۴ عضو" }, { id: "product", name: "تیم محصول", role: "بیننده", detail: "۶ عضو" }],
     files: Array.from({ length: 12 }, (_, i) => ({ id: `file-${i}`, name: `راهنمای محصول ${i + 1}.pdf`, detail: "PDF · ۲۴۰ کیلوبایت" })),
@@ -20,9 +21,9 @@ export function initialRepository(): RepositoryPreview {
   };
 }
 const Context = createContext<{ repo: RepositoryPreview; setRepo: Dispatch<SetStateAction<RepositoryPreview>> } | null>(null);
-export function RepositoryPreviewProvider({ children }: { children: ReactNode }) {
+export function RepositoryPreviewProvider({ children, value, onChange }: { children: ReactNode; value?: RepositoryPreview; onChange?: Dispatch<SetStateAction<RepositoryPreview>> }) {
   const [repo, setRepo] = useState(initialRepository);
-  return <Context.Provider value={{ repo, setRepo }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ repo: value ?? repo, setRepo: onChange ?? setRepo }}>{children}</Context.Provider>;
 }
 export function useRepositoryPreview() {
   const value = useContext(Context);

@@ -1,3 +1,3 @@
-import { RepositoryOptionsPage } from "@/components/design-system/repository-options-page";
-export const metadata = { title: "دیالوگ‌های مخزن | نمونه صفحات کلاسور" };
-export default function Page() { return <RepositoryOptionsPage />; }
+import { redirect } from "next/navigation";
+
+export default function Page() { redirect("/clasor-pages/dashboard"); }

@@ -67,7 +67,7 @@ export function RepositoryPublication() {
   const [status, setStatus] = useState("");
   return <div data-test-id="repo-publication" className="space-y-4">
     <DialogSection testId="repo-publication-settings" title="انتشار مخزن" description="وضعیت انتشار فقط در مخزن نمایشی تغییر می‌کند."><SwitchField label="فعال بودن انتشار مخزن" checked={enabled} onCheckedChange={value => setEnabled(!!value)} /><Button data-test-id="repo-publication-save" onClick={() => { setRepo(current => ({ ...current, published: enabled })); setStatus("تنظیم انتشار نمونه ذخیره شد."); }}>ذخیره تنظیم انتشار</Button></DialogSection>
-    {repo.published && <CopyField testId="repo-publication-link" label="نشانی صفحهٔ منتشرشدهٔ نمونه" value="https://example.com/publish/sample-repository" />}
+    {repo.published && <CopyField testId="repo-publication-link" label="نشانی صفحهٔ منتشرشدهٔ نمونه" value={`https://example.com/publish/${encodeURIComponent(repo.id)}`} />}
     <p data-test-id="repo-publication-status" role="status" className="text-xs text-success">{status}</p>
   </div>;
 }

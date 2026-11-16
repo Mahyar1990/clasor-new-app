@@ -2,18 +2,14 @@
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
-import { Ellipsis, FileText, FolderOpen } from "lucide-react";
-import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
-import { GlassCard } from "@/components/ui/GlassCard";
-import { Button } from "@/components/ui/button";
+import { FileText, FolderOpen } from "lucide-react";
 import { documentOptions } from "@/components/design-system/clasor-document-options";
 import { repositoryOptions } from "@/components/design-system/clasor-repository-options";
-import { ClasorOptionPreview, type ClasorOptionSelection } from "@/components/design-system/clasor-option-preview";
+import { GlassRecordMenuExample } from "./glass-record-menu-example";
 
 export function GlassOptionsCatalogue() {
   const [dark, setDark] = useState(false);
   const [busyBackground, setBusyBackground] = useState(false);
-  const [selection, setSelection] = useState<ClasorOptionSelection | null>(null);
   const examples = [
     { id: "document", name: "راهنمای همکاری تیم", description: "گزینه‌های سند", icon: <FileText />, items: documentOptions() },
     { id: "shared-document", name: "گزارش اشتراکی نمونه", description: "گزینه‌های سند اشتراکی", icon: <FileText />, items: documentOptions(true) },
@@ -33,13 +29,7 @@ export function GlassOptionsCatalogue() {
       {busyBackground && <div data-test-id="glass-options-busy-background" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex flex-col justify-evenly overflow-hidden rounded-xl px-4 text-lg font-bold text-slate-950/75 dark:text-slate-100/75">
         {Array.from({ length: 10 }, (_, index) => <p data-test-id={`glass-options-busy-line-${index}`} key={index} className="whitespace-nowrap">متن نمونه برای بررسی خوانایی منوی شیشه‌ای روی نوشته‌های پشت آن</p>)}
       </div>}
-      {examples.map(example => <GlassCard data-test-id={`glass-options-example-${example.id}`} key={example.id} className="flex min-w-0 items-center justify-between gap-3 p-4">
-        <div data-test-id={`glass-options-copy-${example.id}`} className="min-w-0"><p data-test-id={`glass-options-type-${example.id}`} className="text-xs text-muted-foreground">{example.description}</p><p data-test-id={`glass-options-name-${example.id}`} className="mt-1 text-sm font-medium">{example.name}</p></div>
-        <GlassOptionsMenu testId={`catalogue-options-${example.id}`} title={example.name} description={example.description} icon={example.icon} items={example.items}
-          trigger={<Button data-test-id={`catalogue-options-${example.id}`} variant="glass" size="icon" aria-label={`نمایش ${example.description}`}><Ellipsis aria-hidden="true" /></Button>}
-          onAction={(id, label) => setSelection({ id, label, name: example.name })} />
-      </GlassCard>)}
-      <ClasorOptionPreview selection={selection} onClose={() => setSelection(null)} testId="catalogue-options-preview" />
+      {examples.map(example => <GlassRecordMenuExample key={example.id} id={example.id} name={example.name} description={example.description} icon={example.icon} />)}
     </div>
   </section>;
 }

@@ -6,6 +6,7 @@ import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
 import { SelectField } from "@/components/ui/select-field";
 import { Button } from "@/components/ui/button";
+import { repositoryActionItems } from "./options";
 import { repositoryOptions } from "@/components/design-system/clasor-repository-options";
 import { RepositoryPreviewProvider, useRepositoryPreview, initialRepository, type PreviewRole } from "./context";
 import { RepositoryActionDialog, type DialogSelection } from "./dialog";
@@ -15,8 +16,8 @@ function Experience() {
   const [selection, setSelection] = useState<DialogSelection | null>(null);
   const [notice, setNotice] = useState("");
   const menuRef = useRef<HTMLButtonElement>(null);
-  const activeOptions = (repo.archived ? allArchiveOptions() : repositoryOptions(repo.role, repo.published)).map(option => ({ ...option, disabled: disabled(option.id) }));
-  function allArchiveOptions() { return [{ id: "restore", label: "بازگردانی مخزن", icon: <RotateCcw /> }, ...repositoryOptions(repo.role, repo.published).filter(option => ["info", "delete"].includes(option.id))]; }
+  const resetRef = useRef<HTMLButtonElement>(null);
+  const activeOptions = repositoryActionItems(repo);
   const allOptions = [...repositoryOptions("مالک", true), { id: "restore", label: "بازگردانی مخزن", icon: <RotateCcw /> }, { id: "leave", label: "ترک مخزن", icon: <LogOut /> }];
   function disabled(id: string) {
     return repo.deleted || repo.left || (repo.archived && !["info", "restore", "delete"].includes(id)) || (["edit", "files", "requests"].includes(id) && repo.role === "ویرایشگر") || (["archive", "delete", "questions", "document-requests"].includes(id) && repo.role !== "مالک") || (id === "leave" && repo.role === "مالک") || (id === "published" && !repo.published) || (id === "archive" && repo.archived) || (id === "restore" && (!repo.archived || repo.role !== "مالک"));
@@ -24,7 +25,7 @@ function Experience() {
   return <section data-test-id="repository-options-experience" className="space-y-5">
     <div data-test-id="repository-options-intro" className="flex flex-wrap items-start justify-between gap-3">
       <div data-test-id="repository-options-heading"><h1 data-test-id="repository-options-title" className="text-xl font-bold">دیالوگ‌های گزینه‌های مخزن</h1><p data-test-id="repository-options-description" className="mt-2 text-xs leading-relaxed text-muted-foreground">هر گزینه را جداگانه باز کنید؛ تغییرها فقط در مخزن نمونهٔ همین صفحه باقی می‌مانند.</p></div>
-      <Button data-test-id="repository-options-reset" variant="outline" size="sm" onClick={() => { setRepo(initialRepository()); setNotice("نمونه بازنشانی شد."); }}>بازنشانی نمونه</Button>
+      <Button data-test-id="repository-options-reset" ref={resetRef} variant="outline" size="sm" onClick={() => { setRepo(initialRepository()); setNotice("نمونه بازنشانی شد."); }}>بازنشانی نمونه</Button>
     </div>
     <GlassCard data-test-id="repository-options-summary" className="flex flex-wrap items-center gap-4 p-4">
       <GlassEmblem data-test-id="repository-options-avatar" className="size-10"><FolderOpen aria-hidden="true" className={`size-5 ${repo.image === "blue" ? "text-blue-600" : repo.image === "green" ? "text-green-600" : repo.image === "orange" ? "text-orange-600" : "text-purple-600"}`} /></GlassEmblem>
@@ -42,7 +43,7 @@ function Experience() {
         <Button data-test-id={`repository-option-open-${option.id}`} variant="outline" size="sm" disabled={disabled(option.id)} onClick={event => setSelection({ id: option.id, label: option.label, trigger: event.currentTarget })}>نمایش</Button>
       </GlassCard>)}
     </div>
-    {selection && <RepositoryActionDialog selection={selection} close={() => setSelection(null)} announce={setNotice} />}
+    {selection && <RepositoryActionDialog selection={selection} close={() => setSelection(null)} announce={setNotice} fallbackFocusRef={resetRef} />}
   </section>;
 }
 export function RepositoryOptionsExperience() { return <RepositoryPreviewProvider><Experience /></RepositoryPreviewProvider>; }

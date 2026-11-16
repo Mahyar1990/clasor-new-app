@@ -72,6 +72,12 @@ Dialog, Sheet, Tooltip and Toast portals preserve local dark themes. `Confirmati
 
 New representative previews are `GlassControlStatesCatalogue`, `GlassStatusStatesCatalogue`, `GlassFeedbackStatesCatalogue`, `GlassLayerStatesCatalogue` and the default-tabs sample. They are reachable through the existing catalogue menu, with local light/dark toggles and scoped selectors. Catalogue toggle controls also consume the shared Checkbox instead of native checkbox styling. The 22 material entries in `components.json` now describe the current implementation, replacing the retired blanket solid-inside-glass rule; table data rows and text breadcrumbs are explicit exceptions. No new product action, backend or dependency was added.
 
+## Dashboard record dialogs
+
+Repository and document option menus on the dashboard now open the same local dialog compositions shown in overlays/layout. Per-record state lives above the filtered tab lists; closing a dialog or switching a tab does not merge/reset record data. Removal operations choose a stable focus destination before removing the source trigger. The separate repository-dialog navigation entry was removed; its previous URL redirects to the dashboard.
+
+`TagPicker` composes the shared input, checkbox, badge and button materials without a new surface preset. Fixed options support search, removable chips, empty/error/disabled states and keyboard focus. Its standalone example is on inputs; the document tag dialog consumes it directly. Compact modal textareas now use the same text size as compact inputs. Document activity and access lists share the cumulative `PreviewList`, including visible loading skeleton geometry outside the workspace shell. Product-specific model/state remains in the preview modules, with no service mutations.
+
 ## Behavior and verification
 
 Base UI retains focus trapping/restoration, Escape/outside dismissal, keyboard selection and scroll locking. Portals preserve local dark previews through `usePortalTheme`. Public wrapper IDs are retained on rendered trigger elements through `withTestId`.
