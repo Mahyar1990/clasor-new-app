@@ -15,6 +15,7 @@ import { documentTags } from "./model";
 export function DocumentEdit({ action, formId, done }: { action: string; formId: string; done: () => void }) {
   const library = useOptionalLibrary();
   const { document, setDocument } = useDocumentPreview();
+  const repositoryTags = library ? library.repositories.find(repo => repo.id === document.repositoryId)?.tags ?? [] : documentTags;
   const [title, setTitle] = useState(document.title);
   const [description, setDescription] = useState(document.description);
   const [order, setOrder] = useState(String(document.order));
@@ -38,9 +39,9 @@ export function DocumentEdit({ action, formId, done }: { action: string; formId:
       <TextareaField data-test-id="doc-edit-description" label="توضیحات سند" value={description} onValueChange={setDescription} rows={3} />
     </>}
     {action === "edit-content" && <TextareaField data-test-id="doc-edit-content" label="محتوای سند" value={content} onValueChange={setContent} rows={9} description="ویرایش متن در همین پیش‌نمایش؛ نسخه‌های پیشین حفظ می‌شوند." />}
-    {action === "tags" && <TagPicker testId="doc-tags" label="تگ‌های سند" value={tags} options={documentTags} onValueChange={setTags} description="برچسب‌ها را جستجو و انتخاب کنید." />}
+    {action === "tags" && <TagPicker testId="doc-tags" label="تگ‌های سند" value={tags} options={repositoryTags} onValueChange={setTags} description="برچسب‌ها را جستجو و انتخاب کنید." />}
     {action === "move" && <DialogSection testId="doc-move-section" title="انتقال سند" description={`مقصد «${document.title}» را انتخاب کنید.`}>
-      <PathPicker nodes={library ? folderTree(library.documents, document.kind === "folder" ? document.id : undefined) : documentFolders} value={categoryPath} onValueChange={setCategoryPath} />
+      <PathPicker nodes={library ? folderTree(library.documents.filter(item => item.repositoryId === document.repositoryId).map(item => ({ ...item, shared: false })), document.kind === "folder" ? document.id : undefined) : documentFolders} value={categoryPath} onValueChange={setCategoryPath} />
     </DialogSection>}
   </form>;
 }

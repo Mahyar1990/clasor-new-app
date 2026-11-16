@@ -1,3 +1,9 @@
+## Repository cards and row feedback — 2026/11/16
+
+Repository tiles now use `glass.repositoryTile`: a clearer thin edge, slightly stronger flat tint and restrained shadow separate adjacent cards without adding another backdrop filter. `RepositoryImage` displays the selected image in a consistent thumbnail area, with a local default illustration for empty/failed images. The options control remains visible for touch/keyboard users with a smaller, quieter surface. It is independent of the card's navigation action.
+
+Apple's [Lists and tables](https://developer.apple.com/design/human-interface-guidelines/lists-and-tables) recommends appropriate row feedback and outline disclosure for hierarchical content; [Materials](https://developer.apple.com/design/human-interface-guidelines/materials) distinguishes content from glass controls. Our interpretation retains a gentle whole-row highlight and keyboard outline, while removing the title button's separate lift, shadow and hover patch. These are web design decisions, not a claim that Apple prescribes this exact card layout.
+
 ## Surface hierarchy — 2026/11/16
 
 Apple's [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/) recommends avoiding stacked glass and grouping content with spacing. This revision keeps one glass shell per surface and flattens its content. This is a web interpretation, not native optical rendering.

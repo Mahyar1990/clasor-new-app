@@ -4,6 +4,7 @@ import { FolderOpen } from "lucide-react";
 import { NavigableGlassModal } from "@/components/ui/DialogNavigation";
 import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { Button } from "@/components/ui/button";
+import { RepositoryTags } from "./tags";
 import { EditRepository } from "./edit";
 import { ConfirmRepository } from "./confirm";
 import { RepositoryNotifications } from "./notifications";
@@ -29,6 +30,7 @@ export function RepositoryActionDialog({ selection, close, announce, fallbackFoc
     finalFocus={() => focusFallback.current && fallbackFocusRef?.current ? fallbackFocusRef.current : selection.trigger?.isConnected ? selection.trigger : fallbackFocusRef?.current ?? true}
     icon={<GlassEmblem data-test-id="repository-dialog-icon" className="size-8"><FolderOpen aria-hidden="true" className="size-4" /></GlassEmblem>}
     footer={<><Button data-test-id="repository-dialog-cancel" variant="outline" onClick={close}>{forms.includes(action) ? "انصراف" : "بستن"}</Button>{forms.includes(action) && <Button data-test-id="repository-dialog-submit" type="submit" form={formId} variant={action === "delete" || action === "leave" ? "destructive" : "default"} disabled={action === "delete" && confirmation !== repo.name}>{labels[action]}</Button>}</>}>
+    {action === "tags" && <RepositoryTags />}
     {action === "info" && <RepositoryInfo />}
     {action === "edit" && <EditRepository formId={formId} done={done} />}
     {action === "share" && <RepositorySharing />}

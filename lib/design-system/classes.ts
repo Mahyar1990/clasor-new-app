@@ -35,6 +35,7 @@ export const glass = {
 
   dialogCompact: "max-h-[min(46rem,calc(100dvh-2rem))] [&_[data-slot=button]]:text-xs [&_[role=tab]]:text-xs [&_[role=combobox]]:text-xs [&_[data-test-id=GlassModal-header-5]>button]:size-8 [--control-height:2.25rem] [&_[data-test-id=GlassModal-header-5]]:gap-3 [&_[data-test-id=GlassModal-header-5]]:p-4 [&_[data-test-id=GlassModal-dialog-title-7]]:text-base [&_[data-test-id=GlassModal-dialog-description-8]]:text-xs [&_[data-dialog-body]]:p-4 [&_[data-slot=input]]:text-xs [&_[data-slot=textarea]]:text-xs [&_label]:text-xs",
   contentSurface,
+  repositoryTile: `${contentSurface} border-white/65 bg-white/35 shadow-[0_2px_7px_rgb(65_45_95/0.08)] dark:border-white/25 dark:bg-white/10 ${opaque}`,
   compactRecord: `${contentSurface} flex items-center gap-2 px-2 py-1.5`,
   dialogSection: "border-t border-white/25 pt-3 first:border-t-0 first:pt-0",
   dialogConfirmation: "fixed w-[calc(100%-2rem)] [&_[data-slot=alert-dialog-title]]:text-base [&_[data-slot=alert-dialog-description]]:text-xs",

@@ -15,13 +15,13 @@ export function FilterDialog({ value, onApply, close, trigger, tags }: { value: 
     <div data-test-id="library-filter-fields" className="grid gap-3 sm:grid-cols-2">
       <SelectField data-test-id="filter-kind" label="نوع" value={draft.kind} onValueChange={value => set("kind", value)} options={[{ value: "all", label: "همه" }, { value: "document", label: "سند" }, { value: "folder", label: "دسته‌بندی" }]} />
       <SelectField data-test-id="filter-content-type" disabled={draft.kind === "folder"} disabledReason="نوع محتوا فقط برای سند کاربرد دارد." label="نوع محتوا" value={draft.contentType} onValueChange={value => set("contentType", value)} options={[{ value: "all", label: "همه" }, { value: "classic", label: "کلاسور" }, { value: "excel", label: "اکسل" }, { value: "file", label: "فایل" }, { value: "form", label: "فرم" }]} />
-      <SelectField data-test-id="filter-search-mode" label="جستجو در" value={draft.searchMode} onValueChange={value => set("searchMode", value)} options={[{ value: "title", label: "عنوان" }, { value: "content", label: "محتوا" }]} />
+
       <SelectField data-test-id="filter-scope" label="محدوده جستجو" value={draft.scope} onValueChange={value => set("scope", value)} options={[{ value: "current", label: "همین دسته‌بندی" }, { value: "all", label: "همه دسته‌بندی‌ها" }]} />
 
     </div>
     <TagPicker testId="filter-tags" label="تگ‌ها" value={draft.tags} options={tags} onValueChange={value => set("tags", value)} description="سند باید همه تگ‌های انتخاب‌شده را داشته باشد." />
-    <CheckboxField data-test-id="filter-bookmarked" label="نشان‌شده" checked={draft.bookmarked} onCheckedChange={value => set("bookmarked", value)} />
-    <CheckboxField data-test-id="filter-template" label="نمونه سند" checked={draft.template} onCheckedChange={value => set("template", value)} />
+    <CheckboxField data-test-id="filter-bookmarked" label="نشان‌شده" description="با انتخاب این گزینه، فقط سندهای نشان‌شده در فهرست نتایج نمایش داده می‌شوند." checked={draft.bookmarked} onCheckedChange={value => set("bookmarked", value)} />
+    <CheckboxField data-test-id="filter-template" label="نمونه سند" description="با انتخاب این گزینه، فقط نمونه‌سندها (تمپلت‌ها) در فهرست نتایج نمایش داده می‌شوند." disabled={draft.kind === "folder"} checked={draft.template} onCheckedChange={value => set("template", value)} />
     <Button data-test-id="filters-reset-draft" variant="ghost" size="sm" onClick={() => setDraft(emptyFilters)}>پاک‌کردن فیلترها</Button>
   </GlassModal>;
 }

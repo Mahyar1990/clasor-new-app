@@ -8,3 +8,7 @@ export function updateRepositoryRecords(items: LibraryRepository[], id: string, 
     return { ...item, ...next, shared: next.role !== "مالک", updatedAt: edited ? now : item.updatedAt };
   });
 }
+
+export function resolveRepositoryDocuments<T extends { repositoryId?: string; shared: boolean }>(documents: T[], repositories: { id: string; shared: boolean; deleted: boolean; left: boolean }[]): T[] {
+  return documents.flatMap(document => { const repo = repositories.find(item => item.id === document.repositoryId); return repo && !repo.deleted && !repo.left ? [{ ...document, shared: repo.shared }] : []; });
+}

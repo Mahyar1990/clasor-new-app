@@ -1,3 +1,18 @@
+## Repository workspaces, master tags and batch actions — 2026/11/16
+
+Evidence: working tree on `feat/repository-workspace-and-bulk-documents`, based on `5f80c17`.
+
+- ui:check passed for 215 React files; lint and TypeScript passed. All 43 workspace, preview-version and library tests passed, including six new selection/subtree/outline/repository-scope cases. Documentation links and specification index checks passed.
+- Browser scenarios passed for bounded applied search and separate creation rows, repository navigation/image display, master tag creation/duplicate validation, tag deletion Cancel/Confirm and document-tag cleanup, folder-only disabled filters, title/content mode, search ancestor context, the ten-item cap, selection retained between table/outline, cross-repository subtree move, recursive deletion and cancellation, atomic repository/tag/image creation, empty new repository and 320/390px overflow.
+- Catalogue scenarios passed for repository/outline/batch examples, local dark tag and bulk/Select portals, one-dialog navigation, focus restoration, solid/forced-color/reduced-motion modes, repository-scoped template and document creation, nested category creation, mobile batch controls and unavailable repository routes. The title hover has no separate translated/shadowed button surface.
+- Desktop checks at 720/900px height passed: list bounds stay inside the main panel and cumulative loading reaches all 28 repository-root records. A failed image request correctly switched to the default illustration; the final card/navigation smoke had no runtime or hydration error.
+- Image-edit checks passed for custom/default recognition, chosen default color, replacing an image and retaining a custom image when saving other metadata.
+- Long-list checks passed for 16 repository tags and 14 destination folders: real inner scrolling, automatic cumulative append, retained existing row identity, cancelled selection and stable title focus after repository deletion.
+- A browser test exposed a stale Back callback captured before pushing a tag confirmation page. The confirmation now reads dialog navigation in its mounted child component; cancellation, successful deletion and focus restoration passed after the fix. Screenshot checks keep caret rendering unchanged to avoid changing unhydrated input attributes; hydration-aware setup waits for interactive controls.
+- npm run build was attempted with escalation and again hit the known Turbopack internal CSS worker port-bind permission failure. Production build success is not claimed. The final feedback audit retained no new qualifying Next issue beyond this already reported environment limitation.
+
+The original Clasor account was not changed. Source inspection used read-only public UI assets. Captures and browser scripts remain outside the repository. All state and images are session-local mock data; checks do not establish backend authorization, human screen-reader acceptance or full accessibility certification.
+
 ## Flat surfaces and independent library pages — 2026/11/16
 
 Evidence: working tree on `feat/clasor-library-pages-and-flat-surfaces`, based on `eb94c0f`.

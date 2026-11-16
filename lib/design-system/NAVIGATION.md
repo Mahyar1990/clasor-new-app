@@ -1,3 +1,9 @@
+## Repository workspace — 2026/11/16
+
+Selecting a repository card navigates to `/clasor-pages/repositories/[repositoryId]`. The dynamic route resolves asynchronous Next params inside Suspense. It renders the repository's image, metadata and options above a shared document browser. Back returns to the corresponding repository list. Invalid/deleted/left repositories show an unavailable state; a stable page-title ref provides focus fallback after header operations remove the card.
+
+Document pages can switch between a table and a disclosure-based outline. The outline preserves parent context for search matches and allows folders to expand/collapse; it uses native buttons rather than claiming an incomplete ARIA tree keyboard contract. Both appearances use the same record menus, selection IDs, cumulative loading and sort/filter state. Desktop list regions fill remaining shell space so repository metadata does not clip the loading sentinel on shorter viewports.
+
 ## Independent library pages and compact creation — 2026/11/16
 
 The Clasor sidebar links to `/clasor-pages/my-documents`, `/clasor-pages/shared-documents`, `/clasor-pages/my-repositories`, `/clasor-pages/shared-repositories`, `/clasor-pages/bookmarked-repositories`, `/clasor-pages/archived-repositories` and `/clasor-pages/published-repositories`. Each is a separate route with a shared layout/store and responsive full-width product shell. The dashboard remains its own page. Mobile selection closes the sidebar sheet.

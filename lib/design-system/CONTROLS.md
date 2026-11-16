@@ -1,3 +1,11 @@
+## Compact search, repository tags and batch controls — 2026/11/16
+
+`CompactSearch` is a bounded native search form with an Apply button and Enter submission. Its optional Base UI Select places title/content mode beside the document query. Draft text/mode are separate from applied query state; creation controls occupy a different row. Filter dialogs no longer duplicate the search-mode field. Folder-only filtering clears/disables content type and template constraints; bookmark/template descriptions explain their effect on results.
+
+`TagManager` creates/removes repository vocabulary, with nonempty/duplicate-name validation and cumulative list loading. It has no selection state. `TagPicker` selects existing repository tags for documents or filtering; its compact search, selected chips and flat option rows remain keyboard usable. Repository tag deletion uses a navigation page within one dialog and confirms removal from affected documents. Direct draft-tag deletion restores focus to the name field.
+
+`BatchActions` provides an explicit selection mode, a 10-item count/limit, Move/Delete and End selection. Unselected checkboxes disable at ten, while selected records can still be unchecked. Public test IDs remain stable across table/outline appearances. Independent catalogue examples are reachable through app/page.tsx on layout/overlays.
+
 ## Library controls — 2026/11/16
 
 `MultiSortEditor` accepts field options, ordered SortRules and onValueChange. Criteria are unique, independently ascending/descending and keyboard-reorderable with up/down buttons. A stable optional rule ID preserves control identity when changing its field. The Clasor composition exposes kind, name, priority, creation date and modification date; an empty criterion list preserves source order.

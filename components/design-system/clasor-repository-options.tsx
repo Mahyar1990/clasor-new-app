@@ -1,4 +1,4 @@
-import { Pencil, Files, Inbox, Bookmark, Share2, Bell, KeyRound, LockKeyhole, Archive, Trash2, CircleHelp, LogOut, FolderOpen, Globe } from "lucide-react";
+import { Pencil, Tags, Files, Inbox, Bookmark, Share2, Bell, KeyRound, LockKeyhole, Archive, Trash2, CircleHelp, LogOut, FolderOpen, Globe } from "lucide-react";
 import type { GlassOption } from "@/components/ui/GlassOptionsMenu";
 
 /** Dashboard menu fixtures based on the source's owner/admin/member distinctions. */
@@ -9,6 +9,7 @@ export function repositoryOptions(role: string, published = false): GlassOption[
     { id: "info", label: "اطلاعات مخزن", icon: <FolderOpen /> },
     ...(manage ? [
       { id: "edit", label: "ویرایش", icon: <Pencil /> },
+      { id: "tags", label: "مدیریت تگ‌های مخزن", icon: <Tags /> },
       { id: "files", label: "مدیریت فایل", icon: <Files /> },
       { id: "requests", label: "درخواست‌ها", icon: <Inbox /> },
     ] : []),

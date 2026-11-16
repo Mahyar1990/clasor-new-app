@@ -10,6 +10,7 @@ export interface DocumentPreview extends DashboardDocument {
   createdAt?: string;
   updatedAt?: string;
   parentId?: string;
+  repositoryId?: string;
   keyId?: string;
   formType?: string;
   formDisplay?: string;

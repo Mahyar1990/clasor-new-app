@@ -14,7 +14,7 @@ export interface RepositoryPreview {
 }
 export function initialRepository(): RepositoryPreview {
   return {
-    id: "repository-sample", name: "مستندات محصول", description: "راهنماها، تصمیم‌های طراحی و دانش مشترک تیم محصول", image: "purple", role: "مالک", bookmarked: false, archived: false, deleted: false, left: false, published: true,
+    id: "repository-sample", name: "مستندات محصول", description: "راهنماها، تصمیم‌های طراحی و دانش مشترک تیم محصول", tags: ["راهنما", "محصول", "طراحی", "آموزش"], image: "purple", role: "مالک", bookmarked: false, archived: false, deleted: false, left: false, published: true,
     members: Array.from({ length: 12 }, (_, i) => ({ id: `person-${i}`, name: `همکار نمونه ${i + 1}`, role: i === 0 ? "مالک" : "ویرایشگر", detail: `person${i + 1}@example.com` })),
     groups: [{ id: "design", name: "تیم طراحی", role: "ویرایشگر", detail: "۴ عضو", memberIds: ["person-1", "person-2", "person-3", "person-4"] }, { id: "product", name: "تیم محصول", role: "بیننده", detail: "۶ عضو", memberIds: ["person-2", "person-3", "person-4", "person-5", "person-6", "person-7"] }],
     files: Array.from({ length: 12 }, (_, i) => ({ id: `file-${i}`, name: `راهنمای محصول ${i + 1}.pdf`, detail: "PDF · ۲۴۰ کیلوبایت", uploadedAt: "۱۴۰۵/۰۸/۲۴ · ۱۰:۳۰", published: false })),

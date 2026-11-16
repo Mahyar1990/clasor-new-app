@@ -2,9 +2,9 @@
 import { CreationMembers, type CreationMember } from "./create-members";
 import { TextField, TextareaField } from "@/components/ui/text-field";
 import { SelectField } from "@/components/ui/select-field";
+import { RepositoryImage } from "@/components/ui/RepositoryImage";
 import { FileInput } from "@/components/ui/file-input";
-import { TagPicker } from "@/components/ui/TagPicker";
-import { documentTags } from "../document-dialogs/model";
+import { TagManager } from "@/components/ui/TagManager";
 import type { DocumentPreview } from "../document-dialogs/model";
 export interface CreationDraft { title: string; description: string; order: string; type: string; version: string; templateId: string; keyId: string; formType: string; formDisplay: string; extension: string; members: CreationMember[]; tags: string[]; image: string }
 export const creationDraft: CreationDraft = { title: "", description: "", order: "1", type: "classic", version: "۱", templateId: "", keyId: "", formType: "normal", formDisplay: "classic", extension: "doc", members: [], tags: [], image: "purple" };
@@ -18,7 +18,7 @@ export function CreationFields({ step, kind, draft, set, templates }: { step: st
     {step === "version" && <TextField data-test-id="create-version" label="نام نسخه" value={draft.version} onValueChange={value => set("version", value)} required maxLength={500} />}
     {step === "form" && <><SelectField data-test-id="create-form-type" label="نوع فرم" value={draft.formType} onValueChange={value => set("formType", value)} options={[{ value: "normal", label: "فرم معمولی" }, { value: "exam", label: "فرم آزمون" }]} /><SelectField data-test-id="create-form-display" label="نمایش فرم" value={draft.formDisplay} onValueChange={value => set("formDisplay", value)} options={[{ value: "classic", label: "فرم کلاسیک" }, { value: "card", label: "فرم کارتی" }]} /></>}
     {step === "share" && <CreationMembers value={draft.members} onChange={value => set("members", value)} />}
-    {step === "tags" && <TagPicker testId="create-tags" label="تگ‌ها" options={documentTags} value={draft.tags} onValueChange={value => set("tags", value)} />}
-    {step === "image" && <FileInput data-test-id="create-image" label="تصویر مخزن" accept="image/*" onFileChange={file => set("image", file?.name ?? "purple")} description="اختیاری؛ در صورت انتخاب نکردن، تصویر پیش‌فرض استفاده می‌شود." />}
+    {step === "tags" && <TagManager testId="create-tags" value={draft.tags} onValueChange={value => set("tags", value)} />}
+    {step === "image" && <><RepositoryImage testId="create-image-preview" image={draft.image} name={draft.title || "جدید"} className="h-20 w-32" /><FileInput data-test-id="create-image" label="تصویر مخزن" accept="image/*" maxSizeBytes={5 * 1024 * 1024} onFileChange={file => { if (!file) { set("image", "purple"); return; } const reader = new FileReader(); reader.onload = () => set("image", String(reader.result)); reader.readAsDataURL(file); }} description="اختیاری؛ در صورت انتخاب نکردن، تصویر پیش‌فرض استفاده می‌شود." /></>}
   </div>;
 }
