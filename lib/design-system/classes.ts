@@ -11,6 +11,10 @@ const emblem = `${panel} relative isolate inline-grid size-11 shrink-0 place-ite
 const liquidFloating = `${panel} glass-enabled:bg-[var(--glass-tint)]/15 glass-enabled:backdrop-blur-[10px] dark:glass-enabled:bg-slate-950/65 relative isolate rounded-xl border-white/70 shadow-[0_12px_28px_rgb(63_41_100/0.2),inset_0_1px_0_rgb(255_255_255/0.95),inset_1px_0_0_rgb(219_234_254/0.6),inset_-1px_-1px_0_rgb(196_181_253/0.45)] glass-enabled:backdrop-saturate-150 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-linear-to-br before:from-white/10 before:via-white/0 before:to-purple-200/5 after:pointer-events-none after:absolute after:inset-px after:rounded-[inherit] after:border after:border-t-white/80 after:border-s-sky-100/60 after:border-e-white/20 after:border-b-purple-200/35 dark:border-white/40 dark:before:from-white/5 dark:before:to-purple-400/5 dark:after:border-white/20 dark:shadow-[0_12px_28px_rgb(0_0_0/0.3),inset_0_1px_0_rgb(255_255_255/0.4),inset_1px_0_0_rgb(219_234_254/0.15),inset_-1px_-1px_0_rgb(196_181_253/0.2)] opaque:before:hidden! opaque:after:hidden! opaque:[backdrop-filter:none]! forced-colors:before:hidden! forced-colors:after:hidden! forced-colors:[backdrop-filter:none]!`;
 
 export const glass = {
+  dialogCompact: "max-h-[min(46rem,calc(100dvh-2rem))] [&_[data-slot=button]]:text-xs [&_[role=tab]]:text-xs [&_[role=combobox]]:text-xs [&_[data-test-id=GlassModal-header-5]>button]:size-8 [--control-height:2.25rem] [&_[data-test-id=GlassModal-header-5]]:gap-3 [&_[data-test-id=GlassModal-header-5]]:p-4 [&_[data-test-id=GlassModal-dialog-title-7]]:text-base [&_[data-test-id=GlassModal-dialog-description-8]]:text-xs [&_[data-dialog-body]]:p-4 [&_[data-slot=input]]:text-xs [&_label]:text-xs",
+  dialogSection: `${panel} bg-white/20 p-3 dark:bg-slate-950/20`,
+  dialogConfirmation: "fixed w-[calc(100%-2rem)] [&_[data-slot=alert-dialog-title]]:text-base [&_[data-slot=alert-dialog-description]]:text-xs",
+  dialogFooter: "flex shrink-0 flex-wrap items-center justify-end gap-2 border-t border-white/40 bg-white/20 p-3 dark:bg-slate-950/25",
   liquidFloating,
   optionsPopup: "w-52 max-w-[calc(100vw-1.5rem)] min-w-48 rounded-lg p-1 text-[11px] leading-4",
   optionsSubPopup: "w-40 min-w-40",
@@ -42,6 +46,7 @@ export const glass = {
   control: `border border-white/20 bg-[var(--glass-fallback)] backdrop-blur-none glass-enabled:bg-white/10 glass-enabled:backdrop-blur-sm enabled:hover:glass-enabled:bg-white/20 ${opaque}`,
   primary: `border-purple-400/50 bg-primary text-white shadow-lg glass-enabled:bg-purple-600/60 glass-enabled:backdrop-blur-md enabled:hover:glass-enabled:bg-purple-500/80 opaque:bg-primary! opaque:backdrop-blur-none! ${systemColors}`,
   secondary: `border-white/60 bg-[var(--glass-fallback)] font-medium text-[color:var(--glass-field-text)] shadow-sm glass-enabled:bg-white/50 glass-enabled:backdrop-blur-md enabled:hover:glass-enabled:bg-white/60 dark:glass-enabled:bg-white/15 dark:enabled:hover:glass-enabled:bg-white/25 ${opaque}`,
-  backdrop: "bg-black/40 backdrop-blur-sm forced-colors:backdrop-blur-none",
+  backdrop: "bg-black/40 backdrop-blur-sm opaque:[backdrop-filter:none]! forced-colors:[backdrop-filter:none]!",
+  liquidBackdrop: "bg-slate-950/15 backdrop-blur-[2px] opaque:[backdrop-filter:none]! forced-colors:[backdrop-filter:none]!",
   canvas: "bg-[image:var(--material-canvas)]",
 };

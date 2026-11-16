@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode, Ref } from "react";
 import { Fragment } from "react";
 import { cn } from "@/lib/utils";
 import { withTestId } from "@/lib/design-system/test-id";
@@ -27,6 +27,7 @@ export interface GlassOptionsMenuProps {
   items: GlassOption[];
   onAction: (id: string, label: string) => void;
   testId: string;
+  triggerRef?: Ref<HTMLButtonElement>;
 }
 
 function OptionItems({ items, onAction, testId }: Pick<GlassOptionsMenuProps, "items" | "onAction" | "testId">) {
@@ -57,9 +58,9 @@ function OptionLabel({ item, testId }: { item: GlassOption; testId: string }) {
 }
 
 /** Base UI owns keyboard navigation, submenus, collision handling and dismissal. */
-export function GlassOptionsMenu({ title, description, icon, trigger, items, onAction, testId }: GlassOptionsMenuProps) {
+export function GlassOptionsMenu({ title, description, icon, trigger, items, onAction, testId, triggerRef }: GlassOptionsMenuProps) {
   return <DropdownMenu>
-    <DropdownMenuTrigger data-test-id={testId} render={withTestId(trigger, testId)} />
+    <DropdownMenuTrigger ref={triggerRef} data-test-id={testId} render={withTestId(trigger, testId)} />
     <DropdownMenuContent data-test-id={`${testId}-popup`} dir="rtl" aria-label={`${description} ${title}`} surface="liquid" className={glass.optionsPopup} align="end" sideOffset={8}>
       <div data-test-id={`${testId}-heading`} className={glass.optionsHeader}>
         {icon && <GlassEmblem data-test-id={`${testId}-heading-icon`} className="size-6 [&_svg]:size-3.5" aria-hidden="true">{icon}</GlassEmblem>}

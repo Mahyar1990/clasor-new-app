@@ -1,5 +1,6 @@
 "use client"
 
+import { usePortalTheme } from "@/hooks/use-portal-theme";
 import { glass } from "@/lib/design-system/classes";
 import * as React from "react"
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog"
@@ -17,9 +18,10 @@ function AlertDialogTrigger({ ...props }: AlertDialogPrimitive.Trigger.Props) {
   )
 }
 
-function AlertDialogPortal({ ...props }: AlertDialogPrimitive.Portal.Props) {
+function AlertDialogPortal({ className, ...props }: AlertDialogPrimitive.Portal.Props) {
+  const theme = usePortalTheme();
   return (
-    <AlertDialogPrimitive.Portal data-test-id="alert-dialog-alertdialogprimitive-portal-2" data-slot="alert-dialog-portal" {...props} />
+    <AlertDialogPrimitive.Portal className={cn(theme, className)} data-test-id="alert-dialog-alertdialogprimitive-portal-2" data-slot="alert-dialog-portal" {...props} />
   )
 }
 
@@ -30,7 +32,7 @@ function AlertDialogOverlay({
   return (
     <AlertDialogPrimitive.Backdrop data-test-id="alert-dialog-alertdialogprimitive-backdrop-3"
       data-slot="alert-dialog-overlay"
-      className={cn("fixed inset-0 isolate z-[var(--z-dialog)] bg-[var(--overlay-backdrop)] duration-[var(--clasor-motion-normal)] supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0", className, glass.backdrop)}
+      className={cn("fixed inset-0 isolate z-[calc(var(--z-dialog)+2)] bg-[var(--overlay-backdrop)] duration-[var(--clasor-motion-normal)] supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0", className, glass.backdrop)}
       {...props}
     />
   )
@@ -49,7 +51,7 @@ function AlertDialogContent({
       <AlertDialogPrimitive.Popup data-test-id="alert-dialog-alertdialogprimitive-popup-4"
         data-slot="alert-dialog-content"
         data-size={size}
-        className={cn("group/alert-dialog-content fixed top-1/2 start-1/2 z-[var(--z-dialog)] grid w-full -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-popover-foreground ring-1 ring-foreground/10 duration-[var(--clasor-motion-normal)] outline-none data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className, glass.panel)}
+        className={cn("group/alert-dialog-content fixed top-1/2 start-1/2 z-[calc(var(--z-dialog)+3)] grid w-full -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-popover p-4 text-popover-foreground ring-1 ring-foreground/10 duration-[var(--clasor-motion-normal)] outline-none data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", glass.panel, className)}
         {...props}
       />
     </AlertDialogPortal>

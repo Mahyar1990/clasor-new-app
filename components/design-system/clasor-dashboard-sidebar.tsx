@@ -15,12 +15,13 @@ const groups = [
   { title: "مدیریت", items: [{ label: "مدیریت دامنه", icon: Globe }, { label: "مدیریت سازمانی", icon: Building2 }, { label: "پنل ادمین", icon: ShieldCheck }] },
 ];
 
-function DashboardNavigation({ onNavigate }: { onNavigate?: () => void }) {
+function DashboardNavigation({ onNavigate, activePage = "dashboard" }: { onNavigate?: () => void; activePage?: string }) {
   return <GlassCard as="div" data-test-id="dashboard-product-sidebar" className="p-2.5">
     <nav data-test-id="dashboard-product-navigation" aria-label="منوی نمونه کلاسور">
-      <a data-test-id="dashboard-current-page" href="#dashboard-overview" onClick={onNavigate} aria-current="page" className={`${glass.navigation} ${glass.current} flex min-h-11 md:min-h-8 items-center gap-3 px-3 text-sm text-primary`}>
+      <Link data-test-id="dashboard-current-page" href="/clasor-pages/dashboard" onClick={onNavigate} aria-current={activePage === "dashboard" ? "page" : undefined} className={`${glass.navigation} ${glass.current} flex min-h-11 md:min-h-8 items-center gap-3 px-3 text-sm text-primary`}>
         <LayoutDashboard aria-hidden="true" className="size-5" />داشبورد
-      </a>
+      </Link>
+      <Link data-test-id="dashboard-repository-options-page" href="/clasor-pages/repository-options" onClick={onNavigate} aria-current={activePage === "repository-options" ? "page" : undefined} className={`${glass.navigation} ${glass.current} mt-1 flex min-h-11 items-center gap-3 px-3 text-xs md:min-h-8`}><FolderOpen aria-hidden="true" className="size-4" />دیالوگ‌های مخزن</Link>
       {groups.map(group => <div data-test-id={`dashboard-nav-group-${group.title}`} key={group.title} className="mt-3">
         <p data-test-id={`dashboard-nav-heading-${group.title}`} className="mb-1 px-3 text-xs font-medium text-muted-foreground">{group.title}</p>
         <ul data-test-id={`dashboard-nav-items-${group.title}`} className="space-y-1">
@@ -40,17 +41,17 @@ function DashboardNavigation({ onNavigate }: { onNavigate?: () => void }) {
   </GlassCard>;
 }
 
-export function ClasorDashboardSidebar() {
+export function ClasorDashboardSidebar({ activePage = "dashboard" }: { activePage?: string } = {}) {
   const [open, setOpen] = useState(false);
   return <>
-    <div data-test-id="dashboard-desktop-navigation" className="hidden md:block"><DashboardNavigation /></div>
+    <div data-test-id="dashboard-desktop-navigation" className="hidden md:block"><DashboardNavigation activePage={activePage} /></div>
     <div data-test-id="dashboard-mobile-navigation" className="md:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger data-test-id="dashboard-mobile-menu" render={<Button data-test-id="dashboard-mobile-menu" variant="outline" className="w-full justify-start" />}><Menu aria-hidden="true" />منوی کلاسور</SheetTrigger>
         <SheetContent data-test-id="dashboard-mobile-sheet" side="right" dir="rtl" className="overflow-y-auto p-4">
           <SheetTitle>منوی کلاسور</SheetTitle>
           <SheetDescription>داشبورد و بخش‌های نمونه مدیریت اسناد</SheetDescription>
-          <DashboardNavigation onNavigate={() => setOpen(false)} />
+          <DashboardNavigation activePage={activePage} onNavigate={() => setOpen(false)} />
         </SheetContent>
       </Sheet>
     </div>

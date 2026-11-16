@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Info } from "lucide-react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
+import { RepositoryDialogsCatalogue } from "@/components/design-system/repository-dialogs-catalogue";
 import { GlassOptionsCatalogue } from "@/components/design-system/glass-options-catalogue";
 import { GlassTabsCatalogue } from "@/components/design-system/glass-tabs-catalogue";
 import { ClasorTabs } from "@/components/ui/clasor-tabs"
@@ -46,6 +47,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
     {section === "overlays" && <>
     <SectionTitle id="overlays" title="لایه و پیام" number="11" />
     <GlassOptionsCatalogue />
+    <RepositoryDialogsCatalogue />
     <Sample title="تصمیم روشن، بازگشت به زمینه" description="Escape و انصراف فوکوس را برمی‌گردانند؛ کلیک بیرون تأیید مخرب را نمی‌بندد.">
       <div data-test-id="navigation-catalogue-div-6" className="flex flex-wrap items-start gap-4">
         <ConfirmationDialog trigger={<Button data-test-id="navigation-catalogue-button-7" variant="outline">تأیید نمونه</Button>} title="تأیید محتوای نمونه" description="تأیید محتوا نوع دسترسی مخاطبان را تغییر نمی‌دهد. این اقدام فقط نمایشی است." targetName="راهنمای همکاری — نسخه ۱" confirmLabel="تأیید محتوای نمونه" onConfirm={() => log("محتوای نمونه تأیید شد")} />
