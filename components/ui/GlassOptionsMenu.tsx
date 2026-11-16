@@ -1,7 +1,8 @@
 "use client";
 
 import type { ReactElement, ReactNode, Ref } from "react";
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
+import { useMergedRefs } from "@base-ui/utils/useMergedRefs";
 import { cn } from "@/lib/utils";
 import { withTestId } from "@/lib/design-system/test-id";
 import { glass } from "@/lib/design-system/classes";
@@ -25,7 +26,7 @@ export interface GlassOptionsMenuProps {
   icon?: ReactNode;
   trigger: ReactElement;
   items: GlassOption[];
-  onAction: (id: string, label: string) => void;
+  onAction: (id: string, label: string, trigger?: HTMLButtonElement | null) => void;
   testId: string;
   triggerRef?: Ref<HTMLButtonElement>;
 }
@@ -59,8 +60,10 @@ function OptionLabel({ item, testId }: { item: GlassOption; testId: string }) {
 
 /** Base UI owns keyboard navigation, submenus, collision handling and dismissal. */
 export function GlassOptionsMenu({ title, description, icon, trigger, items, onAction, testId, triggerRef }: GlassOptionsMenuProps) {
+  const localTrigger = useRef<HTMLButtonElement>(null);
+  const mergedTrigger = useMergedRefs(localTrigger, triggerRef);
   return <DropdownMenu>
-    <DropdownMenuTrigger ref={triggerRef} data-test-id={testId} render={withTestId(trigger, testId)} />
+    <DropdownMenuTrigger ref={mergedTrigger} data-test-id={testId} render={withTestId(trigger, testId)} />
     <DropdownMenuContent data-test-id={`${testId}-popup`} dir="rtl" aria-label={`${description} ${title}`} surface="liquid" className={glass.optionsPopup} align="end" sideOffset={8}>
       <div data-test-id={`${testId}-heading`} className={glass.optionsHeader}>
         {icon && <GlassEmblem data-test-id={`${testId}-heading-icon`} className="size-6 [&_svg]:size-3.5" aria-hidden="true">{icon}</GlassEmblem>}
@@ -69,7 +72,7 @@ export function GlassOptionsMenu({ title, description, icon, trigger, items, onA
           <p data-test-id={`${testId}-title`} className="truncate text-[11px] leading-4 font-semibold" title={title}>{title}</p>
         </div>
       </div>
-      <OptionItems items={items} onAction={onAction} testId={testId} />
+      <OptionItems items={items} onAction={(id, label) => onAction(id, label, localTrigger.current)} testId={testId} />
     </DropdownMenuContent>
   </DropdownMenu>;
 }

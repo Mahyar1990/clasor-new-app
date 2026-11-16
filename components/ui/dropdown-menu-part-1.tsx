@@ -2,6 +2,7 @@
 
 import { glass } from "@/lib/design-system/classes";
 import * as React from "react";
+import { useModalLayer } from "@/hooks/use-modal-layer";
 import { usePortalTheme } from "@/hooks/use-portal-theme";
 import { Menu as MenuPrimitive } from "@base-ui/react/menu";
 import { cn } from "cn";
@@ -33,10 +34,11 @@ export function DropdownMenuContent({
     "align" | "alignOffset" | "side" | "sideOffset"
   >) {
   const portalTheme = usePortalTheme();
+  const inModal = useModalLayer();
   return (
     <MenuPrimitive.Portal className={portalTheme} data-test-id="dropdown-menu-part-1-menuprimitive-portal-3">
       <MenuPrimitive.Positioner data-test-id="dropdown-menu-part-1-menuprimitive-positioner-4"
-        className="isolate z-[var(--z-menu)] outline-none"
+        className={inModal ? "isolate z-[calc(var(--z-dialog)+2)] outline-none" : "isolate z-[var(--z-menu)] outline-none"}
         align={align}
         alignOffset={alignOffset}
         side={side}

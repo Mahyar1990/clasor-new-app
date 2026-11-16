@@ -54,7 +54,7 @@ export function ClasorDashboardRepositories({ repositories }: { repositories: Da
   const [selection, setSelection] = useState<Selection | null>(null);
   const [message, setMessage] = useState("");
   const heading = useRef<HTMLHeadingElement>(null);
-  const visible = repositories.filter(item => !records[item.id].deleted && !records[item.id].archived && !records[item.id].left).map(item => ({ ...item, name: records[item.id].name, published: records[item.id].published, preview: records[item.id] }));
+  const visible = repositories.filter(item => !records[item.id].deleted && !records[item.id].archived && !records[item.id].left).map(item => ({ ...item, name: records[item.id].name, role: records[item.id].role, published: records[item.id].published, preview: records[item.id] }));
   return <GlassCard data-test-id="dashboard-repositories-panel" className="flex h-[36rem] min-h-0 flex-col overflow-hidden p-3 xl:h-full" aria-labelledby="dashboard-repositories-heading">
     <h3 ref={heading} tabIndex={-1} data-test-id="dashboard-repositories-heading" id="dashboard-repositories-heading" className="mb-2 flex items-center gap-2 text-lg font-bold"><FolderOpen aria-hidden="true" className="size-5 text-primary" />مخزن‌ها</h3>
     <p data-test-id="dashboard-repository-action-status" role="status" className="sr-only">{message}</p>

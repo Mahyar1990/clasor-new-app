@@ -1,17 +1,25 @@
 "use client";
 import { ClasorTabs } from "@/components/ui/clasor-tabs";
 import { Button } from "@/components/ui/button";
+import { TextareaField } from "@/components/ui/text-field";
+import { useDialogNavigation } from "@/components/ui/DialogNavigation";
 import { PreviewList } from "./list";
-import { useRepositoryPreview } from "./context";
-function RequestList({ kind }: { kind: string }) {
+import { useRepositoryPreview, type PreviewRecord } from "./context";
+function RequestViewer({ item }: { item: PreviewRecord }) {
   const { repo, setRepo } = useRepositoryPreview();
-  function decide(id: string, status: string) { setRepo(current => ({ ...current, requests: current.requests.map(item => item.id === id ? { ...item, status } : item) })); }
-  return <PreviewList testId={`repo-requests-${kind}`} items={repo.requests.filter(item => item.kind === kind)} noun="درخواست" render={item => <div data-test-id={`repo-request-${item.id}`} className="space-y-3 rounded-lg border border-white/40 bg-white/15 p-3">
-    <div data-test-id={`repo-request-copy-${item.id}`}><p data-test-id={`repo-request-name-${item.id}`} className="text-xs font-semibold">{kind === "question" ? "پرسش دربارهٔ " : ""}{item.name}</p><p data-test-id={`repo-request-person-${item.id}`} className="mt-1 text-[11px] text-muted-foreground">{item.detail} · نسخهٔ ۲</p></div>
-    <div data-test-id={`repo-request-actions-${item.id}`} className="flex flex-wrap items-center justify-end gap-2">
-      {item.status === "pending" ? <><Button data-test-id={`repo-request-reject-${item.id}`} variant="outline" size="sm" onClick={() => decide(item.id, "rejected")}>رد درخواست</Button><Button data-test-id={`repo-request-accept-${item.id}`} size="sm" onClick={() => decide(item.id, "accepted")}>قبول درخواست</Button></> : <p data-test-id={`repo-request-status-${item.id}`} role="status" className="text-xs">{item.status === "accepted" ? "در نمونه تأیید شد" : "در نمونه رد شد"}</p>}
-    </div>
-  </div>} />;
+  const { back } = useDialogNavigation();
+  const current = repo.requests.find(record => record.id === item.id) ?? item;
+  function decide(status: string) { setRepo(value => ({ ...value, requests: value.requests.map(record => record.id === item.id ? { ...record, status } : record) })); back(); }
+  return <div data-test-id="repo-request-viewer" className="space-y-3"><p data-test-id="repo-request-viewer-meta" className="text-xs text-muted-foreground">{item.detail} · ویرایش: {item.editedAt} · نسخه {item.version} · {item.kind === "draft" ? "پیش‌نویس" : "تأییدشده"}</p><TextareaField data-test-id="repo-request-content" label="محتوای نسخه" value={item.content ?? ""} readOnly rows={7} />{current.status === "pending" && <div data-test-id="repo-request-viewer-actions" className="flex gap-2"><Button data-test-id="repo-request-viewer-accept" size="sm" onClick={() => decide("accepted")}>تأیید درخواست</Button><Button data-test-id="repo-request-viewer-reject" variant="outline" size="sm" onClick={() => decide("rejected")}>رد درخواست</Button></div>}</div>;
+}
+function RequestList({ kind }: { kind: string }) {
+  const { repo } = useRepositoryPreview();
+  const { push } = useDialogNavigation();
+  return <PreviewList testId={`repo-requests-${kind}`} items={repo.requests.filter(item => item.kind === kind)} noun="درخواست" render={item => <Button data-test-id={`repo-request-${item.id}`} variant="outline" className="h-auto w-full flex-col items-start gap-1 whitespace-normal px-3 py-2 text-start" onClick={() => push(`نمایش نسخه ${item.version} · ${item.name}`, <RequestViewer item={item} />)}>
+    <span data-test-id={`repo-request-name-${item.id}`} className="text-xs font-medium">{kind === "question" ? "پرسش دربارهٔ " : ""}{item.name}</span>
+    <span data-test-id={`repo-request-person-${item.id}`} className="text-[10px] text-muted-foreground">سازنده: {item.detail} · ویرایش: {item.editedAt}</span>
+    <span data-test-id={`repo-request-status-${item.id}`} className="text-[10px]">نسخه {item.version} · {kind === "draft" ? "پیش‌نویس" : kind === "version" ? "تأییدشده · درخواست عمومی شدن" : "درخواست"} · {item.status === "pending" ? "در انتظار بررسی" : item.status === "accepted" ? "تأیید شد" : "رد شد"}</span>
+  </Button>} />;
 }
 export function RepositoryRequests({ action }: { action: string }) {
   if (action === "document-requests") return <RequestList kind="access" />;

@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { TextField, TextareaField } from "@/components/ui/text-field";
-import { SelectField } from "@/components/ui/select-field";
+import { PathPicker } from "@/components/ui/PathPicker";
+import { documentFolders, folderLabel } from "./move-data";
+import { editDraft } from "./version-state";
 import { TagPicker } from "@/components/ui/TagPicker";
 import { DialogSection } from "@/components/ui/DialogSection";
 import { useDocumentPreview } from "./context";
@@ -15,16 +17,16 @@ export function DocumentEdit({ action, formId, done }: { action: string; formId:
   const [order, setOrder] = useState(String(document.order));
   const [content, setContent] = useState(document.content);
   const [tags, setTags] = useState(document.tags);
-  const [category, setCategory] = useState(document.category);
+  const [categoryPath, setCategoryPath] = useState(document.categoryPath ?? []);
   const [error, setError] = useState("");
   return <form data-test-id="doc-edit-form" id={formId} className="space-y-4" onSubmit={event => {
     event.preventDefault();
     if (action === "edit-document" && !title.trim()) { setError("نام سند را وارد کنید."); return; }
     setDocument(current => ({ ...current,
       ...(action === "edit-document" ? { title: title.trim(), description, order: Number(order) } : {}),
-      ...(action === "edit-content" ? { content, versions: current.versions.map((version, i) => i === 0 ? { ...version, content } : version) } : {}),
+      ...(action === "edit-content" ? { content, versions: current.versions.length ? editDraft(current.versions, (current.versions.find(item => item.approval === "draft") ?? current.versions[0]).id, content) : current.versions } : {}),
       ...(action === "tags" ? { tags } : {}),
-      ...(action === "move" ? { category } : {}),
+      ...(action === "move" ? { category: folderLabel(categoryPath), categoryPath } : {}),
     })); done();
   }}>
     {action === "edit-document" && <>
@@ -35,7 +37,7 @@ export function DocumentEdit({ action, formId, done }: { action: string; formId:
     {action === "edit-content" && <TextareaField data-test-id="doc-edit-content" label="محتوای سند" value={content} onValueChange={setContent} rows={9} description="ویرایش متن در همین پیش‌نمایش؛ نسخه‌های پیشین حفظ می‌شوند." />}
     {action === "tags" && <TagPicker testId="doc-tags" label="تگ‌های سند" value={tags} options={documentTags} onValueChange={setTags} description="برچسب‌ها را جستجو و انتخاب کنید." />}
     {action === "move" && <DialogSection testId="doc-move-section" title="انتقال سند" description={`مقصد «${document.title}» را انتخاب کنید.`}>
-      <SelectField data-test-id="doc-move-target" label="دستهٔ مقصد" value={category} onValueChange={setCategory} options={[...new Set([document.category, "ریشهٔ مخزن", "راهنما", "محصول", "طراحی", "توسعه"])].map(value => ({ value, label: value }))} />
+      <PathPicker nodes={documentFolders} value={categoryPath} onValueChange={setCategoryPath} />
     </DialogSection>}
   </form>;
 }

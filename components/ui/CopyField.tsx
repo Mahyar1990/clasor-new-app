@@ -5,7 +5,7 @@ import { Copy, Check, Eye, EyeOff } from "lucide-react";
 import { TextField } from "@/components/ui/text-field";
 import { Button } from "@/components/ui/button";
 
-export function CopyField({ label, value, secret = false, testId }: { label: string; value: string; secret?: boolean; testId: string }) {
+export function CopyField({ label, value, secret = false, compact = false, testId }: { label: string; value: string; secret?: boolean; compact?: boolean; testId: string }) {
   const [revealed, setRevealed] = useState(false);
   const [status, setStatus] = useState("");
   const input = useRef<HTMLInputElement>(null);
@@ -19,6 +19,6 @@ export function CopyField({ label, value, secret = false, testId }: { label: str
       {secret && <Button data-test-id={`${testId}-reveal`} variant="glass" size="icon" aria-label={revealed ? "پنهان کردن مقدار" : "نمایش مقدار"} aria-pressed={revealed} onClick={() => setRevealed(!revealed)}>{revealed ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}</Button>}
       <Button data-test-id={`${testId}-copy`} variant="glass" size="icon" aria-label={`کپی ${label}`} onClick={copy}>{status === "کپی شد" ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}</Button>
     </div>
-    <p data-test-id={`${testId}-status`} role="status" className="min-h-4 text-[11px] text-muted-foreground">{status}</p>
+    <p data-test-id={`${testId}-status`} role="status" className={compact && !status ? "sr-only" : "min-h-4 text-[11px] text-muted-foreground"}>{status}</p>
   </div>;
 }

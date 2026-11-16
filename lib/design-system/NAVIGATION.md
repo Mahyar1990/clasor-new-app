@@ -1,3 +1,12 @@
+## ناوبری داخلی دیالوگ — ۲۰۲۶/۱۱/۱۶
+
+`NavigableGlassModal` قرارداد GlassModal را حفظ می‌کند. فرزندان از `useDialogNavigation()` و توابع `push(title, content, origin?)` و `back()` استفاده می‌کنند. یک پنجره Base UI باقی می‌ماند؛ صفحات قبلی پنهان ولی mounted هستند تا تب، جستجو و فرم حفظ شوند. بازگشت، اسکرول و فوکوس trigger را بازیابی می‌کند؛ برای trigger حذف‌شده عنوان مقصد فوکوس می‌گیرد. Escape و بستن کل پنجره را می‌بندند؛ بازگشت فقط یک سطح را برمی‌گرداند. Base UI مالک focus trap، dismissal و scroll lock باقی می‌ماند.
+
+`GlassModal.onBack` دکمه بازگشت با نام قابل دسترس دارد. `GlassOptionsMenu.onAction(id, label, trigger)` trigger پایدار ردیف را نیز می‌دهد. منوهای داخل GlassModal با زمینه ModalLayerContext، مانند Select در `--z-dialog + 2` قرار دارند تا فوتر روی گزینه‌ها نیفتد؛ منوی صفحه بیرون دیالوگ در --z-menu باقی می‌ماند؛ تم محلی portal حفظ می‌شود.
+
+نمونه مستقل ناوبری، UploadProgress، PathPicker و محتوای زیر گزینه فعال RadioField در صفحات پوشش‌ها و چیدمان کاتالوگ از app/page.tsx و منوی دیزاین سیستم در دسترس است. عملیات اعضا، گروه‌ها، کلیدها، درخواست‌ها و نسخه‌های داشبورد همین الگو را مصرف می‌کنند.
+
+
 ## ناوبری و Overlay جاری — ۲۰۲۶/۱۱/۱۴
 
 مرجع اجرا: [GlassSidebar](../../components/ui/GlassSidebar.tsx)، [GlassDropdown](../../components/ui/GlassDropdown.tsx)، [GlassModal](../../components/ui/GlassModal.tsx) و ورودی‌های عمومی `sidebar.tsx`، `dropdown-menu.tsx` و `toast.tsx`.
@@ -103,4 +112,4 @@ z-indexهای dialog/menu/toast و backdrop از مبانی مصرف می‌شو
 
 بررسی این مرحله: TypeScript/build، lint و آزمون مرورگر تب RTL و Home/End، مرز صفحه‌بندی، مهار فوکوس دیالوگ، تمرکز امن مخرب، بازگشت فوکوس، Sheet دسکتاپ/موبایل، منو، Toast و Tooltip. شواهد در `.codex/qa-stage-d` ثبت می‌شوند. بررسی یکپارچه صفحه‌خوان انسانی در این مرحله انجام نشده است.
 
-انتخابگر Select در portal یک لایه بالاتر از Dialog قرار می‌گیرد (--z-dialog + 1) تا گزینه‌های داخل فرم modal زیر backdrop پنهان نشوند. Popup داخلی در همان stacking context باقی می‌ماند.
+انتخابگر Select در portal یک لایه بالاتر از Dialog قرار می‌گیرد (--z-dialog + 2) تا گزینه‌های داخل فرم modal زیر backdrop پنهان نشوند. Popup داخلی در همان stacking context باقی می‌ماند.

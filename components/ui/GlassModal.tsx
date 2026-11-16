@@ -2,11 +2,12 @@
 
 import { cn } from "@/lib/utils";
 import type { ReactElement, ReactNode } from "react";
+import { ModalLayerContext } from "@/hooks/use-modal-layer";
 import { usePortalTheme } from "@/hooks/use-portal-theme";
 import { withTestId } from "@/lib/design-system/test-id";
 import { glass } from "@/lib/design-system/classes";
 import { Dialog } from "@base-ui/react/dialog";
-import { X } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface GlassModalProps {
@@ -23,13 +24,14 @@ export interface GlassModalProps {
   surface?: "frosted" | "liquid";
   footer?: ReactNode;
   icon?: ReactNode;
+  onBack?: () => void;
   finalFocus?: Dialog.Popup.Props["finalFocus"];
 }
 
 /** Organism: Base UI owns focus trapping, scroll lock and dismissal. */
 export function GlassModal({
   title, description, children, trigger, open, defaultOpen, onOpenChange,
-  testId = "glass-modal", size = "md", compact = false, surface = "frosted", footer, icon, finalFocus,
+  testId = "glass-modal", size = "md", compact = false, surface = "frosted", footer, icon, finalFocus, onBack,
 }: GlassModalProps) {
   const portalTheme = usePortalTheme();
   return (
@@ -50,7 +52,7 @@ export function GlassModal({
         >
           <header data-test-id="GlassModal-header-5" className="flex shrink-0 items-start justify-between gap-4 border-b border-white/30 p-4 md:p-6">
             <div data-test-id="GlassModal-div-6" className="min-w-0">
-              <Dialog.Title data-test-id="GlassModal-dialog-title-7" className="flex items-center gap-2 text-xl font-bold wrap-anywhere">{icon}{title}</Dialog.Title>
+              <Dialog.Title data-test-id="GlassModal-dialog-title-7" className="flex items-center gap-2 text-xl font-bold wrap-anywhere">{onBack && <Button data-test-id={`${testId}-back`} variant="ghost" size="icon" aria-label="بازگشت" onClick={onBack}><ArrowRight aria-hidden="true" /></Button>}{icon}{title}</Dialog.Title>
               {description && <Dialog.Description data-test-id="GlassModal-dialog-description-8" className="mt-2 text-sm leading-body">{description}</Dialog.Description>}
             </div>
             <Dialog.Close
@@ -62,7 +64,7 @@ export function GlassModal({
             </Dialog.Close>
           </header>
           <div data-test-id={`${testId}-content`} data-dialog-body className="min-h-0 overflow-y-auto overscroll-contain p-4 md:p-6">
-            {children}
+            <ModalLayerContext.Provider value>{children}</ModalLayerContext.Provider>
           </div>
           {footer && <footer data-test-id={`${testId}-footer`} className={glass.dialogFooter}>{footer}</footer>}
         </Dialog.Popup>

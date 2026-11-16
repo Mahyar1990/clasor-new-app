@@ -25,7 +25,7 @@ function SwitchField({ label, description, error, disabledReason, ...props }: Co
   return <ChoiceFrame {...meta} controlId={controlId}><Switch data-test-id="choice-field-switch-3" {...props} id={controlId} aria-describedby={describedBy} aria-invalid={!!error || props["aria-invalid"]} /></ChoiceFrame>
 }
 type RadioFieldProps = ComponentProps<typeof RadioGroup> & FieldMeta & {
-  options: { value: string; label: string; disabled?: boolean; disabledReason?: string }[]
+  options: { value: string; label: string; disabled?: boolean; disabledReason?: string; content?: ReactNode }[]
 }
 function RadioField({ label, description, error, disabledReason, options, ...props }: RadioFieldProps) {
   const meta = { ...props, label, description, error, disabledReason }
@@ -38,6 +38,7 @@ function RadioField({ label, description, error, disabledReason, options, ...pro
           <RadioGroupItem data-test-id={`choice-field-radiogroupitem-6-${String(option.value)}`} id={`${controlId}-${index}`} value={option.value} disabled={props.disabled || option.disabled} aria-describedby={option.disabled && option.disabledReason ? `${controlId}-${index}-reason` : undefined} />
           <FieldLabel htmlFor={`${controlId}-${index}`} className="cursor-pointer text-sm">{option.label}</FieldLabel>
         </div>
+        {props.value === option.value && option.content && <div data-test-id={`choice-field-content-${option.value}`} className="ps-7 pb-2">{option.content}</div>}
         {option.disabled && option.disabledReason && <p data-test-id={`choice-field-p-7-${String(option.value)}`} id={`${controlId}-${index}-reason`} className="text-xs text-muted-foreground">{option.disabledReason}</p>}
       </div>)}
     </RadioGroup>

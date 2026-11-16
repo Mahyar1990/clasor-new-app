@@ -4,6 +4,7 @@ import { useState } from "react";
 import { TextField, TextareaField } from "@/components/ui/text-field";
 import { RadioField, SwitchField } from "@/components/ui/choice-field";
 import { CopyField } from "@/components/ui/CopyField";
+import { changeVersion } from "./version-state";
 import { useDocumentPreview } from "./context";
 
 export function DocumentPublication({ action, formId, done }: { action: string; formId: string; done: () => void }) {
@@ -41,7 +42,7 @@ export function DocumentConfirm({ action, formId, done }: { action: string; form
   const descriptions: Record<string, string> = {
     bookmark: document.bookmarked ? "این سند از نشان‌شده‌ها برداشته می‌شود." : "این سند به نشان‌شده‌های شما اضافه می‌شود.",
     delete: "آیا از حذف این سند اطمینان دارید؟ سند فقط از فهرست همین پیش‌نمایش حذف می‌شود.",
-    "publish-version": "آخرین نسخه عمومی می‌شود؛ وضعیت تأیید محتوای آن تغییری نمی‌کند.",
+    "publish-version": "آخرین نسخهٔ تأییدشده عمومی می‌شود؛ پیش‌نویس تغییر نمی‌کند.",
     hide: document.hidden ? "سند دوباره در انتشار قابل نمایش می‌شود." : "سند در انتشار مخفی می‌شود؛ دسترسی در پنل مستقل می‌ماند.",
     "delete-password": "رمز عبور انتشار این سند نمونه برداشته می‌شود.",
     "delete-link": "لینک انتشار این سند نمونه غیرفعال می‌شود.",
@@ -54,7 +55,7 @@ export function DocumentConfirm({ action, formId, done }: { action: string; form
       hidden: action === "hide" ? !current.hidden : current.hidden,
       password: action === "delete-password" ? "" : current.password,
       publishLink: action === "delete-link" ? "" : current.publishLink,
-      versions: action === "publish-version" ? current.versions.map((version, i) => i === 0 ? { ...version, published: true } : version) : current.versions,
+      versions: action === "publish-version" ? changeVersion(current.versions, (current.versions.find(version => version.approval === "approved" && version.latest) ?? current.versions.find(version => version.approval === "approved"))?.id ?? "", "publish") : current.versions,
     })); done();
   }}>
     <p data-test-id="doc-confirm-description" className="text-xs leading-relaxed">{descriptions[action]}</p>
