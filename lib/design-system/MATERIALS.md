@@ -1,3 +1,7 @@
+## Public reading surface and floating controls — 2026/11/17
+
+The public portal reuses the fixed AppLayout mesh through GlassBackdrop; public header/sidebar/action chrome uses the existing glass.panel contract. ReadingSurface uses the shared glass.readingSurface contract: a quiet 85% white paper fill (slate in dark mode), white edge and restrained shadow, without backdrop filtering. Long-form content intentionally prioritizes readability; controls retain glass. Solid/forced-color fallbacks reuse the existing contract. FloatingOptions adds no new button/menu appearance; it combines the canonical record control and shared glass menu.
+
 ## Rectangular repository list cards — 2026/11/17
 
 GlassTile now uses a larger horizontal layout: a 128px minimum height, image/icon beside title and metadata, and a reserved operation column in normal flow. The operation area has no internal divider and never overlays media or text. The existing glass tile material is retained. Shared repositoryGrid geometry uses adaptive columns with an 18rem preferred minimum, bounded by container width so mobile uses one column. Loading skeletons match the new geometry. This supersedes the earlier square-card layout below.

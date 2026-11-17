@@ -1,3 +1,9 @@
+## Public reading controls — 2026/11/17
+
+`OutlineNavigation` accepts product-independent `OutlineItem` records (`id`, `label`, optional `href` or `children`), controlled `selectedId`, expanded Set and disclosure/selection callbacks. A named nav with nested lists and native links/buttons preserves Tab/Enter/Space behavior without partial ARIA tree semantics. Modified clicks retain native links. Each visible level uses cumulative ten-item LoadMore sessions; callers remount on applied search/filter changes. Selected records expose aria-current=page; folders expose aria-expanded and aria-controls. Empty navigation has an explicit message.
+
+`FloatingOptions` composes the canonical OptionsButton and GlassOptionsMenu in a small glass surface. The consumer owns positioning, item inventory and callbacks; disabled disables the actual trigger. It inherits Base UI dismissal, collision handling and keyboard behavior. `ReadingSurface` accepts title, metadata, body, footer, testId and optional geometry className; it owns a readable paper surface without additional blur. These components contain no publication or version business rules. Examples are reachable on independent navigation/layout catalogue pages.
+
 ## Full-row primary activation — 2026/11/17
 
 SolidDataTable adds optional onRowClick(row, event) without changing non-opted-in tables. The reusable activateRowLink helper activates a marked data-row-link leaf only for plain row-area clicks, preserving the original link/button behavior and synchronous data capture. data-row-ignore marks selection wrappers and action cells. Native interactive targets, events from outside DOM portals, default-prevented/non-primary clicks and active row-text selection are ignored. The document table catalogue demonstrates row-area activation alongside the existing name and independent operation menu; the product table and outline consume the same helper.

@@ -1,3 +1,9 @@
+## Publish routes and outline navigation — 2026/11/17
+
+The catalogue's Clasor samples include the public landing `/clasor-pages/publish` and public documentation example. Each published repository links to `/clasor-pages/publish/[repositoryId]`; each document has `/clasor-pages/publish/[repositoryId]/[documentId]`. Public pages have their own brand/home navigation, without management controls. Unavailable/private repository or document routes show a recovery link and no content fallback.
+
+The shared OutlineNavigation exposes disclosure buttons and document links, controlled selection and expanded folders. Each growing level loads ten at a time with skeletons through shared LoadMore. Desktop sidebar and article have independent scroll areas. A shared repository layout preserves loaded items, expanded folders, applied search and sidebar scroll while document routes change. Below md the right-hand Sheet supplies navigation, traps/restores focus and dismisses after ordinary selection; the center reading region remains available. Floating menus and dialogs use the existing Base UI/portal-theme contracts. Keyboard, local dark, disabled, empty and cumulative-list states are demonstrated independently on navigation/layout.
+
 ## Version commands under Options — 2026/11/17
 
 Open Options → Versions to choose a snapshot or activate View all versions. The independent toolbar version button is removed. Both guarded version changes and the versions dialog now restore focus to the surviving Options trigger. The far-right dock toggle moves into the compact header row. Breadcrumbs and left-side mode/save/options share one row when there is room; tools wrap below on small screens. Document text is bold and the final version includes its approval/public status in parentheses. The submenu uses Base UI radio/keyboard navigation, portal theming and collision handling; no document event listeners or extra floating controller are added.

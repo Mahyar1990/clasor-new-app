@@ -1,3 +1,16 @@
+## Public documentation portal — 2026/11/17
+
+Evidence: working tree on `feat/published-documentation-pages`, based on `0936b58`.
+
+- ui:check passed for 255 React files; lint and TypeScript passed. All 59 tests passed, including the three required workspace suites and four new public-selection cases. They verify approved/public snapshot precedence, exclusions for hidden/deleted/restricted/template records, ancestor retention, encoded deep links and rejection of missing/cyclic/hidden ancestor chains.
+- Browser checks passed for landing repository search/empty recovery, public repository navigation, approved-only content, independent right-side outline loading/search and nested document links. Floating information, published-version selection and clipboard feedback passed; no draft is listed. Dialog dismissal and trigger focus restoration passed.
+- 320/390px bounds passed for the public reading page, right-hand navigation Sheet and floating menu after transition settles. Unavailable/private repository and unsupported document routes show recovery content. The independent catalogue passed native keyboard disclosure/selection, local dark menus/dialogs, focus restoration, empty, disabled, automatic long-list loading, solid material, forced colors and reduced motion. Runtime/console assertions passed on the exercised routes. Browser selectors target visible content because Next may retain inactive routes in the DOM; development chrome was hidden for pointer checks to avoid covering mobile controls.
+- Desktop landing/reader captures were visually reviewed. A targeted browser check also passed retention of loaded records, expanded/collapsed folders, applied search, selected highlighting and sidebar scroll across document segments. The shared repository layout keeps its navigation mounted; article state resets independently. Temporary scripts/captures remain outside the repository.
+- The docs.pod.ir root HTML supplied the public brand/caption, but automated browser access returned a service-access denial and chunk retrieval failed. Exact remote menu inventory and source-layout parity remain unverified; the implemented menu is a provisional local preview. A clarification for its labels was requested. No source account was changed and no production publication/backend/authentication was added.
+- npm run build was attempted on the delivery source and encountered the known Turbopack CSS-worker port-bind permission failure. Production build success is not claimed. The final feedback pass retained no newly verified framework issue; transient errors during module edits did not reproduce in the settled browser checks, so no duplicate feedback report was prepared.
+
+Pages, reusable outline/floating/readable-surface compositions, independent catalogue states and owning contracts ship together. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
 ## Repository cards and shared version workspace — 2026/11/17
 
 Evidence: working tree on `feat/repository-summary-and-document-interactions`, based on `6b98912`. Includes the subsequent repository heading, row activation, rectangular tile, creation placement and divider-removal requests.
