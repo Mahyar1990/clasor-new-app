@@ -32,7 +32,7 @@ export function DocumentEditorToolbar({ editing, canEdit, versions, versionId, o
 
     <div data-test-id="reader-left-actions" className="ms-auto flex min-w-0 max-w-full flex-wrap items-center justify-end gap-1.5">
     {editing && <>
-      {showAutoSave && <label data-test-id="reader-autosave-label" className="flex min-h-8 cursor-pointer items-center gap-1.5 px-1 text-[11px]"><Checkbox data-test-id="reader-autosave" checked={autoSave} onCheckedChange={value => onAutoSaveChange(!!value)} />ذخیرهٔ خودکار</label>}
+      {showAutoSave && <label data-test-id="reader-autosave-label" className="flex min-h-8 cursor-pointer items-center gap-1.5 px-1 text-[11px]!"><Checkbox data-test-id="reader-autosave" checked={autoSave} onCheckedChange={value => onAutoSaveChange(!!value)} />ذخیرهٔ خودکار</label>}
       <Button data-test-id="reader-save" size="sm" variant="outline" disabled={!canEdit || !versions.length || !dirty || showAutoSave && autoSave} onClick={onSave}><Save aria-hidden="true" />ذخیره</Button>
     </>}
     <ModeSwitch data-test-id="reader-mode-switch" testId="reader-mode" label="حالت سند" second={editing} disabled={!canEdit || !versions.length} onValueChange={second => { if (second !== editing) onModeChange(); }} modes={[{ label: "پیش‌نمایش", icon: <Eye /> }, { label: "ویرایش", icon: <Pencil /> }]} />

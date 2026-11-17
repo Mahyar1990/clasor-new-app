@@ -1,3 +1,17 @@
+## Repository cards and shared version workspace — 2026/11/17
+
+Evidence: working tree on `feat/repository-summary-and-document-interactions`, based on `6b98912`. Includes the subsequent repository heading, row activation, rectangular tile, creation placement and divider-removal requests.
+
+- ui:check passed for 240 React files; lint and TypeScript passed. All 55 existing tests passed, including the three required workspace suites. Documentation links and specification index checks passed.
+- Browser checks passed for the entered repository's tinted summary, name inside its card, canonical role below description and removal of duplicate title, Back, tags and Active. Numbered version groups share the clearer flat inset material without adding backdrop blur. Independent catalogue examples, dark portals and 320/390px bounds passed.
+- All five repository list scopes, dashboard and catalogue use larger rectangular tiles. Measured action regions do not overlap titles or custom/default images; no internal divider remains. Create repository sits at the upper-left opposite the title, above search, and restores focus after dismissal. Mobile, solid, forced-color and reduced-motion checks passed; desktop captures were visually reviewed.
+- Table and tree blank-row clicks activate the canonical document/folder control. New-tab snapshot handoff, in-place folder navigation, text selection, action menus, keyboard links and checkbox isolation passed. The disabled unchecked checkbox wrapper at the ten-record limit does not navigate or change selection.
+- Version viewing/editing uses the shared reader workspace with the requested selected version, preserved folder trail and no redundant viewer toolbar. Embedded iframe Escape, View all returning to the existing list, non-overlapping right dock, direct edit entry, dirty discard and navigational approval/publication passed. Only one dialog remains mounted during hosted decisions; Back/Cancel and reopening passed. Injected storage failure retained changes and displayed an error; explicit retry succeeded. Local dark menu/decision flow and mobile solid/forced-color/reduced-motion checks passed. The submenu footer was also exercised by keyboard.
+- Runtime/console checks passed across six product/catalogue/workspace routes and four internal catalogue navigations. Temporary browser scripts and captures remain outside the repository. All writes use fictional local records; the source account was untouched.
+- npm run build was attempted and encountered the previously reported Turbopack CSS worker port-bind permission failure. Production build success is not claimed. The final feedback audit retained no new qualifying Next.js issue; no duplicate report was prepared.
+
+Page revisions, shared components, independent catalogue examples and owning contracts ship together. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
 ## Compact header, breadcrumb and nested versions — 2026/11/17
 
 Evidence: working tree on `feat/compact-reader-header-and-version-menu`, based on `d98ca43`. This includes the subsequent breadcrumb order/status and responsive alignment requests.

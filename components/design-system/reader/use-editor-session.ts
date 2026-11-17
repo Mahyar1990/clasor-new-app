@@ -7,9 +7,9 @@ function persist(next: DocumentPreview, onChange: DocumentSetter, onCommit?: (ne
   if (onCommit) return onCommit(next);
   onChange(next); return true;
 }
-export function useEditorSession(document: DocumentPreview, onChange: DocumentSetter, onCommit?: (next: DocumentPreview) => boolean) {
-  const [editing, setEditing] = useState(false);
-  const [versionId, setVersionId] = useState("");
+export function useEditorSession(document: DocumentPreview, onChange: DocumentSetter, onCommit?: (next: DocumentPreview) => boolean, options: { initialVersionId?: string; initialEditing?: boolean; pauseAutosave?: boolean } = {}) {
+  const [editing, setEditing] = useState(options.initialEditing ?? false);
+  const [versionId, setVersionId] = useState(() => { const selected = document.versions.find(item => item.id === options.initialVersionId); return selected && options.initialEditing ? editableVersion(document.versions, selected).id : options.initialVersionId ?? ""; });
   const [autoSave, setAutoSave] = useState(true);
   const [buffers, setBuffers] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
@@ -28,10 +28,10 @@ export function useEditorSession(document: DocumentPreview, onChange: DocumentSe
     setMessage("تغییرات ذخیره شد."); return true;
   }, [document, version, value, onChange, onCommit]);
   useEffect(() => {
-    if (!editing || !capabilities.autosave || !autoSave || !dirty || pending) return;
+    if (!editing || !capabilities.autosave || !autoSave || !dirty || pending || options.pauseAutosave) return;
     const timer = setTimeout(save, 700);
     return () => clearTimeout(timer);
-  }, [editing, capabilities.autosave, autoSave, dirty, pending, save]);
+  }, [editing, capabilities.autosave, autoSave, dirty, pending, options.pauseAutosave, save]);
   useEffect(() => {
     if (!dirty) return;
     const warn = (event: BeforeUnloadEvent) => event.preventDefault();
@@ -51,10 +51,10 @@ export function useEditorSession(document: DocumentPreview, onChange: DocumentSe
     setPending(null); setMessage(""); setError("");
   }
   function leave(saveChanges: boolean) {
-    if (!pending) return;
-    if (saveChanges && !save()) return;
+    if (!pending) return false;
+    if (saveChanges && !save()) return false;
     if (!saveChanges && version) setBuffers(current => { const next = { ...current }; delete next[version.id]; return next; });
-    applyNavigation(pending);
+    applyNavigation(pending); return true;
   }
   function approve(published: boolean) {
     if (!version) return false;

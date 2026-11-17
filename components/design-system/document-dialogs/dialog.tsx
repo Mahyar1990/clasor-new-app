@@ -6,6 +6,7 @@ import { NavigableGlassModal } from "@/components/ui/DialogNavigation";
 import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { Button } from "@/components/ui/button";
 import { CopyField } from "@/components/ui/CopyField";
+import { readerFolderPath, type ReaderFolder } from "../reader/reader-path";
 import { DocumentPreviewProvider, useDocumentPreview, type DocumentSetter } from "./context";
 import { DocumentEdit } from "./edit";
 import { PanelAccess } from "./panel-access";
@@ -45,8 +46,8 @@ function Content({ selection, close, announce, fallbackFocusRef }: { selection: 
     {action === "view-link" && <CopyField testId="doc-share-link" label="لینک انتشار نمونه" value={document.publishLink} />}
   </NavigableGlassModal>;
 }
-export function DocumentActionDialog({ document, onChange, repository, ...props }: { document: DocumentPreview; repository?: RepositoryPreview; onChange: DocumentSetter; selection: DialogSelection; close: () => void; announce: (message: string) => void; fallbackFocusRef?: RefObject<HTMLElement | null> }) {
+export function DocumentActionDialog({ document, onChange, repository, folders, onCommit, ...props }: { folders?: ReaderFolder[]; onCommit?: (next: DocumentPreview) => boolean; document: DocumentPreview; repository?: RepositoryPreview; onChange: DocumentSetter; selection: DialogSelection; close: () => void; announce: (message: string) => void; fallbackFocusRef?: RefObject<HTMLElement | null> }) {
   const library = useOptionalLibrary();
   const repo = repository ?? library?.repositories.find(item => item.id === document.repositoryId) ?? (!library ? initialRepository() : undefined);
-  return <DocumentPreviewProvider repository={repo} document={document} setDocument={onChange}><Content {...props} /></DocumentPreviewProvider>;
+  return <DocumentPreviewProvider folders={folders ?? readerFolderPath(document, library?.documents ?? [])} onCommit={onCommit} repository={repo} document={document} setDocument={onChange}><Content {...props} /></DocumentPreviewProvider>;
 }

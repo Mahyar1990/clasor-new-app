@@ -5,6 +5,7 @@ import { FileText } from "lucide-react";
 import { DashboardTabs } from "./clasor-dashboard-tabs";
 import { GlassScrollArea } from "@/components/ui/GlassScrollArea";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { activateRowLink } from "@/lib/design-system/row-activation";
 import { SolidDataTable } from "@/components/ui/SolidDataTable";
 import LoadMore from "@/components/workspace/load-more";
 import { getLoadedItems } from "@/lib/workspace/documents";
@@ -24,7 +25,7 @@ export function DocumentList({ documents, onAction, onFolder, selection, editabl
   return <>
     <GlassScrollArea data-test-id="dashboard-documents-scroll" label="فهرست سندها">
       <div data-test-id="dashboard-documents-list" ref={listRef} className="[&_table]:min-w-[24rem]">
-        <SolidDataTable layout="fixed" appearance="glass" testId="dashboard-documents-table" hideCaption caption="فهرست سندها" rows={result.rows} getRowId={row => row.id} emptyMessage="سندی برای نمایش وجود ندارد." columns={[
+        <SolidDataTable onRowClick={(_row, event) => activateRowLink(event)} layout="fixed" appearance="glass" testId="dashboard-documents-table" hideCaption caption="فهرست سندها" rows={result.rows} getRowId={row => row.id} emptyMessage="سندی برای نمایش وجود ندارد." columns={[
 
           { id: "name", label: "نام سند", render: row => <div data-test-id={`document-name-cell-${row.id}`} className="flex min-w-0 items-center gap-1">{selection && <DocumentChoice document={row} selection={selection} />}<DocumentName document={row} onOpen={() => row.kind === "folder" && onFolder?.(row.id)} /></div> },
           { id: "creator", label: "نام سازنده", kind: "metadata", render: row => row.creator },

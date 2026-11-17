@@ -1,3 +1,13 @@
+## Repository summary and shared document surfaces — 2026/11/17
+
+An entered repository owns its page heading inside the tinted summary card. Description comes next and canonical RoleBadge follows it. Back, tags and the redundant Active label are removed from that summary; archived state remains visible when relevant. LibraryShell's explicit titleInContent placement leaves ordinary list/unavailable headings intact and preserves the shared heading ref for destructive-action focus. Catalogue summaries retain an h2 within their own section. Repository lists use larger rectangular tiles with an in-flow operation column and no internal divider. Creation moves into the title row at the upper-left through LibraryShell titleActions; search remains below.
+
+Document and folder rows now activate their existing primary link/button across blank cells in tables and the outline. Documents keep native new-tab snapshot capture; folders keep in-place navigation/expansion. Checkbox wrappers, operation cells, interactive controls, portal content, selected text and non-primary clicks are excluded. Name links remain the keyboard target; table rows keep their native semantics instead of gaining duplicate button roles or tab stops.
+
+Version view and edit both compose the actual EditorWorkspace used by the new-tab page. The selected version/initial editing state, repository, folder trail and commit acknowledgement pass through document context. Embedded workspaces use a section landmark, preserve iframe Escape and return View all to the surrounding version list. Creation/clone remains a compact number-only flow. No redundant zoom/copy toolbar remains in the active version viewer.
+
+Embedded dirty/approval/publication decisions use the existing NavigableGlassModal stack via a decision host, preserving one dialog instead of adding overlays. The decision page reads current navigation itself, retains commit-error retry behavior and cancels its pending request on actual unmount without treating Strict Mode's effect probe as a user cancellation. Approval pauses autosave; Back returns to the same mounted editor state and original control. New-tab workspaces retain their ordinary decision dialogs. Independent table, repository and version catalogue examples exercise these same compositions.
+
 ## Compact reader breadcrumb and tab handoff — 2026/11/17
 
 The reader header now uses repository → ancestor folders → bold document title → selected version (draft/approved/approved public). The former detached version-name/status group is removed. The dock toggle and breadcrumb are vertically centered; tools share the row at sufficient width and wrap below on small screens.

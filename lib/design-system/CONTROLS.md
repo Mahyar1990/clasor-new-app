@@ -1,3 +1,7 @@
+## Full-row primary activation — 2026/11/17
+
+SolidDataTable adds optional onRowClick(row, event) without changing non-opted-in tables. The reusable activateRowLink helper activates a marked data-row-link leaf only for plain row-area clicks, preserving the original link/button behavior and synchronous data capture. data-row-ignore marks selection wrappers and action cells. Native interactive targets, events from outside DOM portals, default-prevented/non-primary clicks and active row-text selection are ignored. The document table catalogue demonstrates row-area activation alongside the existing name and independent operation menu; the product table and outline consume the same helper.
+
 ## Versions inside the reader Options menu — 2026/11/17
 
 The standalone version trigger is retired from the reader toolbar. Its existing selection radio group and View all command now render in the shared Options menu's “نسخه‌های سند” submenu, alongside the existing approval/download actions. This removes one visible control without changing version selection, draft guards or the large versions dialog. The compact header breadcrumb now carries repository, ancestor folders, bold document title and the version name with parenthesized draft/approved/public status; the separate name/status block is removed.

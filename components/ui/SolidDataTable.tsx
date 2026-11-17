@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { tableColumnWidth, type TableColumnKind } from "@/lib/design-system/table-contract";
 import { glass } from "@/lib/design-system/classes";
@@ -22,6 +22,7 @@ export interface SolidDataTableProps<T> {
   testId?: string;
   appearance?: "solid" | "glass";
   layout?: "auto" | "fixed";
+  onRowClick?: (row: T, event: MouseEvent<HTMLTableRowElement>) => void;
 }
 
 /** Semantic table with a glass wrapper and an optional translucent data surface. */
@@ -29,7 +30,7 @@ export function SolidDataTable<T>({
   caption, columns, rows, getRowId, hideCaption = false,
   emptyMessage = "اطلاعاتی برای نمایش وجود ندارد.",
   testId = "solid-table",
-  appearance = "solid",
+  appearance = "solid", onRowClick,
   layout = columns.some(column => column.kind === "actions") ? "fixed" : "auto",
 }: SolidDataTableProps<T>) {
   return (
@@ -64,10 +65,11 @@ export function SolidDataTable<T>({
               <tr
                 key={rowId}
                 data-test-id={`${testId}-row-${rowId}`}
-                className={appearance === "glass" ? glass.tableRow : "border-b border-slate-200 bg-white last:border-b-0 hover:bg-slate-100 focus-within:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800 dark:focus-within:bg-slate-800"}
+                onClick={onRowClick ? event => onRowClick(row, event) : undefined}
+                className={cn(appearance === "glass" ? glass.tableRow : "border-b border-slate-200 bg-white last:border-b-0 hover:bg-slate-100 focus-within:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800 dark:focus-within:bg-slate-800", onRowClick && "cursor-pointer")}
               >
                 {columns.map(column => (
-                  <td data-test-id={`SolidDataTable-td-9-${String(column.id)}`} key={column.id} className={cn(glass.tableCell, "max-w-sm", column.kind === "actions" && glass.tableActionCell)}>
+                  <td data-row-ignore={column.kind === "actions" ? true : undefined} data-test-id={`SolidDataTable-td-9-${String(column.id)}`} key={column.id} className={cn(glass.tableCell, "max-w-sm", column.kind === "actions" && glass.tableActionCell)}>
                     {column.kind === "actions" ? <div data-test-id={`${testId}-actions-${rowId}`} className={glass.tableActions}>{column.render(row)}</div> : column.render(row)}
                   </td>
                 ))}

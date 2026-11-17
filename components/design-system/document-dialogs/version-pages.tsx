@@ -1,40 +1,45 @@
 "use client";
 import { useState } from "react";
-import { EditorFrame } from "@/components/ui/EditorFrame";
-import { DocumentCanvas } from "../reader/document-canvas";
+import { EditorWorkspace } from "../reader/editor-workspace";
+import { WorkspaceDecisionPage, type DecisionHost } from "../reader/workspace-decisions";
+import { readerFolderPath } from "../reader/reader-path";
+import { useOptionalLibrary } from "../library/store";
 import { Button } from "@/components/ui/button";
 import { TextField, TextareaField } from "@/components/ui/text-field";
 import { CopyField } from "@/components/ui/CopyField";
 import { SelectField } from "@/components/ui/select-field";
 import { useDialogNavigation } from "@/components/ui/DialogNavigation";
 import { useDocumentPreview } from "./context";
-import { newDraft, editDraft, changeVersion, versionKey, type VersionAction } from "./version-state";
+import { newDraft, changeVersion, versionKey, type VersionAction } from "./version-state";
 import type { DocumentVersion } from "./model";
+function VersionWorkspace({ version, editing = false }: { version: DocumentVersion; editing?: boolean }) {
+  const { document, setDocument, repository, folders, onCommit } = useDocumentPreview();
+  const library = useOptionalLibrary();
+  const { back, push } = useDialogNavigation();
+  const host: DecisionHost = request => push(request.title, <WorkspaceDecisionPage request={request} />, request.origin?.());
+  return <div data-test-id={editing ? "doc-version-editor-workspace" : "doc-version-viewer"} className="flex h-full min-h-0 flex-1 flex-col"><EditorWorkspace document={document} repository={repository} folders={folders ?? readerFolderPath(document, library?.documents ?? [])} onChange={setDocument} onCommit={onCommit} initialVersionId={version.id} initialEditing={editing} embedded onEscape={back} onVersions={back} decisionHost={host} /></div>;
+}
 export function VersionEditor({ version, clone = false }: { version?: DocumentVersion; clone?: boolean }) {
+  return version && !clone ? <VersionWorkspace version={version} editing /> : <VersionCreation version={version} />;
+}
+function VersionCreation({ version }: { version?: DocumentVersion }) {
   const { document, setDocument } = useDocumentPreview();
   const { back } = useDialogNavigation();
-  const [number, setNumber] = useState(version && !clone ? version.name.replace("نسخهٔ ", "") : "");
-  const [content, setContent] = useState(version?.content ?? "");
+  const [number, setNumber] = useState("");
   const [error, setError] = useState("");
-  const creating = !version || clone;
-  return <form data-test-id="doc-version-editor" className={creating ? "space-y-3" : "flex h-full min-h-0 flex-1 flex-col gap-3"} onSubmit={event => {
+  return <form data-test-id="doc-version-editor" className="space-y-3" onSubmit={event => {
     event.preventDefault();
     const name = `نسخهٔ ${number.trim()}`;
-    if (creating && document.versions.some(item => versionKey(item.name) === versionKey(name) && item.approval === "draft")) { setError("پیش‌نویسی با این شماره وجود دارد؛ آن را ویرایش کنید."); return; }
-    setDocument(current => { const versions = creating ? newDraft(current.versions, name, version?.content ?? "", crypto.randomUUID()) : editDraft(current.versions, version.id, content); return { ...current, updatedAt: new Date().toISOString(), versions, content: creating ? current.content : versions.find(item => item.approval === "draft")?.content ?? current.content }; }); back();
+    if (document.versions.some(item => versionKey(item.name) === versionKey(name) && item.approval === "draft")) { setError("پیش‌نویسی با این شماره وجود دارد؛ آن را ویرایش کنید."); return; }
+    setDocument(current => ({ ...current, updatedAt: new Date().toISOString(), versions: newDraft(current.versions, name, version?.content ?? "", crypto.randomUUID()) })); back();
   }}>
-    {creating && <TextField data-test-id="doc-version-number" label="شماره نسخه" value={number} onValueChange={setNumber} error={error} maxLength={40} required />}
-    {version?.approval === "approved" && !clone && <p data-test-id="doc-version-edit-note" className="text-xs text-muted-foreground">تغییرات در پیش‌نویس هم‌شماره ذخیره می‌شوند؛ محتوای تأییدشده حفظ می‌شود.</p>}
-    {!creating && <EditorFrame testId="doc-version-edit-content" title={`${document.title} · ${version?.name}`} value={content} onValueChange={setContent} readOnly={false} onEscape={back} />}
-    {creating && <p data-test-id="doc-version-create-note" className="text-xs text-muted-foreground">پس از ساخت نسخه، محتوا را از گزینهٔ ویرایش در دیالوگ جداگانه تغییر دهید.</p>}
-    <Button data-test-id="doc-version-editor-save" type="submit">{creating ? "ایجاد نسخه جدید" : "ذخیره پیش‌نویس"}</Button>
+    <TextField data-test-id="doc-version-number" label="شماره نسخه" value={number} onValueChange={setNumber} error={error} maxLength={40} required />
+    <p data-test-id="doc-version-create-note" className="text-xs text-muted-foreground">پس از ساخت نسخه، محتوا را از گزینهٔ ویرایش در دیالوگ جداگانه تغییر دهید.</p>
+    <Button data-test-id="doc-version-editor-save" type="submit">ایجاد نسخه جدید</Button>
   </form>;
 }
 export function VersionViewer({ version }: { version: DocumentVersion }) {
-  const { document } = useDocumentPreview();
-  const current = document.versions.find(item => item.id === version.id) ?? version;
-  const { back } = useDialogNavigation();
-  return <div data-test-id="doc-version-viewer" className="flex h-full min-h-0 flex-1 flex-col"><DocumentCanvas document={document} version={current} onEscape={back} /></div>;
+  return <VersionWorkspace version={version} />;
 }
 export function VersionConfirmation({ version, action, label }: { version: DocumentVersion; action: VersionAction; label: string }) {
   const { document, setDocument } = useDocumentPreview();
