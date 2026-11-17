@@ -1,6 +1,8 @@
 "use client";
 import { useRef, useState, type RefObject } from "react";
-import Link from "next/link";
+import { glass } from "@/lib/design-system/classes";
+import { RoleBadge } from "@/components/ui/status-badge";
+import { Badge } from "@/components/ui/badge";
 import { OptionsButton } from "@/components/ui/OptionsButton";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
 import { RepositoryImage } from "@/components/ui/RepositoryImage";
@@ -9,16 +11,21 @@ import { RepositoryPreviewProvider } from "../repository-dialogs/context";
 import { RepositoryActionDialog, type DialogSelection } from "../repository-dialogs/dialog";
 import { useLibrary, type LibraryRepository } from "./store";
 import { updateRepositoryRecords } from "./repository-state";
-export function RepositoryHeader({ repository, fallbackFocusRef }: { repository: LibraryRepository; fallbackFocusRef?: RefObject<HTMLElement | null> }) {
+const displayRoles = { "مالک": "owner", "مدیر": "admin", "ویرایشگر": "editor" } as const;
+export function RepositoryHeader({ repository, fallbackFocusRef, titleRef }: { titleRef?: RefObject<HTMLHeadingElement | null>; repository: LibraryRepository; fallbackFocusRef?: RefObject<HTMLElement | null> }) {
   const { setRepositories } = useLibrary();
   const [selection, setSelection] = useState<DialogSelection | null>(null);
   const [message, setMessage] = useState("");
   const heading = useRef<HTMLElement>(null);
-  return <section data-test-id="repository-detail-card" ref={heading} tabIndex={-1} className="mb-4 shrink-0 border-b border-white/35 pb-3">
-    <Link data-test-id="repository-detail-back" href={repository.shared ? "/clasor-pages/shared-repositories" : "/clasor-pages/my-repositories"} className="mb-3 inline-block rounded-md text-xs text-primary focus-visible:outline-2 focus-visible:outline-ring">بازگشت به مخزن‌ها ←</Link>
+  const Heading = titleRef ? "h1" : "h2";
+  return <section data-test-id="repository-detail-card" ref={heading} tabIndex={-1} className={`${glass.insetCard} mb-4 shrink-0 p-2`}>
     <div data-test-id="repository-detail-information" className="flex items-start gap-3">
       <RepositoryImage testId="repository-detail-image" image={repository.image} name={repository.name} className="h-16 w-24 shrink-0" />
-      <div data-test-id="repository-detail-text" className="min-w-0 flex-1 space-y-1"><p data-test-id="repository-detail-role" className="text-[10px] text-muted-foreground">{repository.role} · {repository.archived ? "بایگانی‌شده" : "فعال"}</p><p data-test-id="repository-detail-description" className="text-xs wrap-anywhere">{repository.description}</p><p data-test-id="repository-detail-tags" className="text-[10px] text-muted-foreground wrap-anywhere">تگ‌های مخزن: {repository.tags?.join(" · ") || "بدون تگ"}</p></div>
+      <div data-test-id="repository-detail-text" className="min-w-0 flex-1 space-y-1">
+        <Heading data-test-id="repository-detail-name" ref={titleRef} tabIndex={titleRef ? -1 : undefined} className="text-sm font-bold wrap-anywhere">{repository.name}</Heading>
+        <p data-test-id="repository-detail-description" className="text-xs wrap-anywhere">{repository.description}</p>
+        <div data-test-id="repository-detail-meta" className="flex flex-wrap items-center gap-1.5"><span data-test-id="repository-detail-role"><RoleBadge role={displayRoles[repository.role]} /></span>{repository.archived && <Badge data-test-id="repository-detail-state" variant="outline" className={glass.statusNeutral}>بایگانی‌شده</Badge>}</div>
+      </div>
       <GlassOptionsMenu testId="repository-detail-options" title={repository.name} description="عملیات مخزن" trigger={<OptionsButton data-test-id="repository-detail-options" aria-label="عملیات مخزن" />} items={repositoryActionItems(repository)} onAction={(id, label, trigger) => setSelection({ id, label, trigger: trigger ?? null })} />
     </div>
     <p data-test-id="repository-detail-status" role="status" className="sr-only">{message}</p>

@@ -23,12 +23,10 @@ export function RepositoriesPage({ scope }: { scope: RepositoryScope }) {
   const heading = useRef<HTMLDivElement>(null);
   const visible = queryRepositories(repositories, scope, query);
   const selected = repositories.find(item => item.id === selection?.recordId);
-  return <LibraryShell page={scope} title={repositoryTitles[scope]}>
+  return <LibraryShell page={scope} title={repositoryTitles[scope]} titleActions={<Button data-test-id="library-repository-create" size="sm" className="shrink-0" onClick={event => setCreate(event.currentTarget)}><Plus aria-hidden="true" />ایجاد مخزن</Button>}>
     <div data-test-id="library-repository-toolbar" ref={heading} tabIndex={-1} className="mb-3 shrink-0 space-y-3">
       <CompactSearch testId="library-repository-search" label="جستجوی مخزن" value={draftQuery} onValueChange={setDraftQuery} onApply={() => setQuery(draftQuery)} />
-      <div data-test-id="library-repository-create-row" className="flex items-center gap-3">
-      <Button data-test-id="library-repository-create" size="sm" onClick={event => setCreate(event.currentTarget)}><Plus aria-hidden="true" />ایجاد مخزن</Button>
-      <span data-test-id="library-repository-count" role="status" className="pb-2 text-xs text-muted-foreground">{visible.length} مخزن</span></div>
+      <span data-test-id="library-repository-count" role="status" className="block text-xs text-muted-foreground">{visible.length} مخزن</span>
     </div>
     <p data-test-id="library-repository-status" role="status" className="sr-only">{message}</p>
     <div data-test-id="library-repository-results" className="flex h-[calc(100dvh-17rem)] min-h-80 flex-col xl:h-auto xl:min-h-0 xl:flex-1">

@@ -22,8 +22,8 @@ export function DocumentsPage({ shared = false, repositoryId }: { shared?: boole
   const { repositories } = useLibrary();
   const titleRef = useRef<HTMLHeadingElement>(null);
   const repo = repositories.find(item => item.id === repositoryId && !item.deleted && !item.left);
-  return <LibraryShell titleRef={titleRef} page={repo ? repo.shared ? "shared-repositories" : "my-repositories" : shared ? "shared-documents" : "my-documents"} title={repositoryId ? repo?.name ?? "مخزن در دسترس نیست" : shared ? "سندهای اشتراکی" : "سندهای من"}>
-    {repo && <RepositoryHeader repository={repo} fallbackFocusRef={titleRef} />}
+  return <LibraryShell titleRef={titleRef} titleInContent={!!repo} page={repo ? repo.shared ? "shared-repositories" : "my-repositories" : shared ? "shared-documents" : "my-documents"} title={repositoryId ? repo?.name ?? "مخزن در دسترس نیست" : shared ? "سندهای اشتراکی" : "سندهای من"}>
+    {repo && <RepositoryHeader repository={repo} titleRef={titleRef} fallbackFocusRef={titleRef} />}
     {(!repositoryId || repo) && <DocumentBrowser key={repositoryId ?? String(shared)} repositoryId={repositoryId} shared={repo?.shared ?? shared} writable={!repo?.archived} />}
     {repositoryId && !repo && <p data-test-id="repository-not-found" className="text-sm">مخزن حذف شده یا دیگر به آن دسترسی ندارید. از منوی کناری یک مخزن دیگر انتخاب کنید.</p>}
   </LibraryShell>;

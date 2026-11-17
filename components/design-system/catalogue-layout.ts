@@ -122,3 +122,5 @@ export const catalogueLayout = [
   "[@media((max-width:639px))]:[&_[data-slot=ds-sample]_>_header]:[gap:8px]",
   "[@media((prefers-reduced-motion:reduce))]:[&_.swatch:hover]:[transform:none]",
 ].join(" ");
+
+export const repositoryTileDemoLayout = "grid max-w-4xl grid-cols-1 gap-3 md:grid-cols-2";

@@ -15,6 +15,7 @@ import { repositoryActionItems } from "./repository-dialogs/options";
 import { updateRepositoryRecords } from "./library/repository-state";
 import { useLibrary } from "./library/store";
 import { RepositorySkeletons } from "./library/repository-skeletons";
+import { glass } from "@/lib/design-system/classes";
 import { GlassTile } from "@/components/ui/GlassTile";
 import { RepositoryPreviewProvider, type RepositoryPreview } from "./repository-dialogs/context";
 import { RepositoryActionDialog, type DialogSelection } from "./repository-dialogs/dialog";
@@ -29,7 +30,7 @@ export function RepositoryList({ repositories, onAction }: { repositories: Repos
   const triggers = useRef(new Map<string, HTMLButtonElement>());
   const result = getLoadedItems(repositories, count);
   return <GlassScrollArea data-test-id="dashboard-repositories-scroll" label="فهرست مخزن‌ها">
-    <div data-test-id="dashboard-repositories-grid" ref={listRef} className="grid grid-cols-2 gap-2 sm:grid-cols-[repeat(auto-fill,minmax(8rem,1fr))]">
+    <div data-test-id="dashboard-repositories-grid" ref={listRef} className={glass.repositoryGrid}>
       {result.rows.map(repository => <div data-test-id={`repository-tile-wrap-${repository.id}`} data-load-more-item key={repository.id}>
         <GlassTile testId={`dashboard-repository-card-${repository.id}`} title={repository.name} icon={<FolderOpen />} media={<RepositoryImage testId={`repository-image-${repository.id}`} image={repository.preview.image} name={repository.name} className="h-full w-full" />} onOpen={() => router.push(`/clasor-pages/repositories/${encodeURIComponent(repository.id)}`)} metadata={<><span data-test-id={`dashboard-repository-role-${repository.id}`}>{repository.role}</span><span data-test-id={`dashboard-repository-date-${repository.id}`}>{formatDocumentDate(repository.updatedAt)}</span>{repository.preview.bookmarked && <Bookmark data-test-id={`dashboard-repository-bookmarked-${repository.id}`} aria-label="نشان‌شده" className="size-3 text-primary" />}</>} actions={
         <GlassOptionsMenu testId={`dashboard-repository-action-${repository.id}`} title={repository.name} description={`گزینه‌های مخزن · ${repository.role}`} icon={<FolderOpen />} triggerRef={node => { if (node) triggers.current.set(repository.id, node); else triggers.current.delete(repository.id); }}

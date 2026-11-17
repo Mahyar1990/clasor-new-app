@@ -1,4 +1,5 @@
 "use client";
+import { repositoryTileDemoLayout } from "./catalogue-layout";
 import { OptionsButton } from "@/components/ui/OptionsButton";
 import { ReaderWorkspaceCatalogue } from "./reader-workspace-catalogue";
 import { DocumentInteractionsCatalogue } from "./document-interactions-catalogue";
@@ -25,9 +26,9 @@ function Patterns() {
   const [filters, setFilters] = useState(emptyFilters);
   const [opened, setOpened] = useState<{ kind: string; trigger: HTMLElement } | null>(null);
   const [notice, setNotice] = useState("");
-  return <GlassPreviewFrame title="فهرست‌های کلاسور؛ سطح ساده، کارت مربعی و ساخت مرحله‌ای" testId="library-patterns-catalogue">
+  return <GlassPreviewFrame title="فهرست‌های کلاسور؛ سطح ساده، کارت مستطیلی و ساخت مرحله‌ای" testId="library-patterns-catalogue">
     <GlassCard data-test-id="catalogue-flat-nesting" className="p-3"><DialogSection testId="catalogue-flat-section" title="گروه داخلی بدون شیشهٔ تکراری"><p data-test-id="catalogue-flat-copy" className="text-xs text-muted-foreground">سطح اصلی شیشه‌ای است؛ گروه‌های داخل آن با فاصله و جداکننده تعریف می‌شوند.</p></DialogSection></GlassCard>
-    <div data-test-id="library-patterns-tiles" className="grid max-w-sm grid-cols-2 gap-2">
+    <div data-test-id="library-patterns-tiles" className={repositoryTileDemoLayout}>
       <GlassTile testId="catalogue-square-tile" media={<RepositoryImage testId="catalogue-repository-photo" image="/repositories/sample-cover.svg" name="مستندات محصول" className="h-full w-full" />} title="مستندات محصول" icon={<FolderOpen />} metadata="مالک · فعال" actions={<OptionsButton data-test-id="catalogue-square-actions" aria-label="عملیات مخزن نمونه" onClick={() => setNotice("کارت و عملیات آن دو کنترل مستقل‌اند.")} />} onOpen={() => setNotice("مشاهدهٔ اطلاعات مخزن نمونه")} />
       <GlassTile testId="catalogue-default-tile" title="راهنمای تیم" icon={<FolderOpen />} media={<RepositoryImage testId="catalogue-repository-default" name="راهنمای تیم" className="h-full w-full" />} metadata="تصویر پیش‌فرض" actions={<OptionsButton data-test-id="catalogue-default-actions" aria-label="عملیات نمونهٔ پیش‌فرض" onClick={() => setNotice("تصویر پیش‌فرض برای مخزن بدون تصویر نمایش داده می‌شود.")} />} onOpen={() => setNotice("نمونهٔ کارت با تصویر پیش‌فرض")} />
     </div>

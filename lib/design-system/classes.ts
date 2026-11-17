@@ -42,6 +42,7 @@ export const glass = {
 
   dialogCompact: "max-h-[min(46rem,calc(100dvh-2rem))] [&_[data-slot=button]]:text-xs [&_[role=tab]]:text-xs [&_[role=combobox]]:text-xs [&_[data-test-id=GlassModal-header-5]>button]:size-8 [--control-height:2.25rem] [&_[data-test-id=GlassModal-header-5]]:gap-3 [&_[data-test-id=GlassModal-header-5]]:p-4 [&_[data-test-id=GlassModal-dialog-title-7]]:text-base [&_[data-test-id=GlassModal-dialog-description-8]]:text-xs [&_[data-dialog-body]]:p-4 [&_[data-slot=input]]:text-xs [&_[data-slot=textarea]]:text-xs [&_label]:text-xs",
   contentSurface,
+  insetCard: `${contentSurface} border-white/65 bg-white/35 shadow-[inset_0_1px_0_rgb(255_255_255/0.65),0_1px_4px_rgb(65_45_95/0.04)] dark:border-white/25 dark:bg-white/10 dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.1)] ${opaque}`,
   formActions: "flex flex-wrap items-center gap-2 [&>button]:m-0! [&>button]:h-8 [&>button]:text-xs",
   recordOptions: `size-8 border-white/75 bg-white/75 text-slate-800 shadow-[inset_0_1px_0_rgb(255_255_255/0.85)] dark:border-white/40 dark:bg-slate-800/85 dark:text-white [&>svg]:size-4 [&>svg]:stroke-2 ${opaque}`,
   recordActions: "flex shrink-0 items-center justify-end px-1",
@@ -50,6 +51,8 @@ export const glass = {
   searchInput: "h-8 min-w-0 flex-1 rounded-none! border-0! bg-transparent! shadow-none! backdrop-blur-none! focus:ring-0! focus:outline-none!",
   searchMode: "h-8! w-22! shrink-0 rounded-none! border-0! border-e! border-gray-300/40! bg-transparent! shadow-none! backdrop-blur-none! text-xs hover:translate-y-0! active:translate-y-0! focus:ring-0!",
   searchApply: "h-8 gap-1 rounded-none! border-0! border-s! border-gray-300/40! bg-white/30! px-2 text-xs shadow-none! hover:translate-y-0! focus-visible:outline-offset-[-2px]",
+  repositoryGrid: "grid grid-cols-[repeat(auto-fill,minmax(min(100%,18rem),1fr))] gap-3",
+  repositoryTileLayout: "grid min-h-32 min-w-0 grid-cols-[minmax(0,1fr)_auto] overflow-hidden",
   repositoryTile: `${contentSurface} border-white/65 bg-white/35 shadow-[0_2px_7px_rgb(65_45_95/0.08)] dark:border-white/25 dark:bg-white/10 ${opaque}`,
   compactRecord: `${contentSurface} flex items-center gap-2 px-2 py-1.5`,
   dialogSection: "border-t border-white/25 pt-3 first:border-t-0 first:pt-0",

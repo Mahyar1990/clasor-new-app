@@ -1,3 +1,15 @@
+## Rectangular repository list cards — 2026/11/17
+
+GlassTile now uses a larger horizontal layout: a 128px minimum height, image/icon beside title and metadata, and a reserved operation column in normal flow. The operation area has no internal divider and never overlays media or text. The existing glass tile material is retained. Shared repositoryGrid geometry uses adaptive columns with an 18rem preferred minimum, bounded by container width so mobile uses one column. Loading skeletons match the new geometry. This supersedes the earlier square-card layout below.
+
+The independent layout/overlays examples show custom and default images with the real non-overlapping action area. Repository lists in all scopes and the dashboard consume the same component/geometry. The create action sits at the upper-left, opposite the page title through LibraryShell's titleActions slot, above the separate search region. No page-specific tile material or new action-button style is added.
+
+## Distinguished inset cards — 2026/11/17
+
+`glass.insetCard` extends the existing flat content surface with 35% white fill, a 65% white border and a restrained edge highlight/shadow; dark mode uses 10% white and a 25% border. It adds no backdrop blur, preserving one glass master rather than stacking frosted surfaces. Existing solid/contrast/forced-color fallbacks remain authoritative.
+
+RepositoryHeader consumes this shared contract to distinguish the selected repository summary from its document list. The Back to repositories link is removed; the image, options and focus targets remain. The name is now inside the card, tags and the Active label are removed, and canonical RoleBadge appears below the description (archived repositories retain their archive indicator). RecordGroup uses the same contract, making numbered version cards distinct while draft/approved snapshots continue sharing one heading with internal separators. Row density, actions and canonical badges remain unchanged. Layout/overlays show the real repository composition and two adjacent numbered group examples; no page-only material override is introduced.
+
 ## Document status and editor surfaces — 2026/11/17
 
 Version status uses the established semantic status badges, including draft, approved, pending, public and latest; no alternate text-only visual is introduced in version rows. Document flags reuse Badge and the existing bookmark/visibility/shield/ban icon family. Repository pending invite rows share accepted-row geometry with reduced emphasis and a single visible cancellation action.
