@@ -1,3 +1,21 @@
+## Type-aware editor workspace — 2026/11/17
+
+The current user-specified reader structure supersedes the earlier header/sidebar composition below. Entry is always preview. One compact glass header combines the document path/title, canonical flags/status badges and the toolbar; redundant bookmark/options/zoom/copy controls and permanent tools sidebar are removed from the new-tab page. The separate version-view dialog retains its existing controls and near-viewport navigation.
+
+| Family | Preview | Editing | Side panel |
+| --- | --- | --- | --- |
+| Classic Clasor | PDF via browser print/save | Approve draft, approve/publish, autosave | History (editing only), tags, attachments, chat, comments, questions |
+| File | File download | Approve draft, approve/publish | None |
+| Word, flowchart, Excel | File download | Approve draft, approve/publish, autosave | None |
+
+Office/Word and Excel extensions normalize through `editorCapabilities`; flowchart aliases normalize to the same family. Creation now also exposes flowchart. Other existing document kinds remain supported without inferring new tools from this request.
+
+Entering edit mode chooses the selected version's same-number draft when available. Manual/autosave writes only draft content; approved content remains independent until explicit approval. Autosave debounces 700ms and is unavailable for files. Changing mode/version with unsaved content asks Save and continue, Discard or Back; pending navigation pauses autosave. The browser also receives a normal beforeunload warning while dirty. Approval confirms replacing the same-number approved snapshot and optionally public-labeling it, then returns to preview. Existing publication and latest labels retain the version-state rules. The product workspace accepts an optional synchronous commit acknowledgement; a failed local write keeps the buffer dirty, shows a retryable error and blocks guarded navigation/approval until a write succeeds. The catalogue can simulate this failure independently of storage. Saved edits append local editing-history records; the panel does not relabel version snapshots as editing history.
+
+Classic's drawer starts closed, uses the existing Base UI Sheet and unified ClasorTabs, and restores toggle focus on close. History is absent in preview. Tags use repository master options. Attachment and chat interactions update fictional preview records; attachment payloads are bounded to 500KB total for this local handoff. All growing panel lists reuse cumulative PreviewList/LoadMore. Comments and questions reuse their existing compositions.
+
+The independent toolbar catalogue example complements a complete type-selectable workspace example; no business rules moved into the generic toolbar. Embedded editors remain local plaintext integration fixtures, not real Word/Excel/flowchart engines or remote Clasor editors. Fixture file downloads are truthful `.txt` exports of fixture content; production binary download requires a backend file response. This limitation is distinct from the working PDF print bridge and local attachment download.
+
 ## Repository invitations and document reading — 2026/11/17
 
 Pending invitations are separate from accepted repository members. Sharing renders accepted members first, followed by a dimmer pending list with avatar fallback, role and waiting status. Pending entries have only Cancel invitation; they are excluded from panel restriction choices. Inviting through sharing or repository creation appends pending entries, while the creator remains the active owner. Both lists retain cumulative loading and search behavior.

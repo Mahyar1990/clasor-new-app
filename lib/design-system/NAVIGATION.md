@@ -1,3 +1,11 @@
+## Compact reader and optional tabbed drawer — 2026/11/17
+
+The new-tab reader now starts in preview with a compact toolbar instead of a permanent tools sidebar. The versions trigger still opens the existing navigable versions dialog; choosing a version there stays in that same large dialog. The toolbar Select switches the iframe's active snapshot. Changing mode or selection with dirty content is guarded by a compact decision dialog. Save/discard returns focus to the initiating mode/version control; approval returns to the surviving mode control.
+
+Classic's tools open in the existing Base UI Sheet with a horizontally scrollable, unified tab bar: history only while editing, then tags, attachments, chat, comments and questions. Closing restores the toolbar toggle; Base UI owns trap, Escape and scroll locking. History selection falls back to Tags in preview. No panel or toggle is rendered for file, Word, flowchart or Excel. Closed tools consume no editor width. Keyboard and local portal themes use the existing primitives.
+
+The reusable toolbar has its own interactive example on `/design-system/navigation`, separate from the full workspace preview on layout/overlays. Read-only and empty-version examples make unavailable controls inspectable. The former new-tab reader's bookmark/general-options/zoom/copy controls are intentionally retired under the updated content structure; document flags and the separate version-dialog controls remain.
+
 ## Reader navigation and document toolbar — 2026/11/17
 
 The document browser puts Create opposite its breadcrumb on the first row. Search/filter disclosure remains immediately above the results, hidden initially. Filter, Sort and Close form one adjacent action group inside that section. Closing clears search/filter and restores focus to its trigger; multi-sort and explicit selection retain their existing semantics.

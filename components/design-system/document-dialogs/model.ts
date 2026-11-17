@@ -2,7 +2,7 @@ import type { DashboardDocument } from "../clasor-dashboard-data";
 
 export interface DocumentRecipient { id: string; name: string; role: string }
 export interface DocumentVersion { id: string; name: string; content: string; approval: "draft" | "approved"; published: boolean; pending?: boolean; latest?: boolean; creator?: string; editedAt?: string }
-export interface DocumentActivity { id: string; name: string; body: string; kind: "comments" | "questions"; state: "approved" | "pending" | "rejected"; answer?: string }
+export interface DocumentActivity { id: string; name: string; body: string; kind: "comments" | "questions" | "chat"; state: "approved" | "pending" | "rejected"; answer?: string }
 export interface DocumentPreview extends DashboardDocument {
   kind?: "document" | "folder" | "template";
   contentType?: string;
@@ -30,6 +30,8 @@ export interface DocumentPreview extends DashboardDocument {
   recipients: DocumentRecipient[];
   versions: DocumentVersion[];
   activities: DocumentActivity[];
+  editHistory?: { id: string; versionName: string; content: string; editedAt: string; creator: string }[];
+  attachments?: { id: string; name: string; size: number; dataUrl: string }[];
 }
 export const documentTags = ["راهنما", "محصول", "طراحی", "توسعه", "آموزش", "داخلی", "پژوهش", "کیفیت"];
 export function initialDocument(document: DashboardDocument): DocumentPreview {

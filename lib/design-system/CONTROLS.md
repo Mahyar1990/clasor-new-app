@@ -1,3 +1,11 @@
+## Compact document editor toolbar — 2026/11/17
+
+`DocumentEditorToolbar` is a controlled composition of existing Button, Checkbox and shadcn Select controls. It receives version options/selection, preview/edit mode, permissions, dirty/autosave state and callbacks. Product rules remain in the reader module. The standalone example on `/design-system/navigation` demonstrates the classic/file/Office control matrix, preview/edit, read-only permission, an empty disabled version list, unsaved changes, RTL and local dark mode. The complete page example lives on layout/overlays and includes a simulated save failure with retained edits; both are reachable through the catalogue menu.
+
+Preview shows version selection/management, Edit when permitted, and PDF/file download. Editing replaces Download with Approve draft, Approve and publish, optional Autosave and a Save icon only while dirty. The file family omits Autosave. Classic alone offers the drawer toggle. Controls wrap on narrow screens; the iframe consumes the remaining height. Empty version lists disable version selection, management and entering edit mode. No alternate tab appearance is introduced.
+
+`EditorFrame` adds optional `minimal` and `printRequest` props. Minimal removes duplicate inner document chrome. An increasing print request uses the existing origin/source/session-validated bridge and waits for ready state; the editor waits for fonts before opening the browser print dialog. PDF saving uses that native dialog, not a text file relabeled as PDF. The iframe's document header and decorative paper border/shadow are omitted in print.
+
 ## Document controls and stable upload completion — 2026/11/17
 
 `UploadProgress` reserves the same action-rail width during and after upload. At 100% (unless cancelled), “آپلود موفق” replaces Retry and Cancel; the existing progress element, value, width and height remain intact. Cancellation retains the retry path.

@@ -9,6 +9,7 @@ import { LibraryPatternsCatalogue } from "./library-patterns-catalogue";
 import { HeaderActionsCatalogue } from "./header-actions-catalogue";
 import { RepositoryDialogsCatalogue } from "@/components/design-system/repository-dialogs-catalogue";
 import { GlassOptionsCatalogue } from "@/components/design-system/glass-options-catalogue";
+import { EditorToolbarCatalogue } from "./editor-toolbar-catalogue";
 import { GlassTabsCatalogue } from "@/components/design-system/glass-tabs-catalogue";
 import { ClasorBreadcrumb } from "@/components/ui/clasor-breadcrumb"
 import { ClasorPagination } from "@/components/ui/clasor-pagination"
@@ -35,6 +36,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
       <ClasorPagination page={page} pageCount={5} onPageChange={setPage} /><p data-test-id="navigation-catalogue-p-2" role="status" className="text-xs text-muted-foreground">صفحه نمایشی: {new Intl.NumberFormat("fa").format(page)}؛ داده جدول تغییر نمی‌کند.</p>
     </Sample>
     <GlassTabsCatalogue />
+    <EditorToolbarCatalogue />
     </>}
     {section === "feedback" && <>
     <SectionTitle id="feedback" title="بازخورد" number="10" />
