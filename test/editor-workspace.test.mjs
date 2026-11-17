@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { registerHooks } from 'node:module';
 // Match the app bundler's extension resolution for this dependency under Node's TS runner.
 const resolution = registerHooks({ resolve(specifier, context, next) { return next(specifier === '../document-dialogs/version-state' ? `${specifier}.ts` : specifier, context); } });
-const { editorCapabilities, editableVersion, saveEditorDraft, approveEditorDraft } = await import('../components/design-system/reader/editor-state.ts');
+const { editorCapabilities, editableVersion, saveEditorDraft, approveEditorDraft, versionActions, publishEditorVersion } = await import('../components/design-system/reader/editor-state.ts');
 resolution.deregister();
 const draft={id:'draft',name:'نسخهٔ ۳',content:'draft',approval:'draft',published:false};
 const approved={id:'approved',name:'نسخهٔ ۳',content:'approved',approval:'approved',published:true,latest:true};
@@ -41,4 +41,20 @@ test('approval commits the current buffer atomically and preserves the existing 
  const result=approveEditorDraft({...doc,versions:[draft]},draft,'new',false);
  assert.equal(result.version.published,false);
  assert.equal(approveEditorDraft({...doc,versions:[draft]},draft,'new',true).version.published,true);
+});
+
+test('document actions depend on approval and public status in both modes',()=>{
+ assert.deepEqual(versionActions(draft,true),{approveDraft:true,publishVersion:false});
+ assert.deepEqual(versionActions({...approved,published:false},true),{approveDraft:false,publishVersion:true});
+ for(const item of [draft,approved,undefined])assert.deepEqual(versionActions(item,false),{approveDraft:false,publishVersion:false});
+ assert.deepEqual(versionActions(approved,true),{approveDraft:false,publishVersion:false});
+});
+test('publishing approved content preserves the independent same-number draft',()=>{
+ const source={...doc,versions:[draft,{...approved,published:false}]};
+ const result=publishEditorVersion(source,source.versions[1]);
+ assert.equal(result.versions.find(v=>v.id==='approved').published,true);
+ assert.equal(result.versions.find(v=>v.id==='approved').content,'approved');
+ assert.equal(result.versions.find(v=>v.id==='draft'),draft);
+ assert.equal(result.versions.length,2);
+ assert.equal(source.versions[1].published,false);
 });

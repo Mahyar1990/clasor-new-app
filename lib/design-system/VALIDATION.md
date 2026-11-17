@@ -1,3 +1,17 @@
+## Right dock, named mode control and unified menus — 2026/11/17
+
+Evidence: working tree on `feat/docked-reader-tools-and-actions`, based on `4a63a91`. This scope includes the subsequent toolbar placement and named-mode refinements.
+
+- ui:check passed for 239 React files; lint and TypeScript passed. All 52 logic tests passed, including two new cases for draft/approved/public action visibility and approved-only publication preserving the independent same-number draft. The three required workspace test files remain included.
+- Browser checks passed for the 208px right-side nonmodal dock, measured iframe width reduction/restoration without overlap, small text/fields, live header/editor interaction while open, retained compose text, close focus restoration and every preview tab at 320/390px. A visual review found clipped internal content despite valid outer bounds; GlassScrollArea's optional bounded content class now overrides the primitive's fit-content minimum only for the dock. Inner viewport/content widths are measured as equal; existing scroll areas retain their default.
+- Toolbar geometry passed: drawer at the physical far right, Options at the far left, ModeSwitch beside Options, and editing Save/Autosave to the right of ModeSwitch. The named mode control shows both Eye/Preview and Pencil/Edit labels with a more prominent sliding glass capsule, without presenting an off state. Click, Space, disabled states and local dark variants passed through the independent toolbar example.
+- Version-menu footer and keyboard activation passed, opening the existing versions dialog and restoring trigger focus. The separate management icon is absent. Version radio items explicitly use the primitive's closeOnClick behavior; this fixed the initial menu remaining open after selection. Tests await the close transition when checking focus/visibility.
+- Preview draft approval and approve/publish, approved-only publication, absence of redundant actions on public versions, persistent disabled/enabled Save, manual save and autosave all passed. Approved publication retained the same-number draft content. Drawer/menu state and independent version semantics stayed intact.
+- Independent catalogue checks passed for dark version/action portals, empty/read-only states, keyboard footer, docked layout with active sibling controls, retained fields/focus, 320px bounds, solid material, forced colors and reduced motion. Runtime/console checks passed on six product/catalogue/workspace routes, four internal catalogue navigations and the shared table menu. Desktop captures were visually reviewed.
+- npm run build was attempted and again encountered the already reported Turbopack CSS worker port-bind permission failure after token/structural checks; production build success is not claimed. The final feedback audit retained no new qualifying Next.js issue, so no duplicate report was prepared.
+
+All account/source data remains untouched; browser writes use fictional local fixtures. The page, shared ModeSwitch/VersionPicker/DockedPanel, independent catalogue examples and owning contracts are delivered together. Temporary scripts/captures stay outside the repository. These checks do not establish human screen-reader acceptance or full accessibility certification.
+
 ## Compact type-aware editor workspace — 2026/11/17
 
 Evidence: working tree on `feat/compact-document-editor-workspace`, based on `06a5240`. This revision replaces the earlier new-tab reader toolbar/sidebar while retaining version-dialog behavior.

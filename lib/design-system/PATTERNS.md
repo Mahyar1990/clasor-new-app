@@ -1,3 +1,17 @@
+## Reader action matrix and independent publication — 2026/11/17
+
+The compact right-hand dock and consolidated menus supersede the previous Sheet/toolbar description below. The panel uses DockedPanel, existing ClasorTabs and existing content compositions; only scoped density changes. Toolbar/picker examples remain independently reachable on navigation, and a separate dock example is on layout, alongside the complete reader preview.
+
+| Selected snapshot | Preview/edit actions when writable |
+| --- | --- |
+| Draft | Approve draft; Approve and publish |
+| Approved, non-public | Publish only |
+| Approved, public | No approval/publication action |
+
+The product `versionActions` helper derives these presentation flags; generic controls receive booleans/callbacks. Preview download shares the action menu; edit/preview uses a separate Switch. Options sits at the physical far left, ModeSwitch sits beside it, editing Save/Autosave controls sit to its right, and the drawer toggle sits at the far right. Manual Save is a stable editing control and disables under Autosave (or when clean), rather than disappearing.
+
+Publishing an approved snapshot uses `publishEditorVersion`/the existing publish version action directly. It changes the approved record's public flag without recreating an approved record, copying content, approving/deleting a same-number draft or changing the selected ID. Explicit draft approval remains the separate confirmation flow and may replace its approved counterpart. Both preserve local commit acknowledgement/error handling.
+
 ## Type-aware editor workspace — 2026/11/17
 
 The current user-specified reader structure supersedes the earlier header/sidebar composition below. Entry is always preview. One compact glass header combines the document path/title, canonical flags/status badges and the toolbar; redundant bookmark/options/zoom/copy controls and permanent tools sidebar are removed from the new-tab page. The separate version-view dialog retains its existing controls and near-viewport navigation.

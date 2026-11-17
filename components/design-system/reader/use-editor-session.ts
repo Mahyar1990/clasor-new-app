@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { approveEditorDraft, editableVersion, editorCapabilities, saveEditorDraft } from "./editor-state";
+import { approveEditorDraft, publishEditorVersion, editableVersion, editorCapabilities, saveEditorDraft } from "./editor-state";
 import type { DocumentPreview } from "../document-dialogs/model";
 import type { DocumentSetter } from "../document-dialogs/context";
 function persist(next: DocumentPreview, onChange: DocumentSetter, onCommit?: (next: DocumentPreview) => boolean) {
@@ -63,7 +63,12 @@ export function useEditorSession(document: DocumentPreview, onChange: DocumentSe
     setError(""); setVersionId(result.version.id); setEditing(false); setBuffers({});
     setMessage(published ? "نسخه تأیید و عمومی شد." : "پیش‌نویس تأیید شد."); return true;
   }
-  return { capabilities, editing, version, value, dirty, autoSave, setAutoSave, save, approve, message, error, pending, setPending, leave, navigate,
+  function publish() {
+    if (!version || version.approval !== "approved") return false;
+    if (!persist(publishEditorVersion(document, version), onChange, onCommit)) { setError("ذخیره انجام نشد؛ دوباره تلاش کنید."); return false; }
+    setError(""); setMessage("نسخه عمومی شد."); return true;
+  }
+  return { capabilities, editing, version, value, dirty, autoSave, setAutoSave, save, approve, publish, message, error, pending, setPending, leave, navigate,
     changeContent: (text: string) => { if (version) setBuffers(current => ({ ...current, [version.id]: text })); },
   };
 }

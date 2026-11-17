@@ -1,3 +1,9 @@
+## Right-side dock and version-menu footer — 2026/11/17
+
+This revision retires the overlay Sheet for reader tools. Classic's tools now sit in a compact nonmodal panel on the physical right of an RTL content row. Opening it reduces the iframe width; closing restores that width. Header controls and editor stay active while it is open. At narrow widths the panel is capped at 44% of the row and continues to reserve layout space. The active panel remains mounted; the close control restores the tools toggle. History remains edit-only and falls back to Tags in preview.
+
+Version selection is a menu radio group followed by “مشاهده همه نسخه‌ها”. That action opens the existing versions dialog and returns focus to the version trigger on close. The separate versions icon is retired. Approvals, publication and preview download share the existing options menu; an independent edit/preview Switch stays visible. The drawer toggle is at the far right. The left action group orders Save/Autosave to the right of ModeSwitch, with Options at the far left. Dirty-navigation and approval dialogs return focus to their surviving version/options trigger. Public test IDs for the version trigger, Save, Autosave and tools toggle remain; the retired separate action-button IDs are replaced with menu item IDs.
+
 ## Compact reader and optional tabbed drawer — 2026/11/17
 
 The new-tab reader now starts in preview with a compact toolbar instead of a permanent tools sidebar. The versions trigger still opens the existing navigable versions dialog; choosing a version there stays in that same large dialog. The toolbar Select switches the iframe's active snapshot. Changing mode or selection with dirty content is guarded by a compact decision dialog. Save/discard returns focus to the initiating mode/version control; approval returns to the surviving mode control.

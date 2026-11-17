@@ -29,3 +29,10 @@ export function approveEditorDraft(document: DocumentPreview, version: DocumentV
   const approved = versions.find(item => item.approval === "approved" && versionKey(item.name) === versionKey(version.name));
   return { document: { ...saved.document, versions }, version: approved ?? saved.version };
 }
+
+export function versionActions(version: DocumentVersion | undefined, canEdit: boolean) {
+  return { approveDraft: canEdit && version?.approval === "draft", publishVersion: canEdit && version?.approval === "approved" && !version.published };
+}
+export function publishEditorVersion(document: DocumentPreview, version: DocumentVersion) {
+  return { ...document, versions: changeVersion(document.versions, version.id, "publish"), updatedAt: new Date().toISOString() };
+}

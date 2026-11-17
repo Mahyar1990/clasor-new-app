@@ -1,5 +1,6 @@
 "use client";
 
+import { DockedPanelCatalogue } from "./docked-panel-catalogue";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { AppLayout } from "@/components/ui/AppLayout";
@@ -76,7 +77,8 @@ export function LayoutContentCatalogue() {
         <AppLayout density={compact ? "compact" : "comfortable"} title="نمونه چیدمان کلاسور" contentAs="section" profile={<CatalogueProfileMenu />}>
           <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /><GlassOptionsCatalogue /></div>
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
-            <LibraryPatternsCatalogue /><HeaderActionsCatalogue /><RepositoryDialogsCatalogue /><DocumentDialogsCatalogue />
+            <DockedPanelCatalogue />
+      <LibraryPatternsCatalogue /><HeaderActionsCatalogue /><RepositoryDialogsCatalogue /><DocumentDialogsCatalogue />
             <GlassIdentityCatalogue />
             <GlassScrollCatalogue />
             <DocumentTableCatalogue />

@@ -1,30 +1,40 @@
 "use client";
-import { Eye, Pencil, History, PanelLeft, Download, Save, Check, Globe } from "lucide-react";
+import { Eye, Pencil, PanelRight, Download, Save, Check, Globe } from "lucide-react";
 import { Button } from "./button";
+import { ModeSwitch } from "./ModeSwitch";
 import { Checkbox } from "./checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
-export interface EditorVersionOption { id: string; label: string }
-export function DocumentEditorToolbar({ editing, canEdit, versions, versionId, onVersionChange, onVersions, onModeChange, onDownload, onSave, onApprove, dirty, autoSave, onAutoSaveChange, showAutoSave, showDrawer, drawerOpen, onDrawerChange, pdf }: {
+import { OptionsButton } from "./OptionsButton";
+import { GlassOptionsMenu, type GlassOption } from "./GlassOptionsMenu";
+import { VersionPicker, type EditorVersionOption } from "./VersionPicker";
+export type { EditorVersionOption } from "./VersionPicker";
+export function DocumentEditorToolbar({ editing, canEdit, versions, versionId, onVersionChange, onVersions, onModeChange, onDownload, onSave, onApprove, onPublish, approveDraft, publishVersion, dirty, autoSave, onAutoSaveChange, showAutoSave, showDrawer, drawerOpen, onDrawerChange, drawerId, pdf }: {
   editing: boolean; canEdit: boolean; versions: EditorVersionOption[]; versionId: string; onVersionChange: (id: string) => void;
   onVersions: (trigger: HTMLElement) => void; onModeChange: () => void; onDownload: () => void; onSave: () => void;
-  onApprove: (published: boolean) => void; dirty: boolean; autoSave: boolean; onAutoSaveChange: (value: boolean) => void;
-  showAutoSave: boolean; showDrawer: boolean; drawerOpen: boolean; onDrawerChange: () => void; pdf: boolean;
+  onApprove: (published: boolean) => void; onPublish: () => void; approveDraft: boolean; publishVersion: boolean;
+  dirty: boolean; autoSave: boolean; onAutoSaveChange: (value: boolean) => void;
+  showAutoSave: boolean; showDrawer: boolean; drawerOpen: boolean; onDrawerChange: () => void; drawerId?: string; pdf: boolean;
 }) {
+  const items: GlassOption[] = [
+    ...(approveDraft ? [{ id: "confirm", label: "تأیید پیش‌نویس", icon: <Check /> }, { id: "confirm-public", label: "تأیید و عمومی‌سازی", icon: <Globe /> }] : []),
+    ...(publishVersion ? [{ id: "publish", label: "عمومی‌سازی", icon: <Globe /> }] : []),
+    ...(!editing ? [{ id: "download", label: pdf ? "دانلود PDF" : "دانلود فایل", icon: <Download />, disabled: !versions.length, separatorBefore: approveDraft || publishVersion }] : []),
+  ];
+  function action(id: string) {
+    if (id === "download") onDownload();
+    if (id === "confirm" || id === "confirm-public") onApprove(id === "confirm-public");
+    if (id === "publish") onPublish();
+  }
   return <div data-test-id="reader-toolbar" className="flex min-w-0 flex-wrap items-center gap-1.5">
-    <div data-test-id="reader-version-controls" className="flex min-w-0 items-center gap-1">
-      <Select disabled={!versions.length} value={versionId} items={versions.map(item => ({ value: item.id, label: item.label }))} onValueChange={value => { if (value) onVersionChange(value); }}>
-        <SelectTrigger data-test-id="reader-version-select" aria-label="نسخهٔ سند" size="sm" className="w-44 max-w-[48vw] text-xs"><SelectValue /></SelectTrigger>
-        <SelectContent dir="rtl" align="start" alignItemWithTrigger={false}>{versions.map(item => <SelectItem data-test-id={`reader-version-option-${item.id}`} key={item.id} value={item.id}>{item.label}</SelectItem>)}</SelectContent>
-      </Select>
-      <Button data-test-id="reader-tool-versions" size="icon-sm" variant="outline" aria-label="مدیریت نسخه‌های سند" disabled={!versions.length} onClick={event => onVersions(event.currentTarget)}><History aria-hidden="true" /></Button>
-    </div>
-    {canEdit && <Button data-test-id="reader-mode" size="sm" variant="outline" aria-label={editing ? "تغییر به پیش‌نمایش سند" : "ویرایش سند"} disabled={!versions.length} onClick={onModeChange}>{editing ? <Eye aria-hidden="true" /> : <Pencil aria-hidden="true" />}{editing ? "پیش‌نمایش" : "ویرایش"}</Button>}
-    {editing ? <>
-      <Button data-test-id="reader-confirm" size="sm" variant="outline" onClick={() => onApprove(false)} disabled={!canEdit || !versions.length}><Check aria-hidden="true" />تأیید پیش‌نویس</Button>
-      <Button data-test-id="reader-confirm-public" size="sm" onClick={() => onApprove(true)} disabled={!canEdit || !versions.length}><Globe aria-hidden="true" />تأیید و عمومی‌سازی</Button>
+    {showDrawer && <Button data-test-id="reader-drawer-toggle" size="icon-sm" variant="outline" aria-label="ابزارهای سند" aria-expanded={drawerOpen} aria-controls={drawerId} onClick={onDrawerChange}><PanelRight aria-hidden="true" /></Button>}
+    <VersionPicker versions={versions} value={versionId} onValueChange={onVersionChange} onViewAll={onVersions} />
+
+    <div data-test-id="reader-left-actions" className="ms-auto flex min-w-0 max-w-full flex-wrap items-center justify-end gap-1.5">
+    {editing && <>
       {showAutoSave && <label data-test-id="reader-autosave-label" className="flex min-h-8 cursor-pointer items-center gap-1.5 px-1 text-[11px]"><Checkbox data-test-id="reader-autosave" checked={autoSave} onCheckedChange={value => onAutoSaveChange(!!value)} />ذخیرهٔ خودکار</label>}
-      {dirty && <Button data-test-id="reader-save" size="icon-sm" variant="outline" aria-label="ذخیرهٔ تغییرات" onClick={onSave}><Save aria-hidden="true" /></Button>}
-    </> : <Button data-test-id="reader-download" size="sm" variant="outline" onClick={onDownload}><Download aria-hidden="true" />{pdf ? "دانلود PDF" : "دانلود فایل"}</Button>}
-    {showDrawer && <Button data-test-id="reader-drawer-toggle" size="icon-sm" variant="outline" className="ms-auto" aria-label="ابزارهای سند" aria-expanded={drawerOpen} onClick={onDrawerChange}><PanelLeft aria-hidden="true" /></Button>}
+      <Button data-test-id="reader-save" size="sm" variant="outline" disabled={!canEdit || !versions.length || !dirty || showAutoSave && autoSave} onClick={onSave}><Save aria-hidden="true" />ذخیره</Button>
+    </>}
+    <ModeSwitch data-test-id="reader-mode-switch" testId="reader-mode" label="حالت سند" second={editing} disabled={!canEdit || !versions.length} onValueChange={second => { if (second !== editing) onModeChange(); }} modes={[{ label: "پیش‌نمایش", icon: <Eye /> }, { label: "ویرایش", icon: <Pencil /> }]} />
+    <GlassOptionsMenu data-test-id="reader-actions-menu" testId="reader-actions" title="عملیات سند" description={editing ? "حالت ویرایش" : "حالت پیش‌نمایش"} trigger={<OptionsButton data-test-id="reader-actions" aria-label="عملیات سند" disabled={!items.length} />} items={items} onAction={action} />
+    </div>
   </div>;
 }
