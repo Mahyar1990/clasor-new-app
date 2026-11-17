@@ -1,7 +1,12 @@
 "use client";
 import { OptionsButton } from "@/components/ui/OptionsButton";
-import { useRef } from "react";
-import { FileText, FolderOpen, Bookmark } from "lucide-react";
+import { useOptionalLibrary } from "./store";
+import { saveReaderSnapshot } from "../reader/transfer";
+import { useStatusToast } from "@/components/ui/status-toast";
+import { useRef, type MouseEvent } from "react";
+import { FileText, FolderOpen } from "lucide-react";
+import { DocumentFlags } from "@/components/ui/DocumentFlags";
+import { documentFlags } from "./document-state";
 import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -15,11 +20,16 @@ export function DocumentChoice({ document, selection }: { document: DocumentPrev
   return <Checkbox data-test-id={`document-select-${document.id}`} aria-label={`انتخاب ${document.title}`} checked={checked} disabled={!checked && selection.ids.length >= 10} onCheckedChange={checked => selection.onToggle(document.id, !!checked)} />;
 }
 export function DocumentName({ document, onOpen }: { document: DocumentPreview; onOpen: () => void }) {
-  return <button data-test-id={`dashboard-document-open-${document.id}`} type="button" className="flex min-h-9 max-w-full items-center gap-2 rounded-md px-2 text-start text-xs focus-visible:outline-2 focus-visible:outline-ring md:min-h-7" onClick={onOpen}>
-    <GlassEmblem data-test-id={`dashboard-document-icon-${document.id}`} className="size-6 shrink-0">{document.kind === "folder" ? <FolderOpen aria-hidden="true" className="size-3.5" /> : <FileText aria-hidden="true" className="size-3.5" />}</GlassEmblem>
-    <span data-test-id={`dashboard-document-title-${document.id}`} className="wrap-anywhere">{document.title}</span>{document.bookmarked && <Bookmark data-test-id={`dashboard-document-bookmarked-${document.id}`} aria-label="نشان‌شده" className="size-3 shrink-0" />}
-  </button>;
+  const library = useOptionalLibrary();
+  const toast = useStatusToast();
+  const content = <><GlassEmblem data-test-id={`dashboard-document-icon-${document.id}`} className="size-6 shrink-0">{document.kind === "folder" ? <FolderOpen aria-hidden="true" className="size-3.5" /> : <FileText aria-hidden="true" className="size-3.5" />}</GlassEmblem><span data-test-id={`dashboard-document-title-${document.id}`} className="wrap-anywhere">{document.title}</span><DocumentFlags testId={`document-flags-${document.id}`} bookmarkTestId={`dashboard-document-bookmarked-${document.id}`} state={documentFlags(document)} /></>;
+  const flags = documentFlags(document);
+  const statusLabel = [flags.bookmarked && "نشان‌شده", flags.hidden && "مخفی در انتشار", flags.restricted && "محدودیت انتشار", flags.blocked && "محدودیت دسترسی در پنل"].filter(Boolean).join("؛ ");
+  const className = "flex min-h-9 max-w-full items-center gap-2 rounded-md px-2 text-start text-xs focus-visible:outline-2 focus-visible:outline-ring md:min-h-7";
+  function capture(event: MouseEvent) { if (!saveReaderSnapshot(document, library?.repositories.find(repo => repo.id === document.repositoryId))) { event.preventDefault(); toast.show("باز کردن سند انجام نشد. دوباره تلاش کنید.", { type: "error" }); } }
+  return document.kind === "folder" ? <button data-test-id={`dashboard-document-open-${document.id}`} type="button" className={className} onClick={onOpen}>{content}</button> : <a data-test-id={`dashboard-document-open-${document.id}`} className={className} href={`/clasor-pages/read/${encodeURIComponent(document.id)}`} target="_blank" rel="noopener noreferrer" aria-label={`${document.title}${statusLabel ? `؛ ${statusLabel}` : ""}؛ بازشدن در تب جدید`} onClick={capture} onAuxClick={capture} onContextMenu={capture}>{content}</a>;
 }
+
 export function DocumentActions({ document, onAction, editable, publicationControls = false }: { document: DocumentPreview; onAction: DocumentAction; editable?: boolean; publicationControls?: boolean }) {
   const trigger = useRef<HTMLButtonElement>(null);
   return <GlassOptionsMenu testId={`dashboard-document-menu-${document.id}`} title={document.title} description={document.kind === "folder" ? "گزینه‌های دسته‌بندی" : "گزینه‌های سند"} icon={document.kind === "folder" ? <FolderOpen /> : <FileText />} triggerRef={node => { trigger.current = node; }}

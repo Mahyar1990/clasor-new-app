@@ -1,3 +1,11 @@
+## Document status and editor surfaces — 2026/11/17
+
+Version status uses the established semantic status badges, including draft, approved, pending, public and latest; no alternate text-only visual is introduced in version rows. Document flags reuse Badge and the existing bookmark/visibility/shield/ban icon family. Repository pending invite rows share accepted-row geometry with reduced emphasis and a single visible cancellation action.
+
+The reader's outer panels and viewport dialog use the shared glass contracts. The embedded editor deliberately has an opaque paper surface for content readability. No additional glass cards are nested around each status or toolbar. Existing material/contrast/motion preferences continue to own shared controls and portals.
+
+When Base UI marks a toast portal as outside an active dialog, `glass.toastPortal` moves its viewport behind the dialog and disables pointer interception until the dialog closes. The toast's live region remains present; success feedback cannot cover a full-size editor's Save button. This behavior follows the primitive's inert marker rather than a separate global overlay listener.
+
 ## Unified record options and compact vertical versions — 2026/11/16
 
 `OptionsButton` is the single three-dot control for repository/document/version/file/member/group menus, catalogue examples and RowActionMenu. `glass.recordOptions` owns its 32px geometry, full opacity, visible border, stronger neutral foreground and light/dark base; normal focus, hover, disabled and transparency opt-outs remain shared Button behavior. Individual records no longer override its variant, size or opacity. This supersedes the earlier faded tile-control treatment below.

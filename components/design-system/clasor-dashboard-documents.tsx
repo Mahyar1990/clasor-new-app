@@ -6,7 +6,6 @@ import { DashboardTabs } from "./clasor-dashboard-tabs";
 import { GlassScrollArea } from "@/components/ui/GlassScrollArea";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { SolidDataTable } from "@/components/ui/SolidDataTable";
-import { GlassModal } from "@/components/ui/GlassModal";
 import LoadMore from "@/components/workspace/load-more";
 import { getLoadedItems } from "@/lib/workspace/documents";
 import { applyDocumentChange } from "./library/tree";
@@ -20,25 +19,21 @@ import { DocumentName, DocumentActions, DocumentChoice, type DocumentSelection }
 type Selection = DialogSelection & { recordId: string };
 export function DocumentList({ documents, onAction, onFolder, selection, editable, publicationControls }: { editable?: boolean; publicationControls?: boolean; selection?: DocumentSelection; onFolder?: (id: string) => void; documents: DocumentPreview[]; onAction: (selection: Selection) => void }) {
   const [count, setCount] = useState(10);
-  const [opened, setOpened] = useState<string | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const result = getLoadedItems(documents, count);
-  const selected = documents.find(item => item.id === opened);
   return <>
     <GlassScrollArea data-test-id="dashboard-documents-scroll" label="فهرست سندها">
       <div data-test-id="dashboard-documents-list" ref={listRef} className="[&_table]:min-w-[24rem]">
         <SolidDataTable layout="fixed" appearance="glass" testId="dashboard-documents-table" hideCaption caption="فهرست سندها" rows={result.rows} getRowId={row => row.id} emptyMessage="سندی برای نمایش وجود ندارد." columns={[
 
-          { id: "name", label: "نام سند", render: row => <div data-test-id={`document-name-cell-${row.id}`} className="flex min-w-0 items-center gap-1">{selection && <DocumentChoice document={row} selection={selection} />}<DocumentName document={row} onOpen={() => row.kind === "folder" && onFolder ? onFolder(row.id) : setOpened(row.id)} /></div> },
+          { id: "name", label: "نام سند", render: row => <div data-test-id={`document-name-cell-${row.id}`} className="flex min-w-0 items-center gap-1">{selection && <DocumentChoice document={row} selection={selection} />}<DocumentName document={row} onOpen={() => row.kind === "folder" && onFolder?.(row.id)} /></div> },
           { id: "creator", label: "نام سازنده", kind: "metadata", render: row => row.creator },
           { id: "actions", label: "عملیات", kind: "actions", render: row => <DocumentActions document={row} onAction={onAction} editable={editable} publicationControls={publicationControls} /> },
         ]} />
       </div>
       <LoadMore noun="سند" listRef={listRef} result={result} onLoadMore={() => setCount(result.nextCount)} />
     </GlassScrollArea>
-    <GlassModal testId="dashboard-document-modal" open={!!selected} onOpenChange={open => { if (!open) setOpened(null); }} title={selected?.title ?? "مشاهده سند"} >
-      <p data-test-id="dashboard-document-body" className="whitespace-pre-wrap text-sm leading-body">{selected?.content}</p>
-    </GlassModal>
+
   </>;
 }
 

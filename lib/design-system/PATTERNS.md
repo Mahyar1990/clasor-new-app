@@ -1,3 +1,15 @@
+## Repository invitations and document reading — 2026/11/17
+
+Pending invitations are separate from accepted repository members. Sharing renders accepted members first, followed by a dimmer pending list with avatar fallback, role and waiting status. Pending entries have only Cancel invitation; they are excluded from panel restriction choices. Inviting through sharing or repository creation appends pending entries, while the creator remains the active owner. Both lists retain cumulative loading and search behavior.
+
+Publication audience IDs use removable tokens; panel exclusions use the repository-scoped user/group picker and explicit Save. Document rows and reader surfaces consume the same derived status flags. Existing bookmark IDs and document/version menu contracts remain stable.
+
+Document links open `/clasor-pages/read/[documentId]` in a native new tab with noopener/noreferrer. Folders continue in-place navigation. The reader places a compact title/options header, version and discussion tools around an iframe. Version selection from the versions dialog stays in that same navigable dialog and expands close to the viewport; view/edit retain independent same-number draft and approved snapshots. New-version creation still asks for no content.
+
+`EditorFrame` hosts `/document-editor`. The local plaintext editor uses a same-origin, source-window-checked, session-scoped postMessage handshake; content is rendered as text, never evaluated markup. Ready acknowledgement removes the loading label even when initialization precedes the listener. Iframe Escape returns from a version page; direct content editing dismisses through Base UI's close primitive. Zoom, text copy and local text download are functional preview tools. This is an editor integration preview, not a connection to Clasor's remote rich-text/Office editor.
+
+To hand modified and newly created fixtures to a tab without an opener, the preview stores a bounded per-document browser-local snapshot (24-hour TTL, maximum two million serialized characters), including repository membership context. Repository files, keys, requests and join links are omitted; custom image payloads are omitted. Expired entries are pruned on writes. Reader changes synchronize matching records in already-open preview tabs through storage events. This narrow handoff is not general application persistence, backend authorization or account storage. Other list/repository state remains session-local; unavailable/expired custom documents show a return link.
+
 ## Compact control follow-up — 2026/11/16
 
 Version snapshots are vertically stacked again under their canonical version number; same-number draft and approved content remain independent. Inline status/creator/date/public/latest labels reduce height, while options stay in normal flow with reserved padding. There is no absolute menu over the row text. OptionsButton is shared across every record menu, including files, members and groups.

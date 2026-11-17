@@ -1,5 +1,6 @@
 "use client";
 import { OptionsButton } from "@/components/ui/OptionsButton";
+import { DocumentInteractionsCatalogue } from "./document-interactions-catalogue";
 import { useState } from "react";
 import { FolderOpen } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -36,6 +37,7 @@ function Patterns() {
       {(["document", "folder", "template", "repository"] as CreationKind[]).map(kind => <Button data-test-id={`catalogue-create-${kind}`} key={kind} size="sm" variant="outline" onClick={event => setOpened({ kind, trigger: event.currentTarget })}>{{ document: "ساخت سند", folder: "دسته‌بندی", template: "نمونه سند", repository: "مخزن" }[kind]}</Button>)}
       <Button data-test-id="catalogue-library-filter" size="sm" variant="outline" onClick={event => setOpened({ kind: "filter", trigger: event.currentTarget })}>فیلتر اسناد</Button>
     </div>
+    <DocumentInteractionsCatalogue />
     <details data-test-id="catalogue-repository-workspace" className="border-t border-white/30 pt-3"><summary data-test-id="catalogue-repository-workspace-toggle" className="cursor-pointer text-xs font-medium">نمونهٔ مخزن، جستجو، نمایش درختی و انتخاب گروهی</summary><div data-test-id="catalogue-repository-workspace-demo" className="mt-3"><RepositoryHeader repository={repositories[0]} /><DocumentBrowser shared={false} repositoryId={repositories[0].id} /></div></details>
     {opened && opened.kind !== "filter" && <CreationDialog kind={opened.kind as CreationKind} trigger={opened.trigger} close={() => setOpened(null)} />}
     {opened?.kind === "filter" && <FilterDialog value={filters} onApply={setFilters} trigger={opened.trigger} close={() => setOpened(null)} tags={["راهنما", "محصول"]} />}

@@ -21,7 +21,7 @@ export interface GlassModalProps {
   defaultOpen?: boolean;
   onOpenChange?: Dialog.Root.Props["onOpenChange"];
   testId?: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "viewport";
   compact?: boolean;
   surface?: "frosted" | "liquid";
   footer?: ReactNode;
@@ -50,7 +50,7 @@ export function GlassModal({
           data-test-id={testId}
           data-material-surface="floating"
           data-material-variant={surface}
-          className={cn(`${glass.panel} fixed top-1/2 start-1/2 z-[calc(var(--z-dialog)+1)] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 flex-col text-start shadow-2xl outline-none rtl:translate-x-1/2`, surface === "liquid" ? glass.liquidFloating : glass.floating, size === "sm" ? "max-w-sm" : size === "lg" ? "max-w-2xl" : "max-w-lg", compact && glass.dialogCompact, "fixed")}
+          className={cn(`${glass.panel} fixed top-1/2 start-1/2 z-[calc(var(--z-dialog)+1)] flex max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 flex-col text-start shadow-2xl outline-none rtl:translate-x-1/2`, surface === "liquid" ? glass.liquidFloating : glass.floating, size === "sm" ? "max-w-sm" : size === "lg" ? "max-w-2xl" : "max-w-lg", compact && glass.dialogCompact, size === "viewport" && "h-[calc(100dvh-2rem)]! max-h-[calc(100dvh-2rem)]! w-[calc(100vw-2rem)]! max-w-[calc(100vw-2rem)]!", "fixed")}
         >
           <header data-test-id="GlassModal-header-5" className="flex shrink-0 items-start justify-between gap-4 border-b border-white/30 p-4 md:p-6">
             <div data-test-id="GlassModal-div-6" className="min-w-0">
@@ -65,7 +65,7 @@ export function GlassModal({
               <X aria-hidden="true" />
             </Dialog.Close>
           </header>
-          <div data-test-id={`${testId}-content`} data-dialog-body className="min-h-0 overflow-y-auto overscroll-contain p-4 md:p-6">
+          <div data-test-id={`${testId}-content`} data-dialog-body className={cn("min-h-0 overflow-y-auto overscroll-contain p-4 md:p-6", size === "viewport" && "flex flex-1 flex-col")}>
             <ModalLayerContext.Provider value><GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider></ModalLayerContext.Provider>
           </div>
           {footer && <footer data-test-id={`${testId}-footer`} className={glass.dialogFooter}>{footer}</footer>}

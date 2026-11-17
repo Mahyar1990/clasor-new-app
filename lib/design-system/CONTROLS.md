@@ -1,3 +1,15 @@
+## Document controls and stable upload completion — 2026/11/17
+
+`UploadProgress` reserves the same action-rail width during and after upload. At 100% (unless cancelled), “آپلود موفق” replaces Retry and Cancel; the existing progress element, value, width and height remain intact. Cancellation retains the retry path.
+
+`IdentifierInput` accepts multiple identifiers separated by spaces, Enter, ASCII comma or Persian comma, including pasted text. It preserves order, removes duplicates, commits the remaining token on blur and supplies individually named remove buttons with focus restored to the input. It consumes the existing field/input/Badge contracts.
+
+`RecipientPicker` is a controlled, searchable multi-select for existing user/group options; IDs use separate namespaces. Its bounded scroll region appends ten records automatically with the shared loading component. Query changes reset pending loading; selected IDs remain intact. Panel restrictions supply only active members and groups of the selected repository, never pending invitees or arbitrary identifiers.
+
+`VersionBadges` composes the existing ApprovalBadge, LatestBadge and VisibilityBadge. Draft, approved, pending, public and latest appearances have one source of truth. `DocumentFlags` supplies accessible compact row icons or labeled badges for bookmark, publication hiding, audience/password/expiry restrictions and panel restrictions. Hidden and restricted are independent states.
+
+Representative interactions for these controls and `EditorFrame` render in `DocumentInteractionsCatalogue` through the normal catalogue (`app/page.tsx` → shared section composition, layout/overlays). The stacked-version example also consumes the canonical badges.
+
 ## Integrated search and aligned actions — 2026/11/16
 
 CompactSearch now renders one continuous field: its optional title/content Select is inside the field and Apply touches the input edge. `glass.searchGroup/searchMode/searchInput/searchApply` own the shared surfaces and separators, with a visible group focus ring and local dark/opaque/forced-color support. Base UI still handles the Select popup and keyboard behavior.

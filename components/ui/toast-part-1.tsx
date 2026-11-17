@@ -15,7 +15,7 @@ export function ToastProvider({ ...props }: ToastPrimitive.Provider.Props) {
 
 export function ToastPortal({ className, ...props }: ToastPrimitive.Portal.Props) {
   const theme = usePortalTheme();
-  return <ToastPrimitive.Portal className={cn(theme, className)} data-test-id="toast-part-1-toastprimitive-portal-1" data-slot="toast-portal" {...props} />
+  return <ToastPrimitive.Portal className={cn(theme, glass.toastPortal, className)} data-test-id="toast-part-1-toastprimitive-portal-1" data-slot="toast-portal" {...props} />
 }
 
 export function ToastViewport({ className, ...props }: ToastPrimitive.Viewport.Props) {

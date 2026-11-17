@@ -1,3 +1,13 @@
+## Reader navigation and document toolbar — 2026/11/17
+
+The document browser puts Create opposite its breadcrumb on the first row. Search/filter disclosure remains immediately above the results, hidden initially. Filter, Sort and Close form one adjacent action group inside that section. Closing clears search/filter and restores focus to its trigger; multi-sort and explicit selection retain their existing semantics.
+
+Document titles are native new-tab links; folder titles stay navigation buttons. Ctrl/Cmd/middle-click preserve native behavior. A link captures the latest local preview snapshot before navigation; a failed browser-storage handoff reports an error instead of opening stale data. Titles expose active document flags and the new-tab announcement to assistive technology.
+
+`GlassModal size="viewport"` reserves a one-rem margin on each viewport edge and gives its body a flexible editor region. `NavigableGlassModal.push` accepts an optional presentation override; Back restores the preceding size, mounted form state, list scroll and originating focus. Version view/edit uses this override; create/clone stays compact. Parent-page Escape follows Base UI's normal whole-dialog dismissal. Escape inside the editor iframe is bridged to navigation Back (version pages) or Base UI Close (direct editing), without custom document keyboard listeners.
+
+The new iframe route sits outside the product layout to avoid recursive shells/providers. Dynamic reader parameters are awaited within a page-local Suspense boundary. A hydration placeholder precedes browser snapshot lookup, preventing an incorrect unavailable flash for a newly created document.
+
 ## Catalogue route streaming — 2026/11/16
 
 The catalogue section route now awaits params inside a page-local Suspense boundary. This satisfies Instant Navigation with Cache Components/Partial Prefetching, while retaining static section samples, metadata and notFound validation. Shared-layout boundaries alone cannot cover a client navigation below that layout.

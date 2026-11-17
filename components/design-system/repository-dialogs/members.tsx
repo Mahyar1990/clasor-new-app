@@ -1,6 +1,6 @@
 "use client";
 import { OptionsButton } from "@/components/ui/OptionsButton";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
@@ -16,6 +16,7 @@ import { useRepositoryPreview, type PreviewRecord } from "./context";
 export function Members() {
   const { repo, setRepo } = useRepositoryPreview();
   const { push } = useDialogNavigation();
+  const pendingHeading = useRef<HTMLHeadingElement>(null);
   const [query, setQuery] = useState("");
   const [name, setName] = useState("");
   const [role, setRole] = useState("بیننده");
@@ -26,7 +27,7 @@ export function Members() {
     if (id === "transfer" || id === "remove") push(id === "transfer" ? "انتقال مالکیت" : "حذف کاربر", <MemberConfirm member={member} transfer={id === "transfer"} />, origin);
   }
   return <div data-test-id="repo-share-members" className="space-y-3">
-    {canManage && <form data-test-id="repo-share-add-form" className="grid grid-cols-[minmax(0,1fr)_6rem_auto] items-end gap-2" onSubmit={event => { event.preventDefault(); if (!name.trim() || repo.members.some(item => item.detail === name.trim())) return; setRepo(current => ({ ...current, members: [{ id: crypto.randomUUID(), name: name.trim(), role, detail: name.trim() }, ...current.members] })); setName(""); }}>
+    {canManage && <form data-test-id="repo-share-add-form" className="grid grid-cols-[minmax(0,1fr)_6rem_auto] items-end gap-2" onSubmit={event => { event.preventDefault(); if (!name.trim() || [...repo.members, ...(repo.pendingMembers ?? [])].some(item => item.detail === name.trim())) return; setRepo(current => ({ ...current, pendingMembers: [...(current.pendingMembers ?? []), { id: crypto.randomUUID(), name: name.trim(), role, detail: name.trim() }] })); setName(""); }}>
       <TextField data-test-id="repo-share-add-name" label="شناسه پادی" value={name} onValueChange={setName} required />
       <SelectField data-test-id="repo-share-role-select" label="نقش" options={roles} value={role} onValueChange={setRole} />
       <Button className="h-[var(--control-height)]" data-test-id="repo-share-add" type="submit" size="sm" disabled={!name.trim()}>افزودن</Button>
@@ -42,5 +43,9 @@ export function Members() {
         ...(repo.role === "مالک" && item.role !== "مالک" ? [{ id: "transfer", label: "انتقال مالکیت" }, { id: "remove", label: "حذف کاربر", destructive: true }] : []),
       ]} onAction={(id, _label, trigger) => action(id, item, trigger)} />
     </div>} />
+    <section data-test-id="repo-pending-invitations" className="space-y-2 border-t border-white/30 pt-2" aria-label="دعوت‌های در انتظار پذیرش">
+      <h4 ref={pendingHeading} tabIndex={-1} data-test-id="repo-pending-title" className="text-xs text-muted-foreground">دعوت‌های در انتظار پذیرش</h4>
+      <PreviewList key={query} testId="repo-pending-list" noun="دعوت" items={(repo.pendingMembers ?? []).filter(item => `${item.name} ${item.detail}`.includes(query))} render={item => <div data-test-id={`repo-pending-${item.id}`} className={`${glass.compactRecord} opacity-70`}><Avatar data-test-id={`repo-pending-avatar-${item.id}`} className="size-7"><AvatarFallback><UserRound aria-hidden="true" className="size-4" /></AvatarFallback></Avatar><div data-test-id={`repo-pending-copy-${item.id}`} className="min-w-0 flex-1"><p data-test-id={`repo-pending-name-${item.id}`} className="truncate text-xs">{item.name}</p><p data-test-id={`repo-pending-detail-${item.id}`} className="text-[10px] text-muted-foreground">{item.role} · در انتظار پذیرش</p></div>{canManage && <Button data-test-id={`repo-pending-cancel-${item.id}`} variant="outline" size="sm" onClick={() => { setRepo(current => ({ ...current, pendingMembers: current.pendingMembers?.filter(record => record.id !== item.id) })); pendingHeading.current?.focus(); }}>لغو دعوت</Button>}</div>} />
+    </section>
   </div>;
 }

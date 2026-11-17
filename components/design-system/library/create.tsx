@@ -26,7 +26,7 @@ export function CreationDialog({ kind, parentId, repositoryId = "dashboard-repos
     const now = new Date().toISOString();
     if (kind === "repository") {
       const members = draft.members.map(item => ({ ...item, detail: item.name }));
-      setRepositories(current => [{ ...initialRepository(), id, name: draft.title.trim(), description: draft.description, tags: draft.tags, image: draft.image, imageType: draft.image.startsWith("data:") ? "custom" : "default", published: false, shared: false, updatedAt: now, members: [{ id: "owner", name: "کاربر نمونه", role: "مالک" }, ...members], groups: [], files: [], requests: [], keys: [], joinLinks: [] }, ...current]);
+      setRepositories(current => [{ ...initialRepository(), id, name: draft.title.trim(), description: draft.description, tags: draft.tags, image: draft.image, imageType: draft.image.startsWith("data:") ? "custom" : "default", published: false, shared: false, updatedAt: now, members: [{ id: "owner", name: "کاربر نمونه", role: "مالک" }], pendingMembers: members, groups: [], files: [], requests: [], keys: [], joinLinks: [] }, ...current]);
     } else {
       const source = documents.find(item => item.id === draft.templateId);
       const content = kind === "document" ? source?.content ?? "" : "";

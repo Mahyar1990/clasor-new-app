@@ -47,6 +47,7 @@ export const glass = {
   compactRecord: `${contentSurface} flex items-center gap-2 px-2 py-1.5`,
   dialogSection: "border-t border-white/25 pt-3 first:border-t-0 first:pt-0",
   dialogConfirmation: "fixed w-[calc(100%-2rem)] [&_[data-slot=alert-dialog-title]]:text-base [&_[data-slot=alert-dialog-description]]:text-xs",
+  toastPortal: "data-[base-ui-inert]:[&_[data-slot=toast-viewport]]:z-[calc(var(--z-dialog)-1)] data-[base-ui-inert]:[&_*]:pointer-events-none!",
   dialogFooter: "flex shrink-0 flex-wrap items-center justify-end gap-2 border-t border-white/40 bg-white/20 p-3 dark:bg-slate-950/25",
   liquidFloating,
   menuFloating: `${liquidFloating} glass-enabled:bg-[var(--glass-tint)]/30 glass-enabled:backdrop-blur-md`,

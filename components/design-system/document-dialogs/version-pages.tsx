@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { EditorFrame } from "@/components/ui/EditorFrame";
+import { DocumentCanvas } from "../reader/document-canvas";
 import { Button } from "@/components/ui/button";
 import { TextField, TextareaField } from "@/components/ui/text-field";
 import { CopyField } from "@/components/ui/CopyField";
@@ -15,7 +17,7 @@ export function VersionEditor({ version, clone = false }: { version?: DocumentVe
   const [content, setContent] = useState(version?.content ?? "");
   const [error, setError] = useState("");
   const creating = !version || clone;
-  return <form data-test-id="doc-version-editor" className="space-y-3" onSubmit={event => {
+  return <form data-test-id="doc-version-editor" className={creating ? "space-y-3" : "flex h-full min-h-0 flex-1 flex-col gap-3"} onSubmit={event => {
     event.preventDefault();
     const name = `نسخهٔ ${number.trim()}`;
     if (creating && document.versions.some(item => versionKey(item.name) === versionKey(name) && item.approval === "draft")) { setError("پیش‌نویسی با این شماره وجود دارد؛ آن را ویرایش کنید."); return; }
@@ -23,7 +25,7 @@ export function VersionEditor({ version, clone = false }: { version?: DocumentVe
   }}>
     {creating && <TextField data-test-id="doc-version-number" label="شماره نسخه" value={number} onValueChange={setNumber} error={error} maxLength={40} required />}
     {version?.approval === "approved" && !clone && <p data-test-id="doc-version-edit-note" className="text-xs text-muted-foreground">تغییرات در پیش‌نویس هم‌شماره ذخیره می‌شوند؛ محتوای تأییدشده حفظ می‌شود.</p>}
-    {!creating && <TextareaField data-test-id="doc-version-edit-content" label="محتوا" value={content} onValueChange={setContent} rows={7} />}
+    {!creating && <EditorFrame testId="doc-version-edit-content" title={`${document.title} · ${version?.name}`} value={content} onValueChange={setContent} readOnly={false} onEscape={back} />}
     {creating && <p data-test-id="doc-version-create-note" className="text-xs text-muted-foreground">پس از ساخت نسخه، محتوا را از گزینهٔ ویرایش در دیالوگ جداگانه تغییر دهید.</p>}
     <Button data-test-id="doc-version-editor-save" type="submit">{creating ? "ایجاد نسخه جدید" : "ذخیره پیش‌نویس"}</Button>
   </form>;
@@ -31,7 +33,8 @@ export function VersionEditor({ version, clone = false }: { version?: DocumentVe
 export function VersionViewer({ version }: { version: DocumentVersion }) {
   const { document } = useDocumentPreview();
   const current = document.versions.find(item => item.id === version.id) ?? version;
-  return <div data-test-id="doc-version-viewer" className="space-y-3"><p data-test-id="doc-version-viewer-meta" className="text-xs text-muted-foreground">{current.name} · {current.approval === "draft" ? "پیش‌نویس" : "تأییدشده"} {current.published ? "· عمومی" : ""} · {current.creator} · {current.editedAt}</p><TextareaField data-test-id="doc-version-content" label="محتوای نسخه" value={current.content} readOnly rows={8} /></div>;
+  const { back } = useDialogNavigation();
+  return <div data-test-id="doc-version-viewer" className="flex h-full min-h-0 flex-1 flex-col"><DocumentCanvas document={document} version={current} onEscape={back} /></div>;
 }
 export function VersionConfirmation({ version, action, label }: { version: DocumentVersion; action: VersionAction; label: string }) {
   const { document, setDocument } = useDocumentPreview();
