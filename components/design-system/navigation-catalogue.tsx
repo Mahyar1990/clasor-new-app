@@ -32,7 +32,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
     {section === "navigation" && <>
     <SectionTitle id="navigation" title="ناوبری" number="08" />
     <Sample title="مسیر و صفحه‌بندی" description="هر الگو وظیفه جدا دارد؛ صفحه‌بندی این نمونه فقط شماره صفحه را تغییر می‌دهد.">
-      <ClasorBreadcrumb items={[{ id: "home", label: "کتابخانه", href: "/" }, { id: "team", label: "اسناد گروه", href: "#navigation" }, { id: "current", label: "راهنمای همکاری" }]} />
+      <ClasorBreadcrumb items={[{ id: "home", label: "کتابخانه", href: "/" }, { id: "team", label: "اسناد گروه", href: "#navigation" }, { id: "document", label: "راهنمای همکاری", emphasis: true }, { id: "current", label: "نسخهٔ ۳ (پیش‌نویس)" }]} />
       <ClasorPagination page={page} pageCount={5} onPageChange={setPage} /><p data-test-id="navigation-catalogue-p-2" role="status" className="text-xs text-muted-foreground">صفحه نمایشی: {new Intl.NumberFormat("fa").format(page)}؛ داده جدول تغییر نمی‌کند.</p>
     </Sample>
     <GlassTabsCatalogue />

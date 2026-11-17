@@ -1,3 +1,9 @@
+## Compact reader breadcrumb and tab handoff — 2026/11/17
+
+The reader header now uses repository → ancestor folders → bold document title → selected version (draft/approved/approved public). The former detached version-name/status group is removed. The dock toggle and breadcrumb are vertically centered; tools share the row at sufficient width and wrap below on small screens.
+
+`readerFolderPath` resolves same-repository folder ancestry with cycle/deletion guards; legacy flat category metadata supplies a text-only fallback and omits the repository root placeholder. New-tab snapshots optionally carry the ancestor labels so user-created folder paths survive a fresh tab/reload even when those folders are not in the reader's initial fixtures. Reader commits retain that path. Legacy snapshots remain accepted; malformed optional paths are rejected. Only the known repository destination is linked; unknown folder destinations remain text instead of inventing unsupported routes.
+
 ## Reader action matrix and independent publication — 2026/11/17
 
 The compact right-hand dock and consolidated menus supersede the previous Sheet/toolbar description below. The panel uses DockedPanel, existing ClasorTabs and existing content compositions; only scoped density changes. Toolbar/picker examples remain independently reachable on navigation, and a separate dock example is on layout, alongside the complete reader preview.

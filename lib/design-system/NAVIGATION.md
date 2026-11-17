@@ -1,3 +1,7 @@
+## Version commands under Options — 2026/11/17
+
+Open Options → Versions to choose a snapshot or activate View all versions. The independent toolbar version button is removed. Both guarded version changes and the versions dialog now restore focus to the surviving Options trigger. The far-right dock toggle moves into the compact header row. Breadcrumbs and left-side mode/save/options share one row when there is room; tools wrap below on small screens. Document text is bold and the final version includes its approval/public status in parentheses. The submenu uses Base UI radio/keyboard navigation, portal theming and collision handling; no document event listeners or extra floating controller are added.
+
 ## Right-side dock and version-menu footer — 2026/11/17
 
 This revision retires the overlay Sheet for reader tools. Classic's tools now sit in a compact nonmodal panel on the physical right of an RTL content row. Opening it reduces the iframe width; closing restores that width. Header controls and editor stay active while it is open. At narrow widths the panel is capped at 44% of the row and continues to reserve layout space. The active panel remains mounted; the close control restores the tools toggle. History remains edit-only and falls back to Tags in preview.

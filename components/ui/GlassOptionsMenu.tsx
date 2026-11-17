@@ -18,6 +18,7 @@ export interface GlassOption {
   destructive?: boolean;
   separatorBefore?: boolean;
   children?: GlassOption[];
+  submenuContent?: ReactNode;
 }
 
 export interface GlassOptionsMenuProps {
@@ -34,12 +35,13 @@ export interface GlassOptionsMenuProps {
 function OptionItems({ items, onAction, testId }: Pick<GlassOptionsMenuProps, "items" | "onAction" | "testId">) {
   return items.map(item => <Fragment key={item.id}>
     {item.separatorBefore && <DropdownMenuSeparator data-test-id={`${testId}-separator-${item.id}`} />}
-    {item.children ? <DropdownMenuSub>
+    {item.children || item.submenuContent ? <DropdownMenuSub>
       <DropdownMenuSubTrigger data-test-id={`${testId}-item-${item.id}`} disabled={item.disabled} className={glass.optionItem}>
         <OptionLabel item={item} testId={testId} />
       </DropdownMenuSubTrigger>
       <DropdownMenuSubContent data-test-id={`${testId}-submenu-${item.id}`} dir="rtl" aria-label={item.label} surface="liquid" className={cn(glass.optionsPopup, glass.optionsSubPopup)} sideOffset={6}>
-        <OptionItems items={item.children} onAction={onAction} testId={testId} />
+        {item.submenuContent}
+        {item.children && <OptionItems items={item.children} onAction={onAction} testId={testId} />}
       </DropdownMenuSubContent>
     </DropdownMenuSub> : <DropdownMenuItem data-test-id={`${testId}-item-${item.id}`} disabled={item.disabled} aria-description={item.description}
       variant={item.destructive ? "destructive" : "default"} className={glass.optionItem} onClick={() => onAction(item.id, item.label)}>

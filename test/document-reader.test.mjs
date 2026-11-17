@@ -29,6 +29,8 @@ test('reader handoff validates identity, expiration and required collections wit
  assert.equal(parseReaderSnapshot(raw,'doc',86_401_001),null);
  assert.equal(parseReaderSnapshot(raw,'doc',999),null);
  assert.equal(parseReaderSnapshot('{broken','doc',2000),null);
+ assert.deepEqual(parseReaderSnapshot(JSON.stringify({document,storedAt:1000,folderPath:[{id:'a',label:'Folder'}]}),'doc',2000).folderPath,[{id:'a',label:'Folder'}]);
+ assert.equal(parseReaderSnapshot(JSON.stringify({document,storedAt:1000,folderPath:'bad'}),'doc',2000),null);
  assert.equal(parseReaderSnapshot(JSON.stringify({document:{...document,versions:undefined},storedAt:1000}),'doc',2000),null);
  assert.equal(parseReaderSnapshot('x'.repeat(2_000_001),'doc',2000),null);
 });

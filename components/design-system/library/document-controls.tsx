@@ -1,6 +1,7 @@
 "use client";
 import { OptionsButton } from "@/components/ui/OptionsButton";
 import { useOptionalLibrary } from "./store";
+import { readerFolderPath } from "../reader/reader-path";
 import { saveReaderSnapshot } from "../reader/transfer";
 import { useStatusToast } from "@/components/ui/status-toast";
 import { useRef, type MouseEvent } from "react";
@@ -26,7 +27,7 @@ export function DocumentName({ document, onOpen }: { document: DocumentPreview; 
   const flags = documentFlags(document);
   const statusLabel = [flags.bookmarked && "نشان‌شده", flags.hidden && "مخفی در انتشار", flags.restricted && "محدودیت انتشار", flags.blocked && "محدودیت دسترسی در پنل"].filter(Boolean).join("؛ ");
   const className = "flex min-h-9 max-w-full items-center gap-2 rounded-md px-2 text-start text-xs focus-visible:outline-2 focus-visible:outline-ring md:min-h-7";
-  function capture(event: MouseEvent) { if (!saveReaderSnapshot(document, library?.repositories.find(repo => repo.id === document.repositoryId))) { event.preventDefault(); toast.show("باز کردن سند انجام نشد. دوباره تلاش کنید.", { type: "error" }); } }
+  function capture(event: MouseEvent) { if (!saveReaderSnapshot(document, library?.repositories.find(repo => repo.id === document.repositoryId), readerFolderPath(document, library?.documents ?? []))) { event.preventDefault(); toast.show("باز کردن سند انجام نشد. دوباره تلاش کنید.", { type: "error" }); } }
   return document.kind === "folder" ? <button data-test-id={`dashboard-document-open-${document.id}`} type="button" className={className} onClick={onOpen}>{content}</button> : <a data-test-id={`dashboard-document-open-${document.id}`} className={className} href={`/clasor-pages/read/${encodeURIComponent(document.id)}`} target="_blank" rel="noopener noreferrer" aria-label={`${document.title}${statusLabel ? `؛ ${statusLabel}` : ""}؛ بازشدن در تب جدید`} onClick={capture} onAuxClick={capture} onContextMenu={capture}>{content}</a>;
 }
 

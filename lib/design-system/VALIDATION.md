@@ -1,3 +1,16 @@
+## Compact header, breadcrumb and nested versions — 2026/11/17
+
+Evidence: working tree on `feat/compact-reader-header-and-version-menu`, based on `d98ca43`. This includes the subsequent breadcrumb order/status and responsive alignment requests.
+
+- ui:check passed for 239 React files; lint and TypeScript passed. All 55 tests passed, including the three required workspace suites. Three new path/status cases cover ordered ancestors, cycle/repository/root fallbacks, document emphasis and the three parenthesized version states. Reader snapshot parsing also verifies optional path validation and legacy compatibility.
+- Browser checks passed for no standalone version buttons, nested Options → Versions selection, the View all dialog, dirty-change guards, trigger-focus restoration, mobile submenu bounds and independent catalogue dark/keyboard/empty states. The existing shared menu now accepts a generic submenuContent composition; existing children-based submenus are preserved.
+- The actual list-to-new-tab flow captured the folder name correctly; reload retained it. A path with two user-created/unknown ancestor IDs survived reload and a reader publication commit. Breadcrumb order, bold document weight, selected-version updates and removal of the old status block passed. The drawer is in the header row and still restores toggle focus when closed.
+- Measured desktop header/tool centers share one row; breadcrumb and drawer centers align within one pixel after hover settles. At 320/390px, tools wrap to the second row without document overflow. The final desktop screenshot was visually reviewed.
+- Runtime/console checks passed across six product/catalogue/workspace routes, four internal catalogue navigations and shared table-menu dismissal.
+- npm run build was attempted and encountered the previously reported Turbopack CSS worker port-bind permission failure. Production build success is not claimed. The final feedback audit retained no new qualifying Next.js friction; no duplicate report was prepared.
+
+All browser writes target fictional local records. No source account was changed. The shared components, independent navigation/full reader examples, local handoff behavior and owning contracts ship in the same feature branch. Temporary scripts/captures remain outside the repository. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
 ## Right dock, named mode control and unified menus — 2026/11/17
 
 Evidence: working tree on `feat/docked-reader-tools-and-actions`, based on `4a63a91`. This scope includes the subsequent toolbar placement and named-mode refinements.
