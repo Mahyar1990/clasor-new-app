@@ -125,3 +125,4 @@ export const catalogueLayout = [
 
 export const repositoryTileDemoLayout = "grid max-w-4xl grid-cols-1 gap-3 md:grid-cols-2";
 export const publishPatternDemoLayout = "grid min-w-0 gap-4 md:grid-cols-[12rem_minmax(0,1fr)]";
+export const publishToolsDemoLayout = "flex min-h-0 min-w-0 flex-col gap-3 md:flex-row";

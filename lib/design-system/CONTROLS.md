@@ -1,3 +1,11 @@
+## Public identity, feedback and section controls — 2026/11/17
+
+PublicHeaderActions is controlled by user/null and login/profile/newsletter/search callbacks plus a panelHref; it shows the supplied avatar or shared AvatarFallback. It contains no auth/session logic. ReactionControl accepts a nullable like/dislike value, explicit counts, a change callback and disabled. Repeating the selected choice requests null; changing choices requests the other value. aria-pressed and the shared glass button states identify the selection.
+
+FloatingActionBar owns only controlled open/onOpenChange disclosure, a canonical OptionsButton and its children. Hidden actions leave the tab order; the group uses normal Tab navigation rather than incomplete ARIA toolbar/menu semantics. Product code owns positioning and item inventory. ContentsNavigation accepts heading id/label/level records, controlled selection and activation; anchors retain native modified-click behavior and expose aria-current=location. It is independent of heading extraction, scroll observation and product data.
+
+OutlineNavigation adds density=compact (10px labels/28px rows; default remains comfortable), shared outlineRow/outlineGroup contracts, selected-ancestor highlighting and optional revealSelected. Native link/button focus and existing cumulative sessions remain. DockedPanel adds className and closeLabel without changing its existing editor defaults. ReadingSurface adds width=full and optional focusable titleId; default reading width remains unchanged. Independent examples demonstrate these contracts on navigation/layout.
+
 ## Public reading controls — 2026/11/17
 
 `OutlineNavigation` accepts product-independent `OutlineItem` records (`id`, `label`, optional `href` or `children`), controlled `selectedId`, expanded Set and disclosure/selection callbacks. A named nav with nested lists and native links/buttons preserves Tab/Enter/Space behavior without partial ARIA tree semantics. Modified clicks retain native links. Each visible level uses cumulative ten-item LoadMore sessions; callers remount on applied search/filter changes. Selected records expose aria-current=page; folders expose aria-expanded and aria-controls. Empty navigation has an explicit message.

@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import { PublishPatternsCatalogue } from "./publish-patterns-catalogue";
+import { PublishToolsCatalogue } from "./publish-tools-catalogue";
 import { GlassFeedbackStatesCatalogue } from "./glass-status-feedback-catalogue";
 import { GlassLayerStatesCatalogue } from "./glass-layer-states-catalogue";
 import { Info } from "lucide-react"
@@ -39,6 +40,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
     <GlassTabsCatalogue />
     <EditorToolbarCatalogue />
     <PublishPatternsCatalogue />
+    <PublishToolsCatalogue />
     </>}
     {section === "feedback" && <>
     <SectionTitle id="feedback" title="بازخورد" number="10" />

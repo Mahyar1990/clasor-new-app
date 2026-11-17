@@ -1,7 +1,9 @@
 import { dashboardDocuments, dashboardRepositories } from "../clasor-dashboard-data";
 import { initialDocument, type DocumentPreview } from "../document-dialogs/model";
+import { publicationGuide } from "../publish/fixtures";
 export function libraryDocuments(): DocumentPreview[] {
   const records: DocumentPreview[] = [
+    publicationGuide(),
     ...Array.from({ length: 36 }, (_, i) => {
       const base = dashboardDocuments[i % 12];
       return { ...initialDocument({ ...base, id: i < 12 ? base.id : `library-document-${i}`, title: base.title + (i >= 12 ? ` ${i + 1}` : "") }), repositoryId: base.shared ? "dashboard-repository-2" : "dashboard-repository-1", kind: "document" as const, contentType: ["classic", "excel", "file"][i % 3], createdAt: `2026-10-${String(1 + i % 28).padStart(2, "0")}`, updatedAt: `2026-11-${String(1 + i % 14).padStart(2, "0")}`, order: i % 7 + 1 };

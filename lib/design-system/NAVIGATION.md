@@ -1,3 +1,11 @@
+## Publish search, section drawer and short routes — 2026/11/17
+
+The public header opens the source's two-mode search and public/private newsletter dialogs on both landing and reading pages. Search results link to addressable public documents; applied criteria and mode own list-session resets. News Read more uses the existing dialog navigation stack. Preview sign-in replaces Login with the avatar; local session retention is an explicit demonstration flag, not service authentication.
+
+The selected document's folder ancestors are included in breadcrumbs and emphasized in the compact outline. Optional selection reveal uses the existing cumulative loading sentinel when required and never steals keyboard focus. The shared repository layout retains expanded folders, query and scroll during document navigation. The section drawer reserves a separate column between the right repository tree and full-width paper; below md it stacks above the content. Heading links update the reading viewport and focus the corresponding heading. Close restores its trigger, or the disclosure control if the bar is collapsed.
+
+The expanded floating action group includes public version selection, reactions/counts, downloadable attachments, short-link copy and gated panel entry. `/clasor-pages/p/[documentId]` resolves only to a currently available public document; unavailable targets show recovery. URLs are local deterministic preview paths. Panel links require the sample account's explicit repository membership and reuse the existing protected new-tab handoff; they are absent for guests and other repositories.
+
 ## Publish routes and outline navigation — 2026/11/17
 
 The catalogue's Clasor samples include the public landing `/clasor-pages/publish` and public documentation example. Each published repository links to `/clasor-pages/publish/[repositoryId]`; each document has `/clasor-pages/publish/[repositoryId]/[documentId]`. Public pages have their own brand/home navigation, without management controls. Unavailable/private repository or document routes show a recovery link and no content fallback.

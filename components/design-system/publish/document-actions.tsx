@@ -1,28 +1,41 @@
 "use client";
 import { useRef, useState } from "react";
-import { PreviewList } from "../preview-list";
-import { Copy, Info, History } from "lucide-react";
-import { FloatingOptions } from "@/components/ui/FloatingOptions";
-import { GlassModal } from "@/components/ui/GlassModal";
+import { History, Link2, ListTree, Paperclip } from "lucide-react";
+import { FloatingActionBar } from "@/components/ui/FloatingActionBar";
+import { ReactionControl } from "@/components/ui/ReactionControl";
+import { HelpTooltip } from "@/components/ui/help-tooltip";
 import { Button } from "@/components/ui/button";
-import { VersionBadges } from "@/components/ui/VersionBadges";
+import { PublishedActionDialogs, type PublishedAction } from "./action-dialogs";
+import { PublishedPanelLink } from "./panel-link";
+import { usePublishSession } from "./session";
+import { publicationFeedback } from "./fixtures";
+import { reactionCounts } from "./article-state";
 import type { DocumentPreview, DocumentVersion } from "../document-dialogs/model";
-export function PublishedActions({ document, version, onVersionChange }: { document: DocumentPreview; version: DocumentVersion; onVersionChange: (id: string) => void }) {
-  const [opened, setOpened] = useState("");
-  const [notice, setNotice] = useState("");
+export function PublishedActions({ document, version, onVersionChange, contentsOpen, onContentsToggle }: { document: DocumentPreview; version: DocumentVersion; onVersionChange: (id: string) => void; contentsOpen: boolean; onContentsToggle: (trigger: HTMLButtonElement) => void }) {
+  const [expanded, setExpanded] = useState(false);
+  const [opened, setOpened] = useState<PublishedAction | null>(null);
+  const [shortLink, setShortLink] = useState("");
   const anchor = useRef<HTMLDivElement>(null);
-  async function action(id: string) {
-    if (id !== "copy") { setOpened(id); return; }
-    try { await navigator.clipboard.writeText(window.location.href); setNotice("لینک سند کپی شد."); }
-    catch { setNotice("کپی انجام نشد؛ نشانی را از نوار آدرس مرورگر کپی کنید."); }
+  const session = usePublishSession();
+  const value = session.votes[document.id] ?? null;
+  const counts = reactionCounts(value, publicationFeedback[document.id]?.likes ?? 0, publicationFeedback[document.id]?.dislikes ?? 0);
+  function open(action: PublishedAction, trigger: HTMLButtonElement) {
+    anchor.current?.querySelectorAll('[data-action-origin]').forEach(item => item.removeAttribute('data-action-origin'));
+    trigger.dataset.actionOrigin = "true";
+    if (action === "short-link") setShortLink(`${window.location.origin}/clasor-pages/p/${encodeURIComponent(document.id)}`);
+    setOpened(action);
   }
   return <>
-    <div data-test-id="publish-floating-position" ref={anchor} className="pointer-events-none absolute inset-x-2 bottom-4 z-20 flex flex-col items-center gap-2">
-      <span data-test-id="publish-action-notice" role="status" className="max-w-full rounded-lg bg-card px-2 text-[10px] leading-6 empty:hidden">{notice}</span>
-      <FloatingOptions testId="publish-document-options" title="گزینه‌های سند" items={[{ id: "information", label: "اطلاعات سند", icon: <Info /> }, { id: "versions", label: "نسخه‌های منتشرشده", icon: <History /> }, { id: "copy", label: "کپی لینک سند", icon: <Copy /> }]} onAction={action} />
+    <div data-test-id="publish-floating-position" ref={anchor} className="pointer-events-none absolute inset-x-2 bottom-4 z-20 flex justify-center">
+      <FloatingActionBar testId="publish-action-bar" open={expanded} onOpenChange={setExpanded}>
+        <HelpTooltip content="فهرست سند"><Button data-test-id="publish-contents-toggle" size="icon-sm" variant="ghost" aria-label="فهرست سند" aria-expanded={contentsOpen} aria-controls="publish-contents-drawer" onClick={event => onContentsToggle(event.currentTarget)}><ListTree aria-hidden="true" /></Button></HelpTooltip>
+        <HelpTooltip content="فایل‌های پیوست سند"><Button data-test-id="publish-attachments-open" size="icon-sm" variant="ghost" aria-label={`فایل‌های پیوست سند؛ ${document.attachments?.length ?? 0} فایل`} onClick={event => open("attachments", event.currentTarget)}><Paperclip aria-hidden="true" /></Button></HelpTooltip>
+        <PublishedPanelLink data-test-id="publish-open-in-panel" document={document} />
+        <HelpTooltip content="لینک کوتاه سند"><Button data-test-id="publish-short-link-open" size="icon-sm" variant="ghost" aria-label="لینک کوتاه سند" onClick={event => open("short-link", event.currentTarget)}><Link2 aria-hidden="true" /></Button></HelpTooltip>
+        <ReactionControl testId="publish-reaction" value={value} {...counts} onValueChange={next => { if (!session.user) session.requestLogin(); else session.vote(document.id, next); }} />
+        <HelpTooltip content={`انتخاب نسخهٔ سند؛ ${version.name}`}><Button data-test-id="publish-versions-open" size="icon-sm" variant="ghost" aria-label="انتخاب نسخهٔ سند" onClick={event => open("versions", event.currentTarget)}><History aria-hidden="true" /></Button></HelpTooltip>
+      </FloatingActionBar>
     </div>
-    <GlassModal themeAnchorRef={anchor} testId="publish-options-dialog" title={opened === "versions" ? "نسخه‌های منتشرشده" : "اطلاعات سند"} description={document.title} open={!!opened} onOpenChange={open => { if (!open) setOpened(""); }} finalFocus={() => anchor.current?.querySelector<HTMLButtonElement>('[data-test-id="publish-document-options"]') ?? true} surface="liquid" compact size="sm">
-      {opened === "versions" ? <PreviewList testId="publish-version-list" noun="نسخه" items={document.versions.filter(item => item.approval === "approved" && item.published)} render={item => <Button data-test-id={`publish-version-${item.id}`} key={item.id} variant="plain" className="h-auto min-h-9 w-full justify-between px-2 text-xs" aria-pressed={version.id === item.id} onClick={() => { onVersionChange(item.id); setOpened(""); }}>{item.name}<VersionBadges testId={`publish-version-state-${item.id}`} approval={item.approval} published={item.published} latest={item.latest} /></Button>} /> : <dl data-test-id="publish-information" className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-xs"><dt data-test-id="publish-author-label">سازنده</dt><dd data-test-id="publish-author">{version.creator ?? document.creator}</dd><dt data-test-id="publish-edit-label">آخرین ویرایش</dt><dd data-test-id="publish-edited">{version.editedAt ?? document.updatedAt ?? "—"}</dd><dt data-test-id="publish-version-label">نسخه</dt><dd data-test-id="publish-selected-version">{version.name}</dd></dl>}
-    </GlassModal>
+    <PublishedActionDialogs opened={opened} close={() => setOpened(null)} anchor={anchor} document={document} version={version} onVersionChange={onVersionChange} shortLink={shortLink} />
   </>;
 }

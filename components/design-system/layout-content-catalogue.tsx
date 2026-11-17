@@ -2,6 +2,7 @@
 
 import { DockedPanelCatalogue } from "./docked-panel-catalogue";
 import { PublishPatternsCatalogue } from "./publish-patterns-catalogue";
+import { PublishToolsCatalogue } from "./publish-tools-catalogue";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { AppLayout } from "@/components/ui/AppLayout";
@@ -80,6 +81,7 @@ export function LayoutContentCatalogue() {
           <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
             <DockedPanelCatalogue />
             <PublishPatternsCatalogue />
+            <PublishToolsCatalogue />
       <LibraryPatternsCatalogue /><HeaderActionsCatalogue /><RepositoryDialogsCatalogue /><DocumentDialogsCatalogue />
             <GlassIdentityCatalogue />
             <GlassScrollCatalogue />

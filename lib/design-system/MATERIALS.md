@@ -1,3 +1,9 @@
+## Compact publish navigation and expanded action bar — 2026/11/17
+
+The public outline uses shared outlineRow/outlineGroup contracts: smaller labels/icons, tighter rows, an emphasized selected branch rail and the existing current-navigation glass treatment. Hover does not translate navigation rows. The public ReadingSurface explicitly opts into full width; its readable paper material is retained. There is no new content-width cap or second glass layer around each paragraph.
+
+FloatingActionBar uses one existing glass.panel around its controls and canonical OptionsButton disclosure. Reactions reuse the existing glass button's aria-pressed, disabled, dark, solid and forced-color states. The section drawer reuses DockedPanel, reserving layout space rather than covering the paper. Header identity uses the shared Avatar and fallback; the independent catalogue demonstrates local dark portals and accessibility preferences.
+
 ## Public reading surface and floating controls — 2026/11/17
 
 The public portal reuses the fixed AppLayout mesh through GlassBackdrop; public header/sidebar/action chrome uses the existing glass.panel contract. ReadingSurface uses the shared glass.readingSurface contract: a quiet 85% white paper fill (slate in dark mode), white edge and restrained shadow, without backdrop filtering. Long-form content intentionally prioritizes readability; controls retain glass. Solid/forced-color fallbacks reuse the existing contract. FloatingOptions adds no new button/menu appearance; it combines the canonical record control and shared glass menu.
