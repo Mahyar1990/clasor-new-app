@@ -6,7 +6,7 @@ import { readerBreadcrumbs, type ReaderFolder } from "./reader-path";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { GlassModal } from "@/components/ui/GlassModal";
 import { Button } from "@/components/ui/button";
-import { EditorFrame } from "@/components/ui/EditorFrame";
+import { EditorWithContents } from "@/components/ui/EditorWithContents";
 import { DocumentEditorToolbar } from "@/components/ui/DocumentEditorToolbar";
 import { DocumentFlags } from "@/components/ui/DocumentFlags";
 import { DocumentActionDialog } from "../document-dialogs/dialog";
@@ -57,7 +57,7 @@ export function EditorWorkspace({ document, repository, onChange, onCommit, fold
       <p data-test-id="reader-action-message" role="status" className="sr-only">{notice || (editor.dirty ? "تغییرات ذخیره نشده" : editor.message)}</p>
       <div data-test-id="reader-body" className="flex min-h-0 min-w-0 flex-1 gap-2">
         {editor.capabilities.drawer && <ReaderDrawer open={drawerOpen} onOpenChange={setDrawerOpen} editing={editor.editing} canEdit={canEdit} anchor={toolsAnchor} />}
-      <EditorFrame testId="document-editor" title={`${document.title} · ${editor.version?.name ?? ""}`} value={editor.editing ? editor.value : editor.version?.content ?? document.content} readOnly={!editor.editing || !canEdit} onValueChange={editor.changeContent} printRequest={printRequest} onEscape={onEscape} minimal />
+      <EditorWithContents testId="document-editor" title={`${document.title} · ${editor.version?.name ?? ""}`} value={editor.editing ? editor.value : editor.version?.content ?? document.content} readOnly={!editor.editing || !canEdit} onValueChange={editor.changeContent} printRequest={printRequest} onEscape={onEscape} minimal />
       </div>
       {selection && <DocumentActionDialog key={selection.id} document={document} repository={repository} folders={folders} onCommit={onCommit} onChange={onChange} selection={selection} close={() => setSelection(null)} announce={setNotice} fallbackFocusRef={heading} />}
       <GlassModal testId="reader-unsaved-dialog" finalFocus={() => anchor.current?.querySelector<HTMLButtonElement>(`[data-test-id="${navigationFocus.current}"]`) ?? true} open={!decisionHost && !!editor.pending} onOpenChange={open => { if (!open) editor.setPending(null); }} title="تغییرات ذخیره نشده" description="پیش از تغییر حالت یا نسخه، دربارهٔ تغییرات تصمیم بگیرید." compact surface="liquid" size="sm" footer={<><Button data-test-id="reader-unsaved-cancel" variant="outline" onClick={() => editor.setPending(null)}>بازگشت</Button><Button data-test-id="reader-unsaved-discard" variant="outline" onClick={() => editor.leave(false)}>ذخیره نشود</Button><Button data-test-id="reader-unsaved-save" onClick={() => editor.leave(true)}>ذخیره و ادامه</Button></>}>{editor.error && <p data-test-id="reader-unsaved-error" role="alert" className="text-xs text-danger">{editor.error}</p>}</GlassModal>

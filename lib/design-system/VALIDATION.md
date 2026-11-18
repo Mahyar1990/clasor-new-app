@@ -1,3 +1,12 @@
+## Editor outline and full-width paper — 2026/11/18
+
+Evidence: working tree on `feat/editor-document-contents`, based on `52263f6`.
+
+- Reused DockedPanel and ContentsNavigation in EditorWithContents; standalone and embedded EditorWorkspace share the composition. The icon-only opener sits inside the editor frame at top-right and disappears while the closeable outline is open. Minimal paper fills the available iframe width instead of a centered, margin-constrained card.
+- ui:check passed for 320 React files; lint and all 91 tests passed, including required workspace suites and heading offset/duplicate/six-level/nonheading cases. The Webpack production build passed with 85 pages. Documentation links/index and diff checks passed.
+- Browser checks passed preview/edit outlines, six heading levels, right-hand docked geometry, internal icon bounds/no text, full-width paper, opener visibility, keyboard opening, close/focus restoration, iframe scroll navigation, live contentEditable heading changes without content mutation, discard refresh, 320/390/768px bounds and independent dark/empty catalogue examples.
+- The embedded version-workspace regression passed one-dialog navigation/decisions, iframe Escape, unsaved changes, storage-error recovery, save/approval, edit/preview and mobile bounds with the new outline. Existing plaintext fixture and backend limitations remain; full human screen-reader or usability acceptance is not claimed. Framework feedback audit retained no new qualifying issue; an interrupted live browser run was repeated after source hot updates settled and passed.
+
 ## Restore default domain colors — 2026/11/18
 
 Evidence: working tree on `fix/domain-default-palette-reset`, based on `60f75aa`.
