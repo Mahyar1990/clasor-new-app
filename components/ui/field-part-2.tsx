@@ -77,7 +77,7 @@ export function FieldError({
     <div data-test-id="field-part-2-div-5"
       role="alert"
       data-slot="field-error"
-      className={cn("text-sm font-normal text-destructive", className)}
+      className={cn("text-sm font-normal text-[var(--glass-error)]", className)}
       {...props}
     >
       {content}

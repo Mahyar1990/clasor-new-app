@@ -1,5 +1,6 @@
 "use client";
 
+import { GlassSurfaceContext } from "@/components/ui/glass-surface-context";
 import { workspaceStyles } from "@/components/workspace/workspace-styles";
 import { cn } from "@/lib/utils";
 import { glass } from "@/lib/design-system/classes";
@@ -35,11 +36,12 @@ export default function WorkspaceShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const section = pathname.startsWith("/workspace/repositories") ? "مخزن‌ها" : pathname.startsWith("/workspace/shared") ? "اشتراکی‌ها" : pathname === "/workspace/documents" ? "اسناد من" : "مشاهده سند";
   return <div data-test-id="workspace-shell-div-19" className={cn("ws-canvas", glass.canvas)}><div data-test-id="workspace-shell-div-20" className={cn("ws-app", glass.panel)}>
+    <GlassSurfaceContext.Provider value>
     <a data-test-id="workspace-shell-a-21" href="#workspace-main" className="ws-skip">رفتن به محتوای اصلی</a>
-    <aside data-test-id="workspace-shell-aside-22" className={cn("ws-sidebar", glass.panel)} data-material-surface="chrome"><WorkspaceNavigation /></aside>
-    <div data-test-id="workspace-shell-div-23" className={cn("ws-body", glass.panel)}><header data-test-id="workspace-shell-header-24" className={cn("ws-topbar", glass.panel)} data-material-surface="chrome">
+    <aside data-test-id="workspace-shell-aside-22" className={cn("ws-sidebar", glass.contentSurface)} data-material-surface="chrome"><WorkspaceNavigation /></aside>
+    <div data-test-id="workspace-shell-div-23" className={cn("ws-body", glass.contentSurface)}><header data-test-id="workspace-shell-header-24" className={cn("ws-topbar", glass.contentSurface)} data-material-surface="chrome">
       <div data-test-id="workspace-shell-div-25" className="ws-topbarStart"><div data-test-id="workspace-shell-div-26" className="ws-mobileNav"><Sheet open={menuOpen} onOpenChange={setMenuOpen}><SheetTrigger data-test-id="workspace-shell-sheettrigger-27" render={<Button data-test-id="workspace-shell-sheettrigger-27" variant="ghost" size="icon" aria-label="بازکردن فهرست" />}><Menu aria-hidden="true" /></SheetTrigger><SheetContent side="right" dir="rtl" className="ws-navigationSheet w-[min(340px,100vw)] overflow-y-auto p-5"><SheetTitle className="sr-only">فهرست فضای کار</SheetTitle><SheetDescription className="sr-only">انتخاب بخش برنامه</SheetDescription><WorkspaceNavigation mobile onSelect={() => setMenuOpen(false)} /><SheetClose data-test-id="workspace-shell-sheetclose-29" render={<Button data-test-id="workspace-shell-sheetclose-29" variant="outline" />}>بستن فهرست</SheetClose></SheetContent></Sheet></div><span data-test-id="workspace-shell-span-31" className="ws-workspaceName"><span data-test-id="workspace-shell-span-32" className="ws-smallMark"><Layers size={16} aria-hidden="true" /></span>فضای کار<span data-test-id="workspace-shell-span-33" className="ws-pathSeparator">/</span><strong data-test-id="workspace-shell-strong-34">{section}</strong></span></div>
       <div data-test-id="workspace-shell-div-35" className="ws-topbarLinks"><MaterialPreference /><span data-test-id="workspace-shell-span-36" className="ws-demoBadge">نسخه نمونه</span><Link data-test-id="workspace-shell-link-37" href="/wireframes">طرح صفحات<ArrowUpLeft size={14} aria-hidden="true" /></Link></div>
     </header><main data-test-id="workspace-shell-main-38" id="workspace-main" tabIndex={-1} className="ws-main"><UndoDeleteNotice />{children}</main><footer data-test-id="workspace-shell-footer-39" className="ws-footer"><span data-test-id="workspace-shell-span-40">کلاسور · فضایی برای نظم دادن به دانسته‌ها</span><Link data-test-id="workspace-shell-link-41" href="/">کتابخانه طراحی</Link></footer></div>
-  </div></div>;
+  </GlassSurfaceContext.Provider></div></div>;
 }

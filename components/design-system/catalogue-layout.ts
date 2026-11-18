@@ -122,3 +122,8 @@ export const catalogueLayout = [
   "[@media((max-width:639px))]:[&_[data-slot=ds-sample]_>_header]:[gap:8px]",
   "[@media((prefers-reduced-motion:reduce))]:[&_.swatch:hover]:[transform:none]",
 ].join(" ");
+
+export const repositoryTileDemoLayout = "grid max-w-4xl grid-cols-1 gap-3 md:grid-cols-2";
+export const publishPatternDemoLayout = "grid min-w-0 gap-4 md:grid-cols-[12rem_minmax(0,1fr)]";
+export const publishToolsDemoLayout = "flex min-h-0 min-w-0 flex-col gap-3 md:flex-row";
+export const resizablePaneDemoLayout = "flex h-72 min-w-0 gap-2";

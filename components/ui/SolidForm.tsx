@@ -1,5 +1,6 @@
 "use client";
 
+import { useGlassSurface } from "./glass-surface-context";
 import { cn } from "@/lib/utils";
 import { useId, useRef, useState, type FormEvent } from "react";
 import { glass } from "@/lib/design-system/classes";
@@ -28,6 +29,7 @@ const controlClass = `${glass.input} min-h-11 w-full py-2 ps-3 pe-3 text-start t
 
 /** Organism: field molecules and a submit atom with the shared glass treatment. */
 export function SolidForm({ disabled = false, onSubmit }: SolidFormProps) {
+  const nested = useGlassSurface();
   const id = useId();
   const submitting = useRef(false);
   const [busy, setBusy] = useState(false);
@@ -81,7 +83,7 @@ export function SolidForm({ disabled = false, onSubmit }: SolidFormProps) {
       data-test-id="solid-form"
       onSubmit={handleSubmit}
       onChange={() => { setStatus(""); setSubmitError(""); }}
-      className={`${glass.panel} p-4 text-start md:p-6 [&_[data-slot=field-error]]:text-red-700 dark:[&_[data-slot=field-error]]:text-red-400 [&_[data-slot=field-label]_span]:text-inherit`}
+      className={`${nested ? glass.contentSurface : glass.panel} p-4 text-start md:p-6 [&_[data-slot=field-error]]:text-red-700 dark:[&_[data-slot=field-error]]:text-red-400 [&_[data-slot=field-label]_span]:text-inherit`}
     >
       <h2 data-test-id="SolidForm-h2-2" id={`${id}-title`} className="mb-4 text-xl font-bold">ثبت اطلاعات</h2>
       <fieldset data-test-id="SolidForm-fieldset-3" disabled={disabled || busy} className="grid min-w-0 gap-5 md:grid-cols-2">

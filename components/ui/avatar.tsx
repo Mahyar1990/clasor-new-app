@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar"
+import { glass } from "@/lib/design-system/classes";
 import { cn } from "cn"
 
 function Avatar({
@@ -16,6 +17,7 @@ function Avatar({
       data-slot="avatar"
       data-size={size}
       className={cn(
+        glass.emblem,
         "group/avatar relative flex size-8 shrink-0 rounded-full select-none border border-border data-[size=lg]:size-10 data-[size=sm]:size-6 ",
         className
       )}
@@ -45,7 +47,7 @@ function AvatarFallback({
     <AvatarPrimitive.Fallback data-test-id="avatar-avatarprimitive-fallback-2"
       data-slot="avatar-fallback"
       className={cn(
-        "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs",
+        "flex size-full items-center justify-center rounded-full bg-transparent text-sm text-inherit group-data-[size=sm]/avatar:text-xs",
         className
       )}
       {...props}
@@ -90,7 +92,8 @@ function AvatarGroupCount({
     <div data-test-id="avatar-div-5"
       data-slot="avatar-group-count"
       className={cn(
-        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+        glass.emblem,
+        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-transparent text-sm text-inherit ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
         className
       )}
       {...props}

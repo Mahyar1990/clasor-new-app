@@ -1,3 +1,116 @@
+## Document metadata columns — 2026/11/18
+
+The shared Clasor DocumentList and independent DocumentTableCatalogue use RTL order: priority, name, paired creation/modification dates, creator and actions. TableColumnKind adds priority (80px) and dates (160px); metadata stays 112px and padded actions 76px. Name takes the remaining width. glass.documentTableViewport sets a 42rem minimum with table-local horizontal scrolling on narrow panels; other column layouts and the outline are unchanged. SolidDataTable positions its scroll region relatively so absolute screen-reader-only descendants remain contained instead of enlarging the page.
+
+RecordDates(createdAt?, updatedAt?, testId) is a product-independent pair of labeled semantic time elements. ISO values are formatted with the Persian calendar and Asia/Tehran time zone consistently on server/client; missing or invalid timestamps display an accessible unknown dash. It does not invent a modification date from creation. The catalogue includes valid and unavailable dates, a long name and independent row/action interactions. Existing row activation, name-cell selection and cumulative loading contracts remain in effect.
+
+## Hierarchical contents and bounded pane resizing — 2026/11/18
+
+ContentsNavigation now builds nested ordered lists from the heading levels rather than applying flat padding. contentsTree attaches each heading to the nearest preceding lower-level heading, handles skipped levels without fake headings and preserves input order/data. Every nested group has a logical start rail and every child an elbow connector; parent chevrons and leaf markers supplement indentation. The independent example reaches heading levels 1–6 and includes returning to a parent level. Anchors, active state, modified clicks, heading activation and empty behavior retain their public contract.
+
+ResizablePane is a product-independent, non-collapsible side pane. It accepts children/label/testId, defaultWidth/minWidth/maxWidth/minRemainingWidth, direction and className. A ResizeObserver measures the parent minus the column gap; the remaining content allocation takes priority when the viewport is narrow. The requested width is retained while the effective width clamps responsively. Values describe the entire pane including its 16px handle.
+
+The focusable vertical separator exposes its controlled pane, accessible name, pixel min/max/current values and hint. Pointer capture supports mouse/touch without document-wide event handlers. Left/Right move physically in that direction in RTL and LTR; steps are 8px or 32px with Shift. Home/End select bounds; Escape cancels an active drag; double-click restores the bounded default. Its semantics were checked against the [WAI window splitter reference](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/); this implementation does not add a collapse operation or claim full accessibility certification. The catalogue shows both directions, dark mode, touch, keyboard and constrained mobile geometry.
+
+OptionsButton adds tone=accent while retaining neutral as the default. FloatingActionBar chooses accent; other record menus keep their existing appearance and common dimensions. This is a shared component variant, not a page-only override.
+
+## Public identity, feedback and section controls — 2026/11/17
+
+PublicHeaderActions is controlled by user/null and login/profile/newsletter/search callbacks plus a panelHref; it shows the supplied avatar or shared AvatarFallback. It contains no auth/session logic. ReactionControl accepts a nullable like/dislike value, explicit counts, a change callback and disabled. Repeating the selected choice requests null; changing choices requests the other value. aria-pressed and the shared glass button states identify the selection.
+
+FloatingActionBar owns only controlled open/onOpenChange disclosure, a canonical OptionsButton and its children. Hidden actions leave the tab order; the group uses normal Tab navigation rather than incomplete ARIA toolbar/menu semantics. Product code owns positioning and item inventory. ContentsNavigation accepts heading id/label/level records, controlled selection and activation; anchors retain native modified-click behavior and expose aria-current=location. It is independent of heading extraction, scroll observation and product data.
+
+OutlineNavigation adds density=compact (10px labels/28px rows; default remains comfortable), shared outlineRow/outlineGroup contracts, selected-ancestor highlighting and optional revealSelected. Native link/button focus and existing cumulative sessions remain. DockedPanel adds className and closeLabel without changing its existing editor defaults. ReadingSurface adds width=full and optional focusable titleId; default reading width remains unchanged. Independent examples demonstrate these contracts on navigation/layout.
+
+## Public reading controls — 2026/11/17
+
+`OutlineNavigation` accepts product-independent `OutlineItem` records (`id`, `label`, optional `href` or `children`), controlled `selectedId`, expanded Set and disclosure/selection callbacks. A named nav with nested lists and native links/buttons preserves Tab/Enter/Space behavior without partial ARIA tree semantics. Modified clicks retain native links. Each visible level uses cumulative ten-item LoadMore sessions; callers remount on applied search/filter changes. Selected records expose aria-current=page; folders expose aria-expanded and aria-controls. Empty navigation has an explicit message.
+
+`FloatingOptions` composes the canonical OptionsButton and GlassOptionsMenu in a small glass surface. The consumer owns positioning, item inventory and callbacks; disabled disables the actual trigger. It inherits Base UI dismissal, collision handling and keyboard behavior. `ReadingSurface` accepts title, metadata, body, footer, testId and optional geometry className; it owns a readable paper surface without additional blur. These components contain no publication or version business rules. Examples are reachable on independent navigation/layout catalogue pages.
+
+## Full-row primary activation — 2026/11/17
+
+SolidDataTable adds optional onRowClick(row, event) without changing non-opted-in tables. The reusable activateRowLink helper activates a marked data-row-link leaf only for plain row-area clicks, preserving the original link/button behavior and synchronous data capture. data-row-ignore marks selection wrappers and action cells. Native interactive targets, events from outside DOM portals, default-prevented/non-primary clicks and active row-text selection are ignored. The document table catalogue demonstrates row-area activation alongside the existing name and independent operation menu; the product table and outline consume the same helper.
+
+## Versions inside the reader Options menu — 2026/11/17
+
+The standalone version trigger is retired from the reader toolbar. Its existing selection radio group and View all command now render in the shared Options menu's “نسخه‌های سند” submenu, alongside the existing approval/download actions. This removes one visible control without changing version selection, draft guards or the large versions dialog. The compact header breadcrumb now carries repository, ancestor folders, bold document title and the version name with parenthesized draft/approved/public status; the separate name/status block is removed.
+
+`GlassOption.submenuContent` accepts a product-independent custom submenu composition. Existing children-based submenus keep their behavior. The reader supplies `VersionMenuItems`, which reuses the same radio items and footer previously rendered by VersionPicker. The existing VersionPicker export remains compatible; the active reader/catalogue path uses its extracted menu content. The Options trigger ref owns View all focus restoration. Empty collections still offer View all. The independent navigation toolbar example renders this same submenu, including keyboard/dark/empty behavior. ClasorBreadcrumb adds optional className and per-item emphasis; unlinked ancestors render as text. Its independent navigation example demonstrates a bold document followed by the current version. The full reader example includes nested folders.
+
+The reader header aligns its drawer icon and breadcrumb by center, without extra vertical text padding. The toolbar shares that row when space permits. A 288px preferred breadcrumb basis and wrapping tool group move the tools to a second row on narrow screens instead of compressing or clipping them. Drawer focus uses the header anchor; version-dialog and guarded version-change focus use Options, while guarded mode changes return to ModeSwitch. No other control placement is changed.
+
+## Docked tools and unified editor menus — 2026/11/17
+
+The current toolbar combines approval/publication/download commands in one shared GlassOptionsMenu. Edit/preview uses ModeSwitch outside that menu: two named icon choices with a sliding glass selection, similar to day/night controls. Neither is presented as an off state. The selected version's presentation capabilities come from the owning reader module, not from generic toolbar business logic. Drafts expose Approve and Approve/publish in preview as well as editing. Approved non-public snapshots expose only Publish; approved public snapshots expose neither. The mode control is a stable controlled button (Space/Enter), with both labels visible and an accessible current/next-mode name, disabled without edit access or versions. The drawer toggle is the physical far-right control. Options stays at the far left, with ModeSwitch beside it; editing Save/Autosave controls sit to the right of ModeSwitch. The active glass capsule has a purple tint, raised highlights and stronger icon weight. Save and optional Autosave stay outside it while editing. Save is always rendered there, disabled when clean, unavailable, or Autosave is enabled; file documents retain manual Save without an Autosave checkbox.
+
+`VersionPicker` composes the existing Base UI/shadcn menu radio group with a separated “مشاهده همه نسخه‌ها” action. This is a menu containing both selection and a command, not a native Select or a button nested in a listbox. Arrow/Enter navigation includes the footer; its callback receives the surviving trigger for modal focus restoration. The former adjacent management button is removed. An empty list still exposes the View all command; mode/download actions remain disabled. ModeSwitch accepts two labeled icons, a controlled second flag and change callback, disabled state and a public test ID. Its glass thumb follows the selected named choice; Button handles Space/Enter and the accessible name states current and next modes. The independent toolbar catalogue on navigation demonstrates draft, approved, public, readonly, empty and save states with the actual picker.
+
+`DockedPanel` is a reusable nonmodal aside. The parent RTL flex row reserves its width on the right instead of overlaying the editor. It stays mounted while hidden to preserve current content and scroll; there is no backdrop, focus trap or document Escape listener. Close explicitly restores the toggle. The shared `glass.dockedPanel` contract is 208px wide with a 44% width cap; `glass.compactPanelContent` owns 10px typography, 24–28px controls, compact forms and the same tab materials. GlassScrollArea accepts optional contentClassName; the dock supplies glass.boundedScrollContent to override the primitive's intrinsic fit-content minimum, bounding fields and tab panels to the viewport instead of clipping them. Its default remains unchanged for existing tables/lists. These density rules are scoped to the panel and preserve material/contrast/motion opt-outs. The independent layout-catalogue example demonstrates toggling, retained fields, active sibling content, RTL/mobile and local dark mode.
+
+## Compact document editor toolbar — 2026/11/17
+
+`DocumentEditorToolbar` is a controlled composition of existing Button, Checkbox and shadcn Select controls. It receives version options/selection, preview/edit mode, permissions, dirty/autosave state and callbacks. Product rules remain in the reader module. The standalone example on `/design-system/navigation` demonstrates the classic/file/Office control matrix, preview/edit, read-only permission, an empty disabled version list, unsaved changes, RTL and local dark mode. The complete page example lives on layout/overlays and includes a simulated save failure with retained edits; both are reachable through the catalogue menu.
+
+Preview shows version selection/management, Edit when permitted, and PDF/file download. Editing replaces Download with Approve draft, Approve and publish, optional Autosave and a Save icon only while dirty. The file family omits Autosave. Classic alone offers the drawer toggle. Controls wrap on narrow screens; the iframe consumes the remaining height. Empty version lists disable version selection, management and entering edit mode. No alternate tab appearance is introduced.
+
+`EditorFrame` adds optional `minimal` and `printRequest` props. Minimal removes duplicate inner document chrome. An increasing print request uses the existing origin/source/session-validated bridge and waits for ready state; the editor waits for fonts before opening the browser print dialog. PDF saving uses that native dialog, not a text file relabeled as PDF. The iframe's document header and decorative paper border/shadow are omitted in print.
+
+## Document controls and stable upload completion — 2026/11/17
+
+`UploadProgress` reserves the same action-rail width during and after upload. At 100% (unless cancelled), “آپلود موفق” replaces Retry and Cancel; the existing progress element, value, width and height remain intact. Cancellation retains the retry path.
+
+`IdentifierInput` accepts multiple identifiers separated by spaces, Enter, ASCII comma or Persian comma, including pasted text. It preserves order, removes duplicates, commits the remaining token on blur and supplies individually named remove buttons with focus restored to the input. It consumes the existing field/input/Badge contracts.
+
+`RecipientPicker` is a controlled, searchable multi-select for existing user/group options; IDs use separate namespaces. Its bounded scroll region appends ten records automatically with the shared loading component. Query changes reset pending loading; selected IDs remain intact. Panel restrictions supply only active members and groups of the selected repository, never pending invitees or arbitrary identifiers.
+
+`VersionBadges` composes the existing ApprovalBadge, LatestBadge and VisibilityBadge. Draft, approved, pending, public and latest appearances have one source of truth. `DocumentFlags` supplies accessible compact row icons or labeled badges for bookmark, publication hiding, audience/password/expiry restrictions and panel restrictions. Hidden and restricted are independent states.
+
+Representative interactions for these controls and `EditorFrame` render in `DocumentInteractionsCatalogue` through the normal catalogue (`app/page.tsx` → shared section composition, layout/overlays). The stacked-version example also consumes the canonical badges.
+
+## Integrated search and aligned actions — 2026/11/16
+
+CompactSearch now renders one continuous field: its optional title/content Select is inside the field and Apply touches the input edge. `glass.searchGroup/searchMode/searchInput/searchApply` own the shared surfaces and separators, with a visible group focus ring and local dark/opaque/forced-color support. Base UI still handles the Select popup and keyboard behavior.
+
+`FormActions` gives related buttons one wrapping flex row, consistent heights and explicit gaps instead of margins on independent inline buttons. Key generation/save use it before and after generated values appear; request, tag-confirmation and activity actions reuse it. TextField's optional action slot places an input and its action on the same control row, leaving validation messages underneath. TagManager uses this slot; invitation/member/access add controls match the associated field height.
+
+`OptionsButton` has one fixed variant/size and preserves explicit public IDs and Base UI render refs. The structural guard rejects newly authored Button/IconButton three-dot variants outside this shared component. Representative vertical record groups, options and aligned action rows are rendered through app/page.tsx on layout/overlays.
+
+## Compact search, repository tags and batch controls — 2026/11/16
+
+`CompactSearch` is a bounded native search form with an Apply button and Enter submission. Its optional Base UI Select places title/content mode beside the document query. Draft text/mode are separate from applied query state; creation controls occupy a different row. Filter dialogs no longer duplicate the search-mode field. Folder-only filtering clears/disables content type and template constraints; bookmark/template descriptions explain their effect on results.
+
+`TagManager` creates/removes repository vocabulary, with nonempty/duplicate-name validation and cumulative list loading. It has no selection state. `TagPicker` selects existing repository tags for documents or filtering; its compact search, selected chips and flat option rows remain keyboard usable. Repository tag deletion uses a navigation page within one dialog and confirms removal from affected documents. Direct draft-tag deletion restores focus to the name field.
+
+`BatchActions` provides an explicit selection mode, a 10-item count/limit, Move/Delete and End selection. Unselected checkboxes disable at ten, while selected records can still be unchecked. Public test IDs remain stable across table/outline appearances. Independent catalogue examples are reachable through app/page.tsx on layout/overlays.
+
+## Library controls — 2026/11/16
+
+`MultiSortEditor` accepts field options, ordered SortRules and onValueChange. Criteria are unique, independently ascending/descending and keyboard-reorderable with up/down buttons. A stable optional rule ID preserves control identity when changing its field. The Clasor composition exposes kind, name, priority, creation date and modification date; an empty criterion list preserves source order.
+
+`SelectField` forwards its explicit data-test-id to the visible trigger, not Base UI's hidden form inputs. Empty-value options display their own label. `Button variant="plain"` supports flat clickable data content while keeping keyboard focus and hover/pressed states. `GlassTile` keeps the main open action separate from its top-end options control. These controls have interactive catalogue examples through app/page.tsx on layout/overlays.
+
+## Compact attachments - 2026/11/16
+
+AttachmentPicker(value, onValueChange, accept, maxFiles?, maxSizeBytes?, testId) is a controlled, compact composition. Items have stable IDs and File objects; accept is an extension suffix list. It validates the batch before appending, preserves existing items on errors and supports removing/replacing files. Removing returns focus to Add after the controlled value commits. A count, file names/sizes and associated error/help text are exposed; there is no drop-zone-sized card or remote upload.
+
+The feedback composition uses the source limits: six files, one MiB each; JPG, JPEG, PNG, WEBP, PDF, TXT, MPEG and MP4. A representative interactive example is rendered on the inputs catalogue, including selection, removal, limit and format/size errors.
+
+## Follow-up controls - 2026/11/16
+
+UploadProgress announces an explicit success status beside the meter at 100%; retry and cancel remain disabled after completion. PathPicker uses the shared Breadcrumb primitives, RTL chevron separators and aria-current on the selected destination. Both updated states are rendered in DialogPatternsCatalogue.
+
+RecordGroup(title, description?, children, testId) is a shared glass composition with a named section, shared header and a logical start accent. It visually groups related records without merging their identities, content or actions. The independent example and the interactive version groups are available on the overlays/layout catalogue pages.
+
+## کنترل‌های دیالوگ جمع‌وجور — ۲۰۲۶/۱۱/۱۶
+
+- `UploadProgress(name, value, cancelled?, onRetry, onCancel)` از ProgressIndicator بومی و قرارداد شیشه‌ای استفاده می‌کند. نام فایل، درصد و دکمه‌های آیکونی تلاش مجدد/لغو نام دارند؛ در ۱۰۰٪ هر دو غیرفعال‌اند. زمان‌بندی در مصرف‌کننده است. نمونه مخزن شبیه‌سازی محلی با cleanup هنگام لغو، تلاش مجدد و unmount دارد؛ فایل یک بار در پایان اضافه می‌شود.
+- `PathPicker(nodes, value, onValueChange)` مسیر را با آرایه شناسه‌های پایدار می‌گیرد، فرزندان سطح فعلی را نشان می‌دهد و با انتخاب دسته به سطح بعد می‌رود. breadcrumb ریشه/اجداد و بازگشت دارد؛ برگ مقصد معتبر است. انتخاب مسیر انتقال را ثبت نمی‌کند؛ فرم والد آن را ثبت می‌کند.
+- `RadioField.options[].content` در حالت کنترل‌شده فقط زیر گزینه انتخاب‌شده نمایش داده می‌شود؛ محتوای گزینه دیگر در DOM نیست.
+- `CopyField.compact` فضای خالی پیام کپی را حذف می‌کند؛ live region باقی می‌ماند و پیام موفقیت/انتخاب متن نمایش داده می‌شود. ردیف کلید نمونه مصرف آن است.
+- `glass.compactRecord` سطح، تم، حالت بدون شفافیت و forced colors ردیف‌های عضو/گروه/فایل/نسخه را یکپارچه می‌کند.
+
+
 ## کنترل‌های جاری — ۲۰۲۶/۱۱/۱۴
 
 [Button](../../components/ui/button.tsx)، [Input](../../components/ui/input.tsx)، [Select](../../components/ui/select.tsx) و [SolidForm](../../components/ui/SolidForm.tsx) مرجع اجرا هستند؛ ظاهر و سیاست حالت‌ها قراردادهای Tailwind در [classes.ts](classes.ts) هستند. فایل CSS مستقل کنترل‌ها حذف شده است.
@@ -5,6 +118,16 @@
 Input پیش از فوکوس white/40 با حاشیه خاکستری و سایه داخلی است؛ در دارک white/10. فوکوس بنفش و خطا معنایی است. دکمه اصلی purple/60 و Hover آن purple/80؛ ثانویه white/50 با حاشیه و سایه پایه؛ Ghost/Close از white/10 به white/20 می‌رود. حرکت Hover فقط برای کنترل فعال است و در کاهش حرکت غیرفعال می‌شود.
 
 Select بومی HTML ممنوع است. Trigger و Content همان shadcn Base UI، شیشه‌ای و با شناسه تست‌اند؛ `select-parts.tsx` بخش‌های کوچک را نگه می‌دارد. `name` و serialization primitive را حفظ کنید، ولی تست‌ها را روی کنترل قابل مشاهده بنویسید. قواعد قاب ماتِ گزارش قدیمی برای فرم جاری معتبر نیستند.
+
+## تکمیل سطوح انتخاب و وضعیت — ۲۰۲۶/۱۱/۱۶
+
+Checkbox/Radio در حالت عادی white/40 و در انتخاب purple/60 دارند؛ انتخاب جزئی آیکون مستقل خود را حفظ می‌کند. Switch ریل فرورفته و دستگیره روشن با حرکت RTL دارد. قراردادهای `choice`، `switchTrack` و `switchThumb` در `classes.ts` مالک ظاهر، خطا، فوکوس و fallback هستند. بدون شفافیت و forced colors محوشدگی حذف و انتخاب با رنگ سیستم/آیکون باقی می‌ماند. Base UI مسئول رفتار است.
+
+نشان‌های وضعیت و Feedback از `statusSurface` و رنگ‌های معنایی مشترک استفاده می‌کنند. Avatar و مرحله‌های ایجاد از متریال GlassEmblem استفاده می‌کنند؛ نمونه مراحل فعلی/تکمیل‌شده/در انتظار را با دکمه ادامه بررسی کنید. Progress همچنان عنصر بومی دارای label/value/max است و فقط track/value شیشه‌ای شده‌اند. نمونه‌های روشن/تاریک در `/design-system/inputs`، `/design-system/status` و `/design-system/feedback` در دسترس‌اند. فایل انتخاب‌شده نیز قاب شیشه‌ای مشترک دارد.
+
+## انتخاب‌گر برچسب — ۲۰۲۶/۱۱/۱۶
+
+[TagPicker](../../components/ui/TagPicker.tsx) ترکیب عمومی جستجو، چیپ‌های قابل حذف و چک‌باکس گزینه‌های ثابت است. `label`، `value: string[]`، `options: string[]`، `onValueChange` و `testId` لازم‌اند؛ `disabled`، `description` و `error` اختیاری‌اند. گزینه‌ها از مصرف‌کننده می‌آیند؛ ساخت تگ یا درخواست سرویس انجام نمی‌دهد. Enter در جستجو فرم بیرونی را ثبت نمی‌کند، Space انتخاب را تغییر می‌دهد و حذف چیپ فوکوس را به جستجو برمی‌گرداند. نام قابل دسترس، ارتباط خطا، RTL، تم و fallback از کنترل‌های مشترک می‌آیند. جستجوی بدون نتیجه، انتخاب خالی، غیرفعال و خطا در بخش inputs قابل بررسی‌اند. گزینه‌های ثابت فرم، فهرست دادهٔ صفحه‌بندی‌شونده نیستند.
 
 ## تاریخچهٔ مرحله C
 

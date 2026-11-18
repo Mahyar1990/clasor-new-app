@@ -13,11 +13,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: glass.primary,
+        glass: glass.iconButton,
         outline: glass.secondary,
         secondary: glass.secondary,
         ghost: `${glass.control} text-primary`,
-        destructive: "border-transparent bg-destructive text-destructive-foreground enabled:hover:brightness-90 enabled:active:brightness-75 opaque:bg-destructive! opaque:backdrop-blur-none!",
-        "destructive-outline": "border-destructive bg-card text-destructive enabled:hover:bg-danger-surface enabled:active:bg-danger-border",
+        destructive: glass.destructive,
+        "destructive-outline": glass.destructiveOutline,
+        plain: "border-transparent bg-transparent text-inherit enabled:hover:bg-white/10",
         link: "border-transparent text-primary underline-offset-4 enabled:hover:underline",
       },
       size: {

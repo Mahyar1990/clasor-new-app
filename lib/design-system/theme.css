@@ -96,5 +96,9 @@
   --glass-text: var(--clasor-color-neutral-100);
   --glass-field-text: var(--color-gray-100);
   --glass-error: #f87171;
+  --success: var(--color-emerald-200);
+  --warning: var(--color-amber-200);
+  --info: var(--color-sky-200);
+  --danger: var(--color-red-300);
 }
 :root { --material-canvas: radial-gradient(ellipse at 10% 15%, #b294ed66, transparent 55%), radial-gradient(ellipse at 90% 30%, #345f9455, transparent 55%), linear-gradient(135deg, var(--clasor-color-brand-100), var(--background)); }

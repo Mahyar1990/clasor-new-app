@@ -35,7 +35,16 @@ Always load growing data lists in `/workspace` automatically when their bottom e
 
 ## Design system component previews
 
-Every newly designed UI component must have a representative example rendered through `app/page.tsx` in the design system catalogue. Keep demo data and interactions in `components/design-system`; keep React component files within 200 physical lines and add `data-test-id` to interactive elements.
+Every newly designed UI component must have a representative example on the relevant independent design system catalogue page, reachable from `app/page.tsx` and the catalogue menu. Keep demo data and interactions in `components/design-system`; keep React component files within 200 physical lines and add `data-test-id` to interactive elements.
+
+## Grow the design system with Clasor pages
+
+- For every Clasor page design or revision, compare the observed elements, controls and interaction patterns with the existing design system before implementation.
+- Reuse or extend an existing component when it covers the need. When a required component or pattern is missing, implement it and its catalogue example alongside the page; do not leave the reusable part embedded only in the page preview.
+- Keep product-independent primitives and compositions in `components/ui`, product behavior in its owning product module, and fictional data and preview interactions in `components/design-system`. Document product-specific compositions as patterns without moving business rules into generic primitives.
+- Show representative states and interactions in the component catalogue, including keyboard behavior, RTL, responsive layout and relevant disabled, loading, empty or error states. Update the owning component contract when its public API or behavior changes.
+- Preserve the source page's content structure and behavior while applying the shared visual contracts. New components must address an observed need rather than add unrequested product features.
+- Include the page, missing components, catalogue examples and their documentation in the same feature branch and logical delivery. A standalone product-page preview does not replace a component catalogue example.
 
 ## Unified glass contracts
 

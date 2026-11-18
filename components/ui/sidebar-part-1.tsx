@@ -1,6 +1,5 @@
 "use client";
 
-import { glass } from "@/lib/design-system/classes";
 import * as React from "react";
 import { cn } from "cn";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -116,7 +115,7 @@ export function SidebarProvider({
             ...style,
           } as React.CSSProperties
         }
-        className={cn("group/sidebar-wrapper flex min-h-svh w-full has-data-[variant=inset]:bg-sidebar", className, glass.panel)}
+        className={cn("group/sidebar-wrapper flex min-h-svh w-full ", className)}
         {...props}
       >
         {children}

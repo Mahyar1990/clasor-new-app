@@ -1,3 +1,187 @@
+## Publish hierarchy and adjustable document navigation — 2026/11/18
+
+The public guide now demonstrates six heading levels. Its repository path is راهنما → شروع به کار → راهنمای شروع به کار, supplying the requested pair of nested categories in both the real preview data and catalogue examples. Existing publication filtering, ancestor retention, selection reveal, disclosure and scroll behavior remain in use.
+
+The right-hand document list is wrapped in the generic ResizablePane. Its desktop width starts at 240px, ranges from 180px to 420px when space permits, and reserves at least 320px for the remaining main region, accounting for the flex gap. It stays mounted across document navigation, retaining the chosen width and existing tree state. On mobile the existing right-hand Sheet remains the navigation interface; the desktop splitter is hidden. No backend or source-account mutation is introduced.
+
+ContentsNavigation now renders actual nested lists with visible group rails and child connectors. The section drawer and article heading navigation continue to use the existing docking/focus behavior. Adjacent-document links are compact single-line “سند قبلی”/“سند بعدی” controls without document names; first/last boundaries still omit unavailable destinations. The floating trigger opts into the shared accent tone, preserving the canonical OptionsButton implementation. Independent navigation/layout examples cover deep headings, resizing in both directions, pointer/touch, keyboard and responsive limits.
+
+## Source-aligned public search and reading tools — 2026/11/17
+
+This revision supersedes the provisional public menu and source-access limitation below. The user-supplied public document was opened in the existing Firefox session. Read-only inspection confirmed the header newsletter/search/panel/profile controls, two search tabs, public/private newsletters, expanded floating action bar and a section drawer between the repository tree and document. No source reaction, account change, publication, download or outbound message was performed; fixtures contain no source account names or document text.
+
+PublishHeaderActions composes the generic public header with the existing modal/tab/form contracts. Guest Login is replaced by the avatar after local preview sign-in, with an avatar fallback and profile sign-out. The product provider retains an explicit preview flag in sessionStorage for reloads; no credentials or account data are stored. Storage failure keeps the in-memory flow usable. Catalogue providers remain isolated and non-persistent. This is a demonstration of auth states, not real authentication.
+
+News uses compact dated public/private cards and navigational Read more pages. Private news gates on the sample session. Its Login action dismisses news before requesting sign-in, keeping one dialog. Search has the source's content and advanced tabs; advanced fields are title, creator text, tag and sorting by creation/update/title. Applied criteria filter only currently public approved snapshots across published repositories; no draft/private fallback is searched. Results appear below the fields and use native deep links. Lists append ten records with shared LoadMore, preserve old results while appending and reset on a newly applied query or mode.
+
+The public tree uses OutlineNavigation's compact density, visible ancestor rails/branches, current-row emphasis and folder breadcrumbs. On a new document selection its ancestors reopen; optional revealSelected brings the selected row into view without moving keyboard focus. If it is outside the loaded batch, the relevant sentinel is brought into view so the normal ten-record/600ms loading lifecycle continues. This selection-driven reveal is separate from ordinary append behavior; already loaded rows, manual expansion state and focus remain stable during ordinary loading. The document surface now uses ReadingSurface width=full instead of a page-only CSS override.
+
+The source-aligned floating action bar is a controlled disclosure group, using the canonical OptionsButton. It exposes a docked table of contents, attachment list/downloads, short link, exclusive counted like/dislike controls, public versions and the panel link only for the logged-in preview account's explicit repository access. Reactions are local state with fictional counts; no remote votes are sent. Panel entry reuses the existing new-tab snapshot handoff. Downloads use actual local fixture URLs and expose an unavailable state for unsupported URLs. No fake PDF/Office generation is claimed.
+
+A shortened `/clasor-pages/p/[documentId]` route resolves to the corresponding public document and rejects unavailable records. It is a deterministic local preview route, not an external URL-shortening service. Heading navigation parses plain text/Markdown headings into escaped React content, never arbitrary HTML. The nonmodal DockedPanel reserves space between tree and paper on desktop and stacks above paper on mobile. A scoped viewport scroll callback updates the active heading, including the final heading at the bottom; activation scrolls only the reading viewport and moves focus to the heading, respects reduced motion and restores the trigger when closed.
+
+A representative fictional guide supplies nested headings, two downloadable attachments and an independent draft/approved pair. New reusable controls and extensions have independent examples on navigation/layout, including theme portals, missing-avatar fallback, keyboard, empty/disabled states and responsive geometry. All source inspection and browser validation use separate read-only source/local preview contexts.
+
+## Public publish portal — 2026/11/17
+
+Two independent previews are linked from the Clasor page registry: “صفحه ای اولیه پابلیش” at `/clasor-pages/publish`, and the document-reading example at `/clasor-pages/publish/dashboard-repository-1`. Repository and document IDs have addressable nested routes with a repository-layout Suspense boundary. The shared repository layout keeps the outline/search/scroll mounted while the selected document segment changes. These pages use public-site chrome rather than the management sidebar. The landing uses existing repository images/tile materials, applied compact search and cumulative loading.
+
+The document reader places a separately scrollable outline on the RTL start/right and a centered ReadingSurface in the remaining space. Small screens expose that same navigation in the shared right-hand Base UI Sheet; selection closes the sheet. Links retain native modified-click behavior while ordinary selections use client routing. Each outline level appends ten items through shared LoadMore; search remounts the list session to cancel pending work. Content scrolls independently; the floating action surface is centered at the bottom of the reading region and reserves content padding.
+
+The product publication selector includes only published, non-deleted/non-archived repositories and approved/public document snapshots. Hidden/deleted/unsupported restricted records, templates, missing ancestors and cyclic ancestry are omitted. Required ancestor folders remain, empty folders do not. Draft buffers are never used as fallback content. This is local preview presentation, not backend authorization. No remote publication, account mutation or production authentication was added.
+
+The floating menu composes GlassOptionsMenu/OptionsButton with document information, published-version selection and retryable clipboard feedback. Version choices reuse PreviewList; only public approved versions are offered. The actual docs.pod.ir root HTML identified “داکس” and “سیستم مدیریت اسناد”; automated browser access returned “You Can not Access to this service” and public chunk requests failed. Consequently the source's exact repository layout and floating menu inventory could not be verified. This preview follows the requested landing/right-tree/center-content/floating-control structure; exact source parity is not claimed. A clarification for the remote menu labels was requested while implementation continued.
+
+OutlineNavigation, FloatingOptions and ReadingSurface have independent catalogue examples on navigation and layout, including RTL, local dark portals, keyboard disclosure/selection, empty, disabled and growing-list states. GlassBackdrop is extracted from AppLayout unchanged, retaining its original public test IDs and fixed blue/purple mesh.
+
+## Repository summary and shared document surfaces — 2026/11/17
+
+An entered repository owns its page heading inside the tinted summary card. Description comes next and canonical RoleBadge follows it. Back, tags and the redundant Active label are removed from that summary; archived state remains visible when relevant. LibraryShell's explicit titleInContent placement leaves ordinary list/unavailable headings intact and preserves the shared heading ref for destructive-action focus. Catalogue summaries retain an h2 within their own section. Repository lists use larger rectangular tiles with an in-flow operation column and no internal divider. Creation moves into the title row at the upper-left through LibraryShell titleActions; search remains below.
+
+Document and folder rows now activate their existing primary link/button across blank cells in tables and the outline. Documents keep native new-tab snapshot capture; folders keep in-place navigation/expansion. Checkbox wrappers, operation cells, interactive controls, portal content, selected text and non-primary clicks are excluded. Name links remain the keyboard target; table rows keep their native semantics instead of gaining duplicate button roles or tab stops.
+
+Version view and edit both compose the actual EditorWorkspace used by the new-tab page. The selected version/initial editing state, repository, folder trail and commit acknowledgement pass through document context. Embedded workspaces use a section landmark, preserve iframe Escape and return View all to the surrounding version list. Creation/clone remains a compact number-only flow. No redundant zoom/copy toolbar remains in the active version viewer.
+
+Embedded dirty/approval/publication decisions use the existing NavigableGlassModal stack via a decision host, preserving one dialog instead of adding overlays. The decision page reads current navigation itself, retains commit-error retry behavior and cancels its pending request on actual unmount without treating Strict Mode's effect probe as a user cancellation. Approval pauses autosave; Back returns to the same mounted editor state and original control. New-tab workspaces retain their ordinary decision dialogs. Independent table, repository and version catalogue examples exercise these same compositions.
+
+## Compact reader breadcrumb and tab handoff — 2026/11/17
+
+The reader header now uses repository → ancestor folders → bold document title → selected version (draft/approved/approved public). The former detached version-name/status group is removed. The dock toggle and breadcrumb are vertically centered; tools share the row at sufficient width and wrap below on small screens.
+
+`readerFolderPath` resolves same-repository folder ancestry with cycle/deletion guards; legacy flat category metadata supplies a text-only fallback and omits the repository root placeholder. New-tab snapshots optionally carry the ancestor labels so user-created folder paths survive a fresh tab/reload even when those folders are not in the reader's initial fixtures. Reader commits retain that path. Legacy snapshots remain accepted; malformed optional paths are rejected. Only the known repository destination is linked; unknown folder destinations remain text instead of inventing unsupported routes.
+
+## Reader action matrix and independent publication — 2026/11/17
+
+The compact right-hand dock and consolidated menus supersede the previous Sheet/toolbar description below. The panel uses DockedPanel, existing ClasorTabs and existing content compositions; only scoped density changes. Toolbar/picker examples remain independently reachable on navigation, and a separate dock example is on layout, alongside the complete reader preview.
+
+| Selected snapshot | Preview/edit actions when writable |
+| --- | --- |
+| Draft | Approve draft; Approve and publish |
+| Approved, non-public | Publish only |
+| Approved, public | No approval/publication action |
+
+The product `versionActions` helper derives these presentation flags; generic controls receive booleans/callbacks. Preview download shares the action menu; edit/preview uses a separate Switch. Options sits at the physical far left, ModeSwitch sits beside it, editing Save/Autosave controls sit to its right, and the drawer toggle sits at the far right. Manual Save is a stable editing control and disables under Autosave (or when clean), rather than disappearing.
+
+Publishing an approved snapshot uses `publishEditorVersion`/the existing publish version action directly. It changes the approved record's public flag without recreating an approved record, copying content, approving/deleting a same-number draft or changing the selected ID. Explicit draft approval remains the separate confirmation flow and may replace its approved counterpart. Both preserve local commit acknowledgement/error handling.
+
+## Type-aware editor workspace — 2026/11/17
+
+The current user-specified reader structure supersedes the earlier header/sidebar composition below. Entry is always preview. One compact glass header combines the document path/title, canonical flags/status badges and the toolbar; redundant bookmark/options/zoom/copy controls and permanent tools sidebar are removed from the new-tab page. The separate version-view dialog retains its existing controls and near-viewport navigation.
+
+| Family | Preview | Editing | Side panel |
+| --- | --- | --- | --- |
+| Classic Clasor | PDF via browser print/save | Approve draft, approve/publish, autosave | History (editing only), tags, attachments, chat, comments, questions |
+| File | File download | Approve draft, approve/publish | None |
+| Word, flowchart, Excel | File download | Approve draft, approve/publish, autosave | None |
+
+Office/Word and Excel extensions normalize through `editorCapabilities`; flowchart aliases normalize to the same family. Creation now also exposes flowchart. Other existing document kinds remain supported without inferring new tools from this request.
+
+Entering edit mode chooses the selected version's same-number draft when available. Manual/autosave writes only draft content; approved content remains independent until explicit approval. Autosave debounces 700ms and is unavailable for files. Changing mode/version with unsaved content asks Save and continue, Discard or Back; pending navigation pauses autosave. The browser also receives a normal beforeunload warning while dirty. Approval confirms replacing the same-number approved snapshot and optionally public-labeling it, then returns to preview. Existing publication and latest labels retain the version-state rules. The product workspace accepts an optional synchronous commit acknowledgement; a failed local write keeps the buffer dirty, shows a retryable error and blocks guarded navigation/approval until a write succeeds. The catalogue can simulate this failure independently of storage. Saved edits append local editing-history records; the panel does not relabel version snapshots as editing history.
+
+Classic's drawer starts closed, uses the existing Base UI Sheet and unified ClasorTabs, and restores toggle focus on close. History is absent in preview. Tags use repository master options. Attachment and chat interactions update fictional preview records; attachment payloads are bounded to 500KB total for this local handoff. All growing panel lists reuse cumulative PreviewList/LoadMore. Comments and questions reuse their existing compositions.
+
+The independent toolbar catalogue example complements a complete type-selectable workspace example; no business rules moved into the generic toolbar. Embedded editors remain local plaintext integration fixtures, not real Word/Excel/flowchart engines or remote Clasor editors. Fixture file downloads are truthful `.txt` exports of fixture content; production binary download requires a backend file response. This limitation is distinct from the working PDF print bridge and local attachment download.
+
+## Repository invitations and document reading — 2026/11/17
+
+Pending invitations are separate from accepted repository members. Sharing renders accepted members first, followed by a dimmer pending list with avatar fallback, role and waiting status. Pending entries have only Cancel invitation; they are excluded from panel restriction choices. Inviting through sharing or repository creation appends pending entries, while the creator remains the active owner. Both lists retain cumulative loading and search behavior.
+
+Publication audience IDs use removable tokens; panel exclusions use the repository-scoped user/group picker and explicit Save. Document rows and reader surfaces consume the same derived status flags. Existing bookmark IDs and document/version menu contracts remain stable.
+
+Document links open `/clasor-pages/read/[documentId]` in a native new tab with noopener/noreferrer. Folders continue in-place navigation. The reader places a compact title/options header, version and discussion tools around an iframe. Version selection from the versions dialog stays in that same navigable dialog and expands close to the viewport; view/edit retain independent same-number draft and approved snapshots. New-version creation still asks for no content.
+
+`EditorFrame` hosts `/document-editor`. The local plaintext editor uses a same-origin, source-window-checked, session-scoped postMessage handshake; content is rendered as text, never evaluated markup. Ready acknowledgement removes the loading label even when initialization precedes the listener. Iframe Escape returns from a version page; direct content editing dismisses through Base UI's close primitive. Zoom, text copy and local text download are functional preview tools. This is an editor integration preview, not a connection to Clasor's remote rich-text/Office editor.
+
+To hand modified and newly created fixtures to a tab without an opener, the preview stores a bounded per-document browser-local snapshot (24-hour TTL, maximum two million serialized characters), including repository membership context. Repository files, keys, requests and join links are omitted; custom image payloads are omitted. Expired entries are pruned on writes. Reader changes synchronize matching records in already-open preview tabs through storage events. This narrow handoff is not general application persistence, backend authorization or account storage. Other list/repository state remains session-local; unavailable/expired custom documents show a return link.
+
+## Compact control follow-up — 2026/11/16
+
+Version snapshots are vertically stacked again under their canonical version number; same-number draft and approved content remain independent. Inline status/creator/date/public/latest labels reduce height, while options stay in normal flow with reserved padding. There is no absolute menu over the row text. OptionsButton is shared across every record menu, including files, members and groups.
+
+Repository-key generation and registration share one FormActions row below generated values, keeping their geometry aligned before/after generation. Submission requires both a nonempty name and generated key. Shared action rows and TextField action slots also address related dialog alignment rather than maintaining isolated offsets. These changes retain local demo-key semantics.
+
+Search disclosure and integrated-field behavior in NAVIGATION.md/CONTROLS.md supersede the previous always-visible search row. Existing cumulative list loading, multi-sort, ownership, tags and ten-item selection rules remain in force.
+
+## Repository-scoped documents, tags and group mutations — 2026/11/16
+
+Every library document now has a repositoryId. The provider derives document sharing scope from current repository metadata and excludes deleted/left repositories. Clicking a tile opens its own workspace, not the information dialog. A repository workspace reuses document search/filter, sort, table/outline, creation and menus. New records inherit the current repository and category; at the aggregate personal root they use the personal repository. Template choices are limited to the destination repository. New repositories start with no documents.
+
+Repository tags are a vocabulary owned by that repository. The repository-creation tag stage creates/deletes names only; it does not select from global tags. Management is also available from repository options in lists, dashboard and the workspace header. Deletion confirms once, then removes the tag from documents in that repository without affecting another repository's vocabulary. This replaces the older tag-selection description in the initial creation flow below. Public Clasor UI bundles were inspected read-only: the create stage uses title + add + removable tags; repository tag management has name/create and delete confirmation. No source-account mutation occurred.
+
+Search text and title/content mode apply on submission. Changing the draft does not change the current result list. Filter changes and applied queries reset/cancel cumulative loads; selection remains explicit across search, filters, scrolling and view switches. Ending selection or a successful batch operation clears it. The outline includes matching rows and their ancestor context; sort order applies among matching siblings. Short and long lists retain the existing 10-record/600ms mock loading contract, including repository tag management.
+
+Batch deletion removes selected folders and descendants atomically after confirmation. Batch move accepts up to ten distinct selected records, validates the destination and rejects self/descendant targets. Selecting a parent and its child moves one coherent subtree, not two detached records. Cross-repository move updates sharing scope and retains only tags defined by the destination vocabulary; destination controls explain this. Cancelling leaves records and selection intact. Shared aggregate documents retain their existing edit restrictions; writable repository workspaces expose creation/batch actions and role-appropriate publication controls. These local preview controls do not replace backend authorization.
+
+Repository images use a thumbnail, accessible name and default/error fallback; custom image files are read locally and retained in the session as data URLs. Creation is still atomic at the final step. No real upload, storage, encryption or backend was introduced. Fixtures now include distinct repository documents and nested categories for interactive review.
+
+## Library pages and surface grouping — 2026/11/16
+
+The dashboard and seven standalone library pages share the in-memory `LibraryProvider`. Search/filter/sort and active folders belong to each page; record mutations remain shared during client navigation. Reload resets mock data. No account mutation, real upload, backend storage or persistent encryption was introduced.
+
+Document search supports normalized Persian/Arabic letters and digits, title/content mode and current-category/all-repository scope. Filters combine kind, content type, every selected tag, template and bookmark; removable chips expose active constraints. Folder kind disables irrelevant content-type/template options. Filtering and sorting reset/cancel cumulative loads; lists append 10 records with skeletons and preserve existing nodes. Repository lists use compact square GlassTile cards, search and tile-shaped loading skeletons. Ownership/shared/archive/published scopes are distinct.
+
+Ordered multi-sort supports kind (folder/document), name, numeric priority, created date and modified date, with independent directions and stable ties. The default is kind, priority, name. Folder breadcrumbs support drill-down; moving excludes self/descendants and deleting a category handles descendants locally.
+
+Source public Clasor UI was inspected read-only. The local creation compositions follow these stage sequences:
+
+| Creation | Stages |
+| --- | --- |
+| Classic document | Type → title/description/priority → template → encryption key → version name |
+| File / Office document | Type (Office subtype/extension) → title/description/priority → version name |
+| Form document | Type → title/description/priority → form configuration → version name |
+| Template | Classic type → title/description/priority → version name |
+| Category | Title/description/priority → review |
+| Repository | Title/description → member POD IDs and individual roles → tags → optional image |
+
+The category review is an intentional compact step added for the requested stepped UX. Unlike the source's early repository creation, these previews commit atomically at the final stage, so cancellation leaves no partial record. New documents get one named draft and no invented approval history. Template content is copied only when selected; content editing stays in its separate dialog. Repositories start with an owner and the explicitly entered members.
+
+Same-number version snapshots share one RecordGroup heading and compact side-by-side draft/approved cells with independent menus. Public remains a label on approved state; independent snapshot content and actions remain intact. Groups, form sections, tags and file summaries are flat content on one glass master rather than nested glass panes. Independent examples for these patterns, filters, multi-sort, tiles and creation flows are rendered by app/page.tsx on layout/overlays.
+
+## Header source mapping - 2026/11/16
+
+Read-only inspection of the available public Clasor frontend mapped the header controls to these fields and actions:
+
+| Control | Source structure | Local preview |
+| --- | --- | --- |
+| Invitation list | Repository name, role, reject/accept; accepted state has repository URL/copy and entry action | Fictional independent requests, cumulative batches of ten, decisions retained across reopening; one modal with Back to the list |
+| Feedback | Required content and optional files, six maximum, one MiB each, eight supported extensions | Compact text area and AttachmentPicker, fixed submit/cancel footer, inline validation and local success toast |
+| Account | User name and logout | Labeled dropdown; compact logout confirmation and local guest/resume state |
+| Admin | Navigation to /panel-admin-clasor | Labeled external navigation to Clasor in a new tab |
+
+No feedback subject/email/account-type fields are invented. The account metadata uses fictional identity. No source-account mutation, feedback request or attachment upload is sent. The accepted fixture's URL is under example.com; entry is disabled with an explicit reason until the repository interior has a designed preview. That limitation does not affect the source admin navigation.
+
+Header compositions have independent light/dark and empty-list examples on overlays/layout. Glass controls and attachment selection have independent buttons/inputs catalogue examples. Product-specific state stays in components/design-system/header-dialogs; reusable attachments and material contracts stay in components/ui and classes.ts.
+
+## Request, file and version follow-up - 2026/11/16
+
+Request rows contain separate sibling controls for opening details and accepting/rejecting a pending request; decision controls also remain in the detail page. Inline decisions retain focus on the row opener.
+
+Repository file rows show upload date and source-aligned download, publish, rename and delete actions. Rename/publication/delete use the existing single-modal navigation. Uploaded files retain their local File payload for download; fixture downloads use the local sample PDF. No account or remote file operation is performed.
+
+Version creation collects only the version number. A fresh version starts empty; cloning retains the source snapshot. Creation leaves the current document content unchanged. Content can be edited only through the separate edit action. Same-number draft/approved snapshots appear under one RecordGroup heading while retaining independent status, content, IDs and menus. Groups use cumulative loading in batches of ten version numbers.
+
+## دیالوگ‌های داشبورد کلاسور — قرارداد جاری ۲۰۲۶/۱۱/۱۶
+
+این بخش بر توصیف‌های قدیمی پیش‌نمایش داشبورد مقدم است. مدل تاریخی `/workspace` در این تغییر بازنویسی نشده است.
+
+اشتراک مخزن: دعوت شناسه پادی و نقش در یک ردیف، آواتار تصویر یا fallback، منوی دسترسی پیشرفته/اعلانات/انتقال مالکیت/حذف عضو و ویرایش نقش. گروه دارای نام، توضیح و مجموعه غیرخالی اعضای غیرمالک است؛ عملیات ویرایش/حذف در همان پنجره با بازگشت اجرا می‌شوند. حذف عضو، عضویت او در گروه‌ها را نیز حذف می‌کند. انتقال مالکیت نقش فعلی را به مدیر تبدیل می‌کند. نقش‌ها و رفتارها محلی‌اند و مجوز backend ایجاد نمی‌کنند.
+
+لینک پیوستن برای هر نقش رکورد جدا در state مخزن دارد؛ ساخت تکراری هم در انتخابگر و هم هنگام ثبت مسدود است. حذف لینک اجازه ساخت دوباره آن نقش را می‌دهد. انتشار فعال فقط دکمه لغو انتشار دارد؛ پس از لغو، انتشار دوباره ممکن است. لینک‌ها نمایشی و زیر example.com هستند.
+
+مدیریت فایل: افزودن تک‌دکمه‌ای، جستجو بالای فهرست و پیشرفت شیشه‌ای با لغو/تلاش مجدد؛ بارگذاری شبکه‌ای واقعی انجام نمی‌شود. فهرست‌های قابل رشد از PreviewList و بارگذاری تجمعی ۱۰تایی استفاده می‌کنند. اعلانات ناحیه اسکرول نام‌گذاری‌شده مستقل دارند. ردیف کلید و دسترسی مستقیم جمع‌وجور است.
+
+نسخه پیش‌نویس و تاییدشده هم‌شماره، شناسه و محتوای جدا دارند. عمومی صرفاً برچسب تاییدشده است؛ پیش‌نویس عمومی نمی‌شود. فهرست نسخه محتوا ندارد؛ نمایش، ویرایش، ایجاد/کپی نسخه، مقایسه، لینک، درخواست/لغو درخواست، تایید/رد، عمومی‌سازی، انتخاب آخرین نسخه و حذف به صفحات داخلی همان دیالوگ می‌روند. منو تابع وضعیت نسخه است. ویرایش تاییدشده، پیش‌نویس هم‌شماره را ایجاد/ویرایش می‌کند. تایید پیش‌نویس پس از هشدار صریح، تاییدشده هم‌شماره را جایگزین و پیش‌نویس را می‌بندد؛ برچسب عمومی قبلی حفظ می‌شود. شماره‌های فارسی/عربی/لاتین در تشخیص تکرار یکسان‌اند. ایجاد نسخه، پیش‌نویس تکراری نمی‌سازد. عمومی‌سازی منوی اصلی سند فقط آخرین تاییدشده را هدف می‌گیرد.
+
+درخواست نسخه، سازنده، تاریخ ویرایش، شماره و وضعیت دارد؛ کلیک، محتوا و تصمیم تایید/رد را با بازگشت باز می‌کند. انتقال سند از انتخابگر درختی استفاده می‌کند و انصراف تغییری ثبت نمی‌کند. همه وضعیت‌ها در حافظه پیش‌نمایش و برای هر رکورد مستقل‌اند.
+
+## Shared table column contract — 2026/11/15
+
+Current table geometry lives in `table-contract.ts` and shared `classes.ts` utilities. Metadata columns default to 112px, single actions to 76px with 16px padding on each side; content gets the remaining width. Both SolidDataTable and DataTable consume this contract. Custom multiple actions retain 128px by default. The new document table catalogue is rendered on the data and layout pages with a long title, hidden semantic caption and working glass menu/dialog. Dashboard-only width/padding overrides have been removed. See [materials](MATERIALS.md) for the current API; the older stage sections below are historical.
+
+## Dashboard glass table and identity surfaces — 2026/11/15
+
+`SolidDataTable` accepts `appearance="glass"` for a graduated translucent header and alternating translucent rows; its default remains `solid`. Semantics, stable row IDs, scroll region and action focus are preserved. `GlassEmblem` supplies reusable logo/folder tiles and circular avatars. Both are demonstrated on `/design-system/layout` with a local dark preview; the dashboard consumes these shared components directly. See [materials](MATERIALS.md) for the appearance and accessibility contract.
+
 ## ترکیب‌های جاری — ۲۰۲۶/۱۱/۱۴
 
 [GlassCard](../../components/ui/GlassCard.tsx) سطح مشترک و [AppLayout](../../components/ui/AppLayout.tsx) ترکیب آن با هدر، سایدبار و Mesh ثابت است. [SolidDataTable](../../components/ui/SolidDataTable.tsx) و [SolidForm](../../components/ui/SolidForm.tsx) نام عمومی خود را نگه داشته‌اند، اما قاب‌هایشان شیشه‌ای است؛ ردیف دادهٔ جدول می‌تواند مات بماند.

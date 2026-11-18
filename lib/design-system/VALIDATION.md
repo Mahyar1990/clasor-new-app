@@ -1,3 +1,242 @@
+## Document list metadata columns — 2026/11/18
+
+Evidence: working tree on `feat/document-list-metadata-columns`, based on `a1f1ab1`.
+
+- ui:check passed for 274 React files; lint and TypeScript passed. All 70 tests passed, including the required workspace mutations, documents and collaboration suites. No new product mutation or backend behavior was introduced.
+- Targeted Chromium checks verified priority, name, paired creation/modification dates, creator and actions on dashboard, My documents, shared documents and entered-repository tables. The 80/160/112/76px bounded columns leave name flexible. Semantic ISO time attributes, Persian dates, missing/invalid date dashes, retained 16px action padding and standalone catalogue row activation passed.
+- RTL checks passed at 320/390/768/1600px without document-level horizontal overflow; the table scroll remains local and keyboard focusable. Browser inspection identified an absolute hidden descendant escaping the table scroll region; positioning the shared scroll region relatively resolved the reproduction. A visual review also caught the priority heading wrapping, resolved by an 80px column.
+- Independent table checks also passed catalogue menu/dialog interaction, existing selection/deletion controls, local dark portal inheritance, forced-color blur removal and 320/390/768/1920px bounds.
+- A separate browser regression passed full table/outline row activation, in-place folder navigation, native new-tab document handoff, keyboard activation, independent operation/selection controls and preserved text selection. Temporary browser scripts and captures remain outside the repository.
+- npm run build encountered the previously reported environment restriction in the Turbopack CSS-worker port bind. The documented `npm run build -- --webpack` fallback passed on the final component source and generated all 82 pages. No dependency or build configuration changes were made. The final Next.js feedback audit retained no new qualifying framework issue; the known environment failure was not reported again.
+
+The reusable RecordDates composition, independent catalogue example, shared table geometry, product integration and owning contract are delivered together. Automated checks do not establish human screen-reader or complete accessibility acceptance.
+
+## Connected publish hierarchy and resizable navigation — 2026/11/18
+
+Evidence: working tree on `feat/publish-hierarchy-and-resizable-navigation`, based on `e73e613`.
+
+- ui:check passed for 273 React files; lint and TypeScript passed. All 70 tests passed, including the three required workspace suites and four new hierarchy/splitter cases. They cover six nested heading levels, peers and returning to a parent, skipped levels without synthetic headings, input immutability, constrained pane bounds and physical keyboard movement in both directions.
+- Browser checks passed the six-level nested ordered lists and visible start rails/elbows, active heading focus, accent trigger and actual راهنما → شروع به کار → document repository path. First/middle adjacent navigation uses compact labels without document names and retains destinations. The final desktop capture was visually reviewed; leaf markers remain 6px inside compact drawers.
+- Product resizing passed real pointer drag, inverse main-region geometry, 180/420px bounds, 8px/Shift-32px keyboard steps, Home/End, double-click reset, Escape drag cancellation and retained folder expansion/width across document navigation. At 768px the remaining main region stays at least 320px, accounting for the parent gap. 900px bounds and 320/390px mobile Sheet/nested navigation also passed without horizontal overflow.
+- The independent navigation/layout examples passed deep heading activation/focus restoration, local dark accent control, RTL/LTR splitter keys, reset and native touch drag through Chromium's touch input. Mobile example bounds, responsive min/max and solid/forced-color/reduced-motion behavior passed without runtime/console errors. Temporary scripts and captures remain outside the repository; all changes use fictional local data.
+- npm run build was attempted on the final source and encountered the existing Turbopack CSS-worker port-bind permission failure. The documented `npm run build -- --webpack` fallback compiled successfully and generated all 82 pages. Its first run then exited with a Next.js security-upgrade reminder; retrying the same command as directed completed with exit 0. No dependencies or project configuration changed, and the security reminder itself has not been remediated. The final feedback audit retained no new verified framework defect; the known Turbopack environment failure was not reported again.
+
+Components, examples, product integration and contracts are delivered together. Automated checks do not establish human screen-reader acceptance or complete accessibility certification. No source account was changed.
+
+## Publish identity, advanced search and document tools — 2026/11/17
+
+Evidence: working tree on `feat/publish-search-and-reading-tools`, based on `b8a3512`.
+
+- Read-only Firefox inspection of the user-supplied public document succeeded. The header, two search modes (including title/creator/tag/sort fields), public/private newsletter list, expanded floating toolbar and section drawer between tree/content were observed. This supersedes the preceding source-access limitation. No source votes, downloads, account changes, publication or messages were performed; local fixtures remain fictional.
+- ui:check passed for 271 React files; lint and TypeScript passed. All 66 tests passed, including the three required workspace suites and seven new public-search/section/path/reaction/access/attachment cases. Tests verify public-approved-only content, combined normalized filters, deterministic sorts without mutation, heading extraction with markup retained as text, ancestor/cycle handling, exclusive reaction counts, explicit panel access and supported download URLs.
+- Browser flow passed public/private news, navigational Read more, login gating with one dialog, guest Login/avatar replacement, explicit sign-in/out, counted reaction switching and undo, permitted new-tab panel handoff, real fixture attachment download, short-link copy/resolution and approved/public-only version selection. Sign-in UI retention uses a preview-only sessionStorage flag, with no credentials or source account data. A separate browser check passed hiding panel entry for a signed-in account without access; injected storage-quota failure retained in-memory sign-in/sign-out without runtime errors.
+- Full-text result navigation, advanced title/creator/tag conjunction, empty results and cumulative append passed. The selected row is revealed through normal cumulative loading without stealing focus; compact 10px rows and highlighted ancestor branches passed. Full-width paper has no max-width cap. Section-drawer geometry sits between tree and paper, reduces actual paper width, scrolls/focuses headings and restores its trigger. Final-section highlighting at the bottom passed after a visual review identified the need to account for the bounded scroll range.
+- 320/390px header, right navigation Sheet, selection reveal, stacked non-overlapping section list, floating action bar and search-modal bounds passed. Independent catalogue checks passed local dark search/Select/login/profile/news portals, deliberate missing-avatar fallback, keyboard disclosure and heading focus, reaction counts/disabled, empty contents and compact/comfortable density. Font-size assertions wait for the existing transition to settle. Solid/forced-color/reduced-motion checks passed. Expected network failure for the intentionally blocked avatar is excluded from the otherwise empty console/runtime error assertions.
+- Desktop product and local-dark catalogue captures were visually reviewed. Source screenshots and temporary browser scripts remain outside the repository. Product primitives, independent catalogue examples and contracts are delivered together; no production auth, votes, URL-shortener service or search backend was added.
+- npm run build was attempted on the final source and encountered the already reported Turbopack CSS-worker port-bind permission failure. Production build success is not claimed. The final feedback audit retained no new verified Next.js friction; no duplicate report was prepared.
+
+Automated checks do not establish human screen-reader acceptance or complete accessibility certification. Documentation link and specification-index checks passed.
+
+## Public documentation portal — 2026/11/17
+
+Evidence: working tree on `feat/published-documentation-pages`, based on `0936b58`.
+
+- ui:check passed for 255 React files; lint and TypeScript passed. All 59 tests passed, including the three required workspace suites and four new public-selection cases. They verify approved/public snapshot precedence, exclusions for hidden/deleted/restricted/template records, ancestor retention, encoded deep links and rejection of missing/cyclic/hidden ancestor chains.
+- Browser checks passed for landing repository search/empty recovery, public repository navigation, approved-only content, independent right-side outline loading/search and nested document links. Floating information, published-version selection and clipboard feedback passed; no draft is listed. Dialog dismissal and trigger focus restoration passed.
+- 320/390px bounds passed for the public reading page, right-hand navigation Sheet and floating menu after transition settles. Unavailable/private repository and unsupported document routes show recovery content. The independent catalogue passed native keyboard disclosure/selection, local dark menus/dialogs, focus restoration, empty, disabled, automatic long-list loading, solid material, forced colors and reduced motion. Runtime/console assertions passed on the exercised routes. Browser selectors target visible content because Next may retain inactive routes in the DOM; development chrome was hidden for pointer checks to avoid covering mobile controls.
+- Desktop landing/reader captures were visually reviewed. A targeted browser check also passed retention of loaded records, expanded/collapsed folders, applied search, selected highlighting and sidebar scroll across document segments. The shared repository layout keeps its navigation mounted; article state resets independently. Temporary scripts/captures remain outside the repository.
+- The docs.pod.ir root HTML supplied the public brand/caption, but automated browser access returned a service-access denial and chunk retrieval failed. Exact remote menu inventory and source-layout parity remain unverified; the implemented menu is a provisional local preview. A clarification for its labels was requested. No source account was changed and no production publication/backend/authentication was added.
+- npm run build was attempted on the delivery source and encountered the known Turbopack CSS-worker port-bind permission failure. Production build success is not claimed. The final feedback pass retained no newly verified framework issue; transient errors during module edits did not reproduce in the settled browser checks, so no duplicate feedback report was prepared.
+
+Pages, reusable outline/floating/readable-surface compositions, independent catalogue states and owning contracts ship together. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
+## Repository cards and shared version workspace — 2026/11/17
+
+Evidence: working tree on `feat/repository-summary-and-document-interactions`, based on `6b98912`. Includes the subsequent repository heading, row activation, rectangular tile, creation placement and divider-removal requests.
+
+- ui:check passed for 240 React files; lint and TypeScript passed. All 55 existing tests passed, including the three required workspace suites. Documentation links and specification index checks passed.
+- Browser checks passed for the entered repository's tinted summary, name inside its card, canonical role below description and removal of duplicate title, Back, tags and Active. Numbered version groups share the clearer flat inset material without adding backdrop blur. Independent catalogue examples, dark portals and 320/390px bounds passed.
+- All five repository list scopes, dashboard and catalogue use larger rectangular tiles. Measured action regions do not overlap titles or custom/default images; no internal divider remains. Create repository sits at the upper-left opposite the title, above search, and restores focus after dismissal. Mobile, solid, forced-color and reduced-motion checks passed; desktop captures were visually reviewed.
+- Table and tree blank-row clicks activate the canonical document/folder control. New-tab snapshot handoff, in-place folder navigation, text selection, action menus, keyboard links and checkbox isolation passed. The disabled unchecked checkbox wrapper at the ten-record limit does not navigate or change selection.
+- Version viewing/editing uses the shared reader workspace with the requested selected version, preserved folder trail and no redundant viewer toolbar. Embedded iframe Escape, View all returning to the existing list, non-overlapping right dock, direct edit entry, dirty discard and navigational approval/publication passed. Only one dialog remains mounted during hosted decisions; Back/Cancel and reopening passed. Injected storage failure retained changes and displayed an error; explicit retry succeeded. Local dark menu/decision flow and mobile solid/forced-color/reduced-motion checks passed. The submenu footer was also exercised by keyboard.
+- Runtime/console checks passed across six product/catalogue/workspace routes and four internal catalogue navigations. Temporary browser scripts and captures remain outside the repository. All writes use fictional local records; the source account was untouched.
+- npm run build was attempted and encountered the previously reported Turbopack CSS worker port-bind permission failure. Production build success is not claimed. The final feedback audit retained no new qualifying Next.js issue; no duplicate report was prepared.
+
+Page revisions, shared components, independent catalogue examples and owning contracts ship together. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
+## Compact header, breadcrumb and nested versions — 2026/11/17
+
+Evidence: working tree on `feat/compact-reader-header-and-version-menu`, based on `d98ca43`. This includes the subsequent breadcrumb order/status and responsive alignment requests.
+
+- ui:check passed for 239 React files; lint and TypeScript passed. All 55 tests passed, including the three required workspace suites. Three new path/status cases cover ordered ancestors, cycle/repository/root fallbacks, document emphasis and the three parenthesized version states. Reader snapshot parsing also verifies optional path validation and legacy compatibility.
+- Browser checks passed for no standalone version buttons, nested Options → Versions selection, the View all dialog, dirty-change guards, trigger-focus restoration, mobile submenu bounds and independent catalogue dark/keyboard/empty states. The existing shared menu now accepts a generic submenuContent composition; existing children-based submenus are preserved.
+- The actual list-to-new-tab flow captured the folder name correctly; reload retained it. A path with two user-created/unknown ancestor IDs survived reload and a reader publication commit. Breadcrumb order, bold document weight, selected-version updates and removal of the old status block passed. The drawer is in the header row and still restores toggle focus when closed.
+- Measured desktop header/tool centers share one row; breadcrumb and drawer centers align within one pixel after hover settles. At 320/390px, tools wrap to the second row without document overflow. The final desktop screenshot was visually reviewed.
+- Runtime/console checks passed across six product/catalogue/workspace routes, four internal catalogue navigations and shared table-menu dismissal.
+- npm run build was attempted and encountered the previously reported Turbopack CSS worker port-bind permission failure. Production build success is not claimed. The final feedback audit retained no new qualifying Next.js friction; no duplicate report was prepared.
+
+All browser writes target fictional local records. No source account was changed. The shared components, independent navigation/full reader examples, local handoff behavior and owning contracts ship in the same feature branch. Temporary scripts/captures remain outside the repository. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
+## Right dock, named mode control and unified menus — 2026/11/17
+
+Evidence: working tree on `feat/docked-reader-tools-and-actions`, based on `4a63a91`. This scope includes the subsequent toolbar placement and named-mode refinements.
+
+- ui:check passed for 239 React files; lint and TypeScript passed. All 52 logic tests passed, including two new cases for draft/approved/public action visibility and approved-only publication preserving the independent same-number draft. The three required workspace test files remain included.
+- Browser checks passed for the 208px right-side nonmodal dock, measured iframe width reduction/restoration without overlap, small text/fields, live header/editor interaction while open, retained compose text, close focus restoration and every preview tab at 320/390px. A visual review found clipped internal content despite valid outer bounds; GlassScrollArea's optional bounded content class now overrides the primitive's fit-content minimum only for the dock. Inner viewport/content widths are measured as equal; existing scroll areas retain their default.
+- Toolbar geometry passed: drawer at the physical far right, Options at the far left, ModeSwitch beside Options, and editing Save/Autosave to the right of ModeSwitch. The named mode control shows both Eye/Preview and Pencil/Edit labels with a more prominent sliding glass capsule, without presenting an off state. Click, Space, disabled states and local dark variants passed through the independent toolbar example.
+- Version-menu footer and keyboard activation passed, opening the existing versions dialog and restoring trigger focus. The separate management icon is absent. Version radio items explicitly use the primitive's closeOnClick behavior; this fixed the initial menu remaining open after selection. Tests await the close transition when checking focus/visibility.
+- Preview draft approval and approve/publish, approved-only publication, absence of redundant actions on public versions, persistent disabled/enabled Save, manual save and autosave all passed. Approved publication retained the same-number draft content. Drawer/menu state and independent version semantics stayed intact.
+- Independent catalogue checks passed for dark version/action portals, empty/read-only states, keyboard footer, docked layout with active sibling controls, retained fields/focus, 320px bounds, solid material, forced colors and reduced motion. Runtime/console checks passed on six product/catalogue/workspace routes, four internal catalogue navigations and the shared table menu. Desktop captures were visually reviewed.
+- npm run build was attempted and again encountered the already reported Turbopack CSS worker port-bind permission failure after token/structural checks; production build success is not claimed. The final feedback audit retained no new qualifying Next.js issue, so no duplicate report was prepared.
+
+All account/source data remains untouched; browser writes use fictional local fixtures. The page, shared ModeSwitch/VersionPicker/DockedPanel, independent catalogue examples and owning contracts are delivered together. Temporary scripts/captures stay outside the repository. These checks do not establish human screen-reader acceptance or full accessibility certification.
+
+## Compact type-aware editor workspace — 2026/11/17
+
+Evidence: working tree on `feat/compact-document-editor-workspace`, based on `06a5240`. This revision replaces the earlier new-tab reader toolbar/sidebar while retaining version-dialog behavior.
+
+- ui:check passed for 235 React files; lint and TypeScript passed. All 50 tests in `test/*.test.mjs` passed, including the three required workspace files and three new editor cases: type capabilities/aliases, draft-only saves with independent approved content/edit history, and atomic approval/publication from the current buffer.
+- Browser checks passed for preview-first entry, more than 850px iframe height in a 1000px desktop viewport, removed redundant page controls, the classic-only closed drawer, edit-only history, chat/attachment preview interactions, drawer focus restoration, manual Save, unsaved Back/Discard/Save-and-continue while switching versions, and 700ms autosave. Approved content stayed independent until approval. Public approval returned to preview with canonical badges; PDF invoked the validated iframe print bridge. Version selection still stayed in one enlarged dialog and opened no additional tab.
+- File, Word, flowchart and Excel toolbar cases passed: file downloads in preview; approval controls in editing; Autosave absent for File and present for the other three. 320/390px checks found no document overflow and retained editor space. Fixture downloads correctly used `.txt` rather than claiming to generate real Office files.
+- Storage-quota fault injection passed: manual save and approval retained the current buffer, failed Save-and-continue stayed on the decision dialog, error messages remained visible, and explicit retry succeeded after storage recovery without runtime errors. The full catalogue exposes this state with a failure toggle.
+- The independent navigation-catalogue example passed keyboard mode activation, dark Select portals, read-only and empty-version disabled controls, dirty/save interaction, RTL mobile bounds and solid/forced-color/reduced-motion modes. The complete workspace example passed local dark drawer/version portals and arrow-key tabs. Desktop captures were visually reviewed. Runtime/console checks also passed across six product/catalogue/workspace routes and four internal catalogue navigations. The focus test waits for the Sheet closing transition before asserting restoration.
+- The server stopped during the interrupted run and the first development restart stopped for the CLI upgrade reminder. Retrying the same command restored the local server; no dependency upgrade was performed. The repeated build attempt again hit the known Turbopack CSS worker port-bind permission failure after tokens and structural checks. Production build success is not claimed. The required feedback instructions were read (with the documented network retry). The CLI notice was evaluated and excluded because its explicit retry guidance resolved it immediately; no new qualifying report remained. The repeated CSS port-bind limitation was already reported and was not submitted again.
+
+The page, independent shared toolbar example, full workspace example and owning contracts are delivered together. The original source account remains untouched; all browser mutations target fictional local fixtures. Native browser print offers Save as PDF. Local plaintext iframes are integration previews, not actual Word/Excel/flowchart engines or remote file services. These results do not establish backend authorization, human screen-reader acceptance or complete accessibility certification. Temporary browser scripts and captures remain outside the repository.
+
+## Document reader, sharing and canonical status controls — 2026/11/17
+
+Evidence: working tree on `feat/document-reader-and-repository-sharing`, based on `00bfd96`. Results below belong to this revision, not earlier stage counts.
+
+- ui:check passed for 229 React files; lint and TypeScript passed. All 47 tests in `test/*.test.mjs` passed, including four new cases for identifier tokenization, repository-only recipient scoping, independent status flags and bounded/expired reader handoff parsing. The three required workspace test files are included. Specification index (17 sources), documentation links and diff whitespace checks passed.
+- Browser checks passed for successful upload replacing Retry/Cancel while retaining the identical progress node and meter width/height; pending sharing invitations, active-member separation and cancellation (including invitations from the repository-creation wizard); repository member/group multiselect; identifier separation/removal; document row flags; Create opposite breadcrumb and adjacent Filter/Sort/Close controls.
+- Real new-tab checks passed with no opener, iframe rendering, bookmark updates back to the originating list, newly created document handoff and reload, plaintext markup rendering without execution, and saved iframe edits. Version status badges reuse the canonical components; selecting/viewing/editing a version retained the same dialog and browser-tab count. Near-viewport geometry, Back restoration and iframe Escape passed at 320/390px. A missed-ready race was fixed with an explicit session-scoped acknowledgement; the loading label disappears after initialization.
+- Catalogue checks passed for dark preview, token removal, multi-select, editable/read-only iframe, 320px component bounds, solid material, forced colors and reduced motion. Escape from direct editing dismisses through the Base UI close primitive. An initial catalogue test clicked before React hydration; the test now waits for interactive state. A separate test initially selected a folder instead of a document; the selector now names the intended document. Neither was a product regression.
+- A browser test exposed an existing success toast intercepting Save on the enlarged editor. The toast now follows Base UI's outside/inert marker and moves behind the active dialog while retaining its live region. The upload/create/edit/version scenarios passed again after this fix. Mobile reader and desktop reader/version captures were visually reviewed.
+- Runtime/console checks passed across six product/catalogue/workspace routes, four internal catalogue navigations and shared table-menu keyboard dismissal. npm run build was attempted with escalation and hit the already reported Turbopack CSS worker port-bind permission failure; no successful production build is claimed. The final Next.js feedback audit retained no new qualifying issue beyond the known environment limitation.
+
+All source-account data remains untouched. The source iframe integration was confirmed in publicly delivered UI code; authenticated reader DOM automation was unavailable, so the local tools are a preview composition rather than a claim of exact remote editor integration. Reader handoff uses a bounded 24-hour local snapshot; other fixtures remain in memory. Temporary scripts/captures stay outside the repository. These checks do not establish production authorization, human screen-reader acceptance or complete accessibility certification.
+
+## Unified options, compact versions and search disclosure — 2026/11/16
+
+Evidence: working tree on `fix/compact-search-and-dialog-controls`, based on `5478d26`.
+
+- ui:check passed for 217 React files; lint and TypeScript passed. All 43 existing workspace, preview-version and library tests passed. Structural validation now rejects ad hoc three-dot Button/IconButton controls outside OptionsButton.
+- Browser checks passed for initially hidden search/filter controls, disclosure state, focus, integrated title/content selection, attached Apply geometry and Enter, immediate adjacency to table/outline, filter application, close/clear/reset, and 320/390px overflow. Sort and explicit selection retain their independent state.
+- Record-menu geometry and computed materials matched between repository, document and version controls. Version snapshots stack vertically, retain shared numbering and independent actions/content, and reserve menu insets. Key generation/save share one aligned row in both generated/ungenerated states. Captures were visually reviewed.
+- Local dark search/Select/menu portals, tag input/action alignment with validation errors, tree reuse, solid mode, forced colors, reduced motion and mobile key dialogs passed. Alignment measurements wait for the standard two-pixel hover lift to settle. Public IDs and composed Base UI refs remain preserved.
+- A final console sweep exposed instant-shell-url-data on the catalogue route: Page awaited params outside a page-local Suspense boundary. Moving the read into the streamed section fixed the application error; all six route checks, four internal catalogue navigations and the shared table menu then passed without runtime/console errors. This is a documented migration requirement, not retained as a new framework defect. A legacy forced-colors test now checks that no pseudo-element is painted (including content:none), rather than requiring a particular display value for a nonexistent pseudo-element.
+- npm run build was attempted with escalation and encountered the already reported Turbopack CSS worker port-bind permission failure. A successful production build is not claimed. The final feedback audit retained no new qualifying Next issue beyond this known environment limitation.
+
+All account/source data remains untouched; tests use local fixtures. Scripts and screenshots stay outside the repository. Automated checks do not establish human screen-reader acceptance or complete accessibility certification. Remote publication is explicitly authorized for this request; branch synchronization is verified separately after committing.
+
+## Repository workspaces, master tags and batch actions — 2026/11/16
+
+Evidence: working tree on `feat/repository-workspace-and-bulk-documents`, based on `5f80c17`.
+
+- ui:check passed for 215 React files; lint and TypeScript passed. All 43 workspace, preview-version and library tests passed, including six new selection/subtree/outline/repository-scope cases. Documentation links and specification index checks passed.
+- Browser scenarios passed for bounded applied search and separate creation rows, repository navigation/image display, master tag creation/duplicate validation, tag deletion Cancel/Confirm and document-tag cleanup, folder-only disabled filters, title/content mode, search ancestor context, the ten-item cap, selection retained between table/outline, cross-repository subtree move, recursive deletion and cancellation, atomic repository/tag/image creation, empty new repository and 320/390px overflow.
+- Catalogue scenarios passed for repository/outline/batch examples, local dark tag and bulk/Select portals, one-dialog navigation, focus restoration, solid/forced-color/reduced-motion modes, repository-scoped template and document creation, nested category creation, mobile batch controls and unavailable repository routes. The title hover has no separate translated/shadowed button surface.
+- Desktop checks at 720/900px height passed: list bounds stay inside the main panel and cumulative loading reaches all 28 repository-root records. A failed image request correctly switched to the default illustration; the final card/navigation smoke had no runtime or hydration error.
+- Image-edit checks passed for custom/default recognition, chosen default color, replacing an image and retaining a custom image when saving other metadata.
+- Long-list checks passed for 16 repository tags and 14 destination folders: real inner scrolling, automatic cumulative append, retained existing row identity, cancelled selection and stable title focus after repository deletion.
+- A browser test exposed a stale Back callback captured before pushing a tag confirmation page. The confirmation now reads dialog navigation in its mounted child component; cancellation, successful deletion and focus restoration passed after the fix. Screenshot checks keep caret rendering unchanged to avoid changing unhydrated input attributes; hydration-aware setup waits for interactive controls.
+- npm run build was attempted with escalation and again hit the known Turbopack internal CSS worker port-bind permission failure. Production build success is not claimed. The final feedback audit retained no new qualifying Next issue beyond this already reported environment limitation.
+
+The original Clasor account was not changed. Source inspection used read-only public UI assets. Captures and browser scripts remain outside the repository. All state and images are session-local mock data; checks do not establish backend authorization, human screen-reader acceptance or full accessibility certification.
+
+## Flat surfaces and independent library pages — 2026/11/16
+
+Evidence: working tree on `feat/clasor-library-pages-and-flat-surfaces`, based on `eb94c0f`.
+
+- ui:check passed for 204 React files; lint and TypeScript passed. All 37 workspace, preview-version and library logic tests passed, including 7 new query/tree/repository tests. Documentation links, specification index and diff whitespace checks passed.
+- Browser checks passed on all seven library routes: visible active navigation, source-aligned document/template/category/repository creation, wizard Back retaining fields, template-content copy, atomic final creation, folder drill-down and all-category scope, search normalization, filter Apply/Cancel/chips, five-criterion sort and reorder, my/shared restrictions, square repository tiles and archive/restore state across navigation.
+- Same-number draft/approved snapshots were checked side by side with independent actions and no nested backdrop filter. Catalogue nested surfaces, creation/filter/select dark portals, focus restoration, solid mode, forced colors, reduced motion, 320/390px overflow, mobile multi-sort and mobile navigation passed. Workspace regression smoke passed; no runtime errors occurred in these checks.
+- The shared Select wrapper now forwards explicit test IDs to visible controls. Tests scope selectors to the visible route because cacheComponents retains previous pages in hidden Activity trees. This matches the installed Next documentation and is not treated as a framework defect.
+- npm run build was attempted during this request and hit the already reported Turbopack internal CSS worker port-bind permission failure. A successful production build is not claimed. The final feedback audit retained no new qualifying Next issue beyond that known environment limitation.
+
+Apple source references and implemented material hierarchy are in MATERIALS.md; source field/stage mapping and local state limits are in PATTERNS.md. Browser scripts and captures remain outside the repository. These checks do not establish human screen-reader or complete accessibility acceptance; no source-account write occurred.
+
+## Refined glass header controls - 2026/11/16
+
+Evidence: working tree on `feat/refined-glass-header-controls`, based on `c563e58`.
+
+- ui:check passed for 183 React files; lint, TypeScript, documentation links, specification index and whitespace checks passed. All 30 existing workspace/preview-version tests passed.
+- Browser checks covered compact header control geometry, shared rim/reflection layers, the source admin target (not followed), feedback text validation, unsupported/oversized files, six-file limit, removal and focus, local success confirmation, cumulative invitation loading with existing nodes retained, reject/accept, accepted link and Back, retained decisions, logout cancellation and stable fallback focus.
+- Existing repository/document dialog regression checks also passed after the shared button/material change.
+- Widths 320/390, catalogue examples, pressed/disabled/keyboard states, local dark controls and dialog portals, solid mode, forced colors, reduced motion, focus containment, Escape/restoration and empty invitations passed. Tests waited for theme changes and visual transitions before inspecting styles. No runtime error or source-account write occurred in the final checks.
+- The account label was placed inside Menu.Group after an initial runtime check exposed the primitive's required context. Header dialogs now accept a stable theme anchor, preventing local preview themes from being lost when focus moves into portals.
+- npm run build was attempted and hit the previously reported Turbopack internal CSS port-bind permission failure. Production build success is not claimed; the feedback reporting pass retained no new qualifying issue beyond this already reported environment limitation.
+
+Browser captures and scripts remain temporary files outside the repository. These checks are not human screen-reader or complete accessibility acceptance. All feedback/invitation/logout state is a local design preview, not backend integration.
+
+## Request/file/version follow-up - 2026/11/16
+
+Evidence: working tree on `feat/refine-request-file-version-flows`, based on `0978cce`.
+
+- ui:check passed for 176 React files; lint and TypeScript passed. All 30 existing workspace/preview-version tests passed. Documentation links, specification index and diff whitespace checks passed.
+- Local browser checks covered inline accept/reject without opening a viewer, retained detail decisions, focus after inline decisions, file upload dates, source-aligned menus, rename/publication/delete, download filename, upload success status and record persistence after reopening.
+- Same-number snapshots share a group while retaining different content; creating a version has no content field, starts empty and leaves prior content intact; the separate editor remains functional. Breadcrumb separators and ancestor navigation passed.
+- RTL widths 320/390, dark file-menu portals, standalone catalogue examples, completed upload disabled states, solid and forced-color surfaces, reduced motion and horizontal overflow were checked. No runtime errors were recorded.
+- npm run build was attempted and stopped at the previously reported Turbopack CSS internal port-bind permission error. Production build success is not claimed; no duplicate Next.js feedback report was submitted for this known environment issue.
+
+Data and actions remain local previews. These checks do not establish human screen-reader or complete accessibility acceptance.
+
+## دیالوگ‌های جمع‌وجور و ناوبری داخلی — ۲۰۲۶/۱۱/۱۶
+
+شواهد روی working tree برنچ `feat/compact-navigable-record-dialogs` بر پایه `170a37e` ثبت شدند.
+
+- `ui:check` برای ۱۷۴ فایل React، lint، TypeScript، لینک‌های مستندات و هماهنگی ایندکس مشخصات پاس شدند. ۲۳ تست موجود workspace و ۷ تست تازه مدل نسخه، در مجموع ۳۰ تست، پاس شدند.
+- مرورگر محلی: جای محتوای گزینه تصویر مخزن، لغو/تلاش مجدد و تکمیل بارگذاری محلی، جستجوی فایل، بازگشت با حفظ تب/جستجو/فوکوس، ویرایش گروه، اعتبارسنجی اعضای غیرخالی، ساخت/حذف کلید و لایه واحد دیالوگ بررسی شدند.
+- نگهداری لینک جدا برای هر نقش، جلوگیری از تکرار و حذف/ساخت مجدد، انتشار/لغو انتشار، نمایش درخواست و تصمیم تایید، مسیر درختی و نگهداری مقصد بررسی شدند.
+- فهرست نسخه بدون محتوا، محتوای متفاوت پیش‌نویس/تاییدشده هم‌شماره، ساخت نسخه و رد شماره تکراری فارسی/لاتین، عمومی‌سازی تاییدشده و منوهای وضعیت بررسی شدند. تست‌های خالص، عدم تغییر محتوای تاییدشده هنگام ویرایش و جایگزینی صریح هنگام تایید را نیز بررسی می‌کنند.
+- عرض‌های ۳۲۰/۳۹۰، تم تاریک portal و منوی داخلی، reduced motion، forced colors، حالت بدون شفافیت و محصوربودن فوکوس پاس شدند. اسکرول اعلانات با داده بلند موقت مرورگر بررسی شد. خطای runtime ثبت نشد.
+- منوی داخلی از فوتر بالاتر و منوی صفحه از دیالوگ پایین‌تر قرار می‌گیرد؛ مشکل برخورد pointer با فوتر در بررسی پیدا و اصلاح شد.
+- `npm run build` در حالت معمول و با دسترسی بیشتر اجرا شد؛ هر دو با خطای شناخته‌شده مجوز bind پورت داخلی Turbopack هنگام CSS متوقف شدند. بیلد تولید تایید نشده است. این رخداد قبلاً در گذر بازخورد Next.js ثبت شده و گزارش تکراری ارسال نشد.
+
+بارگذاری، کلید، لینک و تغییرات رکورد صرفاً محلی‌اند؛ حساب کلاسور تغییر نکرد. این شواهد پذیرش انسانی صفحه‌خوان یا تایید کامل WCAG نیستند.
+
+
+## یکپارچه‌سازی تب‌بار — ۲۰۲۶/۱۱/۱۶
+
+شواهد روی working tree برنچ `refactor/unify-glass-tabs` بر پایهٔ `9388d7d` ثبت شدند. ظاهر ریل و تب فعالِ نمونهٔ مورد تأیید پیش از تغییر ثبت شد و رنگ زمینه/متن، blur، شعاع، رنگ حاشیه، سایه، padding و ارتفاع پیش‌فرض با پیاده‌سازی یکپارچه در مرورگر مقایسه و یکسان بود.
+
+- صفحهٔ ناوبری فقط یک tablist دارد؛ نمونه‌های تکراری خطی/بخش‌بندی‌شده حذف شده‌اند. حالت تاریک، عنوان بلند و تب غیرفعال روی همان نمونه بررسی شدند.
+- RTL با جهت‌ها، Home/End، ردشدن از تب غیرفعال، بازگشت انتخاب هنگام غیرفعال‌کردن تب فعال و حالت کنترل‌شده پاس شد.
+- سطوح داشبورد با نمونهٔ مرجع یکسان‌اند؛ ارتفاع جمع‌وجور دسکتاپ ۳۲px حفظ شد. استقلال تب‌های سند/مخزن و تب‌های دیالوگ اشتراک مخزن، درخواست‌ها و نظرات سند بررسی شدند.
+- عرض‌های ۳۲۰ و ۳۹۰px، دیده‌شدن تب فوکوس‌شده در نوار افقی، نبود سرریز ریشه، dark، solid، forced colors و reduced motion بررسی شدند. خطای runtime در بررسی مرورگر ثبت نشد.
+- `ui:check` برای ۱۶۵ فایل React، lint، TypeScript، ۲۳ تست منطق workspace، لینک‌های مستندات و ایندکس مشخصات پاس شدند.
+- `npm run build` اجرا شد و با همان خطای شناخته‌شدهٔ مجوز bind پورت داخلی Turbopack در پردازش CSS متوقف شد؛ موفقیت بیلد تولید ادعا نمی‌شود.
+
+این شواهد پذیرش انسانی صفحه‌خوان، همهٔ مرورگرها یا تأیید کامل WCAG نیستند.
+
+## اتصال دیالوگ‌های رکورد به داشبورد — ۲۰۲۶/۱۱/۱۶
+
+شواهد این تغییر روی working tree برنچ `feat/dashboard-record-dialogs` بر پایهٔ `8d770be` ثبت شدند.
+
+- منوی جداگانهٔ دیالوگ مخزن از سایدبار محصول و رجیستری صفحات حذف شده؛ نشانی قبلی به داشبورد redirect می‌شود. نمونه‌های کامپوننت داخل کاتالوگ حفظ شده‌اند.
+- `ui:check` برای ۱۶۵ فایل React، lint و TypeScript پاس شدند؛ ۲۳ تست منطق workspace پاس شد. لینک‌های مستندات و ایندکس مشخصات هماهنگ‌اند.
+- بررسی مرورگر از خود منوی عملیات داشبورد شامل ویرایش و اشتراک مخزن، سایر گزینه‌های مالک، نشان، بایگانی، ویرایش سند/متن/تگ، نسخه‌ها، عمومی‌سازی، دسترسی، نظرات و تأیید/حذف بود. استقلال دو رکورد، ماندگاری پس از جابه‌جایی تب‌ها و بازگشت فوکوس به عملیات یا عنوان پنل پس از حذف بررسی شدند. عمومی‌سازی نسخه وضعیت تأیید آن را تغییر نداد.
+- تمام گونه‌های دیالوگ سند از کاتالوگ باز و بسته شدند؛ لینک با انقضا، رمز/حذف رمز، کپی/حذف لینک، محدودیت کاربران، پاسخ پرسش و محدودیت زمینهٔ داشبورد بررسی شدند. منوی نمونهٔ قبلی نیز دیالوگ واقعی محلی را باز کرد و تم تاریک آن حفظ شد.
+- TagPicker از نظر انتخاب با Space، حذف چیپ و بازگشت فوکوس، جستجوی بدون نتیجه، غیرفعال، جلوگیری از ثبت فرم با Enter جستجو، حالت solid/forced-colors و اندازه‌های ۳۲۰/۳۹۰px بررسی شد. فهرست فعالیت با skeleton قابل مشاهده، حفظ ۱۰ ردیف قبلی و افزودن خودکار تا ۱۲ ردیف بررسی شد.
+- نمایش دیالوگ داشبورد و تگ در عرض‌های ۳۲۰/۳۹۰px سرریز ریشه نداشت. کاهش حرکت و حالت‌های بدون شفافیت بررسی شدند. تصاویر صرفاً در مسیر موقت هستند.
+- `npm run build` اجرا شد؛ پردازش CSS در Turbopack با محدودیت شناخته‌شدهٔ مجوز پورت داخلی محیط متوقف شد. موفقیت بیلد تولید ادعا نمی‌شود.
+
+این شواهد ادعای پذیرش انسانی صفحه‌خوان، همهٔ مرورگرها، کنتراست کامل یا اتصال به حساب/سرویس کلاسور نیست. ویرایش محتوا در این نمونه متن ساده است و نسخه‌ها داخل دیالوگ محلی نمایش داده می‌شوند.
+
+## بازبینی سراسری متریال شیشه‌ای — ۲۰۲۶/۱۱/۱۶
+
+شواهد این تغییر روی working tree برنچ `feat/design-system-glass-polish` بر پایهٔ `07c34a0` ثبت شدند؛ نتایج تاریخی زیر اجرای جدید محسوب نمی‌شوند.
+
+- تمام ۱۴ بخش کاتالوگ در مرورگر Chrome بررسی شدند. نمای واقعی سطوح، نشان‌ها، انتخاب‌ها، آواتار و پیام‌ها قبل/بعد مشاهده شد؛ حالت‌های روشن/تاریکِ کنترل، وضعیت و بازخورد نیز بازبینی شدند.
+- `ui:check` برای ۱۵۳ فایل React، lint و TypeScript پاس شدند؛ ۲۳ تست موجود منطق workspace پاس شد. لینک‌های مستندات و ایندکس مشخصات هماهنگ‌اند.
+- بررسی تعاملی شامل Checkbox عادی/جزئی/غیرفعال/خطا، رادیو با کلید جهت، حرکت RTL سوییچ، Select تاریک، نشان‌های معنایی، مقدار progress، Dialog/AlertDialog/Sheet با فوکوس محصور و بازگشت، Tooltip با hover و Toast تاریک بود.
+- همهٔ ۱۴ بخش در عرض‌های ۳۲۰ و ۳۹۰px بدون سرریز ریشه بررسی شدند. حالت solid، forced colors، کاهش حرکت، کاهش شفافیت، کنتراست بیشتر و print، از جمله حفظ fallback هنگام hover/انتخاب، پاس شدند. چک‌باکس‌های تنظیمات خود کاتالوگ هم با کنترل مشترک بررسی شدند.
+- جریان‌های ۱۳ دیالوگ مخزن، تأییدهای تو در تو، تغییر/حذف دسترسی، کلیدها، فوکوس جایگزین و بارگذاری تجمعی فایل‌ها پاس شدند. تب‌های داشبورد با baseline فعلی compact (۳۲px دسکتاپ و هدف موبایل مربوط به خود کنترل)، استقلال محتوا، صفحه‌کلید RTL، ۳۲۰/۳۹۰px و fallback دوباره بررسی شدند.
+- `npm run build` اجرا شد، ولی Turbopack هنگام پردازش CSS به‌علت نداشتن مجوز bind پورت داخلی متوقف شد؛ همان محدودیت ثبت‌شدهٔ محیط در تحویل قبلی. موفقیت بیلد تولید ادعا نمی‌شود.
+
+این شواهد، پذیرش انسانی صفحه‌خوان، کنتراست تمام ترکیب‌ها، همهٔ مرورگرها یا تأیید کامل WCAG نیستند. داده و رفتار محصول همچنان نمونه‌اند و به حساب کلاسور متصل نشده‌اند.
+
 ## اعتبارسنجی انتقال CSS به Tailwind — ۲۰۲۶/۱۱/۱۴
 
 پس از حذف شش فایل CSS متریال و انتقال قواعد مصرف‌شده به کلاس‌های Tailwind، `ui:check`، `lint`، `build` و ۲۳ تست موجود فضای کار موفق بودند. بررسی لینک‌های مستندات و شاخص مشخصات نیز موفق بود. کنترل جدید `check-style-contracts.mjs` فقط CSS متغیرهای توکن و تم را در این پوشه مجاز می‌داند.

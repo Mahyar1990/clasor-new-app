@@ -6,6 +6,7 @@ Single navigation index for lightweight tasks and feature directories. Current e
 
 | ID | Specification | Kind | Status | Created | Completed |
 | --- | --- | --- | --- | --- | --- |
+| 20261115-142227 | [پیشنهاد تب‌بار شیشه‌ای داشبورد کلاسور](20261115-142227-dashboard-tab-bar-proposal.md) | Task | Done | 2026-11-15 | 2026-11-15 |
 | 20261113-172921 | [Clasor Frosted Glass](20261113-172921-frosted-glass-design-system/spec.md) | Feature | Done | 2026-11-13 | — |
 | 20261101-232706 | [اصلاح اسکرول و جمع‌کردن سایدبار وایرفریم](20261101-232706-wireframe-sidebar-scroll.md) | Task | Done | 2026-11-01 | 2026-11-01 |
 | 20261101-230732 | [اصلاح فاصله هدر هنگام جمع‌شدن سایدبار کاتالوگ](20261101-230732-catalogue-header-sidebar-spacing.md) | Task | Done | 2026-11-01 | 2026-11-01 |
@@ -15,12 +16,12 @@ Single navigation index for lightweight tasks and feature directories. Current e
 | 20261031-213007 | [نمایش بیشتر در همه فهرست‌های داده پنل](20261031-213007-panel-load-more.md) | Task | Done | 2026-10-31 | 2026-10-31 |
 | 20261031-210821 | [رابط جمع‌وجور با تفکیک سطوح و عمق ملایم](20261031-210821-compact-layered-workspace.md) | Task | Done | 2026-10-31 | 2026-10-31 |
 | 20261031-204018 | [ایجاد سند در زمینه محل فعلی](20261031-204018-contextual-document-creation.md) | Task | Done | 2026-10-31 | 2026-10-31 |
-| 20261031-150206 | [نسخه‌ها و تأیید محتوا و اشتراک نمونه](20261031-150206-document-collaboration.md) | Task | Done | 2026-10-31 | 2026-10-31 |
 
 ## Completed history
 
 | ID | Specification | Kind | Status | Created | Completed |
 | --- | --- | --- | --- | --- | --- |
+| 20261115-142227 | [پیشنهاد تب‌بار شیشه‌ای داشبورد کلاسور](20261115-142227-dashboard-tab-bar-proposal.md) | Task | Done | 2026-11-15 | 2026-11-15 |
 | 20261113-172921 | [Clasor Frosted Glass](20261113-172921-frosted-glass-design-system/spec.md) | Feature | Done | 2026-11-13 | — |
 | 20261101-232706 | [اصلاح اسکرول و جمع‌کردن سایدبار وایرفریم](20261101-232706-wireframe-sidebar-scroll.md) | Task | Done | 2026-11-01 | 2026-11-01 |
 | 20261101-230732 | [اصلاح فاصله هدر هنگام جمع‌شدن سایدبار کاتالوگ](20261101-230732-catalogue-header-sidebar-spacing.md) | Task | Done | 2026-11-01 | 2026-11-01 |
@@ -57,4 +58,4 @@ No entries.
 - New lightweight tasks use YYYYMMDD-HHMMSS-description.md with Asia/Tehran timestamps; feature directories keep spec.md and related artifacts.
 - Dates are never inferred from filesystem modification times. Missing completion dates remain —.
 
-_Generated from 16 source specifications._
+_Generated from 17 source specifications._

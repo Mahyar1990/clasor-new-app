@@ -16,6 +16,9 @@ for (const file of targets) {
   const edits = [];
   let ordinal = 0;
   const visit = node => {
+    if (file !== "components/ui/OptionsButton.tsx" && ts.isJsxElement(node) && ["Button", "IconButton"].includes(node.openingElement.tagName.getText(tree)) && node.children.some(child => ts.isJsxSelfClosingElement(child) && ["Ellipsis", "MoreHorizontal", "MoreVertical"].includes(child.tagName.getText(tree)))) {
+      failures.push(`${file}: record option controls must use the shared OptionsButton`);
+    }
     if (ts.isCallExpression(node) && node.expression.getText(tree) === "mergeProps" && ts.isObjectLiteralExpression(node.arguments[0])) {
       const defaults = node.arguments[0];
       if (!defaults.getText(tree).includes('"data-test-id"')) {

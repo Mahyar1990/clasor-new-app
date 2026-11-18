@@ -1,5 +1,6 @@
 "use client";
 
+import { GlassSurfaceContext } from "./glass-surface-context";
 import { glass } from "@/lib/design-system/classes";
 import * as React from "react";
 import { cn } from "cn";
@@ -52,13 +53,13 @@ export function SidebarRail({ className, ...props }: React.ComponentProps<"butto
   )
 }
 
-export function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
+export function SidebarInset({ className, children, ...props }: React.ComponentProps<"main">) {
   return (
     <main data-test-id="sidebar-part-3-main-4"
       data-slot="sidebar-inset"
       className={cn("relative flex w-full flex-1 flex-col bg-background lg:peer-data-[variant=inset]:m-2 lg:peer-data-[variant=inset]:ms-0 lg:peer-data-[variant=inset]:rounded-xl lg:peer-data-[variant=inset]:shadow-sm lg:peer-data-[variant=inset]:peer-data-[state=collapsed]:ms-2", className, glass.panel)}
       {...props}
-    />
+    ><GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider></main>
   )
 }
 

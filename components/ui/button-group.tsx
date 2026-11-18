@@ -1,6 +1,7 @@
 import { mergeProps } from "@base-ui/react/merge-props"
 import { useRender } from "@base-ui/react/use-render"
 import { cva, type VariantProps } from "class-variance-authority"
+import { glass } from "@/lib/design-system/classes";
 import { cn } from "cn"
 
 import { Separator } from "@/components/ui/separator"
@@ -48,7 +49,8 @@ function ButtonGroupText({
     props: mergeProps<"div">(
       { ...{ "data-test-id": "button-group-text" },
         className: cn(
-          "flex items-center gap-2 rounded-md border bg-muted px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
+          glass.secondary,
+          "flex items-center gap-2 rounded-md border px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
           className
         ),
       },

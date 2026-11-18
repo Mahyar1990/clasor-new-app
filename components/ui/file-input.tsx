@@ -49,7 +49,7 @@ function FileInput({ label, description, error, disabledReason, maxSizeBytes, re
       event.target.setCustomValidity(invalid)
       setFile(selected); setSelectionError(invalid); onFileChange?.(invalid ? null : selected)
     }} />
-    {file && <div data-test-id="file-input-div-3" className="flex min-w-0 items-center gap-3 rounded-md border bg-muted p-3">
+    {file && <div data-test-id="file-input-div-3" className={cn(glass.contentSurface, "flex min-w-0 items-center gap-3 p-3")}>
       <FileText className="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
       <div data-test-id="file-input-div-4" className="min-w-0 flex-1"><bdi data-test-id="file-input-bdi-5" className="block break-all text-sm">{file.name}</bdi><p data-test-id="file-input-p-6" className="text-xs text-muted-foreground">{new Intl.NumberFormat("fa").format(file.size)} بایت — انتخاب محلی</p></div>
       <IconButton data-test-id="file-input-iconbutton-7" aria-label={`پاک‌کردن فایل ${file.name}`} variant="ghost" disabled={props.disabled} onClick={clear}><X aria-hidden="true" /></IconButton>

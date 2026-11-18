@@ -1,3 +1,4 @@
+import { GlassEmblem } from "@/components/ui/GlassEmblem";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 import { glass } from "@/lib/design-system/classes";
@@ -23,20 +24,19 @@ export function GlassHeader({
       className={cn(`${glass.panel} sticky top-4 z-30 flex min-h-16 items-center justify-between gap-4 py-3 ps-4 pe-4 md:ps-6 md:pe-6`, glass.panel)}
     >
       <div data-test-id="GlassHeader-div-2" className="flex min-w-0 items-center gap-3">
-        <span data-test-id="GlassHeader-span-3" className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <GlassEmblem data-test-id="GlassHeader-span-3" className="size-10">
           {logo}
-        </span>
+        </GlassEmblem>
         <span data-test-id="GlassHeader-span-4" className="truncate text-xl font-bold">{title}</span>
       </div>
       <div data-test-id="layout-profile" className="flex shrink-0 items-center gap-2">
         {profile ?? (
-          <span data-test-id="GlassHeader-span-6"
+          <GlassEmblem shape="avatar" data-test-id="GlassHeader-span-6"
             role="img"
             aria-label="پروفایل کاربر"
-            className="flex size-11 items-center justify-center rounded-full bg-primary/10 text-primary"
           >
             <UserRound aria-hidden="true" className="size-5" />
-          </span>
+          </GlassEmblem>
         )}
       </div>
     </header>
