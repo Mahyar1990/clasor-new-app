@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Save, Undo2 } from "lucide-react";
+import { RotateCcw, Save, Undo2 } from "lucide-react";
+import { panelPaletteDefaults } from "@/lib/design-system/panel-palette";
 import { Button } from "@/components/ui/button";
 import { FormActions } from "@/components/ui/FormActions";
 import { useStatusToast } from "@/components/ui/status-toast";
@@ -15,11 +16,17 @@ export function DomainSettingsPanel() {
   const [query, setQuery] = useDomainQuery();
   const [error, setError] = useState("");
   const toast = useStatusToast();
+  const defaultColors = Object.entries(panelPaletteDefaults).every(([id, value]) => draft.colors[id]?.toUpperCase() === value);
   const dirty = JSON.stringify(draft) !== JSON.stringify(state.settings);
   const matches = (label: string, kind: string) => (!query.filters.group || query.filters.group === "all" || query.filters.group === kind) && normalizeDomainText(label).includes(normalizeDomainText(query.text));
   const basic = baseFields.filter(item => matches(`${item.label} ${draft.fields[item.id]}`, "basic"));
   const colors = colorFields.filter(item => matches(`${item.label} ${draft.colors[item.id]}`, "colors"));
   const flags = advancedFlags.filter(item => matches(item.label, "advanced"));
+  function resetColors() {
+    setDraft(current => ({ ...current, colors: { ...panelPaletteDefaults } }));
+    setError("");
+    toast.show("رنگ‌های پیش‌فرض آماده‌اند؛ برای اعمال روی پنل، ذخیره تغییرات را بزنید.");
+  }
   function save() {
     if (!draft.fields.name.trim()) { setError("نام دامنه را وارد کنید."); return; }
     if (Object.values(draft.colors).some(value => !/^#[a-f0-9]{6}$/i.test(value))) { setError("کد رنگ‌های نامعتبر را اصلاح کنید؛ با پاک‌کردن فیلتر همه فیلدها دیده می‌شوند."); return; }
@@ -28,7 +35,7 @@ export function DomainSettingsPanel() {
   return <section data-test-id="domain-settings" className="space-y-4">
     <div data-test-id="domain-settings-heading" className="flex flex-wrap items-center justify-between gap-3">
       <div data-test-id="domain-settings-heading-copy"><h2 data-test-id="domain-settings-title" className="text-sm font-bold">تنظیمات دامنه</h2><p data-test-id="domain-settings-dirty" role="status" className="mt-1 text-[10px] text-muted-foreground">{dirty ? "تغییرات ذخیره‌نشده دارید." : "اطلاعات، قابلیت‌ها و هویت بصری دامنه"}</p></div>
-      <FormActions data-test-id="domain-settings-actions"><Button data-test-id="domain-settings-undo" variant="outline" size="sm" disabled={!dirty} onClick={() => { setDraft(state.settings); setError(""); }}><Undo2 aria-hidden="true" className="size-3!" />بازگردانی</Button><Button data-test-id="domain-settings-save" size="sm" disabled={!dirty} onClick={save}><Save aria-hidden="true" className="size-3!" />ذخیره تغییرات</Button></FormActions>
+      <FormActions data-test-id="domain-settings-actions"><Button data-test-id="domain-settings-reset-colors" variant="outline" size="sm" disabled={defaultColors} onClick={resetColors}><RotateCcw aria-hidden="true" className="size-3!" />بازگردانی به رنگ‌های پیش‌فرض</Button><Button data-test-id="domain-settings-undo" variant="outline" size="sm" disabled={!dirty} onClick={() => { setDraft(state.settings); setError(""); }}><Undo2 aria-hidden="true" className="size-3!" />لغو تغییرات</Button><Button data-test-id="domain-settings-save" size="sm" disabled={!dirty} onClick={save}><Save aria-hidden="true" className="size-3!" />ذخیره تغییرات</Button></FormActions>
     </div>
     <DomainTools testId="domain-settings" query={query} onChange={setQuery} count={basic.length + colors.length + flags.length} filters={[{ id: "group", label: "بخش تنظیمات", options: [{ value: "all", label: "همه بخش‌ها" }, { value: "basic", label: "پایه و سرویس‌ها" }, { value: "colors", label: "رنگ‌ها" }, { value: "advanced", label: "تنظیمات پیشرفته" }] }]} />
     {!!error && <p data-test-id="domain-settings-error" role="alert" className="text-xs text-destructive">{error}</p>}
