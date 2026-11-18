@@ -1,3 +1,12 @@
+## Restore default domain colors — 2026/11/18
+
+Evidence: working tree on `fix/domain-default-palette-reset`, based on `60f75aa`.
+
+- Shared settings composition now offers an explicit default-palette reset, independently from Cancel changes. Reset changes only draft colors; Save applies and persists them through the existing palette provider. The same interaction is available in the independent patterns catalogue.
+- ui:check passed for 318 React files; lint and the Webpack production build passed (85 pages). All 26 tests in the three required workspace suites plus the palette suite passed. Documentation links/index and diff whitespace checks passed.
+- Targeted browser checks passed keyboard reset, disabled-at-default state, resetting filtered/hidden colors, undo to the previously saved palette, preserving domain identity, saving all 34 defaults, removing live custom theme overrides, reload restoration and 320/390/768px RTL bounds. The independent catalogue passed custom-save/reset-save without changing the surrounding theme.
+- Framework feedback audit: no new qualifying issue retained; the established build fallback was reused. No backend persistence or human accessibility acceptance is claimed.
+
 ## Scrollable domain settings and saved panel palette — 2026/11/18
 
 Evidence: working tree on `feat/domain-panel-theme`, based on `655e7f9`.
