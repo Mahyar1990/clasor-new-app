@@ -1,3 +1,78 @@
+## Scrollable domain settings and saved panel palette — 2026/11/18
+
+Evidence: working tree on `feat/domain-panel-theme`, based on `655e7f9`.
+
+- ui:check passed for 318 React files, lint passed and all 89 tests passed, including required workspace suites and three palette cases covering all 34 role bindings, unchanged defaults, malformed data and injection rejection. The Webpack production build passed with 85 pages; the previously documented Turbopack environment limitation remains the reason for this fallback.
+- Browser checks passed expanded lower color fields in the independently scrollable desktop domain workspace, 112×32px hex controls, draft/Undo isolation, live saved primary/surface/border variables, reload/new-tab restoration and cross-tab updates. RTL at 320/390/768px retained reachable lower fields without horizontal page overflow.
+- Additional browser checks passed theme inheritance into feedback modal portals, opaque/forced-color overrides, isolated saved-theme catalogue preview, hex validation/disabled controls and an in-memory saved theme when browser storage throws. Feedback regression checks passed full text, actual TXT/PDF/PNG downloads, empty/many/unavailable files, focus restoration and retained header account without a sidebar sample user.
+- Persistence is browser-local preview behavior; no domain backend or authentication integration was added. Automated/browser evidence does not establish complete accessibility or human usability acceptance. The framework feedback audit retained no new qualifying issue.
+
+## Feedback details, downloads and sidebar cleanup — 2026/11/18
+
+Evidence: working tree on `feat/admin-feedback-details`, based on `faa9fdd`.
+
+- ui:check passed for 316 React files; lint/TypeScript and all 86 tests passed, including the required workspace suites and supported/unavailable download URL cases. The Webpack build passed with 85 pages.
+- Browser checks passed full-row and keyboard modal opening, exact full text including line breaks, actual TXT/PDF/PNG download signatures, no-file feedback, origin focus restoration and 320/390/768px modal bounds. The independent data example passed local-dark details, 14-file cumulative loading and unavailable files without download controls. Removing the sidebar sample user retained the header account control.
+- No remote user files or source feedback were downloaded or changed; local fixtures reuse existing assets. The framework feedback audit retained no new qualifying issue. The known build environment restriction uses the documented Webpack fallback. Complete human screen-reader acceptance is not claimed.
+
+## Header-only admin overview — 2026/11/18
+
+Evidence: working tree on `feat/admin-panel`, based on `2ac6779`.
+
+- Read-only Firefox inspection of the actual admin route succeeded, including all four metric groups, the Identifier/entityId/Description table and its identifier sort controls. Initial zero values were followed by loaded source data; those records, numbers and submitted messages were not copied into fixtures. No source records were submitted, changed or deleted.
+- ui:check passed for 314 React files; lint and TypeScript passed. All 84 tests passed, including the required workspace suites and two new feedback-sort cases covering numeric identifiers, both directions, stable equal-key order, empty results and input/reference preservation.
+- Browser checks passed removal of the sidebar admin item, retained header control, a real local new-tab destination with the opener unchanged, all four source metric groups and exact three feedback columns. Native sort buttons update aria-sort, sort numeric-looking IDs and retain keyboard focus; cumulative append preserves existing DOM records, while sorting resets the ten-row window and pending load session.
+- 320/390/768/1440px checks passed stacked/mobile versus two-column desktop summaries, local table overflow and no page-level overflow. Independent data-catalogue checks passed zero values, metric skeleton/aria-busy, empty feedback, local dark materials, forced colors and reduced motion. Desktop and mobile admin captures were visually reviewed; temporary source/browser captures remain outside the repository.
+- The documented `npm run build -- --webpack` command passed on final component source, including 85 generated pages. No dependency or build configuration changed. The final framework feedback audit retained no new qualifying issue; the previously reported sandbox-specific Turbopack restriction was not reported again.
+
+The new MetricCard composition, optional SolidDataTable sorting contract, independent catalogue states and product integration ship together. Administrative data remains fictional/client-side; these checks do not establish production authorization or complete accessibility certification.
+
+## Repository card descriptions — 2026/11/18
+
+Evidence: working tree on `feat/repository-card-descriptions`, based on `b7204b5`.
+
+- ui:check passed for 309 React files, lint passed, and the documented Webpack build fallback passed with TypeScript and 84 generated pages. This is a presentation-only change; no record mutations or loading behavior changed.
+- Browser checks passed description wiring on dashboard and all five repository-list scopes, private newsletter cards and publish cards. The independent overlays example passed 10px text with a two-line clamp, truncation of long prose/unbroken words at 320/390/768/1440px, no page overflow, no description element for an absent value, and separate card/options interactions.
+- The generic description API, shared typography contract and representative catalogue example are included together. Temporary browser scripts remain outside the repository. The final framework feedback audit retained no new qualifying Next.js issue; the known sandbox build restriction uses the established Webpack fallback.
+
+## Multi-user positions and mandatory membership roles — 2026/11/18
+
+Evidence: working tree on `feat/organization-position-members`, based on `452ea9e`.
+
+- ui:check passed for 309 React files; lint and TypeScript passed. All 82 tests passed, including the required workspace suites and four additional membership cases. These verify absent/foreign position rejection even with form checks bypassed, atomic multi-user creation, case-insensitive duplicate/invalid username rejection, preserved user/member identities, branch-scoped membership replacement and deletion guards that leave no roleless users.
+- Browser flows passed explicit required-position selection with no Without position option, creation of a position with three users (including pending unsubmitted username text), dedicated Edit position members, removal/addition and live counts, cancellation without mutation, scoped branch-access removal, transfer from another branch position, blocked deletion of occupied positions and guidance when a branch has no positions.
+- 320/390/768/1440px checks passed modal bounds and no page overflow. A 14-user draft used cumulative loading and bounded independent scrolling; removing a row restored username-field focus, duplicate validation worked and cancelling preserved the source record counts. The mobile dialog capture was visually reviewed; temporary scripts and captures remain outside the repository.
+- The independent patterns example passed real role creation/member updates, local-dark modal and Select portal inheritance, forced-color and reduced-motion behavior without runtime errors. Product-specific member editing reuses the existing shared controls; no alternate tab or operation-button style was introduced.
+- npm run build reproduced the already reported Turbopack CSS-worker sandbox port-bind restriction. The documented `npm run build -- --webpack` fallback passed on final component source and generated 84 pages. No dependency/build configuration changed. The final Next.js feedback audit retained no new qualifying framework issue; the known environment failure was not reported again.
+
+The user's current membership rules supersede the earlier roleless organization preview. This remains local fictional interaction design; no source account or organization data was modified. Automated checks do not establish complete accessibility certification or human screen-reader acceptance.
+
+## Organization management preview — 2026/11/18
+
+Evidence: working tree on `feat/organization-management`, based on `2428f8c`.
+
+- Source inspection is incomplete: Firefox no longer returned usable source-page content/window accessibility, and the supplied public URL timed out during SSL connection. A clarification about reactivating the source tab or providing its menu/form fields is pending. The organization-specific menu/form workflows are explicitly provisional; source parity and backend semantics are not claimed. No source branch/account data was modified.
+- ui:check passed for 307 React files; lint and the build TypeScript pass succeeded. All 78 tests passed, including the required three workspace suites and four organization cases for filtered ancestor context, immutable scoped subtree removal, normalized sibling-name uniqueness and malformed-cycle termination. The organization helpers preserve unrelated branch records and memberships.
+- Browser checks passed equal right/left panel widths and geometry at desktop sizes, explicit selected branch/path, four nested levels, independent selection/disclosure/options, scoped members and job positions, duplicate validation and local branch create/rename/confirmed removal. Current detail tab remains selected when moving between branches, and its rows/options remain scoped to the new branch. Position removal preserves membership, clears its assignment and permits reassignment.
+- 320/390/768/1024/1600px checks passed stacked mobile versus equal desktop panels without page-level horizontal overflow. Branch/member/position modal bounds, local table scrolling, shared Select interaction and list validation passed. Per-level cumulative hierarchy loading preserved existing focus; the independent hierarchy example passed native keyboard selection, disabled nodes, separate options, local dark portal inheritance and forced-color/reduced-motion checks. Desktop organization and mobile captures were visually reviewed; temporary scripts/screenshots remain outside the repository.
+- The generic search/table/loading composition was moved into SearchableCollection with compatibility exports retained for domain callers. A fresh full domain browser regression passed after the move. Identity's default public behavior/IDs remain, with an independently demonstrated compact density added for organization rows.
+- npm run build reproduced the previously reported Turbopack CSS-worker sandbox port-bind failure. The documented `npm run build -- --webpack` fallback passed on final component source and generated all 84 pages. No dependency/build configuration changed. The final feedback audit retained no new qualifying Next.js issue; the known environment failure was not reported again.
+
+Components, route, independent navigation example, owning contracts and explicit source-inspection limits are delivered together. This remains fictional client-state interaction design; automated checks do not establish human screen-reader/complete accessibility acceptance or live organization integration.
+
+## Domain administration and compact layout revision — 2026/11/18
+
+Evidence: working tree on `feat/domain-management`, based on `e02963f`.
+
+- Read-only Firefox inspection covered the source settings, access/user form, public and private newsletter forms, private request columns, published repository columns, moderation/report empty states and domain tags. No source forms were submitted and no remote records were changed. Page fixtures use fictional identities/content.
+- ui:check passed for 296 React files; lint and TypeScript passed. All 74 tests passed, including the three required workspace suites and four domain cases covering combined normalized search/facets, Persian/Arabic digits, inclusive Tehran dates across UTC midnight, newsletter content/repository/HTTP(S) validation, duplicate usernames and positive safe-integer priorities.
+- Browser flows passed saved and retained draft settings, hidden-field color validation, role-free user add/duplicate/remove, public newsletter create/read/edit/search, unsafe-link rejection, private request approval/rejection/status filters, scoped private news creation, comment/question row/detail decisions, priority-only editing, all five report target types, report detail/filter and duplicate tag protection. Removed review rows restore modal focus to the owning heading.
+- RTL/mobile checks passed all nine tabs at 320/390/768/1440px without page overflow, internal wide-table scrolling, modal bounds, padded operation controls and independent input/pattern examples. Local dark newsletter/Select portals, keyboard ColorField editing/disabled state, ReviewActions outcomes/disabled state, forced colors and reduced motion passed. Cumulative 10→20 loading retained existing DOM records and displayed skeletons; applying search cancelled pending loads and reset batches.
+- The requested revision passed an additional 320/390/768/1600px geometry check: approve/reject controls remain side by side; private repositories use the shared GlassTile/RepositoryImage cards with actions outside imagery, then navigate into scoped newsletters. Settings show identity/service fields beside grouped capabilities, stack on mobile and use a compact swatch/disclosure grid for palettes. Settings and newsletter-card patterns also have independent catalogue examples. Desktop settings/cards and mobile newsletter captures were visually reviewed; temporary evidence remains outside the repository.
+- npm run build hit the previously reported sandbox restriction in the Turbopack CSS-worker port bind. The documented Webpack fallback passed on the final component source and generated 83 pages. No dependency/build configuration changed. The final feedback audit found no new qualifying Next.js issue, so the existing environment failure was not reported again.
+
+This is a client-state design preview, not live authentication, publication or moderation integration. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
 ## Document list metadata columns — 2026/11/18
 
 Evidence: working tree on `feat/document-list-metadata-columns`, based on `a1f1ab1`.

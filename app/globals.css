@@ -4,6 +4,7 @@
 @import "../lib/design-system/tokens.css";
 @import "../lib/design-system/theme.css";
 
+@custom-variant panel-themed (&:where(html[data-panel-theme="custom"] *));
 @custom-variant dark (&:is(.dark *));
 @custom-variant glass-enabled (@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))));
 @custom-variant opaque {

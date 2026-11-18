@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { Menu, LayoutDashboard, FileText, FolderOpen, Users, Building2, Globe, ShieldCheck, Bookmark, Archive, Share2 } from "lucide-react";
-import { GlassEmblem } from "@/components/ui/GlassEmblem";
+import { Menu, LayoutDashboard, FileText, FolderOpen, Users, Building2, Globe, Bookmark, Archive, Share2 } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { Button } from "@/components/ui/button";
 import { glass } from "@/lib/design-system/classes";
@@ -12,7 +11,7 @@ import { glass } from "@/lib/design-system/classes";
 const groups = [
   { title: "اسناد شخصی", items: [{ id: "my-documents", label: "سندهای من", icon: FileText }, { id: "shared-documents", label: "سندهای اشتراکی", icon: Users }] },
   { title: "مدیریت مخزن‌ها", items: [{ id: "my-repositories", label: "مخزن‌های من", icon: FolderOpen }, { id: "shared-repositories", label: "مخزن‌های اشتراکی", icon: Users }, { id: "bookmarked-repositories", label: "مخزن‌های نشان‌شده", icon: Bookmark }, { id: "archived-repositories", label: "مخزن‌های بایگانی‌شده", icon: Archive }, { id: "published-repositories", label: "مخزن‌های منتشرشده", icon: Share2 }] },
-  { title: "مدیریت", items: [{ id: "", label: "مدیریت دامنه", icon: Globe }, { id: "", label: "مدیریت سازمانی", icon: Building2 }, { id: "", label: "پنل ادمین", icon: ShieldCheck }] },
+  { title: "مدیریت", items: [{ id: "domain-management", label: "مدیریت دامنه", icon: Globe }, { id: "organization-management", label: "مدیریت سازمانی", icon: Building2 }] },
 ];
 
 function DashboardNavigation({ onNavigate, activePage = "dashboard" }: { onNavigate?: () => void; activePage?: string }) {
@@ -30,10 +29,6 @@ function DashboardNavigation({ onNavigate, activePage = "dashboard" }: { onNavig
         </ul>
       </div>)}
     </nav>
-    <div data-test-id="dashboard-sample-user" className="mt-4 flex items-center gap-2 border-t border-white/40 px-2 pt-3">
-      <GlassEmblem shape="avatar" data-test-id="dashboard-user-avatar" className="size-8 text-sm" aria-hidden="true">ک ن</GlassEmblem>
-      <div data-test-id="dashboard-user-copy"><p data-test-id="dashboard-user-name" className="text-sm font-medium">کاربر نمونه</p><p data-test-id="dashboard-user-note" className="text-xs text-muted-foreground">حساب نمایشی</p></div>
-    </div>
     <Link data-test-id="dashboard-back-to-catalogue" href="/" className={`${glass.navigation} mt-2 flex min-h-11 md:min-h-8 items-center px-3 text-xs text-primary`}>بازگشت به سیستم طراحی</Link>
   </GlassCard>;
 }

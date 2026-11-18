@@ -11,6 +11,6 @@ export function HeaderActionsCatalogue() {
       <ClasorDashboardHeaderActions key={String(empty)} initialInvitations={empty ? [] : undefined} />
     </div>
     <CheckboxField data-test-id="header-actions-empty" label="نمایش فهرست خالی دعوت‌ها" checked={empty} onCheckedChange={setEmpty} />
-    <p data-test-id="header-actions-description" className="text-xs text-muted-foreground">دعوت‌ها با نقش و تأیید/رد، فرم بازخورد با متن و پیوست، و منوی حساب. پنل ادمین به صفحهٔ اصلی کلاسور در تب جدید می‌رود؛ ثبت و تصمیم‌های این نمونه محلی‌اند.</p>
+    <p data-test-id="header-actions-description" className="text-xs text-muted-foreground">دعوت‌ها با نقش و تأیید/رد، فرم بازخورد با متن و پیوست، و منوی حساب. پنل ادمین، پیش‌نمایش محلی پنل را در تب جدید باز می‌کند و در سایدبار محصول تکرار نمی‌شود؛ ثبت و تصمیم‌های این نمونه محلی‌اند.</p>
   </GlassPreviewFrame>;
 }

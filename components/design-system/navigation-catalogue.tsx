@@ -1,4 +1,5 @@
 "use client"
+import { HierarchyCatalogue } from "./hierarchy-catalogue";
 import { useState } from "react"
 import { PublishPatternsCatalogue } from "./publish-patterns-catalogue";
 import { PublishToolsCatalogue } from "./publish-tools-catalogue";
@@ -38,7 +39,7 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
       <ClasorBreadcrumb items={[{ id: "home", label: "کتابخانه", href: "/" }, { id: "team", label: "اسناد گروه", href: "#navigation" }, { id: "document", label: "راهنمای همکاری", emphasis: true }, { id: "current", label: "نسخهٔ ۳ (پیش‌نویس)" }]} />
       <ClasorPagination page={page} pageCount={5} onPageChange={setPage} /><p data-test-id="navigation-catalogue-p-2" role="status" className="text-xs text-muted-foreground">صفحه نمایشی: {new Intl.NumberFormat("fa").format(page)}؛ داده جدول تغییر نمی‌کند.</p>
     </Sample>
-    <GlassTabsCatalogue />
+    <GlassTabsCatalogue /><HierarchyCatalogue />
     <EditorToolbarCatalogue />
     <PublishPatternsCatalogue />
     <PublishToolsCatalogue />

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useLayoutEffect, useRef, useState } from "react";
 import { ShieldCheck, Bell, MessageSquare, UserRound, LogOut, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,7 @@ export function ClasorDashboardHeaderActions({ initialInvitations, isAdmin = tru
   const pending = items.filter(item => item.state === "pending").length;
   function open(kind: HeaderDialogKind, origin: HTMLElement | null) { setOpened({ kind, trigger: origin }); setStatus(""); }
   return <div data-test-id="dashboard-header-actions" ref={headerGroup} tabIndex={-1} className="flex flex-wrap items-center justify-end gap-1.5" role="group" aria-label="ابزارهای حساب کاربر">
-    {isAdmin && !signedOut && <Button data-test-id="dashboard-header-admin" nativeButton={false} render={<a data-test-id="dashboard-header-admin" href="https://clasor.pod.ir/panel-admin-clasor" target="_blank" rel="noreferrer" />} variant="glass" size="icon" aria-label="پنل ادمین کلاسور، بازشدن در تب جدید" title="پنل ادمین · تب جدید"><ShieldCheck aria-hidden="true" /></Button>}
+    {isAdmin && !signedOut && <Button data-test-id="dashboard-header-admin" nativeButton={false} render={<Link data-test-id="dashboard-header-admin" href="/clasor-pages/admin" target="_blank" rel="noreferrer" />} variant="glass" size="icon" aria-label="پنل ادمین کلاسور، بازشدن در تب جدید" title="پنل ادمین · تب جدید"><ShieldCheck aria-hidden="true" /></Button>}
     {!signedOut && <>
       <IconButton data-test-id="dashboard-header-requests" variant="glass" aria-label={`لیست درخواست‌ها، ${pending} دعوت`} title="لیست درخواست‌ها" aria-haspopup="dialog" aria-expanded={opened?.kind === "requests"} onClick={event => open("requests", event.currentTarget)}>
         <Bell aria-hidden="true" />{pending > 0 && <span data-test-id="header-requests-indicator" aria-hidden="true" className="absolute end-1.5 top-1.5 size-1.5 rounded-full bg-purple-600 shadow-[0_0_0_2px_rgb(255_255_255/0.7)] dark:bg-purple-300" />}

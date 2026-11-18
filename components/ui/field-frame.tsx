@@ -22,8 +22,8 @@ function useFieldMeta({ id, description, error, disabled, disabledReason, "aria-
 }
 function FieldMessages({ controlId, description, error, disabled, disabledReason }: FieldMeta & { controlId: string }) {
   return <>
-    {description && <FieldDescription id={`${controlId}-help`} className="text-xs leading-body">{description}</FieldDescription>}
-    {disabled && disabledReason && <FieldDescription id={`${controlId}-reason`} className="text-xs leading-body">{disabledReason}</FieldDescription>}
+    {description && <FieldDescription id={`${controlId}-help`} className="text-xs leading-body text-[color:var(--panel-help-text)]">{description}</FieldDescription>}
+    {disabled && disabledReason && <FieldDescription id={`${controlId}-reason`} className="text-xs leading-body text-[color:var(--panel-help-text)]">{disabledReason}</FieldDescription>}
     {error && <FieldError id={`${controlId}-error`} className="text-xs leading-body">{error}</FieldError>}
   </>
 }

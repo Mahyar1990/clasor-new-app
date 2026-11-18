@@ -1,3 +1,4 @@
+import { ChevronDown, ChevronUp, ChevronsUpDown } from "lucide-react";
 import type { MouseEvent, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { tableColumnWidth, type TableColumnKind } from "@/lib/design-system/table-contract";
@@ -7,6 +8,7 @@ import { GlassCard } from "@/components/ui/GlassCard";
 export interface SolidColumn<T> {
   id: string;
   label: string;
+  sort?: { direction?: "asc" | "desc"; onToggle: () => void };
   width?: number;
   kind?: TableColumnKind;
   render: (row: T) => ReactNode;
@@ -52,8 +54,10 @@ export function SolidDataTable<T>({
         <thead data-test-id="SolidDataTable-thead-4" className={appearance === "glass" ? glass.tableHeader : "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-100"}>
           <tr data-test-id={`${testId}-header`}>
             {columns.map(column => (
-              <th data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className={cn(glass.tableCell, "border-b font-bold", appearance === "glass" ? "border-white/30" : "border-slate-200 dark:border-slate-700", column.kind === "actions" && glass.tableActionCell)}>
-                {column.label}
+              <th aria-sort={column.sort ? column.sort.direction === "asc" ? "ascending" : column.sort.direction === "desc" ? "descending" : "none" : undefined} data-test-id={`SolidDataTable-th-6-${String(column.id)}`} key={column.id} scope="col" className={cn(glass.tableCell, "border-b font-bold", appearance === "glass" ? "border-white/30" : "border-slate-200 dark:border-slate-700", column.kind === "actions" && glass.tableActionCell)}>
+                {column.sort ? <button data-test-id={`${testId}-sort-${column.id}`} type="button" className={glass.tableSort} onClick={column.sort.onToggle} aria-label={`${column.label}؛ مرتب‌سازی ${column.sort.direction === "asc" ? "نزولی" : "صعودی"}`}>
+                  <span data-test-id={`${testId}-sort-label-${column.id}`}>{column.label}</span>{column.sort.direction === "asc" ? <ChevronUp aria-hidden="true" className="size-3 shrink-0" /> : column.sort.direction === "desc" ? <ChevronDown aria-hidden="true" className="size-3 shrink-0" /> : <ChevronsUpDown aria-hidden="true" className="size-3 shrink-0" />}
+                </button> : column.label}
               </th>
             ))}
           </tr>

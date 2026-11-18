@@ -1,3 +1,45 @@
+## Read-only feedback details and downloads — 2026/11/18
+
+Admin feedback rows use the existing activateRowLink contract and a native description button, preserving table semantics, identifier sorting and text selection. The compact liquid GlassModal displays untruncated, whitespace-preserved text and returns focus to the originating row button. Attachments use DownloadAttachmentRow (a product-independent filename/byte-count/download composition) and a separately bounded, cumulative list. Missing URLs render an unavailable state. The upload-type URL helper permits supported file locations and rejects executable/unsupported URLs. Native download links preserve filenames; production cross-origin download endpoints must supply the appropriate download response/CORS behavior.
+
+The independent admin data example includes text/PDF/PNG downloads, feedback without files, a long attachment list and unavailable files. The sidebar sample-user footer is removed in both desktop and mobile navigation; the header account menu remains available.
+
+## Administrative metrics and sortable table headers — 2026/11/18
+
+MetricCard(title, icon, metrics, testId, loading?) composes a GlassCard and compact GlassEmblem with a semantic dl of labeled values. Values and units belong to the caller. Loading preserves metric labels while replacing values with skeletons and exposes aria-busy/status; zero is a valid visible value. AdminPanelCatalogue on the independent data page demonstrates the four source metric groups, zero/loading states and local light/dark materials.
+
+SolidColumn adds an optional sort object with direction and onToggle. Sortable headers render a native, explicitly labeled button using glass.tableSort, an inert direction glyph and aria-sort on the owning th. Existing columns without sort remain unchanged. Consumers own stable/numeric sorting, cumulative reset and request cancellation. The admin table retains its header while resetting its ten-row window and LoadMore session on sort, so keyboard focus is preserved. The independent data example demonstrates both sortable identifier headers and empty feedback.
+
+The admin entry is now a local Next link in the shared header, retaining isAdmin/signedOut gating, its icon/test ID and new-tab semantics. It is intentionally absent from the product sidebar and the sample-page registry: the user's header-only instruction overrides adding a duplicate catalogue-menu entry. The shared header example remains reachable from the normal catalogue.
+
+## Bounded repository card descriptions — 2026/11/18
+
+GlassTile adds an optional description string between its title and metadata. The shared glass.repositoryDescription contract uses 10px type, 16px leading, two-line ellipsis and anywhere wrapping, so long prose and unbroken words remain within the copy column. The complete text remains in the DOM and native title; missing/whitespace descriptions create no element. Existing media, metadata, opening and independent padded actions retain their contracts.
+
+Dashboard/library repository lists pass their actual preview description; private newsletter repository cards carry the same field; publish cards use the same typography/clamp contract. The independent library-patterns example on overlays/layout includes a long description and an absent-description state.
+
+## Multi-user position membership pattern — 2026/11/18
+
+The organization membership catalogue uses the existing shared controls without introducing another visual family. PositionMembersEditor composes an applied draft, compact username entry, a same-branch Select and a named GlassScrollArea with cumulative PreviewList. Removing a draft entry restores focus to the username field. Filtering cancels pending list loads and resets the visible batch while preserving the full draft selection. A parent form owns pending text and final validation. Position creation and Edit members share this composition; the independent patterns page demonstrates their actual local state changes and modal/Select theme inheritance.
+
+OrganizationMemberDialog marks the position Select as required, offers only the current branch's positions and disables Save until the chosen ID is valid. With no positions, its disabled Select and inline explanation make the blocked state explicit. Shared mutation helpers also reject absent, deleted or foreign-branch positions. Canonical row options, compact glass modal surfaces, focus restoration and 16px action padding remain in use.
+
+## Selectable hierarchy and shared collection composition — 2026/11/18
+
+HierarchyList accepts HierarchyNode items (id, label, optional children/disabled), a selectedId, controlled expanded IDs, onExpandedChange/onSelectionChange, an optional renderActions slot and revealSelected. Every level can be selected. Selection, disclosure and options use separate controls: opening a menu or collapsing children does not select a different node. Native nested lists and Tab/Enter/Space behavior are retained; no incomplete ARIA-tree keyboard model is claimed. Logical ancestor rails reuse outlineGroup and the selected row uses glass.hierarchyRow. The independent navigation example covers four levels, selected parents/leaves, disabled selection, separate actions and a local dark menu.
+
+Each growing hierarchy level uses the shared cumulative loader. revealSelected observes the mounted selected control and reveals its ancestor loading window without stealing focus; the owner expands its ancestor IDs. hierarchyPath protects the ancestor calculation against malformed cycles. Product branches are converted from flat records by their owning module.
+
+SearchableCollection, CollectionTools and useCollectionQuery now own the formerly domain-only generic composition in components/ui, with CollectionQuery in the shared library. The old domain/collection entry point preserves its public aliases and test IDs. Query/filter decisions remain with each product module; shared UI owns applied search, filter disclosure, table geometry, automatic ten-item loading and reset/cancellation. Identity adds an optional compact density (24px avatar, 12px name); its default presentation and public IDs remain unchanged. The hierarchy catalogue demonstrates compact known/unknown identities alongside selected context.
+
+## Domain settings and direct review actions — 2026/11/18
+
+`ColorField(label, value, onValueChange, testId, disabled?)` pairs the existing text field with a native color input. Only six-digit hex is valid; the accessible error describes an invalid text value while the picker uses a safe fallback. It is controlled and supports disabled state. The compact hex field is 112px wide and 32px high with an adjacent 32px picker; coarse-pointer touch targets remain larger. The primitive does not mutate global colors: the owning domain provider applies validated saved colors. The independent input catalogue demonstrates editing, validation and disabling.
+
+`ReviewActions(status, label, onDecision, testId, disabled?)` uses the shared glass.reviewActions / glass.reviewDecision contracts to keep compact pending decisions side by side without wrapping, including narrow table action cells and the existing ApprovalBadge after approval/rejection. Accessible button labels name the record. Permission checks, transitions and persistence remain with the caller; repeated decisions are guarded in the owning domain list. The independent patterns catalogue demonstrates pending, both terminal states, disabled controls and local dark materials.
+
+DomainCollection is a product preview composition, not a new table primitive. It reuses SolidDataTable, CompactSearch, SelectField, date fields and LoadMore. Search is explicitly applied; filters combine, show their active state and can be cleared. Search/filter changes remount only the table loading session, cancelling pending mock loads and resetting the cumulative window to ten. Appended rows retain stable IDs. Wide moderation/report tables scroll inside their existing table regions. An optional headingRef provides a precise focus destination when a reviewed row disappears; Base UI still owns modal focus restoration and dismissal.
+
 ## Document metadata columns — 2026/11/18
 
 The shared Clasor DocumentList and independent DocumentTableCatalogue use RTL order: priority, name, paired creation/modification dates, creator and actions. TableColumnKind adds priority (80px) and dates (160px); metadata stays 112px and padded actions 76px. Name takes the remaining width. glass.documentTableViewport sets a 42rem minimum with table-local horizontal scrolling on narrow panels; other column layouts and the outline are unchanged. SolidDataTable positions its scroll region relatively so absolute screen-reader-only descendants remain contained instead of enlarging the page.

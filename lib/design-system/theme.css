@@ -78,6 +78,17 @@
   --glass-text: var(--foreground);
   --glass-field-text: var(--color-gray-800);
   --glass-error: var(--destructive);
+  --panel-secondary: #ffffff;
+  --panel-tertiary: var(--clasor-color-semantic-info-text);
+  --panel-body-text: var(--glass-text);
+  --panel-help-text: var(--muted-foreground);
+  --panel-placeholder: var(--muted-foreground);
+  --panel-disabled-text: var(--glass-field-text);
+  --panel-link: var(--primary);
+  --panel-icon: var(--primary);
+  --panel-icon-hover: var(--primary);
+  --panel-border: #ffffff;
+  --panel-field-border: var(--color-gray-300);
 }
 .dark {
   color-scheme: dark;
@@ -96,9 +107,13 @@
   --glass-text: var(--clasor-color-neutral-100);
   --glass-field-text: var(--color-gray-100);
   --glass-error: #f87171;
+  --panel-body-text: var(--glass-text);
+  --panel-help-text: var(--muted-foreground);
+  --panel-placeholder: var(--muted-foreground);
+  --panel-disabled-text: var(--glass-field-text);
   --success: var(--color-emerald-200);
   --warning: var(--color-amber-200);
   --info: var(--color-sky-200);
   --danger: var(--color-red-300);
 }
-:root { --material-canvas: radial-gradient(ellipse at 10% 15%, #b294ed66, transparent 55%), radial-gradient(ellipse at 90% 30%, #345f9455, transparent 55%), linear-gradient(135deg, var(--clasor-color-brand-100), var(--background)); }
+:root { --material-canvas: radial-gradient(ellipse at 10% 15%, color-mix(in srgb, var(--clasor-color-brand-400) 40%, transparent), transparent 55%), radial-gradient(ellipse at 90% 30%, color-mix(in srgb, var(--panel-tertiary) 33.33%, transparent), transparent 55%), linear-gradient(135deg, var(--clasor-color-brand-100), var(--background)); }
