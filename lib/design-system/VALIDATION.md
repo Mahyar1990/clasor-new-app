@@ -1,3 +1,16 @@
+## Document list metadata columns — 2026/11/18
+
+Evidence: working tree on `feat/document-list-metadata-columns`, based on `a1f1ab1`.
+
+- ui:check passed for 274 React files; lint and TypeScript passed. All 70 tests passed, including the required workspace mutations, documents and collaboration suites. No new product mutation or backend behavior was introduced.
+- Targeted Chromium checks verified priority, name, paired creation/modification dates, creator and actions on dashboard, My documents, shared documents and entered-repository tables. The 80/160/112/76px bounded columns leave name flexible. Semantic ISO time attributes, Persian dates, missing/invalid date dashes, retained 16px action padding and standalone catalogue row activation passed.
+- RTL checks passed at 320/390/768/1600px without document-level horizontal overflow; the table scroll remains local and keyboard focusable. Browser inspection identified an absolute hidden descendant escaping the table scroll region; positioning the shared scroll region relatively resolved the reproduction. A visual review also caught the priority heading wrapping, resolved by an 80px column.
+- Independent table checks also passed catalogue menu/dialog interaction, existing selection/deletion controls, local dark portal inheritance, forced-color blur removal and 320/390/768/1920px bounds.
+- A separate browser regression passed full table/outline row activation, in-place folder navigation, native new-tab document handoff, keyboard activation, independent operation/selection controls and preserved text selection. Temporary browser scripts and captures remain outside the repository.
+- npm run build encountered the previously reported environment restriction in the Turbopack CSS-worker port bind. The documented `npm run build -- --webpack` fallback passed on the final component source and generated all 82 pages. No dependency or build configuration changes were made. The final Next.js feedback audit retained no new qualifying framework issue; the known environment failure was not reported again.
+
+The reusable RecordDates composition, independent catalogue example, shared table geometry, product integration and owning contract are delivered together. Automated checks do not establish human screen-reader or complete accessibility acceptance.
+
 ## Connected publish hierarchy and resizable navigation — 2026/11/18
 
 Evidence: working tree on `feat/publish-hierarchy-and-resizable-navigation`, based on `e73e613`.

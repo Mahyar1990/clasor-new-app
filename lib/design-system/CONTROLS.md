@@ -1,3 +1,9 @@
+## Document metadata columns — 2026/11/18
+
+The shared Clasor DocumentList and independent DocumentTableCatalogue use RTL order: priority, name, paired creation/modification dates, creator and actions. TableColumnKind adds priority (80px) and dates (160px); metadata stays 112px and padded actions 76px. Name takes the remaining width. glass.documentTableViewport sets a 42rem minimum with table-local horizontal scrolling on narrow panels; other column layouts and the outline are unchanged. SolidDataTable positions its scroll region relatively so absolute screen-reader-only descendants remain contained instead of enlarging the page.
+
+RecordDates(createdAt?, updatedAt?, testId) is a product-independent pair of labeled semantic time elements. ISO values are formatted with the Persian calendar and Asia/Tehran time zone consistently on server/client; missing or invalid timestamps display an accessible unknown dash. It does not invent a modification date from creation. The catalogue includes valid and unavailable dates, a long name and independent row/action interactions. Existing row activation, name-cell selection and cumulative loading contracts remain in effect.
+
 ## Hierarchical contents and bounded pane resizing — 2026/11/18
 
 ContentsNavigation now builds nested ordered lists from the heading levels rather than applying flat padding. contentsTree attaches each heading to the nearest preceding lower-level heading, handles skipped levels without fake headings and preserves input order/data. Every nested group has a logical start rail and every child an elbow connector; parent chevrons and leaf markers supplement indentation. The independent example reaches heading levels 1–6 and includes returning to a parent level. Anchors, active state, modified clicks, heading activation and empty behavior retain their public contract.

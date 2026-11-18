@@ -75,6 +75,7 @@ export const glass = {
   optionItem: "min-h-9 gap-1.5 px-1.5 py-0.5 text-[11px] leading-4 md:min-h-7 [&>svg]:size-3 dark:data-[variant=destructive]:text-red-200",
   optionLabel: "min-w-0 flex-1 px-1 py-0.5 text-start font-medium whitespace-normal [text-shadow:0_1px_0_rgb(255_255_255/0.25)] dark:[text-shadow:none] opaque:[text-shadow:none]! forced-colors:[text-shadow:none]!",
 
+  documentTableViewport: "[&_table]:min-w-[42rem]",
   tableCell: "px-4 py-3 text-start align-middle wrap-anywhere",
   tableActionCell: "px-4 text-end",
   tableActions: "flex max-w-full flex-wrap items-center justify-end gap-2",

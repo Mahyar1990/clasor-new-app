@@ -40,7 +40,7 @@ export function SolidDataTable<T>({
       aria-label={caption}
       tabIndex={0}
       data-test-id={`${testId}-scroll`}
-      className="max-w-full overflow-x-auto"
+      className="relative max-w-full overflow-x-auto"
     >
       <table data-test-id={testId} className={`w-full min-w-[36rem] border-collapse text-start text-sm leading-body ${layout === "fixed" ? "table-fixed" : "table-auto"}`}>
         <caption data-test-id="SolidDataTable-caption-3" className={hideCaption ? "sr-only" : "border-b border-white/30 px-4 py-3 text-start font-bold"}>
