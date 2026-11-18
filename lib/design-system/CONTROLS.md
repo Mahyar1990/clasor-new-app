@@ -1,3 +1,9 @@
+## Multi-user position membership pattern — 2026/11/18
+
+The organization membership catalogue uses the existing shared controls without introducing another visual family. PositionMembersEditor composes an applied draft, compact username entry, a same-branch Select and a named GlassScrollArea with cumulative PreviewList. Removing a draft entry restores focus to the username field. Filtering cancels pending list loads and resets the visible batch while preserving the full draft selection. A parent form owns pending text and final validation. Position creation and Edit members share this composition; the independent patterns page demonstrates their actual local state changes and modal/Select theme inheritance.
+
+OrganizationMemberDialog marks the position Select as required, offers only the current branch's positions and disables Save until the chosen ID is valid. With no positions, its disabled Select and inline explanation make the blocked state explicit. Shared mutation helpers also reject absent, deleted or foreign-branch positions. Canonical row options, compact glass modal surfaces, focus restoration and 16px action padding remain in use.
+
 ## Selectable hierarchy and shared collection composition — 2026/11/18
 
 HierarchyList accepts HierarchyNode items (id, label, optional children/disabled), a selectedId, controlled expanded IDs, onExpandedChange/onSelectionChange, an optional renderActions slot and revealSelected. Every level can be selected. Selection, disclosure and options use separate controls: opening a menu or collapsing children does not select a different node. Native nested lists and Tab/Enter/Space behavior are retained; no incomplete ARIA-tree keyboard model is claimed. Logical ancestor rails reuse outlineGroup and the selected row uses glass.hierarchyRow. The independent navigation example covers four levels, selected parents/leaves, disabled selection, separate actions and a local dark menu.

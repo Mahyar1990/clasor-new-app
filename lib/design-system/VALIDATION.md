@@ -1,3 +1,15 @@
+## Multi-user positions and mandatory membership roles — 2026/11/18
+
+Evidence: working tree on `feat/organization-position-members`, based on `452ea9e`.
+
+- ui:check passed for 309 React files; lint and TypeScript passed. All 82 tests passed, including the required workspace suites and four additional membership cases. These verify absent/foreign position rejection even with form checks bypassed, atomic multi-user creation, case-insensitive duplicate/invalid username rejection, preserved user/member identities, branch-scoped membership replacement and deletion guards that leave no roleless users.
+- Browser flows passed explicit required-position selection with no Without position option, creation of a position with three users (including pending unsubmitted username text), dedicated Edit position members, removal/addition and live counts, cancellation without mutation, scoped branch-access removal, transfer from another branch position, blocked deletion of occupied positions and guidance when a branch has no positions.
+- 320/390/768/1440px checks passed modal bounds and no page overflow. A 14-user draft used cumulative loading and bounded independent scrolling; removing a row restored username-field focus, duplicate validation worked and cancelling preserved the source record counts. The mobile dialog capture was visually reviewed; temporary scripts and captures remain outside the repository.
+- The independent patterns example passed real role creation/member updates, local-dark modal and Select portal inheritance, forced-color and reduced-motion behavior without runtime errors. Product-specific member editing reuses the existing shared controls; no alternate tab or operation-button style was introduced.
+- npm run build reproduced the already reported Turbopack CSS-worker sandbox port-bind restriction. The documented `npm run build -- --webpack` fallback passed on final component source and generated 84 pages. No dependency/build configuration changed. The final Next.js feedback audit retained no new qualifying framework issue; the known environment failure was not reported again.
+
+The user's current membership rules supersede the earlier roleless organization preview. This remains local fictional interaction design; no source account or organization data was modified. Automated checks do not establish complete accessibility certification or human screen-reader acceptance.
+
 ## Organization management preview — 2026/11/18
 
 Evidence: working tree on `feat/organization-management`, based on `2428f8c`.
