@@ -1,6 +1,6 @@
 # Project retrieval map — current implementation
 
-Updated: 2026-11-18 (Asia/Tehran). Committed baseline: `2ac6779`; admin overview work is labeled separately in VALIDATION.md. This is a curated context/retrieval index, not a vector database or a claim that embeddings were generated.
+Updated: 2026-11-18 (Asia/Tehran). Committed baseline: `faa9fdd`; feedback detail work is labeled separately in VALIDATION.md. This is a curated context/retrieval index, not a vector database or a claim that embeddings were generated.
 
 ## Read in this order
 

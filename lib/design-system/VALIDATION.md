@@ -1,3 +1,11 @@
+## Feedback details, downloads and sidebar cleanup — 2026/11/18
+
+Evidence: working tree on `feat/admin-feedback-details`, based on `faa9fdd`.
+
+- ui:check passed for 316 React files; lint/TypeScript and all 86 tests passed, including the required workspace suites and supported/unavailable download URL cases. The Webpack build passed with 85 pages.
+- Browser checks passed full-row and keyboard modal opening, exact full text including line breaks, actual TXT/PDF/PNG download signatures, no-file feedback, origin focus restoration and 320/390/768px modal bounds. The independent data example passed local-dark details, 14-file cumulative loading and unavailable files without download controls. Removing the sidebar sample user retained the header account control.
+- No remote user files or source feedback were downloaded or changed; local fixtures reuse existing assets. The framework feedback audit retained no new qualifying issue. The known build environment restriction uses the documented Webpack fallback. Complete human screen-reader acceptance is not claimed.
+
 ## Header-only admin overview — 2026/11/18
 
 Evidence: working tree on `feat/admin-panel`, based on `2ac6779`.

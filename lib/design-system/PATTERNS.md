@@ -1,3 +1,9 @@
+## Feedback reading and attached user files — 2026/11/18
+
+Clicking any plain area of an admin feedback row, or activating its keyboard-accessible description control, opens the details dialog. Table descriptions are limited to two lines; the dialog retains the full original text without HTML interpretation. Identifier/entity context stays visible. Attached files display names, byte counts and real download links; the fictional fixtures reuse local PNG/PDF assets and a text data URL. Feedback without files has an explicit empty state. Many attachments append in batches of ten within their own scroll area. No additional feedback moderation action is introduced.
+
+The separate user instruction removes the sample-user footer from the product sidebar while retaining header account tools. Actual accounts and remote files are not accessed or changed by these preview interactions.
+
 ## Source-aligned admin overview — 2026/11/18
 
 `/clasor-pages/admin` is opened by the existing header admin icon in a new local tab; the product sidebar admin item has been removed. Firefox inspection of `/panel-admin-clasor` succeeded read-only after source access returned. The implemented overview preserves all observed groups/fields: repositories (total, super repositories), storage (used, remaining, total), users (active, inactive, total), documents (public, drafts, total), followed by a feedback table with Identifier, entityId and Description. The first two columns have the source's numeric ascending/descending sorting; no unobserved feedback moderation actions or extra columns were invented.

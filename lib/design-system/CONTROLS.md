@@ -1,3 +1,9 @@
+## Read-only feedback details and downloads — 2026/11/18
+
+Admin feedback rows use the existing activateRowLink contract and a native description button, preserving table semantics, identifier sorting and text selection. The compact liquid GlassModal displays untruncated, whitespace-preserved text and returns focus to the originating row button. Attachments use DownloadAttachmentRow (a product-independent filename/byte-count/download composition) and a separately bounded, cumulative list. Missing URLs render an unavailable state. The upload-type URL helper permits supported file locations and rejects executable/unsupported URLs. Native download links preserve filenames; production cross-origin download endpoints must supply the appropriate download response/CORS behavior.
+
+The independent admin data example includes text/PDF/PNG downloads, feedback without files, a long attachment list and unavailable files. The sidebar sample-user footer is removed in both desktop and mobile navigation; the header account menu remains available.
+
 ## Administrative metrics and sortable table headers — 2026/11/18
 
 MetricCard(title, icon, metrics, testId, loading?) composes a GlassCard and compact GlassEmblem with a semantic dl of labeled values. Values and units belong to the caller. Loading preserves metric labels while replacing values with skeletons and exposes aria-busy/status; zero is a valid visible value. AdminPanelCatalogue on the independent data page demonstrates the four source metric groups, zero/loading states and local light/dark materials.
