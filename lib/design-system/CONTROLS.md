@@ -1,3 +1,11 @@
+## Domain settings and direct review actions — 2026/11/18
+
+`ColorField(label, value, onValueChange, testId, disabled?)` pairs the existing text field with a native color input. Only six-digit hex is valid; the accessible error describes an invalid text value while the picker uses a safe fallback. It is controlled, supports disabled state and does not apply colors to the document theme. The independent input catalogue demonstrates editing, validation and disabling.
+
+`ReviewActions(status, label, onDecision, testId, disabled?)` uses the shared glass.reviewActions / glass.reviewDecision contracts to keep compact pending decisions side by side without wrapping, including narrow table action cells and the existing ApprovalBadge after approval/rejection. Accessible button labels name the record. Permission checks, transitions and persistence remain with the caller; repeated decisions are guarded in the owning domain list. The independent patterns catalogue demonstrates pending, both terminal states, disabled controls and local dark materials.
+
+DomainCollection is a product preview composition, not a new table primitive. It reuses SolidDataTable, CompactSearch, SelectField, date fields and LoadMore. Search is explicitly applied; filters combine, show their active state and can be cleared. Search/filter changes remount only the table loading session, cancelling pending mock loads and resetting the cumulative window to ten. Appended rows retain stable IDs. Wide moderation/report tables scroll inside their existing table regions. An optional headingRef provides a precise focus destination when a reviewed row disappears; Base UI still owns modal focus restoration and dismissal.
+
 ## Document metadata columns — 2026/11/18
 
 The shared Clasor DocumentList and independent DocumentTableCatalogue use RTL order: priority, name, paired creation/modification dates, creator and actions. TableColumnKind adds priority (80px) and dates (160px); metadata stays 112px and padded actions 76px. Name takes the remaining width. glass.documentTableViewport sets a 42rem minimum with table-local horizontal scrolling on narrow panels; other column layouts and the outline are unchanged. SolidDataTable positions its scroll region relatively so absolute screen-reader-only descendants remain contained instead of enlarging the page.

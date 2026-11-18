@@ -1,3 +1,16 @@
+## Domain administration and compact layout revision — 2026/11/18
+
+Evidence: working tree on `feat/domain-management`, based on `e02963f`.
+
+- Read-only Firefox inspection covered the source settings, access/user form, public and private newsletter forms, private request columns, published repository columns, moderation/report empty states and domain tags. No source forms were submitted and no remote records were changed. Page fixtures use fictional identities/content.
+- ui:check passed for 296 React files; lint and TypeScript passed. All 74 tests passed, including the three required workspace suites and four domain cases covering combined normalized search/facets, Persian/Arabic digits, inclusive Tehran dates across UTC midnight, newsletter content/repository/HTTP(S) validation, duplicate usernames and positive safe-integer priorities.
+- Browser flows passed saved and retained draft settings, hidden-field color validation, role-free user add/duplicate/remove, public newsletter create/read/edit/search, unsafe-link rejection, private request approval/rejection/status filters, scoped private news creation, comment/question row/detail decisions, priority-only editing, all five report target types, report detail/filter and duplicate tag protection. Removed review rows restore modal focus to the owning heading.
+- RTL/mobile checks passed all nine tabs at 320/390/768/1440px without page overflow, internal wide-table scrolling, modal bounds, padded operation controls and independent input/pattern examples. Local dark newsletter/Select portals, keyboard ColorField editing/disabled state, ReviewActions outcomes/disabled state, forced colors and reduced motion passed. Cumulative 10→20 loading retained existing DOM records and displayed skeletons; applying search cancelled pending loads and reset batches.
+- The requested revision passed an additional 320/390/768/1600px geometry check: approve/reject controls remain side by side; private repositories use the shared GlassTile/RepositoryImage cards with actions outside imagery, then navigate into scoped newsletters. Settings show identity/service fields beside grouped capabilities, stack on mobile and use a compact swatch/disclosure grid for palettes. Settings and newsletter-card patterns also have independent catalogue examples. Desktop settings/cards and mobile newsletter captures were visually reviewed; temporary evidence remains outside the repository.
+- npm run build hit the previously reported sandbox restriction in the Turbopack CSS-worker port bind. The documented Webpack fallback passed on the final component source and generated 83 pages. No dependency/build configuration changed. The final feedback audit found no new qualifying Next.js issue, so the existing environment failure was not reported again.
+
+This is a client-state design preview, not live authentication, publication or moderation integration. Automated checks do not establish human screen-reader acceptance or complete accessibility certification.
+
 ## Document list metadata columns — 2026/11/18
 
 Evidence: working tree on `feat/document-list-metadata-columns`, based on `a1f1ab1`.
