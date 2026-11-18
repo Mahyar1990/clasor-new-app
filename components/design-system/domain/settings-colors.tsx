@@ -10,6 +10,7 @@ export function SettingsColors({ fields, values, expanded, onChange }: { fields:
       <h3 data-test-id="domain-settings-colors-title" className="flex items-center gap-2 text-xs font-bold"><Palette aria-hidden="true" className="size-4 text-primary" />رنگ‌ها و هویت بصری</h3>
       <span data-test-id="domain-settings-colors-count" className="text-[10px] text-muted-foreground">{fields.length.toLocaleString("fa-IR")} رنگ</span>
     </div>
+    <p data-test-id="domain-settings-colors-help" className="text-[10px] text-muted-foreground">رنگ‌ها پس از ذخیره تغییرات روی تم پنل اعمال می‌شوند.</p>
     <div data-test-id="domain-settings-color-groups" className="grid items-start gap-3 md:grid-cols-2 xl:grid-cols-3">
       {groups.map(group => {
         const colors = fields.filter(field => field.group === group);

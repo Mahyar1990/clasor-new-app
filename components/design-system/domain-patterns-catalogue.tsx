@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { Sample } from "./sample";
 import { DomainProvider, useDomain } from "./domain/store";
 import { LibraryProvider } from "./library/store";
+import { DomainThemePreview } from "./domain-theme-preview";
 import { DomainSettingsPanel } from "./domain/settings";
 import { NewsletterRepositoryCards } from "./domain/repository-cards";
 import { useDomainRepositories } from "./domain/shared";
@@ -36,5 +37,5 @@ function RepositoryCardsExample() {
   </Sample>;
 }
 export function DomainPatternsCatalogue() {
-  return <LibraryProvider><DomainProvider><DomainReviewCatalogue /><Sample title="تنظیمات گروه‌بندی‌شده دامنه" description="هویت و سرویس‌ها در بخش اصلی، قابلیت‌ها در ستون کنار و گروه‌های رنگ با پیش‌نمایش مستقل؛ در موبایل پشت‌سرهم قرار می‌گیرند."><DomainSettingsPanel /></Sample><RepositoryCardsExample /><NewsExample /></DomainProvider></LibraryProvider>;
+  return <LibraryProvider><DomainProvider><DomainReviewCatalogue /><Sample title="تنظیمات گروه‌بندی‌شده دامنه" description="هویت و سرویس‌ها در بخش اصلی، قابلیت‌ها در ستون کنار و گروه‌های رنگ با پیش‌نمایش مستقل؛ در موبایل پشت‌سرهم قرار می‌گیرند."><DomainSettingsPanel /><DomainThemePreview /></Sample><RepositoryCardsExample /><NewsExample /></DomainProvider></LibraryProvider>;
 }

@@ -34,7 +34,7 @@ SearchableCollection, CollectionTools and useCollectionQuery now own the formerl
 
 ## Domain settings and direct review actions — 2026/11/18
 
-`ColorField(label, value, onValueChange, testId, disabled?)` pairs the existing text field with a native color input. Only six-digit hex is valid; the accessible error describes an invalid text value while the picker uses a safe fallback. It is controlled, supports disabled state and does not apply colors to the document theme. The independent input catalogue demonstrates editing, validation and disabling.
+`ColorField(label, value, onValueChange, testId, disabled?)` pairs the existing text field with a native color input. Only six-digit hex is valid; the accessible error describes an invalid text value while the picker uses a safe fallback. It is controlled and supports disabled state. The compact hex field is 112px wide and 32px high with an adjacent 32px picker; coarse-pointer touch targets remain larger. The primitive does not mutate global colors: the owning domain provider applies validated saved colors. The independent input catalogue demonstrates editing, validation and disabling.
 
 `ReviewActions(status, label, onDecision, testId, disabled?)` uses the shared glass.reviewActions / glass.reviewDecision contracts to keep compact pending decisions side by side without wrapping, including narrow table action cells and the existing ApprovalBadge after approval/rejection. Accessible button labels name the record. Permission checks, transitions and persistence remain with the caller; repeated decisions are guarded in the owning domain list. The independent patterns catalogue demonstrates pending, both terminal states, disabled controls and local dark materials.
 

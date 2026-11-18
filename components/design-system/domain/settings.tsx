@@ -11,7 +11,7 @@ import { SettingsColors } from "./settings-colors";
 import { normalizeDomainText } from "./queries";
 import { useDomain } from "./store";
 export function DomainSettingsPanel() {
-  const { state, setState, settingsDraft: draft, setSettingsDraft: setDraft } = useDomain();
+  const { state, saveSettings, settingsDraft: draft, setSettingsDraft: setDraft } = useDomain();
   const [query, setQuery] = useDomainQuery();
   const [error, setError] = useState("");
   const toast = useStatusToast();
@@ -23,7 +23,7 @@ export function DomainSettingsPanel() {
   function save() {
     if (!draft.fields.name.trim()) { setError("نام دامنه را وارد کنید."); return; }
     if (Object.values(draft.colors).some(value => !/^#[a-f0-9]{6}$/i.test(value))) { setError("کد رنگ‌های نامعتبر را اصلاح کنید؛ با پاک‌کردن فیلتر همه فیلدها دیده می‌شوند."); return; }
-    setState(current => ({ ...current, settings: draft })); setError(""); toast.show("تنظیمات دامنه ذخیره شد.", { type: "success" });
+    saveSettings(draft); setError(""); toast.show("تنظیمات دامنه ذخیره شد.", { type: "success" });
   }
   return <section data-test-id="domain-settings" className="space-y-4">
     <div data-test-id="domain-settings-heading" className="flex flex-wrap items-center justify-between gap-3">

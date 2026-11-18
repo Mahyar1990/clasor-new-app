@@ -24,5 +24,5 @@ export function DomainWorkspace() {
   ]} />;
 }
 export function DomainPage() {
-  return <LibraryShell page="domain-management" title="مدیریت دامنه"><GlassCard data-test-id="domain-workspace" className="min-w-0 p-3 md:p-4"><DomainWorkspace /></GlassCard></LibraryShell>;
+  return <LibraryShell page="domain-management" title="مدیریت دامنه"><GlassCard data-test-id="domain-workspace" role="region" aria-label="مدیریت دامنه" tabIndex={0} className="min-h-0 min-w-0 flex-1 overflow-y-auto p-3 md:p-4"><DomainWorkspace /></GlassCard></LibraryShell>;
 }

@@ -1,3 +1,12 @@
+## Scrollable domain settings and saved panel palette — 2026/11/18
+
+Evidence: working tree on `feat/domain-panel-theme`, based on `655e7f9`.
+
+- ui:check passed for 318 React files, lint passed and all 89 tests passed, including required workspace suites and three palette cases covering all 34 role bindings, unchanged defaults, malformed data and injection rejection. The Webpack production build passed with 85 pages; the previously documented Turbopack environment limitation remains the reason for this fallback.
+- Browser checks passed expanded lower color fields in the independently scrollable desktop domain workspace, 112×32px hex controls, draft/Undo isolation, live saved primary/surface/border variables, reload/new-tab restoration and cross-tab updates. RTL at 320/390/768px retained reachable lower fields without horizontal page overflow.
+- Additional browser checks passed theme inheritance into feedback modal portals, opaque/forced-color overrides, isolated saved-theme catalogue preview, hex validation/disabled controls and an in-memory saved theme when browser storage throws. Feedback regression checks passed full text, actual TXT/PDF/PNG downloads, empty/many/unavailable files, focus restoration and retained header account without a sidebar sample user.
+- Persistence is browser-local preview behavior; no domain backend or authentication integration was added. Automated/browser evidence does not establish complete accessibility or human usability acceptance. The framework feedback audit retained no new qualifying issue.
+
 ## Feedback details, downloads and sidebar cleanup — 2026/11/18
 
 Evidence: working tree on `feat/admin-feedback-details`, based on `faa9fdd`.
