@@ -71,3 +71,7 @@ Start with [docs/RAG.md](docs/RAG.md) to select the relevant source. Current use
 ## Validation and reporting
 
 For behavior changes, also run `node --test test/workspace-mutations.test.mjs test/workspace-documents.test.mjs test/workspace-collaboration.test.mjs` and targeted browser checks. Verify RTL/mobile overflow, menu and modal layering, focus, default/hover/active/error/disabled states, local dark portals and accessibility preferences as relevant. Automated checks do not establish human screen-reader, contrast or usability acceptance. Label evidence with its revision; do not copy historical pass counts as new runs. Keep `.playwright-mcp/` and generated bundles out of commits. Commit or push only when requested.
+
+## Portable design policies
+
+The final design decisions from the Clasor conversation are indexed in [POLICIES.md](lib/design-system/POLICIES.md). For relevant design work, read the referenced policy section alongside the existing component contract. The repository packages self-contained skills under `skills/glass-design-system` and `skills/clasor-product-patterns`; product rules do not apply to unrelated products, and the skills do not expand action authorization.

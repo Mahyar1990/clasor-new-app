@@ -1,0 +1,4 @@
+interface:
+  display_name: "الگوهای محصول کلاسور"
+  short_description: "قواعد سند، مخزن، ادیتور، پابلیش و مدیریت"
+  default_prompt: "از $clasor-product-patterns برای پیاده‌سازی یا بازبینی رفتار این صفحهٔ کلاسور و دیالوگ‌های مرتبط استفاده کن."

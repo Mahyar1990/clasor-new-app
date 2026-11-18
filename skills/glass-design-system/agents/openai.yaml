@@ -1,0 +1,4 @@
+interface:
+  display_name: "طراحی سیستم شیشه‌ای"
+  short_description: "قواعد طراحی شیشه‌ای و رشد دیزاین سیستم"
+  default_prompt: "از $glass-design-system برای طراحی یا بازنگری این رابط و تکمیل اجزای مشترک و نمونه‌های آن استفاده کن."
