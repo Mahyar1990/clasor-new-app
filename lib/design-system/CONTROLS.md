@@ -1,3 +1,11 @@
+## Administrative metrics and sortable table headers — 2026/11/18
+
+MetricCard(title, icon, metrics, testId, loading?) composes a GlassCard and compact GlassEmblem with a semantic dl of labeled values. Values and units belong to the caller. Loading preserves metric labels while replacing values with skeletons and exposes aria-busy/status; zero is a valid visible value. AdminPanelCatalogue on the independent data page demonstrates the four source metric groups, zero/loading states and local light/dark materials.
+
+SolidColumn adds an optional sort object with direction and onToggle. Sortable headers render a native, explicitly labeled button using glass.tableSort, an inert direction glyph and aria-sort on the owning th. Existing columns without sort remain unchanged. Consumers own stable/numeric sorting, cumulative reset and request cancellation. The admin table retains its header while resetting its ten-row window and LoadMore session on sort, so keyboard focus is preserved. The independent data example demonstrates both sortable identifier headers and empty feedback.
+
+The admin entry is now a local Next link in the shared header, retaining isAdmin/signedOut gating, its icon/test ID and new-tab semantics. It is intentionally absent from the product sidebar and the sample-page registry: the user's header-only instruction overrides adding a duplicate catalogue-menu entry. The shared header example remains reachable from the normal catalogue.
+
 ## Bounded repository card descriptions — 2026/11/18
 
 GlassTile adds an optional description string between its title and metadata. The shared glass.repositoryDescription contract uses 10px type, 16px leading, two-line ellipsis and anywhere wrapping, so long prose and unbroken words remain within the copy column. The complete text remains in the DOM and native title; missing/whitespace descriptions create no element. Existing media, metadata, opening and independent padded actions retain their contracts.

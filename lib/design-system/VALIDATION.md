@@ -1,3 +1,15 @@
+## Header-only admin overview — 2026/11/18
+
+Evidence: working tree on `feat/admin-panel`, based on `2ac6779`.
+
+- Read-only Firefox inspection of the actual admin route succeeded, including all four metric groups, the Identifier/entityId/Description table and its identifier sort controls. Initial zero values were followed by loaded source data; those records, numbers and submitted messages were not copied into fixtures. No source records were submitted, changed or deleted.
+- ui:check passed for 314 React files; lint and TypeScript passed. All 84 tests passed, including the required workspace suites and two new feedback-sort cases covering numeric identifiers, both directions, stable equal-key order, empty results and input/reference preservation.
+- Browser checks passed removal of the sidebar admin item, retained header control, a real local new-tab destination with the opener unchanged, all four source metric groups and exact three feedback columns. Native sort buttons update aria-sort, sort numeric-looking IDs and retain keyboard focus; cumulative append preserves existing DOM records, while sorting resets the ten-row window and pending load session.
+- 320/390/768/1440px checks passed stacked/mobile versus two-column desktop summaries, local table overflow and no page-level overflow. Independent data-catalogue checks passed zero values, metric skeleton/aria-busy, empty feedback, local dark materials, forced colors and reduced motion. Desktop and mobile admin captures were visually reviewed; temporary source/browser captures remain outside the repository.
+- The documented `npm run build -- --webpack` command passed on final component source, including 85 generated pages. No dependency or build configuration changed. The final framework feedback audit retained no new qualifying issue; the previously reported sandbox-specific Turbopack restriction was not reported again.
+
+The new MetricCard composition, optional SolidDataTable sorting contract, independent catalogue states and product integration ship together. Administrative data remains fictional/client-side; these checks do not establish production authorization or complete accessibility certification.
+
 ## Repository card descriptions — 2026/11/18
 
 Evidence: working tree on `feat/repository-card-descriptions`, based on `b7204b5`.

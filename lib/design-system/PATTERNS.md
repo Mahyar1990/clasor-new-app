@@ -1,3 +1,11 @@
+## Source-aligned admin overview — 2026/11/18
+
+`/clasor-pages/admin` is opened by the existing header admin icon in a new local tab; the product sidebar admin item has been removed. Firefox inspection of `/panel-admin-clasor` succeeded read-only after source access returned. The implemented overview preserves all observed groups/fields: repositories (total, super repositories), storage (used, remaining, total), users (active, inactive, total), documents (public, drafts, total), followed by a feedback table with Identifier, entityId and Description. The first two columns have the source's numeric ascending/descending sorting; no unobserved feedback moderation actions or extra columns were invented.
+
+Summary values and feedback rows are fictional local fixtures, not copies of source metrics, account identities or submitted messages. Feedback bodies render as ordinary React text. The preview reuses the product shell, glass summary/identity contracts and SolidDataTable; ten-row cumulative loading retains existing records, while sorting resets the window and cancels pending loads without replacing the focused header. Table overflow stays local on narrow screens. AdminPanelCatalogue independently demonstrates metrics, loading/zero/empty states, sortable headers and local dark materials on the data page.
+
+No real administrative authorization, statistics API or feedback service integration was added. Source inspection changed navigation only and did not submit, delete or alter source account records.
+
 ## Organization positions own multiple members — 2026/11/18
 
 The user's confirmed rule supersedes the earlier roleless-membership preview. A position can contain multiple Pod users. Creating a position includes a compact member editor; its operation menu adds a separate Edit position members action. The editor accepts new usernames and people already in the same branch, lists the complete draft with bounded cumulative scrolling/search and allows removing entries. All changes are local until Save; Cancel discards the draft. Pending text in the username field is validated and included on Save, so it is not silently lost. Duplicate usernames are compared case-insensitively with a leading @ normalized away.
@@ -178,7 +186,7 @@ Read-only inspection of the available public Clasor frontend mapped the header c
 | Invitation list | Repository name, role, reject/accept; accepted state has repository URL/copy and entry action | Fictional independent requests, cumulative batches of ten, decisions retained across reopening; one modal with Back to the list |
 | Feedback | Required content and optional files, six maximum, one MiB each, eight supported extensions | Compact text area and AttachmentPicker, fixed submit/cancel footer, inline validation and local success toast |
 | Account | User name and logout | Labeled dropdown; compact logout confirmation and local guest/resume state |
-| Admin | Navigation to /panel-admin-clasor | Labeled external navigation to Clasor in a new tab |
+| Admin | Navigation to /clasor-pages/admin | Header-only local preview navigation in a new tab |
 
 No feedback subject/email/account-type fields are invented. The account metadata uses fictional identity. No source-account mutation, feedback request or attachment upload is sent. The accepted fixture's URL is under example.com; entry is disabled with an explicit reason until the repository interior has a designed preview. That limitation does not affect the source admin navigation.
 

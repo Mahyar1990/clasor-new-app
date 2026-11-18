@@ -1,6 +1,7 @@
 import FoundationsCatalogue from "@/components/design-system/foundations-catalogue";
 import ControlsCatalogue from "@/components/design-system/controls-catalogue";
 import NavigationCatalogue from "@/components/design-system/navigation-catalogue";
+import { AdminPanelCatalogue } from "./admin-panel-catalogue";
 import { OrganizationMembershipCatalogue } from "./organization-membership-catalogue";
 import { DomainInputsCatalogue } from "./domain-controls-catalogue";
 import { DomainPatternsCatalogue } from "./domain-patterns-catalogue";
@@ -15,7 +16,7 @@ export function CataloguePage({ section }: { section: CatalogueSection }) {
     {(section === "buttons" || section === "inputs" || section === "status") && <ControlsCatalogue section={section} />}
     {(section === "navigation" || section === "feedback" || section === "overlays") && <NavigationCatalogue section={section} />}
     {section === "inputs" && <DomainInputsCatalogue />}
-    {section === "data" && <DataCatalogue />}
+    {section === "data" && <><AdminPanelCatalogue /><DataCatalogue /></>}
     {section === "patterns" && <><OrganizationMembershipCatalogue /><DomainPatternsCatalogue /><PatternsCatalogue /></>}
     {(section === "accessibility" || section === "handoff") && <DeliveryCatalogue section={section} />}
   </FoundationsCatalogue>;
