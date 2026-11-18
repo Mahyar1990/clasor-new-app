@@ -1,3 +1,12 @@
+## Portable design policies and skill packages — 2026/11/18
+
+Evidence: working tree on `docs/portable-design-system-skills`, based on `6b8089a`.
+
+- Added a policy index and two self-contained skills: 14 general design/delivery policy groups and 20 separately scoped Clasor behavior groups. Latest decisions explicitly supersede older tab variants, square repository cards, side-by-side version snapshots and external text outline buttons. AGENTS.md, DESIGN_SYSTEM.md and RAG link the policy map without replacing the existing entry point or runtime contracts.
+- The skill-creator validators passed both packages. Both complete folders were copied to an isolated temporary directory and validated there; all package reference links resolved within the copied package, invocation metadata named the matching skill, and metadata description lengths were valid. All Markdown local links across skills and lib/design-system also resolved. PyYAML needed by the bundled validator was installed only under a temporary directory, with no application dependency changes.
+- ui:check passed for 320 React files, lint passed, and the Webpack build passed with 85 pages. Standard documentation links, specification index and whitespace checks passed. This is documentation/skill work; no new runtime behavior or browser acceptance is claimed, and historical test counts were not reused as new results.
+- The packages are committed for transfer, not installed globally. Their instructions preserve target-stack choice, product scope, live-source read-only boundaries and session-specific external-action authorization. The framework feedback audit retained no new qualifying Next.js issue.
+
 ## Editor outline and full-width paper — 2026/11/18
 
 Evidence: working tree on `feat/editor-document-contents`, based on `52263f6`.
