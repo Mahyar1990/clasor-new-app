@@ -15,7 +15,7 @@ export function DomainDate({ value, testId }: { value: string; testId: string })
 }
 export function useDomainRepositories() {
   const { repositories, documents } = useLibrary();
-  return repositories.filter(item => !item.deleted && item.published).map((repo, i) => ({ id: repo.id, name: repo.name, image: repo.image, creator: documents.find(doc => doc.repositoryId === repo.id)?.creator ?? "کاربر نمونه", priority: i + 1 }));
+  return repositories.filter(item => !item.deleted && item.published).map((repo, i) => ({ id: repo.id, name: repo.name, description: repo.description, image: repo.image, creator: documents.find(doc => doc.repositoryId === repo.id)?.creator ?? "کاربر نمونه", priority: i + 1 }));
 }
 export function useRepositoryFilter(): DomainFilter {
   const repos = useDomainRepositories();

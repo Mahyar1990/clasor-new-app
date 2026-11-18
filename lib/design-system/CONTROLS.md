@@ -1,3 +1,9 @@
+## Bounded repository card descriptions — 2026/11/18
+
+GlassTile adds an optional description string between its title and metadata. The shared glass.repositoryDescription contract uses 10px type, 16px leading, two-line ellipsis and anywhere wrapping, so long prose and unbroken words remain within the copy column. The complete text remains in the DOM and native title; missing/whitespace descriptions create no element. Existing media, metadata, opening and independent padded actions retain their contracts.
+
+Dashboard/library repository lists pass their actual preview description; private newsletter repository cards carry the same field; publish cards use the same typography/clamp contract. The independent library-patterns example on overlays/layout includes a long description and an absent-description state.
+
 ## Multi-user position membership pattern — 2026/11/18
 
 The organization membership catalogue uses the existing shared controls without introducing another visual family. PositionMembersEditor composes an applied draft, compact username entry, a same-branch Select and a named GlassScrollArea with cumulative PreviewList. Removing a draft entry restores focus to the username field. Filtering cancels pending list loads and resets the visible batch while preserving the full draft selection. A parent form owns pending text and final validation. Position creation and Edit members share this composition; the independent patterns page demonstrates their actual local state changes and modal/Select theme inheritance.

@@ -62,6 +62,7 @@ export const glass = {
   searchMode: "h-8! w-22! shrink-0 rounded-none! border-0! border-e! border-gray-300/40! bg-transparent! shadow-none! backdrop-blur-none! text-xs hover:translate-y-0! active:translate-y-0! focus:ring-0!",
   searchApply: "h-8 gap-1 rounded-none! border-0! border-s! border-gray-300/40! bg-white/30! px-2 text-xs shadow-none! hover:translate-y-0! focus-visible:outline-offset-[-2px]",
   repositoryGrid: "grid grid-cols-[repeat(auto-fill,minmax(min(100%,18rem),1fr))] gap-3",
+  repositoryDescription: "line-clamp-2 w-full text-[10px] leading-4 text-muted-foreground wrap-anywhere",
   repositoryTileLayout: "grid min-h-32 min-w-0 grid-cols-[minmax(0,1fr)_auto] overflow-hidden",
   repositoryTile: `${contentSurface} border-white/65 bg-white/35 shadow-[0_2px_7px_rgb(65_45_95/0.08)] dark:border-white/25 dark:bg-white/10 ${opaque}`,
   compactRecord: `${contentSurface} flex items-center gap-2 px-2 py-1.5`,

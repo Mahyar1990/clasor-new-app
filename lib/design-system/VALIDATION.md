@@ -1,3 +1,11 @@
+## Repository card descriptions — 2026/11/18
+
+Evidence: working tree on `feat/repository-card-descriptions`, based on `b7204b5`.
+
+- ui:check passed for 309 React files, lint passed, and the documented Webpack build fallback passed with TypeScript and 84 generated pages. This is a presentation-only change; no record mutations or loading behavior changed.
+- Browser checks passed description wiring on dashboard and all five repository-list scopes, private newsletter cards and publish cards. The independent overlays example passed 10px text with a two-line clamp, truncation of long prose/unbroken words at 320/390/768/1440px, no page overflow, no description element for an absent value, and separate card/options interactions.
+- The generic description API, shared typography contract and representative catalogue example are included together. Temporary browser scripts remain outside the repository. The final framework feedback audit retained no new qualifying Next.js issue; the known sandbox build restriction uses the established Webpack fallback.
+
 ## Multi-user positions and mandatory membership roles — 2026/11/18
 
 Evidence: working tree on `feat/organization-position-members`, based on `452ea9e`.
