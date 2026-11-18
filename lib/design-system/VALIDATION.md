@@ -1,3 +1,15 @@
+## Connected publish hierarchy and resizable navigation — 2026/11/18
+
+Evidence: working tree on `feat/publish-hierarchy-and-resizable-navigation`, based on `e73e613`.
+
+- ui:check passed for 273 React files; lint and TypeScript passed. All 70 tests passed, including the three required workspace suites and four new hierarchy/splitter cases. They cover six nested heading levels, peers and returning to a parent, skipped levels without synthetic headings, input immutability, constrained pane bounds and physical keyboard movement in both directions.
+- Browser checks passed the six-level nested ordered lists and visible start rails/elbows, active heading focus, accent trigger and actual راهنما → شروع به کار → document repository path. First/middle adjacent navigation uses compact labels without document names and retains destinations. The final desktop capture was visually reviewed; leaf markers remain 6px inside compact drawers.
+- Product resizing passed real pointer drag, inverse main-region geometry, 180/420px bounds, 8px/Shift-32px keyboard steps, Home/End, double-click reset, Escape drag cancellation and retained folder expansion/width across document navigation. At 768px the remaining main region stays at least 320px, accounting for the parent gap. 900px bounds and 320/390px mobile Sheet/nested navigation also passed without horizontal overflow.
+- The independent navigation/layout examples passed deep heading activation/focus restoration, local dark accent control, RTL/LTR splitter keys, reset and native touch drag through Chromium's touch input. Mobile example bounds, responsive min/max and solid/forced-color/reduced-motion behavior passed without runtime/console errors. Temporary scripts and captures remain outside the repository; all changes use fictional local data.
+- npm run build was attempted on the final source and encountered the existing Turbopack CSS-worker port-bind permission failure. The documented `npm run build -- --webpack` fallback compiled successfully and generated all 82 pages. Its first run then exited with a Next.js security-upgrade reminder; retrying the same command as directed completed with exit 0. No dependencies or project configuration changed, and the security reminder itself has not been remediated. The final feedback audit retained no new verified framework defect; the known Turbopack environment failure was not reported again.
+
+Components, examples, product integration and contracts are delivered together. Automated checks do not establish human screen-reader acceptance or complete accessibility certification. No source account was changed.
+
 ## Publish identity, advanced search and document tools — 2026/11/17
 
 Evidence: working tree on `feat/publish-search-and-reading-tools`, based on `b8a3512`.

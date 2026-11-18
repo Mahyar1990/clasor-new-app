@@ -14,7 +14,13 @@ import { reactionCounts } from "./publish/article-state";
 import { LibraryProvider } from "./library/store";
 import { GlassPreviewFrame } from "./glass-preview-frame";
 import { publishToolsDemoLayout } from "./catalogue-layout";
-const headings = [{ id: "catalogue-publish-intro", label: "معرفی", level: 1 }, { id: "catalogue-publish-start", label: "شروع به کار", level: 2 }, { id: "catalogue-publish-help", label: "راهنما و پرسش‌ها", level: 2 }];
+const headings = [{ id: "catalogue-publish-intro", label: "معرفی", level: 1 }, { id: "catalogue-publish-start", label: "شروع به کار", level: 2 }, { id: "catalogue-publish-category", label: "دسته‌بندی‌ها", level: 3 }, { id: "catalogue-publish-nested", label: "زیرمجموعهٔ داخلی", level: 4 }, { id: "catalogue-publish-detail", label: "جزئیات", level: 5 }, { id: "catalogue-publish-leaf", label: "سرفصل نهایی", level: 6 }, { id: "catalogue-publish-help", label: "راهنما و پرسش‌ها", level: 2 }];
+function DeepHeadings() {
+  return headings.slice(2, 6).map(item => {
+    const Heading = `h${item.level}` as "h3" | "h4" | "h5" | "h6";
+    return <Heading key={item.id} id={item.id} tabIndex={-1} data-test-id={`publish-demo-heading-${item.id}`} className="text-xs font-medium focus-visible:outline-2 focus-visible:outline-ring">{item.label}</Heading>;
+  });
+}
 function Examples() {
   const [expanded, setExpanded] = useState(false);
   const [dock, setDock] = useState(false);
@@ -33,7 +39,7 @@ function Examples() {
     <FloatingActionBar testId="publish-demo-bar" open={expanded} onOpenChange={setExpanded}><Button data-test-id="publish-demo-contents-toggle" ref={origin} size="icon-sm" variant="ghost" aria-label="فهرست سند نمونه" aria-expanded={dock} aria-controls="publish-demo-drawer" onClick={() => setDock(current => !current)}><ListTree aria-hidden="true" /></Button><ReactionControl testId="publish-demo-reaction" value={reaction} {...reactionCounts(reaction, 20, 3)} onValueChange={setReaction} disabled={disabled} /></FloatingActionBar>
     <div data-test-id="publish-tools-demo-stage" className={publishToolsDemoLayout}>
       <DockedPanel testId="publish-demo-drawer" title="فهرست سند" closeLabel="بستن فهرست سند" open={dock} onClose={() => { setDock(false); origin.current?.focus(); }} className="max-md:h-40 max-md:w-full max-md:max-w-none"><ContentsNavigation testId="publish-demo-contents" items={empty ? [] : headings} selectedId={selected} onSelect={select} /></DockedPanel>
-      <div ref={article} data-test-id="publish-demo-paper-region" className="min-w-0 flex-1"><ReadingSurface testId="publish-demo-paper" width="full" titleId={headings[0].id} title="معرفی" metadata="نمای تمام‌عرض بدون محدودیت خواندن"><h2 id={headings[1].id} tabIndex={-1} data-test-id="publish-demo-start" className="text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring">شروع به کار</h2><p data-test-id="publish-demo-body">فهرست سند در فضای خودش قرار می‌گیرد و محتوا را نمی‌پوشاند.</p><h2 id={headings[2].id} tabIndex={-1} data-test-id="publish-demo-help" className="text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring">راهنما و پرسش‌ها</h2></ReadingSurface></div>
+      <div ref={article} data-test-id="publish-demo-paper-region" className="min-w-0 flex-1"><ReadingSurface testId="publish-demo-paper" width="full" titleId={headings[0].id} title="معرفی" metadata="نمای تمام‌عرض بدون محدودیت خواندن"><h2 id={headings[1].id} tabIndex={-1} data-test-id="publish-demo-start" className="text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring">شروع به کار</h2><p data-test-id="publish-demo-body">فهرست سند در فضای خودش قرار می‌گیرد و محتوا را نمی‌پوشاند.</p><DeepHeadings /><h2 id="catalogue-publish-help" tabIndex={-1} data-test-id="publish-demo-help" className="text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring">راهنما و پرسش‌ها</h2></ReadingSurface></div>
     </div>
   </GlassPreviewFrame>;
 }

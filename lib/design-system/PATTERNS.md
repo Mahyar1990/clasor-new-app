@@ -1,3 +1,11 @@
+## Publish hierarchy and adjustable document navigation — 2026/11/18
+
+The public guide now demonstrates six heading levels. Its repository path is راهنما → شروع به کار → راهنمای شروع به کار, supplying the requested pair of nested categories in both the real preview data and catalogue examples. Existing publication filtering, ancestor retention, selection reveal, disclosure and scroll behavior remain in use.
+
+The right-hand document list is wrapped in the generic ResizablePane. Its desktop width starts at 240px, ranges from 180px to 420px when space permits, and reserves at least 320px for the remaining main region, accounting for the flex gap. It stays mounted across document navigation, retaining the chosen width and existing tree state. On mobile the existing right-hand Sheet remains the navigation interface; the desktop splitter is hidden. No backend or source-account mutation is introduced.
+
+ContentsNavigation now renders actual nested lists with visible group rails and child connectors. The section drawer and article heading navigation continue to use the existing docking/focus behavior. Adjacent-document links are compact single-line “سند قبلی”/“سند بعدی” controls without document names; first/last boundaries still omit unavailable destinations. The floating trigger opts into the shared accent tone, preserving the canonical OptionsButton implementation. Independent navigation/layout examples cover deep headings, resizing in both directions, pointer/touch, keyboard and responsive limits.
+
 ## Source-aligned public search and reading tools — 2026/11/17
 
 This revision supersedes the provisional public menu and source-access limitation below. The user-supplied public document was opened in the existing Firefox session. Read-only inspection confirmed the header newsletter/search/panel/profile controls, two search tabs, public/private newsletters, expanded floating action bar and a section drawer between the repository tree and document. No source reaction, account change, publication, download or outbound message was performed; fixtures contain no source account names or document text.

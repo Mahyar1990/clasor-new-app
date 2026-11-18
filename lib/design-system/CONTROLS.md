@@ -1,3 +1,13 @@
+## Hierarchical contents and bounded pane resizing — 2026/11/18
+
+ContentsNavigation now builds nested ordered lists from the heading levels rather than applying flat padding. contentsTree attaches each heading to the nearest preceding lower-level heading, handles skipped levels without fake headings and preserves input order/data. Every nested group has a logical start rail and every child an elbow connector; parent chevrons and leaf markers supplement indentation. The independent example reaches heading levels 1–6 and includes returning to a parent level. Anchors, active state, modified clicks, heading activation and empty behavior retain their public contract.
+
+ResizablePane is a product-independent, non-collapsible side pane. It accepts children/label/testId, defaultWidth/minWidth/maxWidth/minRemainingWidth, direction and className. A ResizeObserver measures the parent minus the column gap; the remaining content allocation takes priority when the viewport is narrow. The requested width is retained while the effective width clamps responsively. Values describe the entire pane including its 16px handle.
+
+The focusable vertical separator exposes its controlled pane, accessible name, pixel min/max/current values and hint. Pointer capture supports mouse/touch without document-wide event handlers. Left/Right move physically in that direction in RTL and LTR; steps are 8px or 32px with Shift. Home/End select bounds; Escape cancels an active drag; double-click restores the bounded default. Its semantics were checked against the [WAI window splitter reference](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/); this implementation does not add a collapse operation or claim full accessibility certification. The catalogue shows both directions, dark mode, touch, keyboard and constrained mobile geometry.
+
+OptionsButton adds tone=accent while retaining neutral as the default. FloatingActionBar chooses accent; other record menus keep their existing appearance and common dimensions. This is a shared component variant, not a page-only override.
+
 ## Public identity, feedback and section controls — 2026/11/17
 
 PublicHeaderActions is controlled by user/null and login/profile/newsletter/search callbacks plus a panelHref; it shows the supplied avatar or shared AvatarFallback. It contains no auth/session logic. ReactionControl accepts a nullable like/dislike value, explicit counts, a change callback and disabled. Repeating the selected choice requests null; changing choices requests the other value. aria-pressed and the shared glass button states identify the selection.

@@ -3,6 +3,7 @@
 import { DockedPanelCatalogue } from "./docked-panel-catalogue";
 import { PublishPatternsCatalogue } from "./publish-patterns-catalogue";
 import { PublishToolsCatalogue } from "./publish-tools-catalogue";
+import { ResizablePaneCatalogue } from "./resizable-pane-catalogue";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { AppLayout } from "@/components/ui/AppLayout";
@@ -82,6 +83,7 @@ export function LayoutContentCatalogue() {
             <DockedPanelCatalogue />
             <PublishPatternsCatalogue />
             <PublishToolsCatalogue />
+            <ResizablePaneCatalogue />
       <LibraryPatternsCatalogue /><HeaderActionsCatalogue /><RepositoryDialogsCatalogue /><DocumentDialogsCatalogue />
             <GlassIdentityCatalogue />
             <GlassScrollCatalogue />

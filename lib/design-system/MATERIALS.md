@@ -1,3 +1,9 @@
+## Connected heading lists and distinct floating trigger — 2026/11/18
+
+ContentsNavigation's nested groups use shared contentsBranch/contentsNode rails and elbow connectors. Chevron/leaf cues and native list structure make the parent-child relationship visible across heading levels; leaf glyphs stay at 6px inside compact panels. Logical start borders preserve RTL/LTR and system-color borders remain effective in forced colors.
+
+The shared accent OptionsButton uses a purple glass tint with white glyph, brighter border and restrained shadow. It retains the same 32px geometry as neutral options; only the floating action bar selects the new tone. Solid/forced-color and reduced-motion contracts remain authoritative. ResizablePane uses the shared resizeSeparator grip/rail/focus/drag styles and adds no extra glass surface around its existing panel.
+
 ## Compact publish navigation and expanded action bar — 2026/11/17
 
 The public outline uses shared outlineRow/outlineGroup contracts: smaller labels/icons, tighter rows, an emphasized selected branch rail and the existing current-navigation glass treatment. Hover does not translate navigation rows. The public ReadingSurface explicitly opts into full width; its readable paper material is retained. There is no new content-width cap or second glass layer around each paragraph.
