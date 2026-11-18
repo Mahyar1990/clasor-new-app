@@ -1,3 +1,7 @@
+## Editor outline in preview and editing — 2026/11/18
+
+The shared EditorWorkspace now uses EditorWithContents in both the standalone document tab and the version dialog. The content outline is independent from the existing history/tags/attachments drawer and remains available in both modes. It follows the currently selected version or unsaved editor text; closing the panel frees its layout space. Only the icon-only opener inside the top-right of the editor frame is shown when closed, and the open panel owns its close action. Existing save/autosave, version switching, approval and unsaved-change decisions retain ownership in the editor session.
+
 ## Feedback reading and attached user files — 2026/11/18
 
 Clicking any plain area of an admin feedback row, or activating its keyboard-accessible description control, opens the details dialog. Table descriptions are limited to two lines; the dialog retains the full original text without HTML interpretation. Identifier/entity context stays visible. Attached files display names, byte counts and real download links; the fictional fixtures reuse local PNG/PDF assets and a text data URL. Feedback without files has an explicit empty state. Many attachments append in batches of ten within their own scroll area. No additional feedback moderation action is introduced.
