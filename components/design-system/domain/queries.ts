@@ -3,7 +3,8 @@ export function normalizeDomainText(value: string) {
 }
 const calendarDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tehran", year: "numeric", month: "2-digit", day: "2-digit" });
 function localDate(value?: string) { return value && Number.isFinite(Date.parse(value)) ? calendarDate.format(new Date(value)) : ""; }
-export interface DomainQuery { text: string; filters: Record<string, string> }
+export type { CollectionQuery as DomainQuery } from "@/lib/design-system/collection-query";
+import type { CollectionQuery as DomainQuery } from "@/lib/design-system/collection-query";
 export function matchesDomainQuery(query: DomainQuery, searchable: (string | undefined)[], facets: Record<string, string>) {
   const needle = normalizeDomainText(query.text);
   return (!needle || searchable.some(value => normalizeDomainText(value ?? "").includes(needle))) && Object.entries(query.filters).every(([key, value]) => {

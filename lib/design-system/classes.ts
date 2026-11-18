@@ -52,6 +52,7 @@ export const glass = {
   insetCard: `${contentSurface} border-white/65 bg-white/35 shadow-[inset_0_1px_0_rgb(255_255_255/0.65),0_1px_4px_rgb(65_45_95/0.04)] dark:border-white/25 dark:bg-white/10 dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.1)] ${opaque}`,
   formActions: "flex flex-wrap items-center gap-2 [&>button]:m-0! [&>button]:h-8 [&>button]:text-xs",
   recordOptions: `size-8 border-white/75 bg-white/75 text-slate-800 shadow-[inset_0_1px_0_rgb(255_255_255/0.85)] dark:border-white/40 dark:bg-slate-800/85 dark:text-white [&>svg]:size-4 [&>svg]:stroke-2 ${opaque}`,
+  hierarchyRow: "flex min-w-0 items-center gap-1 rounded-lg border border-transparent p-0.5 data-[selected=true]:border-white/60 data-[selected=true]:bg-white/30 dark:data-[selected=true]:border-white/30 dark:data-[selected=true]:bg-white/10 forced-colors:data-[selected=true]:border-[Highlight]!",
   reviewActions: "flex flex-nowrap items-center justify-end gap-1 whitespace-nowrap",
   reviewDecision: "gap-1 ps-2 pe-2 text-[11px]",
   recordActions: "flex shrink-0 items-center justify-end px-1",

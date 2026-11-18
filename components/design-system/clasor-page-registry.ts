@@ -8,6 +8,7 @@ export const clasorPages = [
   { id: "bookmarked-repositories", title: "مخزن‌های نشان‌شده", href: "/clasor-pages/bookmarked-repositories" },
   { id: "archived-repositories", title: "مخزن‌های بایگانی‌شده", href: "/clasor-pages/archived-repositories" },
   { id: "published-repositories", title: "مخزن‌های منتشرشده", href: "/clasor-pages/published-repositories" },
+  { id: "organization-management", title: "مدیریت سازمانی", href: "/clasor-pages/organization-management" },
   { id: "domain-management", title: "مدیریت دامنه", href: "/clasor-pages/domain-management" },
   { id: "publish", title: "صفحه ای اولیه پابلیش", href: "/clasor-pages/publish" },
   { id: "publish-documentation", title: "مستندات پابلیش‌شده", href: "/clasor-pages/publish/dashboard-repository-1" },

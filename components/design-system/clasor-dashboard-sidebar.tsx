@@ -12,7 +12,7 @@ import { glass } from "@/lib/design-system/classes";
 const groups = [
   { title: "اسناد شخصی", items: [{ id: "my-documents", label: "سندهای من", icon: FileText }, { id: "shared-documents", label: "سندهای اشتراکی", icon: Users }] },
   { title: "مدیریت مخزن‌ها", items: [{ id: "my-repositories", label: "مخزن‌های من", icon: FolderOpen }, { id: "shared-repositories", label: "مخزن‌های اشتراکی", icon: Users }, { id: "bookmarked-repositories", label: "مخزن‌های نشان‌شده", icon: Bookmark }, { id: "archived-repositories", label: "مخزن‌های بایگانی‌شده", icon: Archive }, { id: "published-repositories", label: "مخزن‌های منتشرشده", icon: Share2 }] },
-  { title: "مدیریت", items: [{ id: "domain-management", label: "مدیریت دامنه", icon: Globe }, { id: "", label: "مدیریت سازمانی", icon: Building2 }, { id: "", label: "پنل ادمین", icon: ShieldCheck }] },
+  { title: "مدیریت", items: [{ id: "domain-management", label: "مدیریت دامنه", icon: Globe }, { id: "organization-management", label: "مدیریت سازمانی", icon: Building2 }, { id: "", label: "پنل ادمین", icon: ShieldCheck }] },
 ];
 
 function DashboardNavigation({ onNavigate, activePage = "dashboard" }: { onNavigate?: () => void; activePage?: string }) {

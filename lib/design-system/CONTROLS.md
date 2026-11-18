@@ -1,3 +1,11 @@
+## Selectable hierarchy and shared collection composition — 2026/11/18
+
+HierarchyList accepts HierarchyNode items (id, label, optional children/disabled), a selectedId, controlled expanded IDs, onExpandedChange/onSelectionChange, an optional renderActions slot and revealSelected. Every level can be selected. Selection, disclosure and options use separate controls: opening a menu or collapsing children does not select a different node. Native nested lists and Tab/Enter/Space behavior are retained; no incomplete ARIA-tree keyboard model is claimed. Logical ancestor rails reuse outlineGroup and the selected row uses glass.hierarchyRow. The independent navigation example covers four levels, selected parents/leaves, disabled selection, separate actions and a local dark menu.
+
+Each growing hierarchy level uses the shared cumulative loader. revealSelected observes the mounted selected control and reveals its ancestor loading window without stealing focus; the owner expands its ancestor IDs. hierarchyPath protects the ancestor calculation against malformed cycles. Product branches are converted from flat records by their owning module.
+
+SearchableCollection, CollectionTools and useCollectionQuery now own the formerly domain-only generic composition in components/ui, with CollectionQuery in the shared library. The old domain/collection entry point preserves its public aliases and test IDs. Query/filter decisions remain with each product module; shared UI owns applied search, filter disclosure, table geometry, automatic ten-item loading and reset/cancellation. Identity adds an optional compact density (24px avatar, 12px name); its default presentation and public IDs remain unchanged. The hierarchy catalogue demonstrates compact known/unknown identities alongside selected context.
+
 ## Domain settings and direct review actions — 2026/11/18
 
 `ColorField(label, value, onValueChange, testId, disabled?)` pairs the existing text field with a native color input. Only six-digit hex is valid; the accessible error describes an invalid text value while the picker uses a safe fallback. It is controlled, supports disabled state and does not apply colors to the document theme. The independent input catalogue demonstrates editing, validation and disabling.

@@ -1,3 +1,16 @@
+## Organization management preview — 2026/11/18
+
+Evidence: working tree on `feat/organization-management`, based on `2428f8c`.
+
+- Source inspection is incomplete: Firefox no longer returned usable source-page content/window accessibility, and the supplied public URL timed out during SSL connection. A clarification about reactivating the source tab or providing its menu/form fields is pending. The organization-specific menu/form workflows are explicitly provisional; source parity and backend semantics are not claimed. No source branch/account data was modified.
+- ui:check passed for 307 React files; lint and the build TypeScript pass succeeded. All 78 tests passed, including the required three workspace suites and four organization cases for filtered ancestor context, immutable scoped subtree removal, normalized sibling-name uniqueness and malformed-cycle termination. The organization helpers preserve unrelated branch records and memberships.
+- Browser checks passed equal right/left panel widths and geometry at desktop sizes, explicit selected branch/path, four nested levels, independent selection/disclosure/options, scoped members and job positions, duplicate validation and local branch create/rename/confirmed removal. Current detail tab remains selected when moving between branches, and its rows/options remain scoped to the new branch. Position removal preserves membership, clears its assignment and permits reassignment.
+- 320/390/768/1024/1600px checks passed stacked mobile versus equal desktop panels without page-level horizontal overflow. Branch/member/position modal bounds, local table scrolling, shared Select interaction and list validation passed. Per-level cumulative hierarchy loading preserved existing focus; the independent hierarchy example passed native keyboard selection, disabled nodes, separate options, local dark portal inheritance and forced-color/reduced-motion checks. Desktop organization and mobile captures were visually reviewed; temporary scripts/screenshots remain outside the repository.
+- The generic search/table/loading composition was moved into SearchableCollection with compatibility exports retained for domain callers. A fresh full domain browser regression passed after the move. Identity's default public behavior/IDs remain, with an independently demonstrated compact density added for organization rows.
+- npm run build reproduced the previously reported Turbopack CSS-worker sandbox port-bind failure. The documented `npm run build -- --webpack` fallback passed on final component source and generated all 84 pages. No dependency/build configuration changed. The final feedback audit retained no new qualifying Next.js issue; the known environment failure was not reported again.
+
+Components, route, independent navigation example, owning contracts and explicit source-inspection limits are delivered together. This remains fictional client-state interaction design; automated checks do not establish human screen-reader/complete accessibility acceptance or live organization integration.
+
 ## Domain administration and compact layout revision — 2026/11/18
 
 Evidence: working tree on `feat/domain-management`, based on `e02963f`.
