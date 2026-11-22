@@ -1,3 +1,13 @@
+## Catalogue final Firefox audit — 2026/11/22
+
+Evidence: `ac8cb3e`, Firefox 160.0.1 on macOS, temporary headless profile, local development build.
+
+- All 14 catalogue routes passed in both light and dark at viewport widths of 390 and 1280 CSS pixels (56 checks): RTL document direction, exactly one page-level heading, and no document-level horizontal overflow. This does not validate every scroller or open overlay at mobile width.
+- The header theme picker stored Dark, retained it when opening another catalogue page, and switched back to Light.
+- In both themes, Left Arrow moved focus to the next RTL tab. Selection stayed on the original tab and the computed outline was none in the scripted keyboard sequence. Click selection passed. Retest using a manual Tab entry before treating the activation and focus results as confirmed defects.
+- With a local dark preview on the light page, the nested dialog, Select and submenu opened in dark mode; Escape returned focus to the dialog trigger and the toast stayed dark after closing the dialog. With global Dark, the dialog and Select passed, but the automated submenu click did not reach the open state. Retest with pointer hover and keyboard routing in the visible browser; a theme defect is not established.
+- Manual contrast, screen-reader, tooltip, reduced-motion and no-transparency acceptance were not completed by this pass. No production build or runtime code changes are claimed.
+
 ## Portable design policies and skill packages — 2026/11/18
 
 Evidence: working tree on `docs/portable-design-system-skills`, based on `6b8089a`.
