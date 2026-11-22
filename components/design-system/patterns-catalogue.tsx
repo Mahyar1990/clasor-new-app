@@ -95,6 +95,8 @@ export function PatternsCatalogue() {
   const actionProps = { permission, onDirectApproval: () => setMessage("تأیید مستقیم فقط شبیه‌سازی شد."), onRequestApproval: () => setMessage("درخواست تأیید فقط شبیه‌سازی شد.") }
   const context: Context = decided ? { ...contextBase, status: "decided", decision: { by: { kind: "known", id: "person-4", name: "رضا موسوی" }, at: "2026-10-21T10:30:00Z", outcome: "approved" } } : { ...contextBase, status: "pending" }
   return <div data-test-id="patterns-catalogue-div-17" className="space-y-5 pt-10" data-catalogue="patterns"><SectionTitle id="patterns" title="الگوهای ترکیبی" number="12" />
+    <GlassPreviewFrame title="مجوز، ساخت نسخه و زمینهٔ تصمیم در دو تم" testId="glass-composite-patterns">
+    <p data-test-id="glass-composite-patterns-note" className="text-xs text-muted-foreground">در هر تم، سناریوی مهمان، برگشت یک مرحله و بازیابی نسخهٔ ناتمام را امتحان کنید. تغییر تم دادهٔ نمونه را بازنشانی نمی‌کند.</p>
     <Sample title="یک نتیجه مجوز، چند ورودی هماهنگ" description="نقش به مجوز تبدیل نمی‌شود؛ این انتخاب‌گر فقط چهار fixture مشاهده‌شده را بارگذاری می‌کند. نویسنده در نسخه خود با درخواست ادامه می‌دهد.">
       <SelectField data-test-id="patterns-catalogue-selectfield-18" label="سناریوی نقش" value={role} onValueChange={setRole} options={[{ value: "manager", label: "مدیر" }, { value: "editor", label: "ویرایشگر" }, { value: "writer", label: "نویسنده در نسخه خود" }, { value: "guest", label: "مهمان" }]} />
       <div data-test-id="patterns-catalogue-div-19" className="flex flex-wrap items-start gap-5"><div data-test-id="patterns-catalogue-div-20"><PermissionAction {...actionProps} /></div><RowActionMenu rowLabel="نسخه نمایشی" items={[permissionActionItem(actionProps)]} /></div><p data-test-id="patterns-catalogue-p-21" role="status" className="text-sm leading-body text-muted-foreground">{message}</p>
@@ -111,5 +113,6 @@ export function PatternsCatalogue() {
     <Sample title="زمینه تصمیم قابل پیگیری" description="سازنده، آخرین ویرایشگر، درخواست‌دهنده و تصمیم‌گیرنده مستقل‌اند؛ نام‌ها و زمان‌ها ساختگی‌اند.">
       <Button data-test-id="patterns-catalogue-button-30" variant="outline" onClick={() => setDecided(value => !value)}>{decided ? "نمایش انتظار تصمیم" : "نمایش تصمیم ثبت‌شده"}</Button><ApprovalContext context={context} />
     </Sample>
+    </GlassPreviewFrame>
   </div>
 }
