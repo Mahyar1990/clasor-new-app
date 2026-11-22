@@ -25,7 +25,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-test-id={props.id ?? `select-trigger-${testId}`}
       data-size={size}
-      className={cn("flex w-full min-w-0 items-center justify-between gap-1.5 rounded-md border border-white/40 bg-white/30 shadow-lg backdrop-blur-md py-2 pe-2 ps-2.5 text-sm whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 hover:shadow-md hover:shadow-purple-500/20 outline-none select-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground data-[size=default]:h-[var(--control-height)] data-[size=sm]:h-[var(--clasor-size-control-small)] data-[size=lg]:h-[var(--clasor-size-control-large)]  *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4", className, glass.select)}
+      className={cn("flex w-full min-w-0 items-center justify-between gap-1.5 py-2 pe-2 ps-2.5 text-sm whitespace-nowrap select-none data-placeholder:text-[color:var(--panel-placeholder)] data-[size=default]:h-[var(--control-height)] data-[size=sm]:h-[var(--clasor-size-control-small)] data-[size=lg]:h-[var(--clasor-size-control-large)]  *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4", glass.select, className)}
       {...props}
     >
       {children}

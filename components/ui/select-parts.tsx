@@ -49,7 +49,7 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       data-test-id={`select-item-${testId}`}
-      className={cn("relative flex w-full cursor-default items-center gap-1.5 rounded-md min-h-10 py-2 pe-8 ps-1.5 text-sm outline-hidden select-none hover:bg-white/20 data-highlighted:bg-white/20 focus:bg-white/20 focus:text-inherit not-data-[variant=destructive]:focus:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2", className, glass.navigation)}
+      className={cn("relative flex w-full cursor-default items-center gap-1.5 rounded-md min-h-10 py-2 pe-8 ps-1.5 text-sm outline-hidden select-none hover:bg-white/20 data-highlighted:bg-white/20 focus:bg-white/20 focus:text-inherit forced-colors:data-highlighted:outline-2 forced-colors:data-highlighted:outline-[Highlight] data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2", className, glass.navigation)}
       {...props}
     >
       <SelectPrimitive.ItemText data-test-id="select-parts-selectprimitive-itemtext-5" className="flex flex-1 shrink-0 gap-2 whitespace-normal break-words">

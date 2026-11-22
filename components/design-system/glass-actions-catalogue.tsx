@@ -11,6 +11,8 @@ export function GlassActionsCatalogue() {
     <div data-test-id="glass-actions-controls" className="flex flex-wrap items-center gap-3">
       <Button data-test-id="glass-actions-primary"><Plus aria-hidden="true" />ایجاد سند</Button>
       <Button data-test-id="glass-actions-secondary" variant="outline">مشاهده</Button>
+      <Button data-test-id="glass-actions-destructive" variant="destructive">حذف نمونه</Button>
+      <Button data-test-id="glass-actions-loading" loading>ذخیرهٔ نمونه</Button>
       <IconButton data-test-id="glass-actions-bell" variant="glass" aria-label="اعلان‌ها" aria-pressed={selected} onClick={() => setSelected(!selected)}><Bell aria-hidden="true" /></IconButton>
       <IconButton data-test-id="glass-actions-feedback" variant="glass" aria-label="بازخورد"><MessageSquare aria-hidden="true" /></IconButton>
       <IconButton data-test-id="glass-actions-disabled" variant="glass" aria-label="حساب غیرفعال" disabled><UserRound aria-hidden="true" /></IconButton>

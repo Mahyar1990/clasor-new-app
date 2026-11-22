@@ -12,7 +12,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
       type={type}
       data-slot="input"
       data-test-id={props.id ?? props.name ?? `input-${testId}`}
-      className={cn(glass.input, "h-[var(--control-height)] w-full min-w-0 py-1 ps-3 pe-3 text-base md:text-sm placeholder:text-muted-foreground disabled:opacity-50", className, glass.input)}
+      className={cn(glass.input, "h-[var(--control-height)] w-full min-w-0 py-1 ps-3 pe-3 text-base md:text-sm", className)}
       {...props}
     />
   )
