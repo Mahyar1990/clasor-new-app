@@ -1,3 +1,7 @@
+## Catalogue theme preference
+
+The shared catalogue header offers System (default), Light, and Dark. The choice is saved in browser-local storage and is independent of the material selector. System follows changes to the OS preference. While the catalogue shell is mounted, the resolved theme applies to the document root so the header, sidebar and body-mounted portals share it; leaving the shell restores the prior root state. Existing local dark previews still work in the light catalogue. Fixed demo colors and individual state contrast are audited separately.
+
 ## Connected heading lists and distinct floating trigger — 2026/11/18
 
 ContentsNavigation's nested groups use shared contentsBranch/contentsNode rails and elbow connectors. Chevron/leaf cues and native list structure make the parent-child relationship visible across heading levels; leaf glyphs stay at 6px inside compact panels. Logical start borders preserve RTL/LTR and system-color borders remain effective in forced colors.
