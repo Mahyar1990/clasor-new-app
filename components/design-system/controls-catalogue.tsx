@@ -55,7 +55,7 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
     {section === "buttons" && <>
     <SectionTitle id="buttons" title="دکمه و اقدام" description="یک اقدام روشن، در اندازه و جای مناسب" number="05"><MousePointer2 className="size-5" aria-hidden="true" /></SectionTitle>
     <GlassActionsCatalogue />
-    <Sample title="هر اقدام، یک تأکید مشخص" description="اصلی، حاشیه‌دار و آرام؛ عملیات مخرب با نام صریح از هم جدا می‌شوند.">
+    <Sample title="هر اقدام، یک تأکید مشخص" description="اصلی، حاشیه‌دار و آرام؛ عملیات مخرب با نام صریح از هم جدا می‌شوند. با ماوس بالا آمدن و برگشت دکمه را امتحان کنید؛ با Tab فوکوس را بدون جابه‌جایی ببینید. تنظیم کاهش حرکت دستگاه، جابه‌جایی را حذف می‌کند.">
       <div data-test-id="controls-catalogue-div-13" className="flex flex-wrap items-center gap-3">
         <Button data-test-id="controls-catalogue-button-14" onClick={simulateAction} loading={loading} loadingLabel="شبیه‌سازی ذخیره در حال اجراست"><Plus aria-hidden="true" />ایجاد سند</Button>
         <Button data-test-id="controls-catalogue-button-15" variant="outline" onClick={() => setActions(value => value + 1)}><Download aria-hidden="true" />دریافت نمونه</Button>

@@ -34,6 +34,8 @@ OrganizationMemberDialog marks the position Select as required, offers only the 
 
 HierarchyList accepts HierarchyNode items (id, label, optional children/disabled), a selectedId, controlled expanded IDs, onExpandedChange/onSelectionChange, an optional renderActions slot and revealSelected. Every level can be selected. Selection, disclosure and options use separate controls: opening a menu or collapsing children does not select a different node. Native nested lists and Tab/Enter/Space behavior are retained; no incomplete ARIA-tree keyboard model is claimed. Logical ancestor rails reuse outlineGroup and the selected row uses glass.hierarchyRow. The independent navigation example covers four levels, selected parents/leaves, disabled selection, separate actions and a local dark menu.
 
+Hierarchy disclosure rotates only the chevron (120 ms, mirrored in RTL); the branch opens or closes immediately. Reduced motion removes the rotation transition.
+
 Each growing hierarchy level uses the shared cumulative loader. revealSelected observes the mounted selected control and reveals its ancestor loading window without stealing focus; the owner expands its ancestor IDs. hierarchyPath protects the ancestor calculation against malformed cycles. Product branches are converted from flat records by their owning module.
 
 SearchableCollection, CollectionTools and useCollectionQuery now own the formerly domain-only generic composition in components/ui, with CollectionQuery in the shared library. The old domain/collection entry point preserves its public aliases and test IDs. Query/filter decisions remain with each product module; shared UI owns applied search, filter disclosure, table geometry, automatic ten-item loading and reset/cancellation. Identity adds an optional compact density (24px avatar, 12px name); its default presentation and public IDs remain unchanged. The hierarchy catalogue demonstrates compact known/unknown identities alongside selected context.
@@ -164,6 +166,8 @@ RecordGroup(title, description?, children, testId) is a shared glass composition
 [Button](../../components/ui/button.tsx)، [Input](../../components/ui/input.tsx)، [Select](../../components/ui/select.tsx) و [SolidForm](../../components/ui/SolidForm.tsx) مرجع اجرا هستند؛ ظاهر و سیاست حالت‌ها قراردادهای Tailwind در [classes.ts](classes.ts) هستند. فایل CSS مستقل کنترل‌ها حذف شده است.
 
 Input پیش از فوکوس white/40 با حاشیه خاکستری و سایه داخلی است؛ در دارک white/10. فوکوس بنفش و خطا معنایی است. دکمه اصلی purple/60 و Hover آن purple/80؛ ثانویه white/50 با حاشیه و سایه پایه؛ Ghost/Close از white/10 به white/20 می‌رود. حرکت Hover فقط برای کنترل فعال است و در کاهش حرکت غیرفعال می‌شود.
+
+در قرارداد مشترک `glass.interaction` فقط `translate` طی ۱۲۰ میلی‌ثانیه (`--clasor-motion-fast`) تغییر می‌کند: دکمهٔ فعال در Hover دو پیکسل بالا می‌آید و هنگام فشردن یا خروج اشاره‌گر برمی‌گردد. رنگ، حاشیه، سایه و محوشدگی بدون گذار تغییر می‌کنند؛ فوکوس کیبورد به‌تنهایی دکمه را جابه‌جا نمی‌کند. نمونهٔ «دکمه و اقدام» در `/design-system/buttons` حرکت، فوکوس و حالت غیرفعال را نشان می‌دهد.
 
 Select بومی HTML ممنوع است. Trigger و Content همان shadcn Base UI، شیشه‌ای و با شناسه تست‌اند؛ `select-parts.tsx` بخش‌های کوچک را نگه می‌دارد. `name` و serialization primitive را حفظ کنید، ولی تست‌ها را روی کنترل قابل مشاهده بنویسید. قواعد قاب ماتِ گزارش قدیمی برای فرم جاری معتبر نیستند.
 

@@ -25,6 +25,7 @@ export function GlassControlStatesCatalogue() {
       <div data-test-id="glass-control-states-fields" className="space-y-4">
         <RadioField label="نوع دسترسی نمونه" value={choice} onValueChange={value => setChoice(String(value))} options={[{ value: "private", label: "خصوصی" }, { value: "link", label: "با پیوند" }, { value: "public", label: "عمومی", disabled: true, disabledReason: "انتشار عمومی در این نمونه فعال نیست." }]} />
         <SelectField data-test-id="glass-state-select" label="مخزن نمونه" defaultValue="design" options={[{ value: "design", label: "تیم طراحی" }, { value: "product", label: "تیم محصول" }]} />
+        <p data-test-id="glass-state-select-motion" className="text-xs text-muted-foreground">منوی مخزن بدون لغزش یا زوم محو می‌شود. بازکردن با صفحه‌کلید، حرکت بین گزینه‌ها و بستن با Escape را امتحان کنید.</p>
         <TextField data-test-id="glass-state-text" label="عنوان نمونه" placeholder="راهنمای طراحی" />
         <TextField data-test-id="glass-state-error" label="عنوان نیازمند اصلاح" defaultValue="عنوان ناقص" error="یک عنوان مشخص‌تر وارد کنید." />
       </div>

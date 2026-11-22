@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ChevronDown, ChevronLeft, Folder } from "lucide-react";
+import { ChevronDown, Folder } from "lucide-react";
 import { Button } from "./button";
 import { glass } from "@/lib/design-system/classes";
 import { hierarchyPath, type HierarchyNode } from "@/lib/design-system/hierarchy";
@@ -40,7 +40,7 @@ function HierarchyLevel({ items, selectedId, expanded, onExpandedChange, onSelec
     <ul ref={list} data-test-id={`${testId}-level-${depth}-${items[0]?.id ?? "empty"}`} className={depth ? glass.outlineGroup : "space-y-1"} data-current-path={items.some(item => path.includes(item.id))}>
       {result.rows.map(item => <li data-test-id={`${testId}-item-${item.id}`} data-load-more-item key={item.id}>
         <div data-test-id={`${testId}-row-${item.id}`} data-selected={item.id === selectedId} className={glass.hierarchyRow}>
-          {item.children?.length ? <Button data-test-id={`${testId}-toggle-${item.id}`} size="icon-sm" variant="plain" className="size-7! shrink-0" aria-label={`${expanded.has(item.id) ? "بستن" : "بازکردن"} زیرمجموعه‌های ${item.label}`} aria-expanded={expanded.has(item.id)} aria-controls={`${testId}-children-${item.id}`} onClick={() => onExpandedChange(item.id)}>{expanded.has(item.id) ? <ChevronDown aria-hidden="true" className="size-3!" /> : <ChevronLeft aria-hidden="true" className="size-3!" />}</Button> : <span data-test-id={`${testId}-leaf-${item.id}`} aria-hidden="true" className="w-7 shrink-0" />}
+          {item.children?.length ? <Button data-test-id={`${testId}-toggle-${item.id}`} size="icon-sm" variant="plain" className="group/disclosure size-7! shrink-0" aria-label={`${expanded.has(item.id) ? "بستن" : "بازکردن"} زیرمجموعه‌های ${item.label}`} aria-expanded={expanded.has(item.id)} aria-controls={`${testId}-children-${item.id}`} onClick={() => onExpandedChange(item.id)}><ChevronDown aria-hidden="true" className={glass.hierarchyChevron} /></Button> : <span data-test-id={`${testId}-leaf-${item.id}`} aria-hidden="true" className="w-7 shrink-0" />}
           <Button data-test-id={`${testId}-select-${item.id}`} variant="plain" disabled={item.disabled} aria-current={selectedId === item.id ? "page" : undefined} onClick={() => onSelectionChange(item.id)} className={`${glass.outlineRow} ${glass.current} min-w-0 flex-1 justify-start whitespace-normal px-1 text-start text-xs`}><Folder aria-hidden="true" className="size-3.5! shrink-0" /><span data-test-id={`${testId}-name-${item.id}`} className="min-w-0 wrap-anywhere">{item.label}</span></Button>
           {renderActions && <div data-test-id={`${testId}-actions-${item.id}`} className="shrink-0 px-1">{renderActions(item)}</div>}
         </div>

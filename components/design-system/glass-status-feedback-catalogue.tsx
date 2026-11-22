@@ -31,5 +31,6 @@ export function GlassFeedbackStatesCatalogue() {
     <ProgressIndicator label="آماده‌سازی نمونه" value={45} />
     <ProgressIndicator label="کامل‌شده" value={100} />
     <LoadingSkeleton rows={2} label="دریافت داده‌های نمونه" />
+    <p data-test-id="glass-loading-static" className="text-xs text-muted-foreground">جای‌نگهدارهای بارگذاری ثابت‌اند و پالس ندارند.</p>
   </GlassPreviewFrame>;
 }

@@ -29,7 +29,7 @@ export function GlassTabsCatalogue() {
           <Checkbox data-test-id="glass-tabs-long-toggle" aria-label="نمایش عنوان بلند" checked={longLabels} onCheckedChange={setLongLabels} />نمایش عنوان بلند
         </label>
       </div>
-      <p data-test-id="glass-tabs-description" className="text-xs leading-relaxed text-muted-foreground">یک ظاهر مشترک برای دیزاین سیستم، داشبورد و دیالوگ‌ها؛ با کلیدهای جهت، Home و End جابه‌جا شوید. در عرض کم، عنوان‌ها کامل می‌مانند و نوار افقی پیمایش می‌شود.</p>
+      <p data-test-id="glass-tabs-description" className="text-xs leading-relaxed text-muted-foreground">با ماوس یا کلیدهای جهت، Home و End تب را عوض کنید؛ فقط رنگ زمینهٔ تب نرم تغییر می‌کند و محتوای جدید فوراً نمایش داده می‌شود. در حالت کاهش حرکت گذار حذف می‌شود. در عرض کم، نوار تب افقی پیمایش می‌شود.</p>
     </GlassPreviewFrame>
   </div>;
 }

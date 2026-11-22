@@ -31,7 +31,7 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
   return (
     <SheetPrimitive.Backdrop data-test-id="sheet-sheetprimitive-backdrop-4"
       data-slot="sheet-overlay"
-      className={cn("fixed inset-0 z-[var(--z-dialog)] bg-[var(--overlay-backdrop)] transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-backdrop-filter:backdrop-blur-xs", className, glass.backdrop)}
+      className={cn("fixed inset-0 z-[var(--z-dialog)] bg-[var(--overlay-backdrop)] supports-backdrop-filter:backdrop-blur-xs", glass.dialogMotion, className, glass.backdrop)}
       {...props}
     />
   )
@@ -55,7 +55,7 @@ function SheetContent({
       <SheetPrimitive.Popup data-test-id="sheet-sheetprimitive-popup-5"
         data-slot="sheet-content"
         data-side={side}
-        className={cn("fixed z-[var(--z-dialog)] flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg transition duration-200 ease-in-out data-ending-style:opacity-0 data-starting-style:opacity-0 data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=bottom]:data-ending-style:translate-y-[2.5rem] data-[side=bottom]:data-starting-style:translate-y-[2.5rem] data-[side=left]:inset-y-0 ltr:data-[side=left]:start-0 rtl:data-[side=left]:end-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-e data-[side=left]:data-ending-style:translate-x-[-2.5rem]  data-[side=left]:data-starting-style:translate-x-[-2.5rem]  data-[side=right]:inset-y-0 ltr:data-[side=right]:end-0 rtl:data-[side=right]:start-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-s data-[side=right]:data-ending-style:translate-x-[2.5rem] rtl:data-[side=right]:data-ending-style:-translate-x-[2.5rem] data-[side=right]:data-starting-style:translate-x-[2.5rem] rtl:data-[side=right]:data-starting-style:-translate-x-[2.5rem] data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=top]:data-ending-style:translate-y-[-2.5rem] data-[side=top]:data-starting-style:translate-y-[-2.5rem] data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm", glass.floating, className)}
+        className={cn("fixed z-[var(--z-dialog)] flex flex-col gap-4 bg-popover bg-clip-padding text-sm text-popover-foreground shadow-lg data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=left]:inset-y-0 ltr:data-[side=left]:start-0 rtl:data-[side=left]:end-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-e data-[side=right]:inset-y-0 ltr:data-[side=right]:end-0 rtl:data-[side=right]:start-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-s data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm", glass.sheetMotion, glass.floating, className)}
         {...props}
       >
         <GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider>
