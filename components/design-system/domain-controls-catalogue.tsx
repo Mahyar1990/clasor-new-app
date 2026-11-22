@@ -1,4 +1,5 @@
 "use client";
+import { CataloguePreviewTheme, previewDarkLabel } from "./catalogue-preview-theme";
 import { useState } from "react";
 import { ColorField } from "@/components/ui/ColorField";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -18,11 +19,13 @@ export function DomainReviewCatalogue() {
   const [status, setStatus] = useState<"pending" | "approved" | "rejected">("pending");
   const [dark, setDark] = useState(false);
   return <Sample title="تصمیم مستقیم روی ردیف" description="تأیید و رد جمع‌وجور؛ بعد از تصمیم برچسب وضعیت جای کنترل‌ها را می‌گیرد. کسب‌وکار و مجوز در مالک فهرست باقی می‌مانند.">
-    <label data-test-id="catalogue-review-dark-label" className="mb-3 flex items-center gap-2 text-xs"><Checkbox data-test-id="catalogue-review-dark" checked={dark} onCheckedChange={value => setDark(!!value)} />تم تیره محلی</label>
+    <label data-test-id="catalogue-review-dark-label" className="mb-3 flex items-center gap-2 text-xs"><Checkbox data-test-id="catalogue-review-dark" checked={dark} onCheckedChange={value => setDark(!!value)} />{previewDarkLabel}</label>
+    <CataloguePreviewTheme forceDark={dark}>
     <GlassCard data-test-id="catalogue-review-surface" className={`${dark ? "dark" : ""} space-y-3 p-3`}>
       <ReviewActions testId="catalogue-review-actions" status={status} label="درخواست نمونه" onDecision={setStatus} />
       <ReviewActions testId="catalogue-review-disabled" status="pending" label="درخواست بدون دسترسی" onDecision={() => {}} disabled />
       <Button data-test-id="catalogue-review-reset" size="sm" variant="outline" onClick={() => setStatus("pending")}>بازنشانی نمونه</Button>
     </GlassCard>
+    </CataloguePreviewTheme>
   </Sample>;
 }

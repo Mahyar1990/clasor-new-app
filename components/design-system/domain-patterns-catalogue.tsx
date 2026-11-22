@@ -1,4 +1,5 @@
 "use client";
+import { CataloguePreviewTheme, previewDarkLabel } from "./catalogue-preview-theme";
 import { useRef, useState } from "react";
 import { Sample } from "./sample";
 import { DomainProvider, useDomain } from "./domain/store";
@@ -18,8 +19,10 @@ function NewsExample() {
   const [dark, setDark] = useState(false);
   const { state } = useDomain();
   return <Sample title="مدیریت خبرنامه و جستجوی فیلترپذیر" description="نمونه مستقل الگوی دامنه: عنوان، متن، لینک و چهار تصویر پیش‌فرض؛ خبرنامه خصوصی به انتخاب مخزن نیاز دارد. ساخت، ویرایش و حذف فقط داده‌های همین نمونه را تغییر می‌دهند.">
-    <div data-test-id="catalogue-domain-news-controls" className="mb-3 flex flex-wrap gap-4 text-xs"><label data-test-id="catalogue-domain-private-label" className="flex items-center gap-2"><Checkbox data-test-id="catalogue-domain-private" checked={privateNews} onCheckedChange={value => setPrivateNews(!!value)} />خبرنامه خصوصی</label><label data-test-id="catalogue-domain-dark-label" className="flex items-center gap-2"><Checkbox data-test-id="catalogue-domain-dark" checked={dark} onCheckedChange={value => setDark(!!value)} />تم تیره محلی</label></div>
+    <div data-test-id="catalogue-domain-news-controls" className="mb-3 flex flex-wrap gap-4 text-xs"><label data-test-id="catalogue-domain-private-label" className="flex items-center gap-2"><Checkbox data-test-id="catalogue-domain-private" checked={privateNews} onCheckedChange={value => setPrivateNews(!!value)} />خبرنامه خصوصی</label><label data-test-id="catalogue-domain-dark-label" className="flex items-center gap-2"><Checkbox data-test-id="catalogue-domain-dark" checked={dark} onCheckedChange={value => setDark(!!value)} />{previewDarkLabel}</label></div>
+    <CataloguePreviewTheme forceDark={dark}>
     <GlassCard data-test-id="catalogue-domain-news-surface" className={`${dark ? "dark" : ""} p-3`}><DomainNewsList key={String(privateNews)} privateNews={privateNews} /></GlassCard>
+    </CataloguePreviewTheme>
     <p data-test-id="catalogue-domain-news-status" role="status" className="mt-2 text-xs text-muted-foreground">تعداد کل خبرنامه‌های نمونه: {state.news.length.toLocaleString("fa-IR")}</p>
   </Sample>;
 }

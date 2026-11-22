@@ -1,5 +1,5 @@
 "use client";
-import { PortalThemeContext } from "@/hooks/use-portal-theme";
+import { CataloguePreviewTheme, previewDarkLabel } from "./catalogue-preview-theme";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
@@ -22,18 +22,18 @@ export function GlassOptionsCatalogue() {
     <p data-test-id="glass-options-description" className="text-sm text-muted-foreground">ته‌رنگ ۱۵٪ با محوشدگی ۱۰ پیکسل و لایهٔ ملایم زیر نوشته‌ها؛ رنگ پس‌زمینه حفظ می‌شود و متن‌های پشت کمتر مزاحم خواندن گزینه‌ها می‌شوند.</p>
     <p data-test-id="glass-options-motion" className="text-sm text-muted-foreground">منو و زیرمنو بدون لغزش یا زوم ظاهر و محو می‌شوند. با کلیدهای جهت‌دار بین گزینه‌ها حرکت کنید و با Escape ببندید. در حالت کاهش حرکت، منو بدون گذار باز و بسته می‌شود.</p>
     <label data-test-id="glass-options-dark-label" className="flex min-h-11 items-center gap-2 text-sm">
-      <Checkbox data-test-id="glass-options-dark-toggle" aria-label="پیش‌نمایش تاریک منوها" checked={dark} onCheckedChange={checked => setDark(checked)} />پیش‌نمایش تاریک منوها
+      <Checkbox data-test-id="glass-options-dark-toggle" aria-label={previewDarkLabel} checked={dark} onCheckedChange={checked => setDark(checked)} />{previewDarkLabel}
     </label>
     <label data-test-id="glass-options-busy-label" className="flex min-h-11 items-center gap-2 text-sm">
       <Checkbox data-test-id="glass-options-busy-toggle" aria-label="زمینهٔ پرنوشته برای بررسی خوانایی" checked={busyBackground} onCheckedChange={checked => setBusyBackground(checked)} />زمینهٔ پرنوشته برای بررسی خوانایی
     </label>
-    <div data-test-id="glass-options-examples" className={`${dark ? "dark scheme-dark bg-slate-950/80" : "scheme-light"} ${busyBackground ? "min-h-[30rem]" : ""} relative isolate grid content-start gap-3 rounded-xl bg-[linear-gradient(125deg,rgba(96,165,250,0.22),transparent_40%,rgba(167,139,250,0.22))] p-4 text-foreground sm:grid-cols-2`}>
+    <div data-test-id="glass-options-examples" className={`${dark ? "dark scheme-dark bg-slate-950/80" : ""} ${busyBackground ? "min-h-[30rem]" : ""} relative isolate grid content-start gap-3 rounded-xl bg-[linear-gradient(125deg,rgba(96,165,250,0.22),transparent_40%,rgba(167,139,250,0.22))] p-4 text-foreground sm:grid-cols-2`}>
       {busyBackground && <div data-test-id="glass-options-busy-background" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex flex-col justify-evenly overflow-hidden rounded-xl px-4 text-lg font-bold text-slate-950/75 dark:text-slate-100/75">
         {Array.from({ length: 10 }, (_, index) => <p data-test-id={`glass-options-busy-line-${index}`} key={index} className="whitespace-nowrap">متن نمونه برای بررسی خوانایی منوی شیشه‌ای روی نوشته‌های پشت آن</p>)}
       </div>}
-      <PortalThemeContext.Provider value={dark ? "dark" : "document"}>
+      <CataloguePreviewTheme forceDark={dark}>
         {examples.map(example => <GlassRecordMenuExample key={example.id} id={example.id} name={example.name} description={example.description} icon={example.icon} />)}
-      </PortalThemeContext.Provider>
+      </CataloguePreviewTheme>
     </div>
   </section>;
 }

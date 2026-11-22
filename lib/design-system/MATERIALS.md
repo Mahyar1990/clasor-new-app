@@ -1,5 +1,7 @@
 ## Catalogue theme preference
 
+Local preview controls are dark overrides, not light/dark switches. When off, the sample follows its enclosing preview or the catalogue header, without a forced light color scheme. Nested preview portals inherit the parent preview's dark scope unless the nested control explicitly enables dark. The catalogue header remains the control for explicit Light mode.
+
 The shared catalogue header offers System (default), Light, and Dark. The choice is saved in browser-local storage and is independent of the material selector. System follows changes to the OS preference. While the catalogue shell is mounted, the resolved theme applies to the document root so the header, sidebar and body-mounted portals share it; leaving the shell restores the prior root state. Existing local dark previews still work in the light catalogue. Fixed demo colors and individual state contrast are audited separately.
 
 The Colors, Typography, and Geometry catalogue pages use semantic theme roles for sample surfaces, text, borders and focus. Raw brand and neutral swatches preserve their source values; usage samples follow the active theme. Semantic cards display the active role and copy its rendered text color. Dark status roles define matching text, surface and border.
