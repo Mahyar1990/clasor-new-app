@@ -192,3 +192,7 @@ z-indexهای dialog/menu/toast و backdrop از مبانی مصرف می‌شو
 ## Catalogue page headings
 
 Each catalogue route has one page-level heading. Colors keeps its hero heading; the other sections use the shared header's route title. Embedded editor, reading and repository examples use subordinate headings and retain their test IDs and focus targets. `ReadingSurface` defaults to an `h1` for standalone use; `titleAs` sets the heading level for an embedded surface. The publication catalogue preserves its six-level outline data independently of the surrounding page's semantic heading levels.
+
+## Feedback and recovery in both themes
+
+Empty states stay neutral; permission limits use info, partial success uses warning, and service errors use danger. Titles and descriptions state what happened regardless of color. Recovery controls wrap on narrow screens and the catalogue announces the result of each demo action. Determinate progress uses a matte track and a theme-specific fill; the semantic value, RTL direction and opacity-independent skeleton behavior remain unchanged.

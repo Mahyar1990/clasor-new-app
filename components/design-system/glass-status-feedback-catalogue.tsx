@@ -2,6 +2,9 @@
 
 import { ApprovalBadge, VisibilityBadge, LatestBadge, RoleBadge } from "@/components/ui/status-badge";
 import { Identity } from "@/components/ui/identity";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { SystemState } from "@/components/ui/system-state";
 import { Feedback } from "@/components/ui/feedback";
 import { ProgressIndicator, LoadingSkeleton } from "@/components/ui/progress-indicator";
 import { GlassPreviewFrame } from "./glass-preview-frame";
@@ -28,6 +31,9 @@ export function GlassStatusStatesCatalogue() {
 }
 
 export function GlassFeedbackStatesCatalogue() {
+  const [progress, setProgress] = useState(45);
+  const [notice, setNotice] = useState("هنوز اقدامی انجام نشده است.");
+  function log(message: string) { setNotice(`${message} — فقط در این نمونه؛ بدون ذخیره‌سازی.`); }
   return <GlassPreviewFrame title="پیام و پیشرفت؛ حالت روشن و تاریک" testId="glass-feedback-states">
     <div data-test-id="glass-feedback-tones" className="grid gap-3 sm:grid-cols-2">
       <Feedback tone="success" title="ذخیره شد" description="اطلاعات نمونه به‌روز شد." />
@@ -36,9 +42,18 @@ export function GlassFeedbackStatesCatalogue() {
       <Feedback tone="info" title="اطلاعات بیشتر" description="این پیام فقط برای نمایش است." />
     </div>
     <ProgressIndicator label="هنوز شروع نشده" value={0} />
-    <ProgressIndicator label="آماده‌سازی نمونه" value={45} />
+    <ProgressIndicator label="آماده‌سازی نمونه" value={progress} />
+    <Button data-test-id="navigation-catalogue-button-5" variant="outline" onClick={() => setProgress(value => value === 100 ? 0 : Math.min(100, value + 25))}>{progress === 100 ? "شروع دوباره نمونه" : "پیشروی نمونه"}</Button>
     <ProgressIndicator label="کامل‌شده" value={100} />
     <LoadingSkeleton rows={2} label="دریافت داده‌های نمونه" />
     <p data-test-id="glass-loading-static" className="text-xs text-muted-foreground">جای‌نگهدارهای بارگذاری ثابت‌اند و پالس ندارند.</p>
+    <h4 data-test-id="glass-system-state-title" className="text-sm font-semibold">وضعیت سیستم و راه بازیابی</h4>
+    <div data-test-id="navigation-catalogue-div-4" className="grid gap-4 lg:grid-cols-2">
+      <SystemState state={{ kind: "empty", title: "هنوز سندی نیست", description: "پس از افزودن سند، فهرست اینجا نمایش داده می‌شود." }} onRecovery={() => log("نمونه افزودن سند")} />
+      <SystemState state={{ kind: "permission-denied", title: "دسترسی کافی ندارید", reason: "برای دیدن این بخش، از مدیر گروه درخواست دسترسی کنید." }} />
+      <SystemState state={{ kind: "partial-success", createdItem: { id: "sample-1", name: "راهنمای همکاری" }, unfinishedStep: "نسخه نمونه ساخته شد؛ بازکردن ویرایشگر ناتمام ماند. ایجاد مجدد لازم نیست.", recoveryLabel: "بازکردن دوباره ویرایشگر" }} onRecovery={() => log("نمونه بازیابی ویرایشگر")} />
+      <SystemState state={{ kind: "service-error", title: "دریافت اطلاعات انجام نشد", description: "دریافت مجدد را امتحان کنید؛ این خطا نمونه است.", dataRetained: true, recoveryLabel: "تلاش دوباره" }} onRecovery={() => log("نمونه تلاش مجدد")} />
+    </div>
+    <p data-test-id="glass-feedback-recovery-result" role="status" className="wrap-anywhere text-sm text-muted-foreground">{notice}</p>
   </GlassPreviewFrame>;
 }
