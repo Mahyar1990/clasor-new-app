@@ -202,3 +202,7 @@ Empty states stay neutral; permission limits use info, partial success uses warn
 ## Theme ownership in overlay previews
 
 The shared preview frame and the record-options preview pass their theme through React context, including across body-mounted portals. Menu, submenu, Select, tooltip, dialog and sheet in these scopes do not derive dark mode from current focus. Outside an explicit scope, existing anchor and focus fallbacks remain available. `addToastFrom(element, options)` captures the source theme for an individual toast; the shared viewport no longer changes with focus. The overlays catalogue includes a dialog with a Select, a nested menu, and a tooltip; sending an announcement from the submenu preserves the existing modal-layer rules.
+
+## Handoff preview coverage
+
+Each of the 22 handoff contracts links to a live sample anchor. The handoff distinguishes a local theme toggle from the shared catalogue theme control. Coverage means the example can be opened in both themes; it does not record manual contrast, keyboard, or screen-reader acceptance.

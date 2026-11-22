@@ -97,11 +97,11 @@ export function PatternsCatalogue() {
   return <div data-test-id="patterns-catalogue-div-17" className="space-y-5 pt-10" data-catalogue="patterns"><SectionTitle id="patterns" title="الگوهای ترکیبی" number="12" />
     <GlassPreviewFrame title="مجوز، ساخت نسخه و زمینهٔ تصمیم در دو تم" testId="glass-composite-patterns">
     <p data-test-id="glass-composite-patterns-note" className="text-xs text-muted-foreground">در هر تم، سناریوی مهمان، برگشت یک مرحله و بازیابی نسخهٔ ناتمام را امتحان کنید. تغییر تم دادهٔ نمونه را بازنشانی نمی‌کند.</p>
-    <Sample title="یک نتیجه مجوز، چند ورودی هماهنگ" description="نقش به مجوز تبدیل نمی‌شود؛ این انتخاب‌گر فقط چهار fixture مشاهده‌شده را بارگذاری می‌کند. نویسنده در نسخه خود با درخواست ادامه می‌دهد.">
+    <Sample id="catalogue-permission-action" title="یک نتیجه مجوز، چند ورودی هماهنگ" description="نقش به مجوز تبدیل نمی‌شود؛ این انتخاب‌گر فقط چهار fixture مشاهده‌شده را بارگذاری می‌کند. نویسنده در نسخه خود با درخواست ادامه می‌دهد.">
       <SelectField data-test-id="patterns-catalogue-selectfield-18" label="سناریوی نقش" value={role} onValueChange={setRole} options={[{ value: "manager", label: "مدیر" }, { value: "editor", label: "ویرایشگر" }, { value: "writer", label: "نویسنده در نسخه خود" }, { value: "guest", label: "مهمان" }]} />
       <div data-test-id="patterns-catalogue-div-19" className="flex flex-wrap items-start gap-5"><div data-test-id="patterns-catalogue-div-20"><PermissionAction {...actionProps} /></div><RowActionMenu rowLabel="نسخه نمایشی" items={[permissionActionItem(actionProps)]} /></div><p data-test-id="patterns-catalogue-p-21" role="status" className="text-sm leading-body text-muted-foreground">{message}</p>
     </Sample>
-    <Sample title="ادامه، ایجاد نیست" description="ورودی با برگشت حفظ می‌شود؛ فقط دکمه نهایی ایجاد را شبیه‌سازی می‌کند.">
+    <Sample id="catalogue-creation-stepper" title="ادامه، ایجاد نیست" description="ورودی با برگشت حفظ می‌شود؛ فقط دکمه نهایی ایجاد را شبیه‌سازی می‌کند.">
       {result === "none" ? <CreationStepper steps={[{ id: "title", label: "عنوان" }, { id: "source", label: "مبنای نسخه" }, { id: "review", label: "بازبینی" }]} currentStep={step} onStepChange={setStep} canContinue={step !== 0 || !!title.trim()} validationMessage="برای ادامه، عنوان نسخه را وارد کنید." commitLabel="ایجاد نسخه نمونه" onCommit={() => setResult(partial ? "partial" : "complete")}>
         <div data-test-id="patterns-catalogue-div-22" className="space-y-4"><h3 data-test-id="patterns-catalogue-h3-23" ref={heading} tabIndex={-1} className="text-base font-medium">{["عنوان نسخه نمونه", "مبنای نسخه تازه", "بازبینی پیش از ایجاد"][step]}</h3>
           {step === 0 && <TextField data-test-id="patterns-catalogue-textfield-24" label="عنوان نسخه" value={title} onValueChange={setTitle} required />}
@@ -110,7 +110,7 @@ export function PatternsCatalogue() {
         </div>
       </CreationStepper> : result === "partial" ? <SystemState state={{ kind: "partial-success", createdItem: { id: "demo-version-1", name: title }, unfinishedStep: "نسخه نمونه ایجاد شد؛ بازشدن ویرایشگر ناتمام است. برای بازیابی، نسخه دیگری نسازید.", recoveryLabel: "ادامه بازکردن ویرایشگر نمونه" }} onRecovery={() => setResult("complete")} /> : <div data-test-id="patterns-catalogue-div-27" role="status" className="space-y-3 text-sm"><p data-test-id="patterns-catalogue-p-28">نسخه «{title}» در نمونه کامل شد؛ ذخیره‌سازی واقعی انجام نشد.</p><Button data-test-id="patterns-catalogue-button-29" variant="outline" onClick={() => { setResult("none"); setStep(0) }}>بازنشانی نمونه مراحل</Button></div>}
     </Sample>
-    <Sample title="زمینه تصمیم قابل پیگیری" description="سازنده، آخرین ویرایشگر، درخواست‌دهنده و تصمیم‌گیرنده مستقل‌اند؛ نام‌ها و زمان‌ها ساختگی‌اند.">
+    <Sample id="catalogue-approval-context" title="زمینه تصمیم قابل پیگیری" description="سازنده، آخرین ویرایشگر، درخواست‌دهنده و تصمیم‌گیرنده مستقل‌اند؛ نام‌ها و زمان‌ها ساختگی‌اند.">
       <Button data-test-id="patterns-catalogue-button-30" variant="outline" onClick={() => setDecided(value => !value)}>{decided ? "نمایش انتظار تصمیم" : "نمایش تصمیم ثبت‌شده"}</Button><ApprovalContext context={context} />
     </Sample>
     </GlassPreviewFrame>

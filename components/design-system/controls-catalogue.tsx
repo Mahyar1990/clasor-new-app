@@ -15,8 +15,8 @@ import { AttachmentPickerCatalogue } from "./attachment-picker-catalogue";
 import { GlassControlStatesCatalogue } from "./glass-control-states-catalogue";
 import { GlassStatusStatesCatalogue } from "./glass-status-feedback-catalogue";
 
-function Sample({ title, description, children }: { title: string; description: string; children: ReactNode }) {
-  return <GlassCard data-test-id="controls-catalogue-section-1" className="min-w-0 overflow-hidden">
+function Sample({ id, title, description, children }: { id?: string; title: string; description: string; children: ReactNode }) {
+  return <GlassCard id={id} data-test-id="controls-catalogue-section-1" className="min-w-0 overflow-hidden">
     <header data-test-id="controls-catalogue-header-2" className="border-b px-5 py-4"><h3 data-test-id="controls-catalogue-h3-3" className="text-sm font-medium">{title}</h3><p data-test-id="controls-catalogue-p-4" className="mt-1 text-xs leading-body text-muted-foreground">{description}</p></header>
     <div data-test-id="controls-catalogue-div-5" className="space-y-6 p-5 sm:p-6">{children}</div>
   </GlassCard>
@@ -109,7 +109,7 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
       </Sample>
     </div>
     <div data-test-id="controls-catalogue-div-44" className="grid items-start gap-5 lg:grid-cols-2">
-      <Sample title="انتخاب فایل، بدون ارسال" description="نام، اندازه و خطا کنار فایل دیده می‌شوند؛ انتخاب و پاک‌کردن فقط محلی است.">
+      <Sample id="catalogue-file-input" title="انتخاب فایل، بدون ارسال" description="نام، اندازه و خطا کنار فایل دیده می‌شوند؛ انتخاب و پاک‌کردن فقط محلی است.">
         <FileInput data-test-id="controls-catalogue-fileinput-45" label="فایل نمونه" name="attachment" accept=".txt,.pdf" maxSizeBytes={1024 * 1024} restrictionsText="فقط برای نمایش: متن یا PDF تا یک مگابایت؛ محدودیت محصول نیست." />
       </Sample>
       <Sample title="محدودیت پیش از انتخاب" description="اجازه انتخاب و علت غیرفعال‌بودن به‌صورت روشن نمایش داده می‌شود.">

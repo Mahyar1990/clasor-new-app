@@ -22,7 +22,7 @@ export function GlassStatusStatesCatalogue() {
       </div>
     </Sample>
     </div>
-    <div data-test-id="glass-status-identities" className="min-w-0">
+    <div id="glass-status-identities" data-test-id="glass-status-identities" className="min-w-0">
     <Sample title="هر هویت، یک جای مشخص" description="نام‌های زیر ساختگی‌اند. نقش و مجوز از نام یا تصویر شخص نتیجه‌گیری نمی‌شوند.">
       <div data-test-id="controls-catalogue-div-57" className="grid min-w-0 gap-6 sm:grid-cols-2"><div data-test-id="controls-catalogue-div-58" className="space-y-3"><p data-test-id="controls-catalogue-p-59" className="text-xs text-muted-foreground">هویت مشخص</p><Identity identity={{ kind: "known", id: "sample-1", name: "نیلوفر احمدی", avatarUrl: "/avatars/preview-user.svg" }} /></div><div data-test-id="controls-catalogue-div-60" className="space-y-3"><p data-test-id="controls-catalogue-p-61" className="text-xs text-muted-foreground">هویت ثبت‌نشده</p><Identity identity={{ kind: "unknown", label: "هویت نامشخص" }} /></div><div data-test-id="glass-status-no-photo" className="space-y-3"><p data-test-id="glass-status-no-photo-label" className="text-xs text-muted-foreground">نام مشخص، بدون تصویر</p><Identity identity={{ kind: "known", id: "sample-no-photo", name: "همکار نمونه" }} /></div><div data-test-id="glass-status-broken-photo" className="space-y-3"><p data-test-id="glass-status-broken-photo-label" className="text-xs text-muted-foreground">تصویر در دسترس نیست</p><Identity density="compact" identity={{ kind: "known", id: "sample-broken-photo", name: "همکار بدون تصویر معتبر", avatarUrl: "data:image/png;base64,AA==" }} /></div></div>
     </Sample>
@@ -47,7 +47,7 @@ export function GlassFeedbackStatesCatalogue() {
     <ProgressIndicator label="کامل‌شده" value={100} />
     <LoadingSkeleton rows={2} label="دریافت داده‌های نمونه" />
     <p data-test-id="glass-loading-static" className="text-xs text-muted-foreground">جای‌نگهدارهای بارگذاری ثابت‌اند و پالس ندارند.</p>
-    <h4 data-test-id="glass-system-state-title" className="text-sm font-semibold">وضعیت سیستم و راه بازیابی</h4>
+    <h4 id="glass-system-state-title" data-test-id="glass-system-state-title" className="text-sm font-semibold">وضعیت سیستم و راه بازیابی</h4>
     <div data-test-id="navigation-catalogue-div-4" className="grid gap-4 lg:grid-cols-2">
       <SystemState state={{ kind: "empty", title: "هنوز سندی نیست", description: "پس از افزودن سند، فهرست اینجا نمایش داده می‌شود." }} onRecovery={() => log("نمونه افزودن سند")} />
       <SystemState state={{ kind: "permission-denied", title: "دسترسی کافی ندارید", reason: "برای دیدن این بخش، از مدیر گروه درخواست دسترسی کنید." }} />
