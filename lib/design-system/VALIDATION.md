@@ -1,5 +1,7 @@
 ## Catalogue final Firefox audit — 2026/11/22
 
+Follow-up at `3c3286c`: In a visible temporary Firefox session, the header's solid-material option applied in Light and Dark. The nested menu opened and pointer hover opened its submenu in both themes, including global Dark. Computed `backdrop-filter` was `none` on the dialog and submenu in solid mode, and the submenu resolved to the intended theme. This verifies the selected overlay samples, not all catalogue surfaces or visual contrast. The keyboard retest still could not establish `document.hasFocus()` after foreground activation and a click, so automatic tab activation and the visible focus ring remain unverified in a focused window. No runtime changes were made.
+
 Follow-up at `d3174fa`: WebDriver Tab and ArrowLeft input moved the active element to the expected RTL tab in both themes. The document reported `hasFocus() === false` in both headless and visible temporary sessions. No native `focusin` was observed, so neither automatic activation nor the focus ring can be judged from that run. A diagnostic synthetic `focusin` selected the expected tab in both themes, confirming the activation handler responds. No product fix was made; activation and visible focus still need a manual check in a focused window.
 
 Evidence: `ac8cb3e`, Firefox 160.0.1 on macOS, temporary headless profile, local development build.
