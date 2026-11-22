@@ -293,3 +293,37 @@ API تکمیلی: `renderActions(row)` محتوای سفارشی ستون اقد
 ## Composite patterns in both themes
 
 The catalogue demonstrates available and blocked permission actions, version creation and partial-success recovery, and pending or completed decisions in a shared theme preview without resetting its local form state. The active step has the theme focus color and a visible ring; completed steps retain a checkmark. Compact steps use native progress with theme-specific browser fills. The saved domain palette preview scopes overrides to its own content in both themes; switching its theme does not save or change any color. Custom colors are shown as supplied, not assumed to meet contrast requirements.
+
+## Clasor route-to-catalogue coverage
+
+This inventory covers the implemented pages under `app/clasor-pages`. Route names in the first column are relative to `/clasor-pages`. The examples reuse product compositions with local fixture data. New examples mount on disclosure and discard demo changes on close. The scope and view controls switch between examples in the catalogue. Navigation links open the corresponding product routes.
+
+| Product route | What to compare | Live catalogue |
+| --- | --- | --- |
+| `/dashboard` | Header and invitations, desktop/mobile sidebar, two independently scrolling tabbed collections, document columns, repository cards, record menus and dialogs | [Collections](/design-system/layout#clasor-dashboard-pattern), [sidebar](/design-system/layout#clasor-sidebar-pattern), [menus](/design-system/overlays#glass-options-title), [header dialogs](/design-system/overlays#header-actions-catalogue) |
+| `/my-documents` | Breadcrumb, create document/folder/template, table/tree, name/content search, filters, ordered sort, selection, move/delete and owned record menu | [Documents, Mine](/design-system/data#clasor-documents-pattern) |
+| `/shared-documents` | Shared rows and action restrictions; no owner-only creation or batch controls outside a repository | [Documents, Shared](/design-system/data#clasor-documents-pattern) |
+| `/my-repositories` | Create, search, count, card image/fallback, owner menu and local dialogs | [Repositories, Mine](/design-system/data#clasor-repositories-pattern) |
+| `/shared-repositories` | Shared role labels, permitted and unavailable menu actions, leave flow | [Repositories, Shared](/design-system/data#clasor-repositories-pattern) |
+| `/bookmarked-repositories` | Bookmarked results, remove bookmark, same card/open geometry | [Repositories, Bookmarked](/design-system/data#clasor-repositories-pattern) |
+| `/archived-repositories` | Restricted archive menu: info, and restore/delete for owner | [Repositories, Archived](/design-system/data#clasor-repositories-pattern) |
+| `/published-repositories` | Published cards, public metadata/options and publication dialogs | [Repositories, Published](/design-system/data#clasor-repositories-pattern) |
+| `/repositories/[repositoryId]` | Repository header, applied search and folder path, table/tree, batch operations, tags and record-specific dialogs; archived write restrictions remain product logic | [Documents, Inside repository](/design-system/data#clasor-documents-pattern), [record dialogs](/design-system/overlays#overlays) |
+| `/organization-management` | Branch search and hierarchy; add child/edit/delete; scoped members, positions, membership and confirmation forms | [Organization workspace](/design-system/patterns#clasor-organization-pattern) |
+| `/domain-management` | Settings/color save/reset, access, public/private news, comments, questions, repositories, reports and tags; actual row actions and forms | [Domain workspace](/design-system/patterns#clasor-domain-pattern) |
+| `/admin` | Summary metrics including zero/loading; sortable feedback, empty state, details, working, unavailable and cumulative attachments | [Admin](/design-system/data#admin-panel-catalogue) |
+| `/read/[documentId]` | Breadcrumb, per-type toolbar, preview/edit, dock and contents, versions, dirty guard, approval and publication; unavailable route remains a route state | [Reader and version flows](/design-system/overlays#library-patterns-catalogue), [contents](/design-system/navigation#editor-contents-catalogue) |
+| `/publish` | Public header, guest/account/search/newsletter actions, landing hero, applied repository search, cards, count/empty state, footer | [Publish, Landing](/design-system/navigation#clasor-publish-pattern) |
+| `/publish/[repositoryId]`, `/publish/[repositoryId]/[documentId]` | Same reader composition: mobile sheet, desktop resize, repository/document path, paper, headings dock, adjacent links, versions, reactions, attachments and access actions | [Publish, Reader or Unavailable](/design-system/navigation#clasor-publish-pattern), [reading tools](/design-system/navigation#publish-tools-catalogue) |
+| `/p/[documentId]` | Resolves to the existing publish reader; pending and unavailable fallback text/link are route states, not a separate design | [Published reader](/design-system/navigation#clasor-publish-pattern) |
+| `/clasor-pages`, `/documents`, `/repository-options` | Redirect aliases; no independent interface | [Dashboard collections](/design-system/layout#clasor-dashboard-pattern) |
+
+| Action group | Items available in the shared implementation |
+| --- | --- |
+| Document editing | Edit content and metadata, tags, move, bookmark or remove bookmark, and delete |
+| Document versions and access | Versions, publish latest version, direct access, panel access, create/view/remove publication link, hide or unhide, audience restrictions, and set/edit/remove password |
+| Document activity | Questions and answers, comments |
+| Repository management | Information, edit, manage tags and files, repository requests, document-access requests, and questions |
+| Repository access and status | Bookmark or remove bookmark, sharing, personal notifications, keys, published metadata, archive/restore, leave, and delete |
+
+The row previews call the same action definitions and dialog dispatchers as the product. Availability follows role and record state, including the read-only archive case. The inventory records source coverage and representative scenarios. Pixel comparisons and an exhaustive permission-state test matrix are separate checks.

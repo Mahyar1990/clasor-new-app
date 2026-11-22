@@ -27,14 +27,21 @@ function PublishedRepositories({ repositories }: { repositories: LibraryReposito
     <LoadMore noun="مخزن" listRef={listRef} result={result} onLoadMore={() => setCount(result.nextCount)} />
   </GlassScrollArea>;
 }
-export function PublishHome() {
+export function PublishHomeContent({ embedded = false }: { embedded?: boolean }) {
   const { repositories } = useLibrary();
   const [draft, setDraft] = useState("");
   const [query, setQuery] = useState("");
   const visible = repositories.filter(item => item.published && !item.deleted && !item.archived && !item.left && normalized(`${item.name} ${item.description}`).includes(normalized(query)));
-  return <PublishShell><main data-test-id="publish-home-main" id="publish-main" tabIndex={-1} className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-7 px-1 pb-6 sm:px-4">
-    <section data-test-id="publish-hero" className="flex flex-col items-center gap-3 py-8 text-center sm:py-12"><span data-test-id="publish-eyebrow" className="text-xs text-primary">مستندات منتشرشده</span><h1 data-test-id="publish-home-title" className="text-3xl font-bold sm:text-4xl">داکس</h1><p data-test-id="publish-home-description" className="text-sm text-muted-foreground">سیستم مدیریت اسناد</p><div data-test-id="publish-home-search-region" className="mt-3 w-full max-w-xs"><CompactSearch testId="publish-search" label="جستجوی مخزن" value={draft} onValueChange={setDraft} onApply={() => setQuery(draft)} /></div></section>
-    <div data-test-id="publish-results-heading" className="flex items-center justify-between gap-2"><h2 data-test-id="publish-results-title" className="text-sm font-semibold">مخزن‌ها</h2><span data-test-id="publish-results-count" role="status" className="text-[10px] text-muted-foreground">{new Intl.NumberFormat("fa").format(visible.length)} مخزن</span></div>
+  const Content = embedded ? "section" : "main";
+  const Title = embedded ? "h4" : "h1";
+  const ResultsTitle = embedded ? "h5" : "h2";
+  return <><Content data-test-id="publish-home-main" id={embedded ? undefined : "publish-main"} tabIndex={-1} className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-7 px-1 pb-6 sm:px-4">
+    <section data-test-id="publish-hero" className="flex flex-col items-center gap-3 py-8 text-center sm:py-12"><span data-test-id="publish-eyebrow" className="text-xs text-primary">مستندات منتشرشده</span><Title data-test-id="publish-home-title" className="text-3xl font-bold sm:text-4xl">داکس</Title><p data-test-id="publish-home-description" className="text-sm text-muted-foreground">سیستم مدیریت اسناد</p><div data-test-id="publish-home-search-region" className="mt-3 w-full max-w-xs"><CompactSearch testId="publish-search" label="جستجوی مخزن" value={draft} onValueChange={setDraft} onApply={() => setQuery(draft)} /></div></section>
+    <div data-test-id="publish-results-heading" className="flex items-center justify-between gap-2"><ResultsTitle data-test-id="publish-results-title" className="text-sm font-semibold">مخزن‌ها</ResultsTitle><span data-test-id="publish-results-count" role="status" className="text-[10px] text-muted-foreground">{new Intl.NumberFormat("fa").format(visible.length)} مخزن</span></div>
     <div data-test-id="publish-results" className="flex min-h-64 flex-1 flex-col"><PublishedRepositories key={query} repositories={visible} /></div>
-  </main><footer data-test-id="publish-home-footer" className="py-3 text-center text-[10px] text-muted-foreground">قدرت‌گرفته از کلاسور</footer></PublishShell>;
+  </Content><footer data-test-id="publish-home-footer" className="py-3 text-center text-[10px] text-muted-foreground">قدرت‌گرفته از کلاسور</footer></>;
+}
+
+export function PublishHome() {
+  return <PublishShell><PublishHomeContent /></PublishShell>;
 }

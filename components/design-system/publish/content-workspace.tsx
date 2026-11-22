@@ -13,7 +13,7 @@ import { publicationBlocks } from "./article-state";
 import { PublishedBody } from "./content-body";
 import { PublishedActions } from "./document-actions";
 import { usePublishedContents } from "./use-contents";
-export function PublishedContent({ document, documents, repositoryName }: { document: DocumentPreview; documents: DocumentPreview[]; repositoryName: string }) {
+export function PublishedContent({ document, documents, repositoryName, embedded = false }: { document: DocumentPreview; documents: DocumentPreview[]; repositoryName: string; embedded?: boolean }) {
   const [versionId, setVersionId] = useState(publicVersion(document)?.id);
   const [contentsOpen, setContentsOpen] = useState(false);
   const contentsTrigger = useRef<HTMLButtonElement | null>(null);
@@ -38,8 +38,8 @@ export function PublishedContent({ document, documents, repositoryName }: { docu
         <ContentsNavigation testId="publish-contents" items={headings} selectedId={active} onSelect={select} />
       </DockedPanel>
       <GlassScrollArea onScroll={onScroll} ref={contentViewport} key={document.id} data-test-id="publish-content-scroll" label="محتوای سند منتشرشده" contentClassName={`${glass.boundedScrollContent} pb-32`}>
-        <ReadingSurface width="full" titleId="publish-content-title" className="min-h-[calc(100dvh-10rem)]" testId="publish-article" title={document.title} metadata={<><span data-test-id="publish-article-repository">{repositoryName}</span><span data-test-id="publish-article-version">· {version.name}</span></>} footer={<nav data-test-id="publish-adjacent" aria-label="اسناد مجاور" className="flex items-center justify-between gap-2">{adjacent.map(({ item, label, icon: Icon }) => item ? <Link data-test-id={`publish-adjacent-${item.id}`} key={label} href={publicationHref(item.repositoryId!, item.id)} className={`${glass.navigation} inline-flex min-h-7 items-center gap-1 px-2 py-1 text-[10px]`}><Icon aria-hidden="true" className="size-3" />{label}</Link> : <span data-test-id={`publish-adjacent-empty-${label}`} key={label} />)}</nav>}>
-          <PublishedBody blocks={blocks} />
+        <ReadingSurface titleAs={embedded ? "h4" : "h1"} width="full" titleId="publish-content-title" className="min-h-[calc(100dvh-10rem)]" testId="publish-article" title={document.title} metadata={<><span data-test-id="publish-article-repository">{repositoryName}</span><span data-test-id="publish-article-version">· {version.name}</span></>} footer={<nav data-test-id="publish-adjacent" aria-label="اسناد مجاور" className="flex items-center justify-between gap-2">{adjacent.map(({ item, label, icon: Icon }) => item ? <Link data-test-id={`publish-adjacent-${item.id}`} key={label} href={publicationHref(item.repositoryId!, item.id)} className={`${glass.navigation} inline-flex min-h-7 items-center gap-1 px-2 py-1 text-[10px]`}><Icon aria-hidden="true" className="size-3" />{label}</Link> : <span data-test-id={`publish-adjacent-empty-${label}`} key={label} />)}</nav>}>
+          <PublishedBody blocks={blocks} embedded={embedded} />
         </ReadingSurface>
       </GlassScrollArea>
     </div>

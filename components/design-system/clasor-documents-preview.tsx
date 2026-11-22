@@ -8,6 +8,13 @@ import { ClasorDashboardSidebar } from "@/components/design-system/clasor-dashbo
 import { ClasorDashboardDocuments } from "@/components/design-system/clasor-dashboard-documents";
 import { ClasorDashboardRepositories } from "@/components/design-system/clasor-dashboard-repositories";
 
+export function DashboardCollections() {
+  return <div data-test-id="dashboard-content" className="grid min-h-0 min-w-0 gap-3 xl:flex-1 xl:grid-cols-2 xl:grid-rows-1">
+    <ClasorDashboardDocuments />
+    <ClasorDashboardRepositories />
+  </div>;
+}
+
 export function ClasorDashboardPreview() {
   return <section data-test-id="clasor-documents-preview" aria-label="نمونه داشبورد کلاسور" className={dashboardViewport}>
       <AppLayout density="compact" title="کلاسور · سیستم مدیریت اسناد" contentAs="main" sidebar={<ClasorDashboardSidebar />} profile={<ClasorDashboardHeaderActions />}>
@@ -18,10 +25,7 @@ export function ClasorDashboardPreview() {
             <p data-test-id="dashboard-subtitle" className="text-sm text-muted-foreground">دسترسی به سندها و مخزن‌های شما در یک نگاه</p>
           </div>
         </div>
-        <div data-test-id="dashboard-content" className="grid min-h-0 min-w-0 gap-3 xl:flex-1 xl:grid-cols-2 xl:grid-rows-1">
-          <ClasorDashboardDocuments />
-          <ClasorDashboardRepositories />
-        </div>
+        <DashboardCollections />
       </AppLayout>
   </section>;
 }
