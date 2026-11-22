@@ -187,3 +187,6 @@ z-indexهای dialog/menu/toast و backdrop از مبانی مصرف می‌شو
 بررسی این مرحله: TypeScript/build، lint و آزمون مرورگر تب RTL و Home/End، مرز صفحه‌بندی، مهار فوکوس دیالوگ، تمرکز امن مخرب، بازگشت فوکوس، Sheet دسکتاپ/موبایل، منو، Toast و Tooltip. شواهد در `.codex/qa-stage-d` ثبت می‌شوند. بررسی یکپارچه صفحه‌خوان انسانی در این مرحله انجام نشده است.
 
 انتخابگر Select در portal یک لایه بالاتر از Dialog قرار می‌گیرد (--z-dialog + 2) تا گزینه‌های داخل فرم modal زیر backdrop پنهان نشوند. Popup داخلی در همان stacking context باقی می‌ماند.
+## Catalogue page headings
+
+Each catalogue route has one page-level heading. Colors keeps its hero heading; the other sections use the shared header's route title. Embedded editor, reading and repository examples use subordinate headings and retain their test IDs and focus targets. `ReadingSurface` defaults to an `h1` for standalone use; `titleAs` sets the heading level for an embedded surface. The publication catalogue preserves its six-level outline data independently of the surrounding page's semantic heading levels.
