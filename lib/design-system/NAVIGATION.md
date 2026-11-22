@@ -129,7 +129,7 @@ API انتخاب کنترل‌شده/کنترل‌نشده، تب غیرفعال
 
 ## تکمیل لایه‌ها و ناوبری — ۲۰۲۶/۱۱/۱۶
 
-Dialog، Sheet، Tooltip و Toast عمومی نیز `usePortalTheme` دارند. Contentهای Dialog/AlertDialog/Sheet یک `themeAnchorRef` اختیاری می‌گیرند؛ ترکیب‌های تأیید و DetailsSheet مرجع trigger پایدار را تأمین می‌کنند تا انتقال فوکوس هنگام بازشدن، تم مبدأ را از بین نبرد. `TooltipContent` یک `themeAnchorRef` اختیاری می‌گیرد و `HelpTooltip` آن را از trigger تأمین می‌کند؛ به این ترتیب بازشدن با hover هم تم محلی را حفظ می‌کند. observer صرفاً تغییر کلاس تم را دنبال می‌کند و جایگزین رویدادها یا رفتار Base UI نیست. سطح شناور تاریک ۶۵٪ slate دارد تا روی صفحه روشن خوانا بماند. Toast با قرارداد رنگ معنایی بعد از سطح پایه ترکیب می‌شود؛ Tooltip از سطح شناور مشترک استفاده می‌کند. نمونه مستقل هر مورد با toggle تاریک در بالای بخش «لایه و پیام» آمده است.
+Dialog، Sheet و Tooltip عمومی نیز `usePortalTheme` دارند. Contentهای Dialog/AlertDialog/Sheet یک `themeAnchorRef` اختیاری می‌گیرند؛ ترکیب‌های تأیید و DetailsSheet مرجع trigger پایدار را تأمین می‌کنند تا انتقال فوکوس هنگام بازشدن، تم مبدأ را از بین نبرد. `TooltipContent` یک `themeAnchorRef` اختیاری می‌گیرد و `HelpTooltip` آن را از trigger تأمین می‌کند؛ به این ترتیب بازشدن با hover هم تم محلی را حفظ می‌کند. observer صرفاً تغییر کلاس تم را دنبال می‌کند و جایگزین رویدادها یا رفتار Base UI نیست. سطح شناور تاریک ۶۵٪ slate دارد تا روی صفحه روشن خوانا بماند. Toast با قرارداد رنگ معنایی بعد از سطح پایه ترکیب می‌شود؛ Tooltip از سطح شناور مشترک استفاده می‌کند. نمونه مستقل هر مورد با toggle تاریک در بالای بخش «لایه و پیام» آمده است.
 
 این مرحله در ابتدا سه گونهٔ تب داشت؛ طبق تصمیم بعدی مالک پروژه، اکنون تنها ظاهر پیش‌فرض شیشه‌ایِ بخش «تب‌بار مشترک» معتبر است. رفتار صفحه‌کلید و انتخاب حفظ شده‌اند.
 
@@ -196,3 +196,7 @@ Each catalogue route has one page-level heading. Colors keeps its hero heading; 
 ## Feedback and recovery in both themes
 
 Empty states stay neutral; permission limits use info, partial success uses warning, and service errors use danger. Titles and descriptions state what happened regardless of color. Recovery controls wrap on narrow screens and the catalogue announces the result of each demo action. Determinate progress uses a matte track and a theme-specific fill; the semantic value, RTL direction and opacity-independent skeleton behavior remain unchanged.
+
+## Theme ownership in overlay previews
+
+The shared preview frame and the record-options preview pass their theme through React context, including across body-mounted portals. Menu, submenu, Select, tooltip, dialog and sheet in these scopes do not derive dark mode from current focus. Outside an explicit scope, existing anchor and focus fallbacks remain available. `addToastFrom(element, options)` captures the source theme for an individual toast; the shared viewport no longer changes with focus. The overlays catalogue includes a dialog with a Select, a nested menu, and a tooltip; sending an announcement from the submenu preserves the existing modal-layer rules.

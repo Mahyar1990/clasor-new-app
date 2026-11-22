@@ -1,6 +1,6 @@
 "use client";
 
-import { usePortalTheme } from "@/hooks/use-portal-theme";
+import { isDarkPortalSource } from "@/hooks/use-portal-theme";
 import { glass } from "@/lib/design-system/classes";
 import { Toast as ToastPrimitive } from "@base-ui/react/toast";
 import { cn } from "cn";
@@ -9,13 +9,16 @@ import { XIcon } from "lucide-react";
 
 export const toast = ToastPrimitive.createToastManager()
 
+export function addToastFrom(source: Element, options: Parameters<typeof toast.add>[0]) {
+  return toast.add({ ...options, data: { ...options.data, portalDark: isDarkPortalSource(source) } })
+}
+
 export function ToastProvider({ ...props }: ToastPrimitive.Provider.Props) {
   return <ToastPrimitive.Provider {...props} />
 }
 
 export function ToastPortal({ className, ...props }: ToastPrimitive.Portal.Props) {
-  const theme = usePortalTheme();
-  return <ToastPrimitive.Portal className={cn(theme, glass.toastPortal, className)} data-test-id="toast-part-1-toastprimitive-portal-1" data-slot="toast-portal" {...props} />
+  return <ToastPrimitive.Portal className={cn(glass.toastPortal, className)} data-test-id="toast-part-1-toastprimitive-portal-1" data-slot="toast-portal" {...props} />
 }
 
 export function ToastViewport({ className, ...props }: ToastPrimitive.Viewport.Props) {

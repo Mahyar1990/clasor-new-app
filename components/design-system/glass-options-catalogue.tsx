@@ -1,4 +1,5 @@
 "use client";
+import { PortalThemeContext } from "@/hooks/use-portal-theme";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
@@ -30,7 +31,9 @@ export function GlassOptionsCatalogue() {
       {busyBackground && <div data-test-id="glass-options-busy-background" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 flex flex-col justify-evenly overflow-hidden rounded-xl px-4 text-lg font-bold text-slate-950/75 dark:text-slate-100/75">
         {Array.from({ length: 10 }, (_, index) => <p data-test-id={`glass-options-busy-line-${index}`} key={index} className="whitespace-nowrap">متن نمونه برای بررسی خوانایی منوی شیشه‌ای روی نوشته‌های پشت آن</p>)}
       </div>}
-      {examples.map(example => <GlassRecordMenuExample key={example.id} id={example.id} name={example.name} description={example.description} icon={example.icon} />)}
+      <PortalThemeContext.Provider value={dark ? "dark" : "document"}>
+        {examples.map(example => <GlassRecordMenuExample key={example.id} id={example.id} name={example.name} description={example.description} icon={example.icon} />)}
+      </PortalThemeContext.Provider>
     </div>
   </section>;
 }

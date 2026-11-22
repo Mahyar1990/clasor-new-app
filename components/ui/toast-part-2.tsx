@@ -54,11 +54,11 @@ export function ToastIcon({ type }: { type: string | undefined }) {
 }
 
 export function ToastList() {
-  const { toasts } = ToastPrimitive.useToastManager()
+  const { toasts } = ToastPrimitive.useToastManager<{ portalDark?: boolean }>()
 
   const tones: Record<string, string> = { success: glass.statusSuccess, info: glass.statusInfo, warning: glass.statusWarning, error: glass.statusDanger };
   return toasts.map((toastItem) => (
-    <Toast key={toastItem.id} toast={toastItem} dir="rtl" data-tone={toastItem.type ?? "default"} className={`${toastItem.type ? tones[toastItem.type] ?? "" : ""} ${glass.toastSurface}`}>
+    <Toast key={toastItem.id} toast={toastItem} dir="rtl" data-tone={toastItem.type ?? "default"} className={`${toastItem.data?.portalDark ? "dark" : ""} ${toastItem.type ? tones[toastItem.type] ?? "" : ""} ${glass.toastSurface}`}>
       <ToastContent>
         <ToastIcon type={toastItem.type} />
         <div data-test-id={`toast-part-2-div-2-${String(toastItem.id)}`} className="flex min-w-0 flex-1 flex-col gap-1">
