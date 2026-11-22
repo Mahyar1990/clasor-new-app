@@ -9,13 +9,11 @@ import { TextField, SearchField, TextareaField } from "@/components/ui/text-fiel
 import { SelectField } from "@/components/ui/select-field"
 import { CheckboxField, RadioField, SwitchField } from "@/components/ui/choice-field"
 import { FileInput } from "@/components/ui/file-input"
-import { ApprovalBadge, VisibilityBadge, LatestBadge, RoleBadge } from "@/components/ui/status-badge"
 import { TagPickerCatalogue } from "./tag-picker-catalogue";
 import { GlassActionsCatalogue } from "./glass-actions-catalogue";
 import { AttachmentPickerCatalogue } from "./attachment-picker-catalogue";
 import { GlassControlStatesCatalogue } from "./glass-control-states-catalogue";
 import { GlassStatusStatesCatalogue } from "./glass-status-feedback-catalogue";
-import { Identity } from "@/components/ui/identity"
 
 function Sample({ title, description, children }: { title: string; description: string; children: ReactNode }) {
   return <GlassCard data-test-id="controls-catalogue-section-1" className="min-w-0 overflow-hidden">
@@ -124,17 +122,6 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
     {section === "status" && <>
     <SectionTitle id="status" title="وضعیت و هویت" description="تأیید، دسترسی، نسخه و نقش؛ چهار معنای مستقل" number="07"><UsersRound className="size-5" aria-hidden="true" /></SectionTitle>
     <GlassStatusStatesCatalogue />
-    <Sample title="وضعیت را با متن بخوانید" description="تأییدشدن به معنی عمومی‌بودن نیست؛ آخرین نسخه هم مجوز ایجاد نمی‌کند.">
-      <div data-test-id="controls-catalogue-div-48" className="grid gap-5 sm:grid-cols-[100px_1fr]">
-        <span data-test-id="controls-catalogue-span-49" className="text-xs text-muted-foreground">تأیید محتوا</span><div data-test-id="controls-catalogue-div-50" className="flex flex-wrap gap-2">{(["draft", "pending", "approved", "rejected"] as const).map(status => <ApprovalBadge key={status} status={status} />)}</div>
-        <span data-test-id="controls-catalogue-span-51" className="text-xs text-muted-foreground">نوع دسترسی</span><div data-test-id="controls-catalogue-div-52" className="flex flex-wrap gap-2">{(["private", "link", "public"] as const).map(visibility => <VisibilityBadge key={visibility} visibility={visibility} />)}</div>
-        <span data-test-id="controls-catalogue-span-53" className="text-xs text-muted-foreground">نسخه</span><div data-test-id="controls-catalogue-div-54"><LatestBadge status="latest" /><LatestBadge status="previous" /></div>
-        <span data-test-id="controls-catalogue-span-55" className="text-xs text-muted-foreground">نقش نمایشی؛ مستقل از مجوز عملیاتی</span><div data-test-id="controls-catalogue-div-56" className="flex flex-wrap gap-2">{(["owner", "admin", "editor", "writer", "viewer", "anonymous", "manager", "guest"] as const).map(role => <RoleBadge key={role} role={role} />)}</div>
-      </div>
-    </Sample>
-    <Sample title="هر هویت، یک جای مشخص" description="نام‌های زیر ساختگی‌اند. نقش و مجوز از نام یا تصویر شخص نتیجه‌گیری نمی‌شوند.">
-      <div data-test-id="controls-catalogue-div-57" className="grid gap-6 sm:grid-cols-2"><div data-test-id="controls-catalogue-div-58" className="space-y-3"><p data-test-id="controls-catalogue-p-59" className="text-xs text-muted-foreground">هویت مشخص</p><Identity identity={{ kind: "known", id: "sample-1", name: "نیلوفر احمدی" }} /></div><div data-test-id="controls-catalogue-div-60" className="space-y-3"><p data-test-id="controls-catalogue-p-61" className="text-xs text-muted-foreground">هویت ثبت‌نشده</p><Identity identity={{ kind: "unknown", label: "هویت نامشخص" }} /></div></div>
-    </Sample>
     </>}
   </div>
 }

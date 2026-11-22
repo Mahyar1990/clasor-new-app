@@ -15,7 +15,7 @@ export function GlassPreviewFrame({ title, testId, children }: { title: string; 
         {dark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />} {dark ? "نمای روشن" : "نمای تاریک"}
       </Button>
     </header>
-    <div data-test-id={`${testId}-stage`} className={`${dark ? "dark scheme-dark bg-slate-950/80 text-slate-100" : "scheme-light bg-linear-to-br from-purple-200/40 to-sky-200/40"} min-w-0 space-y-5 p-4 sm:p-5`}>
+    <div data-test-id={`${testId}-stage`} className={`${dark ? "dark scheme-dark bg-slate-950/80 text-slate-100" : "bg-linear-to-br from-purple-200/40 to-sky-200/40 dark:from-slate-950/80 dark:to-slate-900/70"} min-w-0 space-y-5 p-4 sm:p-5`}>
       <GlassSurfaceContext.Provider value>{children}</GlassSurfaceContext.Provider>
     </div>
   </section>;
