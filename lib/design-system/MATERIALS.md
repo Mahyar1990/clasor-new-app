@@ -1,5 +1,7 @@
 ## Catalogue theme preference
 
+The Colors hero labels use card background and foreground together. The document editor iframe receives the resolved parent theme on initialization and during changes through its existing origin/source/session-checked bridge. The editor canvas and paper are opaque in both themes; print stays light. Docked contents use a darker glass tint for legibility and still honor solid and forced-color overrides.
+
 Local preview controls are dark overrides, not light/dark switches. When off, the sample follows its enclosing preview or the catalogue header, without a forced light color scheme. Nested preview portals inherit the parent preview's dark scope unless the nested control explicitly enables dark. The catalogue header remains the control for explicit Light mode.
 
 The shared catalogue header offers System (default), Light, and Dark. The choice is saved in browser-local storage and is independent of the material selector. System follows changes to the OS preference. While the catalogue shell is mounted, the resolved theme applies to the document root so the header, sidebar and body-mounted portals share it; leaving the shell restores the prior root state. Existing local dark previews still work in the light catalogue. Fixed demo colors and individual state contrast are audited separately.
