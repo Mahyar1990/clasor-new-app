@@ -1,4 +1,5 @@
 "use client";
+import { CataloguePreviewTheme, previewDarkLabel } from "./catalogue-preview-theme";
 
 import { DockedPanelCatalogue } from "./docked-panel-catalogue";
 import { PublishPatternsCatalogue } from "./publish-patterns-catalogue";
@@ -68,8 +69,8 @@ export function LayoutContentCatalogue() {
           ردیف‌های شیشه‌ای جدول
         </label>
         <label data-test-id="layout-content-catalogue-label-5" className="flex min-h-11 cursor-pointer items-center gap-2">
-          <Checkbox checked={dark} onCheckedChange={checked => setDark(checked)} data-test-id="catalogue-solid-dark" aria-label="نمایش فرم و جدول در حالت تاریک" />
-          نمایش فرم و جدول در حالت تاریک
+          <Checkbox checked={dark} onCheckedChange={checked => setDark(checked)} data-test-id="catalogue-solid-dark" aria-label={previewDarkLabel} />
+          {previewDarkLabel}
         </label>
         <label data-test-id="layout-content-catalogue-label-7" className="flex min-h-11 cursor-pointer items-center gap-2">
           <Checkbox checked={disabled} onCheckedChange={checked => setDisabled(checked)} data-test-id="catalogue-solid-disabled" aria-label="غیرفعال کردن فرم" />
@@ -79,7 +80,8 @@ export function LayoutContentCatalogue() {
       <div data-test-id="layout-content-catalogue-div-9" className="isolate overflow-hidden rounded-xl border [&_[data-test-id=layout-root]]:min-h-0 [&_[data-test-id=layout-main]]:min-h-0 [&_[data-test-id=layout-header]]:static [&_[data-test-id=layout-sidebar]]:static">
         <AppLayout density={compact ? "compact" : "comfortable"} title="نمونه چیدمان کلاسور" contentAs="section" profile={<CatalogueProfileMenu />}>
           <div data-test-id="layout-content-catalogue-div-10" className="mb-6"><GlassOverlayCatalogue /><GlassOptionsCatalogue /></div>
-          <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : "scheme-light"} min-w-0 space-y-6`}>
+          <div data-test-id="layout-content-catalogue-div-11" className={`${dark ? "dark scheme-dark rounded-lg bg-slate-950/80 p-4" : ""} min-w-0 space-y-6`}>
+            <CataloguePreviewTheme forceDark={dark}>
             <DockedPanelCatalogue />
             <PublishPatternsCatalogue />
             <PublishToolsCatalogue />
@@ -90,6 +92,7 @@ export function LayoutContentCatalogue() {
             <DocumentTableCatalogue />
             <SolidDataTable hideCaption={hideCaption} layout="fixed" appearance={glassTable ? "glass" : "solid"} caption="اطلاعات ثبت‌شده در نمونه" columns={columns} rows={rows} getRowId={row => row.id} />
             <SolidForm disabled={disabled} onSubmit={addRow} />
+            </CataloguePreviewTheme>
           </div>
         </AppLayout>
       </div>

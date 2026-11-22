@@ -5,7 +5,10 @@ import { Button } from "@/components/ui/button";
 import { ConfirmationDialog, DestructiveDialog } from "@/components/ui/confirmation-dialog";
 import { DetailsSheet } from "@/components/ui/details-sheet";
 import { HelpTooltip } from "@/components/ui/help-tooltip";
-import { toast } from "@/components/ui/toast";
+import { addToastFrom } from "@/components/ui/toast";
+import { GlassModal } from "@/components/ui/GlassModal";
+import { GlassOptionsMenu } from "@/components/ui/GlassOptionsMenu";
+import { SelectField } from "@/components/ui/select-field";
 import { GlassPreviewFrame } from "./glass-preview-frame";
 
 export function GlassLayerStatesCatalogue() {
@@ -18,7 +21,14 @@ export function GlassLayerStatesCatalogue() {
       <DestructiveDialog trigger={<Button data-test-id="glass-layer-delete" variant="destructive-outline">حذف نمونه</Button>} title="حذف نمونه" description="نمونهٔ تأیید حساس با تمرکز اولیه روی انصراف." targetName="سند نمونه" confirmLabel="حذف" onConfirm={() => {}} />
       <DetailsSheet trigger={<Button data-test-id="glass-layer-sheet" variant="outline">جزئیات نمونه</Button>} title="جزئیات نمونه" description="پنل شیشه‌ای با پیمایش مستقل"><p data-test-id="glass-layer-sheet-copy" className="text-sm">نام و مشخصات سند نمونه در این پنل نمایش داده می‌شود.</p></DetailsSheet>
       <HelpTooltip content="راهنمای مکمل با سطح شیشه‌ای و متن خوانا"><Button data-test-id="glass-layer-tooltip" variant="glass" size="icon" aria-label="راهنمای نمونه"><Info aria-hidden="true" /></Button></HelpTooltip>
-      <Button data-test-id="glass-layer-toast" variant="outline" onClick={() => toast.add({ title: "نمونهٔ موفقیت", description: "سطح شیشه‌ای با رنگ معنایی مستقل", type: "success" })}>پیام گذرا</Button>
+      <Button data-test-id="glass-layer-toast" variant="outline" onClick={event => addToastFrom(event.currentTarget, { title: "نمونهٔ موفقیت", description: "تم اعلان با تغییر فوکوس عوض نمی‌شود.", type: "success" })}>پیام گذرا</Button>
+      <GlassModal testId="glass-layer-nested-dialog" title="لایه‌ها داخل دیالوگ" description="منو، زیرمنو و انتخاب را با ماوس یا صفحه‌کلید باز کنید." trigger={<Button data-test-id="glass-layer-nested-trigger" variant="outline">لایه‌های توکار</Button>}>
+        <SelectField data-test-id="glass-layer-nested-select" label="نمای نمونه" defaultValue="summary" options={[{ value: "summary", label: "خلاصه" }, { value: "details", label: "جزئیات" }]} />
+        <GlassOptionsMenu testId="glass-layer-nested-menu" title="سند نمونه" description="عملیات" trigger={<Button data-test-id="glass-layer-nested-menu" variant="outline">گزینه‌های نمونه</Button>} items={[{ id: "more", label: "عملیات بیشتر", children: [{ id: "notify", label: "نمایش پیام" }] }]} onAction={(_id, _label, trigger) => {
+          if (trigger) addToastFrom(trigger, { title: "عملیات نمونه انجام شد", description: "اعلان تم خود را بعد از بسته‌شدن دیالوگ حفظ می‌کند.", type: "success" });
+        }} />
+        <HelpTooltip content="راهنمای داخل دیالوگ"><Button data-test-id="glass-layer-nested-tooltip" variant="ghost">راهنما</Button></HelpTooltip>
+      </GlassModal>
     </div>
   </GlassPreviewFrame>;
 }

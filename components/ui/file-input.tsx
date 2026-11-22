@@ -35,7 +35,7 @@ function FileInput({ label, description, error, disabledReason, maxSizeBytes, re
     setFile(null); setSelectionError(""); onFileChange?.(null)
   }
   return <FieldFrame {...meta} controlId={controlId}>
-    <Button data-test-id="file-input-button-1" ref={picker} id={controlId} type="button" variant="outline" disabled={props.disabled} aria-describedby={describedBy} aria-invalid={!!meta.error} onClick={() => input.current?.click()}><FileText aria-hidden="true" />انتخاب فایل</Button>
+    <Button data-test-id="file-input-button-1" ref={picker} id={controlId} type="button" variant="outline" disabled={props.disabled} aria-describedby={describedBy} aria-invalid={!!meta.error} className={glass.fieldInvalid} onClick={() => input.current?.click()}><FileText aria-hidden="true" />انتخاب فایل</Button>
     <input data-slot="input" data-test-id="file-input-input-2" {...props} type="file" ref={input} id={`${controlId}-input`} aria-label={label} className={cn("sr-only", glass.input)} tabIndex={-1} aria-describedby={describedBy} aria-invalid={!!meta.error} onInvalid={event => {
       props.onInvalid?.(event)
       if (!event.defaultPrevented) {

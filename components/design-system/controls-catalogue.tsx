@@ -9,16 +9,14 @@ import { TextField, SearchField, TextareaField } from "@/components/ui/text-fiel
 import { SelectField } from "@/components/ui/select-field"
 import { CheckboxField, RadioField, SwitchField } from "@/components/ui/choice-field"
 import { FileInput } from "@/components/ui/file-input"
-import { ApprovalBadge, VisibilityBadge, LatestBadge, RoleBadge } from "@/components/ui/status-badge"
 import { TagPickerCatalogue } from "./tag-picker-catalogue";
 import { GlassActionsCatalogue } from "./glass-actions-catalogue";
 import { AttachmentPickerCatalogue } from "./attachment-picker-catalogue";
 import { GlassControlStatesCatalogue } from "./glass-control-states-catalogue";
 import { GlassStatusStatesCatalogue } from "./glass-status-feedback-catalogue";
-import { Identity } from "@/components/ui/identity"
 
-function Sample({ title, description, children }: { title: string; description: string; children: ReactNode }) {
-  return <GlassCard data-test-id="controls-catalogue-section-1" className="min-w-0 overflow-hidden">
+function Sample({ id, title, description, children }: { id?: string; title: string; description: string; children: ReactNode }) {
+  return <GlassCard id={id} data-test-id="controls-catalogue-section-1" className="min-w-0 overflow-hidden">
     <header data-test-id="controls-catalogue-header-2" className="border-b px-5 py-4"><h3 data-test-id="controls-catalogue-h3-3" className="text-sm font-medium">{title}</h3><p data-test-id="controls-catalogue-p-4" className="mt-1 text-xs leading-body text-muted-foreground">{description}</p></header>
     <div data-test-id="controls-catalogue-div-5" className="space-y-6 p-5 sm:p-6">{children}</div>
   </GlassCard>
@@ -111,7 +109,7 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
       </Sample>
     </div>
     <div data-test-id="controls-catalogue-div-44" className="grid items-start gap-5 lg:grid-cols-2">
-      <Sample title="انتخاب فایل، بدون ارسال" description="نام، اندازه و خطا کنار فایل دیده می‌شوند؛ انتخاب و پاک‌کردن فقط محلی است.">
+      <Sample id="catalogue-file-input" title="انتخاب فایل، بدون ارسال" description="نام، اندازه و خطا کنار فایل دیده می‌شوند؛ انتخاب و پاک‌کردن فقط محلی است.">
         <FileInput data-test-id="controls-catalogue-fileinput-45" label="فایل نمونه" name="attachment" accept=".txt,.pdf" maxSizeBytes={1024 * 1024} restrictionsText="فقط برای نمایش: متن یا PDF تا یک مگابایت؛ محدودیت محصول نیست." />
       </Sample>
       <Sample title="محدودیت پیش از انتخاب" description="اجازه انتخاب و علت غیرفعال‌بودن به‌صورت روشن نمایش داده می‌شود.">
@@ -124,17 +122,6 @@ export default function ControlsCatalogue({ section = "buttons" }: { section?: "
     {section === "status" && <>
     <SectionTitle id="status" title="وضعیت و هویت" description="تأیید، دسترسی، نسخه و نقش؛ چهار معنای مستقل" number="07"><UsersRound className="size-5" aria-hidden="true" /></SectionTitle>
     <GlassStatusStatesCatalogue />
-    <Sample title="وضعیت را با متن بخوانید" description="تأییدشدن به معنی عمومی‌بودن نیست؛ آخرین نسخه هم مجوز ایجاد نمی‌کند.">
-      <div data-test-id="controls-catalogue-div-48" className="grid gap-5 sm:grid-cols-[100px_1fr]">
-        <span data-test-id="controls-catalogue-span-49" className="text-xs text-muted-foreground">تأیید محتوا</span><div data-test-id="controls-catalogue-div-50" className="flex flex-wrap gap-2">{(["draft", "pending", "approved", "rejected"] as const).map(status => <ApprovalBadge key={status} status={status} />)}</div>
-        <span data-test-id="controls-catalogue-span-51" className="text-xs text-muted-foreground">نوع دسترسی</span><div data-test-id="controls-catalogue-div-52" className="flex flex-wrap gap-2">{(["private", "link", "public"] as const).map(visibility => <VisibilityBadge key={visibility} visibility={visibility} />)}</div>
-        <span data-test-id="controls-catalogue-span-53" className="text-xs text-muted-foreground">نسخه</span><div data-test-id="controls-catalogue-div-54"><LatestBadge status="latest" /><LatestBadge status="previous" /></div>
-        <span data-test-id="controls-catalogue-span-55" className="text-xs text-muted-foreground">نقش نمایشی؛ مستقل از مجوز عملیاتی</span><div data-test-id="controls-catalogue-div-56" className="flex flex-wrap gap-2">{(["owner", "admin", "editor", "writer", "viewer", "anonymous", "manager", "guest"] as const).map(role => <RoleBadge key={role} role={role} />)}</div>
-      </div>
-    </Sample>
-    <Sample title="هر هویت، یک جای مشخص" description="نام‌های زیر ساختگی‌اند. نقش و مجوز از نام یا تصویر شخص نتیجه‌گیری نمی‌شوند.">
-      <div data-test-id="controls-catalogue-div-57" className="grid gap-6 sm:grid-cols-2"><div data-test-id="controls-catalogue-div-58" className="space-y-3"><p data-test-id="controls-catalogue-p-59" className="text-xs text-muted-foreground">هویت مشخص</p><Identity identity={{ kind: "known", id: "sample-1", name: "نیلوفر احمدی" }} /></div><div data-test-id="controls-catalogue-div-60" className="space-y-3"><p data-test-id="controls-catalogue-p-61" className="text-xs text-muted-foreground">هویت ثبت‌نشده</p><Identity identity={{ kind: "unknown", label: "هویت نامشخص" }} /></div></div>
-    </Sample>
     </>}
   </div>
 }

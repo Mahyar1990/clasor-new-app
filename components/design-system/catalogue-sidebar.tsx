@@ -41,6 +41,6 @@ export function CatalogueSidebar({ activeSection }: { activeSection: CatalogueSe
       </SidebarGroup>
       <CatalogueSamplesNavigation active={activeSection === "clasor-pages"} />
     </SidebarContent>
-    <SidebarFooter className="border-t p-4 text-xs leading-body text-muted-foreground group-data-[collapsible=icon]:hidden"><p data-test-id="catalogue-sidebar-p-14">نسخه پیش‌نمایش طراحی</p><p data-test-id="catalogue-sidebar-p-15">فارسی، روشن و راست‌به‌چپ</p><p data-test-id="catalogue-sidebar-p-16">نشان بالا موقت است.</p></SidebarFooter>
+    <SidebarFooter className="border-t p-4 text-xs leading-body text-muted-foreground group-data-[collapsible=icon]:hidden"><p data-test-id="catalogue-sidebar-p-14">نسخه پیش‌نمایش طراحی</p><p data-test-id="catalogue-sidebar-p-15">فارسی و راست‌به‌چپ</p><p data-test-id="catalogue-sidebar-p-16">نشان بالا موقت است.</p></SidebarFooter>
   </Sidebar>
 }

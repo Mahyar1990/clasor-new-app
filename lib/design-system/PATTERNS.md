@@ -252,6 +252,8 @@ Current table geometry lives in `table-contract.ts` and shared `classes.ts` util
 
 ## DataTable
 
+هدر ثابت `DataTable` سطح ماتِ تم دارد تا متن ردیف‌ها از زیر آن دیده نشود. انتخاب ردیف علاوه بر زمینه، خطی در ابتدای منطقی سلول انتخاب دارد؛ فوکوس ظرف پیمایش نشانه‌ای مستقل است. پیام خالی، اسکلت و خطا در عرض قابل‌دید پیمایشگر باقی می‌مانند و به عرض کامل ستون‌ها وابسته نیستند. صفحهٔ داده هر چهار وضعیت، و جدول سند هر دو سطح مات و شیشه‌ای را در پیش‌نمایش روشن/تاریک نشان می‌دهد.
+
 نوار جست‌وجو به قاب جدول متصل است: `toolbar` محتوای نوار بالای جدول و `id` شناسه خود table را می‌گیرد. جزء `components/ui/table-search.tsx` از Input، Button و ButtonGroup رجیستری shadcn ساخته شده است. input و دکمه ذره‌بین در یک گروه پیوسته و هم‌ارتفاع هستند و با aria-controls به table متصل می‌شوند. `TableSearch` خواص label، tableId، value، onValueChange، onSearch، placeholder و disabled و ref ورودی را می‌گیرد. فرم جست‌وجو با دکمه یا Enter بدون ناوبری صفحه onSearch را فراخوانی می‌کند؛ فیلتر زنده هنگام تایپ نیز حفظ شده است. نوار هنگام پیمایش بدنه ثابت بیرون ناحیه اسکرول می‌ماند.
 
 تنظیم نمایش رکوردها: شناسه ردیف فقط برای کلید، انتخاب و جست‌وجو نگهداری می‌شود و در سلول‌ها یا پیام مشخصات نمونه نمایش داده نمی‌شود. گزینه حذف غیرفعال و پیام همراه آن از جدول اول حذف شده‌اند. ستون اقدام‌ها با `actionColumnWidth` پیش‌فرض ۱۲۸ پیکسل محدود می‌شود (حداقل ۱۱۲ برای هدف‌های لمس)؛ متن رکوردها ۱۲ پیکسل و عنوان ستون‌ها ۱۴ پیکسل است.
@@ -287,3 +289,7 @@ API تکمیلی: `renderActions(row)` محتوای سفارشی ستون اقد
 ## شواهد
 
 آزمون `.codex/qa-stage-e/verify.mjs` انتخاب جزئی/همه/پاک‌کردن، فاصله ۱۸/۱۲، حالت‌های empty/loading/error، بازیابی فهرست، مهمان مسدود در دکمه و منو، درخواست ویرایشگر، حفظ عنوان و مبنای نسخه پس از برگشت، ایجاد صریح، بازیابی بدون ایجاد دوباره و چهار هویت/دو زمان تصمیم را بررسی می‌کند. در عرض‌های ۳۶۰/۶۴۰/۷۰۰/۱۰۲۴/۱۴۴۰ سرریز سند یا خطای JavaScript دیده نشد. build و lint نیز اجرا شدند. تست انسانی صفحه‌خوان و بررسی نهایی در F باقی است.
+
+## Composite patterns in both themes
+
+The catalogue demonstrates available and blocked permission actions, version creation and partial-success recovery, and pending or completed decisions in a shared theme preview without resetting its local form state. The active step has the theme focus color and a visible ring; completed steps retain a checkmark. Compact steps use native progress with theme-specific browser fills. The saved domain palette preview scopes overrides to its own content in both themes; switching its theme does not save or change any color. Custom colors are shown as supplied, not assumed to meet contrast requirements.

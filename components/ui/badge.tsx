@@ -14,6 +14,12 @@ const badgeVariants = cva(
           glass.statusNeutral,
         destructive:
           glass.statusDanger,
+        success:
+          glass.statusSuccess,
+        warning:
+          glass.statusWarning,
+        info:
+          glass.statusInfo,
         outline:
           glass.statusNeutral,
         ghost:

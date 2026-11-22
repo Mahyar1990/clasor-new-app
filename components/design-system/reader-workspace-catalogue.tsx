@@ -8,7 +8,7 @@ import { initialRepository } from "./repository-dialogs/context";
 const types = [{ value: "classic", label: "کلاسیک کلاسور" }, { value: "file", label: "فایل" }, { value: "word", label: "وورد" }, { value: "flowchart", label: "فلوچارت" }, { value: "excel", label: "اکسل" }];
 function Example({ type, fail }: { type: string; fail: boolean }) {
   const [document, setDocument] = useState<DocumentPreview>(() => ({ ...initialDocument({ id: `editor-example-${type}`, title: "سند نمونهٔ محیط ویرایش", shared: false, creator: "کاربر نمونه", category: "راهنما", content: "محتوای نمونه برای بررسی نوار ابزار و پنل سند" }), contentType: type }));
-  return <div data-test-id="catalogue-editor-workspace-stage" className="flex h-[42rem] min-h-0 flex-col overflow-hidden rounded-lg"><EditorWorkspace document={document} onChange={setDocument} onCommit={next => { if (fail) return false; setDocument(next); return true; }} repository={initialRepository()} folders={[{ id: "design", label: "طراحی" }, { id: "guides", label: "راهنماها" }]} /></div>;
+  return <div data-test-id="catalogue-editor-workspace-stage" className="flex h-[42rem] min-h-0 flex-col overflow-hidden rounded-lg"><EditorWorkspace embedded document={document} onChange={setDocument} onCommit={next => { if (fail) return false; setDocument(next); return true; }} repository={initialRepository()} folders={[{ id: "design", label: "طراحی" }, { id: "guides", label: "راهنماها" }]} /></div>;
 }
 export function ReaderWorkspaceCatalogue() {
   const [type, setType] = useState("classic");

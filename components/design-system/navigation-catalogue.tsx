@@ -8,6 +8,7 @@ import { GlassFeedbackStatesCatalogue } from "./glass-status-feedback-catalogue"
 import { GlassLayerStatesCatalogue } from "./glass-layer-states-catalogue";
 import { Info } from "lucide-react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
+import { GlassPreviewFrame } from "./glass-preview-frame";
 import { DocumentDialogsCatalogue } from "./document-dialogs-catalogue";
 import { LibraryPatternsCatalogue } from "./library-patterns-catalogue";
 import { HeaderActionsCatalogue } from "./header-actions-catalogue";
@@ -18,9 +19,6 @@ import { EditorToolbarCatalogue } from "./editor-toolbar-catalogue";
 import { GlassTabsCatalogue } from "@/components/design-system/glass-tabs-catalogue";
 import { ClasorBreadcrumb } from "@/components/ui/clasor-breadcrumb"
 import { ClasorPagination } from "@/components/ui/clasor-pagination"
-import { Feedback } from "@/components/ui/feedback"
-import { SystemState } from "@/components/ui/system-state"
-import { ProgressIndicator, LoadingSkeleton } from "@/components/ui/progress-indicator"
 import { RowActionMenu } from "@/components/ui/row-action-menu"
 import { ConfirmationDialog, DestructiveDialog } from "@/components/ui/confirmation-dialog"
 import { DetailsSheet } from "@/components/ui/details-sheet"
@@ -30,16 +28,16 @@ import { Button } from "@/components/ui/button"
 import { IconButton } from "@/components/ui/icon-button"
 function Examples({ section }: { section: "navigation" | "feedback" | "overlays" }) {
   const [page, setPage] = useState(1)
-  const [progress, setProgress] = useState(45)
   const [event, setEvent] = useState("هنوز اقدامی انجام نشده است.")
   function log(message: string) { setEvent(`${message} — فقط در این نمونه؛ بدون ذخیره‌سازی.`) }
   return <div data-test-id="navigation-catalogue-div-1" className="space-y-5 pt-10" data-catalogue="navigation">
     {section === "navigation" && <>
     <SectionTitle id="navigation" title="ناوبری" number="08" />
-    <Sample title="مسیر و صفحه‌بندی" description="هر الگو وظیفه جدا دارد؛ صفحه‌بندی این نمونه فقط شماره صفحه را تغییر می‌دهد.">
+    <GlassPreviewFrame title="مسیر و صفحه‌بندی در دو تم" testId="glass-navigation-states">
+      <p data-test-id="glass-navigation-state-description" className="text-xs text-muted-foreground">با Tab فوکوس را دنبال کنید و تا صفحهٔ آخر بروید تا حالت غیرفعالِ بعدی را ببینید. این نمونه دادهٔ جدول را تغییر نمی‌دهد.</p>
       <ClasorBreadcrumb items={[{ id: "home", label: "کتابخانه", href: "/" }, { id: "team", label: "اسناد گروه", href: "#navigation" }, { id: "document", label: "راهنمای همکاری", emphasis: true }, { id: "current", label: "نسخهٔ ۳ (پیش‌نویس)" }]} />
       <ClasorPagination page={page} pageCount={5} onPageChange={setPage} /><p data-test-id="navigation-catalogue-p-2" role="status" className="text-xs text-muted-foreground">صفحه نمایشی: {new Intl.NumberFormat("fa").format(page)}؛ داده جدول تغییر نمی‌کند.</p>
-    </Sample>
+    </GlassPreviewFrame>
     <GlassTabsCatalogue /><HierarchyCatalogue />
     <EditorToolbarCatalogue /><EditorContentsCatalogue />
     <PublishPatternsCatalogue />
@@ -49,14 +47,6 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
     {section === "feedback" && <>
     <SectionTitle id="feedback" title="بازخورد" number="10" />
     <GlassFeedbackStatesCatalogue />
-    <div data-test-id="navigation-catalogue-div-3" className="grid gap-4 lg:grid-cols-2">{(["success", "warning", "error", "info"] as const).map(tone => <Feedback key={tone} tone={tone} title={{ success: "نمونه موفقیت", warning: "نیاز به بررسی", error: "انجام نشد", info: "اطلاعات بیشتر" }[tone]} description="این پیام نمونه است. جزئیات را بررسی کنید و سپس ادامه دهید." dataRetained={tone === "error" ? true : undefined} />)}</div>
-    <div data-test-id="navigation-catalogue-div-4" className="grid gap-4 lg:grid-cols-2">
-      <SystemState state={{ kind: "empty", title: "هنوز سندی نیست", description: "پس از افزودن سند، فهرست اینجا نمایش داده می‌شود." }} onRecovery={() => log("نمونه افزودن سند")} />
-      <SystemState state={{ kind: "permission-denied", title: "دسترسی کافی ندارید", reason: "برای دیدن این بخش، از مدیر گروه درخواست دسترسی کنید." }} />
-      <SystemState state={{ kind: "partial-success", createdItem: { id: "sample-1", name: "راهنمای همکاری" }, unfinishedStep: "نسخه نمونه ساخته شد؛ بازکردن ویرایشگر ناتمام ماند. ایجاد مجدد لازم نیست.", recoveryLabel: "بازکردن دوباره ویرایشگر" }} onRecovery={() => log("نمونه بازیابی ویرایشگر")} />
-      <SystemState state={{ kind: "service-error", title: "دریافت اطلاعات انجام نشد", description: "دریافت مجدد را امتحان کنید؛ این خطا نمونه است.", dataRetained: true, recoveryLabel: "تلاش دوباره" }} onRecovery={() => log("نمونه تلاش مجدد")} />
-    </div>
-    <Sample title="پیشرفت مشخص" description="مقدار عددی و پایان معلوم؛ بدون انیمیشن بی‌پایان برای پیشرفت."><ProgressIndicator label="آماده‌سازی نمونه" value={progress} /><Button data-test-id="navigation-catalogue-button-5" variant="outline" onClick={() => setProgress(value => value === 100 ? 0 : Math.min(100, value + 25))}>{progress === 100 ? "شروع دوباره نمونه" : "پیشروی نمونه"}</Button><LoadingSkeleton /></Sample>
     </>}
     {section === "overlays" && <>
     <SectionTitle id="overlays" title="لایه و پیام" number="11" />

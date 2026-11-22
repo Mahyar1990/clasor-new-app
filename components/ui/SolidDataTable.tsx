@@ -42,7 +42,7 @@ export function SolidDataTable<T>({
       aria-label={caption}
       tabIndex={0}
       data-test-id={`${testId}-scroll`}
-      className="relative max-w-full overflow-x-auto"
+      className={cn("relative overflow-x-auto [container-type:inline-size] [--table-viewport-width:100cqi]", glass.tableScroll)}
     >
       <table data-test-id={testId} className={`w-full min-w-[36rem] border-collapse text-start text-sm leading-body ${layout === "fixed" ? "table-fixed" : "table-auto"}`}>
         <caption data-test-id="SolidDataTable-caption-3" className={hideCaption ? "sr-only" : "border-b border-white/30 px-4 py-3 text-start font-bold"}>
@@ -82,7 +82,9 @@ export function SolidDataTable<T>({
           })}
           {rows.length === 0 && (
             <tr data-test-id={`${testId}-empty`} className={appearance === "glass" ? glass.tableRow : "bg-white dark:bg-slate-900"}>
-              <td data-test-id="SolidDataTable-td-11" colSpan={columns.length} className="px-4 py-8 text-center">{emptyMessage}</td>
+              <td data-test-id="SolidDataTable-td-11" colSpan={columns.length} className="p-0">
+                <div data-test-id={`${testId}-empty-content`} className={cn(glass.tablePlaceholder, "py-8 text-center text-muted-foreground")}>{emptyMessage}</div>
+              </td>
             </tr>
           )}
         </tbody>

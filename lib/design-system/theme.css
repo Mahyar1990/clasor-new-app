@@ -102,6 +102,17 @@
   --muted-foreground: var(--clasor-color-neutral-400);
   --border: var(--clasor-color-neutral-700);
   --input: var(--clasor-color-neutral-500);
+  --secondary: var(--clasor-color-neutral-800);
+  --accent: var(--clasor-color-brand-950);
+  --accent-foreground: var(--clasor-color-brand-200);
+  --ring: var(--clasor-color-brand-300);
+  --surface-outer: var(--clasor-color-neutral-950);
+  --sidebar-accent: var(--clasor-color-neutral-800);
+  --sidebar-accent-foreground: var(--clasor-color-brand-200);
+  --panel-link: var(--clasor-color-brand-300);
+  --panel-icon: var(--clasor-color-brand-300);
+  --panel-icon-hover: var(--clasor-color-brand-200);
+  --material-canvas: radial-gradient(ellipse at 10% 15%, var(--clasor-color-brand-950), transparent 55%), linear-gradient(135deg, var(--clasor-color-neutral-900), var(--background));
   --glass-tint: var(--clasor-color-neutral-900);
   --glass-fallback: var(--clasor-color-neutral-900);
   --glass-text: var(--clasor-color-neutral-100);
@@ -112,8 +123,16 @@
   --panel-placeholder: var(--muted-foreground);
   --panel-disabled-text: var(--glass-field-text);
   --success: var(--color-emerald-200);
+  --success-surface: var(--color-emerald-950);
+  --success-border: var(--color-emerald-700);
   --warning: var(--color-amber-200);
+  --warning-surface: var(--color-amber-950);
+  --warning-border: var(--color-amber-700);
   --info: var(--color-sky-200);
+  --info-surface: var(--color-sky-950);
+  --info-border: var(--color-sky-700);
   --danger: var(--color-red-300);
+  --danger-surface: var(--color-red-950);
+  --danger-border: var(--color-red-700);
 }
-:root { --material-canvas: radial-gradient(ellipse at 10% 15%, color-mix(in srgb, var(--clasor-color-brand-400) 40%, transparent), transparent 55%), radial-gradient(ellipse at 90% 30%, color-mix(in srgb, var(--panel-tertiary) 33.33%, transparent), transparent 55%), linear-gradient(135deg, var(--clasor-color-brand-100), var(--background)); }
+:root:not(.dark) { --material-canvas: radial-gradient(ellipse at 10% 15%, color-mix(in srgb, var(--clasor-color-brand-400) 40%, transparent), transparent 55%), radial-gradient(ellipse at 90% 30%, color-mix(in srgb, var(--panel-tertiary) 33.33%, transparent), transparent 55%), linear-gradient(135deg, var(--clasor-color-brand-100), var(--background)); }

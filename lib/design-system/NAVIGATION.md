@@ -89,6 +89,8 @@ Hover لینک و آیتم منو white/20، blur و border-white/30 دارد؛ 
 
 ## تب‌بار مشترک شیشه‌ای — یک ظاهر
 
+در تم تاریک، تب فعال و مسیر انتخاب‌شده با حاشیهٔ رنگ تم مشخص‌اند. در حالت بدون شفافیت و رنگ‌های اجباری، حاشیهٔ انتخاب باقی می‌ماند و حلقهٔ فوکوس نشانه‌ای مستقل است. پیوندهای مسیر زیرخط دارند؛ موقعیت جاری متن است، نه پیوند غیرفعال. پیش‌نمایش مسیر و صفحه‌بندی در کاتالوگ هر دو تم و مرزهای غیرفعال را نشان می‌دهد.
+
 در `glass.tab` فقط رنگ زمینهٔ تب طی ۱۲۰ میلی‌ثانیه گذار دارد. حاشیه، سایه، محوشدگی و فوکوس بی‌درنگ تغییر می‌کنند؛ نه نشانگر می‌لغزد و نه محتوای پنل انیمیت می‌شود. در حالت کاهش حرکت و رنگ‌های اجباری گذار حذف می‌شود.
 
 `ClasorTabs` و پایه‌های `TabsList`/`TabsTrigger` فقط یک ظاهر دارند: همان «تب‌های پیش‌فرض؛ سطح و انتخاب شیشه‌ای» انتخاب‌شده توسط مالک پروژه. ریل با tint/30% و blur/12px، حاشیهٔ سفید، شعاع ۱۲px و فاصلهٔ داخلی ۳px است. تب فعال زمینهٔ white/40، حاشیهٔ white/70 و سایهٔ برجستهٔ ملایم دارد؛ در تم تاریک زمینهٔ فعال white/15 است. قراردادهای `glass.tabsList` و `glass.tab` مالک مشترک هندسه و حالت‌ها هستند. گونه‌های line/segmented و قراردادهای نوری اختصاصی آن‌ها حذف شده‌اند؛ underline و گرادیان تزئینی جداگانه وجود ندارد.
@@ -127,7 +129,7 @@ API انتخاب کنترل‌شده/کنترل‌نشده، تب غیرفعال
 
 ## تکمیل لایه‌ها و ناوبری — ۲۰۲۶/۱۱/۱۶
 
-Dialog، Sheet، Tooltip و Toast عمومی نیز `usePortalTheme` دارند. Contentهای Dialog/AlertDialog/Sheet یک `themeAnchorRef` اختیاری می‌گیرند؛ ترکیب‌های تأیید و DetailsSheet مرجع trigger پایدار را تأمین می‌کنند تا انتقال فوکوس هنگام بازشدن، تم مبدأ را از بین نبرد. `TooltipContent` یک `themeAnchorRef` اختیاری می‌گیرد و `HelpTooltip` آن را از trigger تأمین می‌کند؛ به این ترتیب بازشدن با hover هم تم محلی را حفظ می‌کند. observer صرفاً تغییر کلاس تم را دنبال می‌کند و جایگزین رویدادها یا رفتار Base UI نیست. سطح شناور تاریک ۶۵٪ slate دارد تا روی صفحه روشن خوانا بماند. Toast با قرارداد رنگ معنایی بعد از سطح پایه ترکیب می‌شود؛ Tooltip از سطح شناور مشترک استفاده می‌کند. نمونه مستقل هر مورد با toggle تاریک در بالای بخش «لایه و پیام» آمده است.
+Dialog، Sheet و Tooltip عمومی نیز `usePortalTheme` دارند. Contentهای Dialog/AlertDialog/Sheet یک `themeAnchorRef` اختیاری می‌گیرند؛ ترکیب‌های تأیید و DetailsSheet مرجع trigger پایدار را تأمین می‌کنند تا انتقال فوکوس هنگام بازشدن، تم مبدأ را از بین نبرد. `TooltipContent` یک `themeAnchorRef` اختیاری می‌گیرد و `HelpTooltip` آن را از trigger تأمین می‌کند؛ به این ترتیب بازشدن با hover هم تم محلی را حفظ می‌کند. observer صرفاً تغییر کلاس تم را دنبال می‌کند و جایگزین رویدادها یا رفتار Base UI نیست. سطح شناور تاریک ۶۵٪ slate دارد تا روی صفحه روشن خوانا بماند. Toast با قرارداد رنگ معنایی بعد از سطح پایه ترکیب می‌شود؛ Tooltip از سطح شناور مشترک استفاده می‌کند. نمونه مستقل هر مورد با toggle تاریک در بالای بخش «لایه و پیام» آمده است.
 
 این مرحله در ابتدا سه گونهٔ تب داشت؛ طبق تصمیم بعدی مالک پروژه، اکنون تنها ظاهر پیش‌فرض شیشه‌ایِ بخش «تب‌بار مشترک» معتبر است. رفتار صفحه‌کلید و انتخاب حفظ شده‌اند.
 
@@ -187,3 +189,20 @@ z-indexهای dialog/menu/toast و backdrop از مبانی مصرف می‌شو
 بررسی این مرحله: TypeScript/build، lint و آزمون مرورگر تب RTL و Home/End، مرز صفحه‌بندی، مهار فوکوس دیالوگ، تمرکز امن مخرب، بازگشت فوکوس، Sheet دسکتاپ/موبایل، منو، Toast و Tooltip. شواهد در `.codex/qa-stage-d` ثبت می‌شوند. بررسی یکپارچه صفحه‌خوان انسانی در این مرحله انجام نشده است.
 
 انتخابگر Select در portal یک لایه بالاتر از Dialog قرار می‌گیرد (--z-dialog + 2) تا گزینه‌های داخل فرم modal زیر backdrop پنهان نشوند. Popup داخلی در همان stacking context باقی می‌ماند.
+## Catalogue page headings
+
+The Accessibility catalogue links directly to live focus, contrast, reduced-motion, and solid-material exercises. Each exercise gives a procedure and an expected result in light and dark. Use the header theme and material preferences; use the device setting for reduced motion. The guide is not a report of completed manual testing or accessibility certification.
+
+Each catalogue route has one page-level heading. Colors keeps its hero heading; the other sections use the shared header's route title. Embedded editor, reading and repository examples use subordinate headings and retain their test IDs and focus targets. `ReadingSurface` defaults to an `h1` for standalone use; `titleAs` sets the heading level for an embedded surface. The publication catalogue preserves its six-level outline data independently of the surrounding page's semantic heading levels.
+
+## Feedback and recovery in both themes
+
+Empty states stay neutral; permission limits use info, partial success uses warning, and service errors use danger. Titles and descriptions state what happened regardless of color. Recovery controls wrap on narrow screens and the catalogue announces the result of each demo action. Determinate progress uses a matte track and a theme-specific fill; the semantic value, RTL direction and opacity-independent skeleton behavior remain unchanged.
+
+## Theme ownership in overlay previews
+
+The shared preview frame and the record-options preview pass their theme through React context, including across body-mounted portals. Menu, submenu, Select, tooltip, dialog and sheet in these scopes do not derive dark mode from current focus. Outside an explicit scope, existing anchor and focus fallbacks remain available. `addToastFrom(element, options)` captures the source theme for an individual toast; the shared viewport no longer changes with focus. The overlays catalogue includes a dialog with a Select, a nested menu, and a tooltip; sending an announcement from the submenu preserves the existing modal-layer rules.
+
+## Handoff preview coverage
+
+Each of the 22 handoff contracts links to a live sample anchor. The handoff distinguishes a local theme toggle from the shared catalogue theme control. Coverage means the example can be opened in both themes; it does not record manual contrast, keyboard, or screen-reader acceptance.

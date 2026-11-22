@@ -2,6 +2,7 @@
 import { useEffect, useId, useRef, useState } from "react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
 import { DocumentTableCatalogue } from "@/components/design-system/document-table-catalogue";
+import { GlassPreviewFrame } from "./glass-preview-frame";
 import { DataTable } from "@/components/ui/data-table"
 import { ApprovalBadge, VisibilityBadge, LatestBadge } from "@/components/ui/status-badge"
 import { SelectField } from "@/components/ui/select-field"
@@ -51,7 +52,7 @@ function SearchableTableExample() {
       { id: "name", label: "نام", render: row => <span data-test-id="patterns-catalogue-span-7" className="font-medium">{row.name}</span> },
       { id: "approval", label: "تأیید", kind: "metadata", render: row => <ApprovalBadge status={row.approval} /> },
       { id: "visibility", label: "دسترسی", kind: "metadata", render: row => <VisibilityBadge visibility={row.visibility} /> },
-    ]} renderActions={row => <div data-test-id="patterns-catalogue-div-8" className="flex items-center gap-2"><RowActionMenu fallbackFocusRef={search} rowLabel={row.name} items={[{ id: "view", label: "مشاهده مشخصات نمونه", onSelect: () => setMessage(`مشخصات نمونه: ${row.name}`) }, { id: "delete", label: "حذف ردیف نمونه", destructive: true, onSelect: () => remove(row) }]} /><IconButton data-test-id="patterns-catalogue-iconbutton-9" variant="ghost" aria-label={`حذف ردیف ${row.name}`} onClick={() => remove(row)}><Trash2 aria-hidden="true" /></IconButton></div>} />
+    ]} renderActions={row => <div data-test-id="patterns-catalogue-div-8" className="flex flex-wrap items-center justify-end gap-2"><RowActionMenu fallbackFocusRef={search} rowLabel={row.name} items={[{ id: "view", label: "مشاهده مشخصات نمونه", onSelect: () => setMessage(`مشخصات نمونه: ${row.name}`) }, { id: "delete", label: "حذف ردیف نمونه", destructive: true, onSelect: () => remove(row) }]} /><IconButton data-test-id="patterns-catalogue-iconbutton-9" variant="ghost" aria-label={`حذف ردیف ${row.name}`} onClick={() => remove(row)}><Trash2 aria-hidden="true" /></IconButton></div>} />
     <p data-test-id="patterns-catalogue-p-10" role="status" className="break-words text-xs leading-body text-muted-foreground">{message}</p>
   </Sample></div>
 }
@@ -62,7 +63,8 @@ export function DataCatalogue() {
   const [message, setMessage] = useState("داده‌ها ساختگی و ثابت‌اند.")
   return <div data-test-id="patterns-catalogue-div-11" className="space-y-5 pt-10" data-catalogue="data"><SectionTitle id="data" title="داده و جدول" number="09" />
     <DocumentTableCatalogue />
-    <Sample title="فهرست خوانا، انتخاب مشخص" description="انتخاب همه فقط همین سه ردیف محلی را شامل می‌شود؛ اسکرول افقی داخل ظرف جدول باقی می‌ماند.">
+    <GlassPreviewFrame title="فهرست خوانا، انتخاب مشخص در دو تم" testId="glass-data-table-states">
+      <p data-test-id="glass-data-states-description" className="text-sm text-muted-foreground">ردیف را انتخاب کنید یا حالت جدول را به خالی، بارگذاری یا خطا تغییر دهید. روی صفحهٔ باریک، خود جدول افقی پیمایش می‌شود.</p>
       <div data-test-id="patterns-catalogue-div-12" className="grid gap-4 sm:grid-cols-2"><SelectField data-test-id="patterns-catalogue-selectfield-13" label="تراکم جدول" value={density} onValueChange={value => setDensity(value as typeof density)} options={[{ value: "comfortable", label: "راحت" }, { value: "compact", label: "فشرده" }]} /><SelectField data-test-id="patterns-catalogue-selectfield-14" label="حالت جدول" value={state} onValueChange={value => { setState(value as typeof state); setSelected([]) }} options={[{ value: "ready", label: "دارای داده" }, { value: "empty", label: "خالی" }, { value: "loading", label: "بارگذاری" }, { value: "error", label: "خطا" }]} /></div>
       <DataTable label="اسناد نمونه" rows={state === "empty" ? [] : rows} state={state} density={density} selectedIds={selected} onSelectionChange={setSelected} getRowId={row => row.id} rowLabel={row => row.name} onRetry={() => setState("ready")} columns={[
         { id: "name", label: "نام", render: row => <span data-test-id="patterns-catalogue-span-15" className="font-medium">{row.name}</span> },
@@ -71,7 +73,7 @@ export function DataCatalogue() {
         { id: "version", label: "نسخه", kind: "metadata", render: () => <LatestBadge status="latest" /> },
       ]} actions={row => [{ id: "view", label: "دیدن نمونه", onSelect: () => setMessage(`نمایش «${row.name}» فقط شبیه‌سازی شد.`) }]} />
       <p data-test-id="patterns-catalogue-p-16" role="status" className="text-xs text-muted-foreground">{message}</p>
-    </Sample>
+    </GlassPreviewFrame>
     <SearchableTableExample />
   </div>
 }
@@ -93,11 +95,13 @@ export function PatternsCatalogue() {
   const actionProps = { permission, onDirectApproval: () => setMessage("تأیید مستقیم فقط شبیه‌سازی شد."), onRequestApproval: () => setMessage("درخواست تأیید فقط شبیه‌سازی شد.") }
   const context: Context = decided ? { ...contextBase, status: "decided", decision: { by: { kind: "known", id: "person-4", name: "رضا موسوی" }, at: "2026-10-21T10:30:00Z", outcome: "approved" } } : { ...contextBase, status: "pending" }
   return <div data-test-id="patterns-catalogue-div-17" className="space-y-5 pt-10" data-catalogue="patterns"><SectionTitle id="patterns" title="الگوهای ترکیبی" number="12" />
-    <Sample title="یک نتیجه مجوز، چند ورودی هماهنگ" description="نقش به مجوز تبدیل نمی‌شود؛ این انتخاب‌گر فقط چهار fixture مشاهده‌شده را بارگذاری می‌کند. نویسنده در نسخه خود با درخواست ادامه می‌دهد.">
+    <GlassPreviewFrame title="مجوز، ساخت نسخه و زمینهٔ تصمیم در دو تم" testId="glass-composite-patterns">
+    <p data-test-id="glass-composite-patterns-note" className="text-xs text-muted-foreground">در هر تم، سناریوی مهمان، برگشت یک مرحله و بازیابی نسخهٔ ناتمام را امتحان کنید. تغییر تم دادهٔ نمونه را بازنشانی نمی‌کند.</p>
+    <Sample id="catalogue-permission-action" title="یک نتیجه مجوز، چند ورودی هماهنگ" description="نقش به مجوز تبدیل نمی‌شود؛ این انتخاب‌گر فقط چهار fixture مشاهده‌شده را بارگذاری می‌کند. نویسنده در نسخه خود با درخواست ادامه می‌دهد.">
       <SelectField data-test-id="patterns-catalogue-selectfield-18" label="سناریوی نقش" value={role} onValueChange={setRole} options={[{ value: "manager", label: "مدیر" }, { value: "editor", label: "ویرایشگر" }, { value: "writer", label: "نویسنده در نسخه خود" }, { value: "guest", label: "مهمان" }]} />
       <div data-test-id="patterns-catalogue-div-19" className="flex flex-wrap items-start gap-5"><div data-test-id="patterns-catalogue-div-20"><PermissionAction {...actionProps} /></div><RowActionMenu rowLabel="نسخه نمایشی" items={[permissionActionItem(actionProps)]} /></div><p data-test-id="patterns-catalogue-p-21" role="status" className="text-sm leading-body text-muted-foreground">{message}</p>
     </Sample>
-    <Sample title="ادامه، ایجاد نیست" description="ورودی با برگشت حفظ می‌شود؛ فقط دکمه نهایی ایجاد را شبیه‌سازی می‌کند.">
+    <Sample id="catalogue-creation-stepper" title="ادامه، ایجاد نیست" description="ورودی با برگشت حفظ می‌شود؛ فقط دکمه نهایی ایجاد را شبیه‌سازی می‌کند.">
       {result === "none" ? <CreationStepper steps={[{ id: "title", label: "عنوان" }, { id: "source", label: "مبنای نسخه" }, { id: "review", label: "بازبینی" }]} currentStep={step} onStepChange={setStep} canContinue={step !== 0 || !!title.trim()} validationMessage="برای ادامه، عنوان نسخه را وارد کنید." commitLabel="ایجاد نسخه نمونه" onCommit={() => setResult(partial ? "partial" : "complete")}>
         <div data-test-id="patterns-catalogue-div-22" className="space-y-4"><h3 data-test-id="patterns-catalogue-h3-23" ref={heading} tabIndex={-1} className="text-base font-medium">{["عنوان نسخه نمونه", "مبنای نسخه تازه", "بازبینی پیش از ایجاد"][step]}</h3>
           {step === 0 && <TextField data-test-id="patterns-catalogue-textfield-24" label="عنوان نسخه" value={title} onValueChange={setTitle} required />}
@@ -106,8 +110,9 @@ export function PatternsCatalogue() {
         </div>
       </CreationStepper> : result === "partial" ? <SystemState state={{ kind: "partial-success", createdItem: { id: "demo-version-1", name: title }, unfinishedStep: "نسخه نمونه ایجاد شد؛ بازشدن ویرایشگر ناتمام است. برای بازیابی، نسخه دیگری نسازید.", recoveryLabel: "ادامه بازکردن ویرایشگر نمونه" }} onRecovery={() => setResult("complete")} /> : <div data-test-id="patterns-catalogue-div-27" role="status" className="space-y-3 text-sm"><p data-test-id="patterns-catalogue-p-28">نسخه «{title}» در نمونه کامل شد؛ ذخیره‌سازی واقعی انجام نشد.</p><Button data-test-id="patterns-catalogue-button-29" variant="outline" onClick={() => { setResult("none"); setStep(0) }}>بازنشانی نمونه مراحل</Button></div>}
     </Sample>
-    <Sample title="زمینه تصمیم قابل پیگیری" description="سازنده، آخرین ویرایشگر، درخواست‌دهنده و تصمیم‌گیرنده مستقل‌اند؛ نام‌ها و زمان‌ها ساختگی‌اند.">
+    <Sample id="catalogue-approval-context" title="زمینه تصمیم قابل پیگیری" description="سازنده، آخرین ویرایشگر، درخواست‌دهنده و تصمیم‌گیرنده مستقل‌اند؛ نام‌ها و زمان‌ها ساختگی‌اند.">
       <Button data-test-id="patterns-catalogue-button-30" variant="outline" onClick={() => setDecided(value => !value)}>{decided ? "نمایش انتظار تصمیم" : "نمایش تصمیم ثبت‌شده"}</Button><ApprovalContext context={context} />
     </Sample>
+    </GlassPreviewFrame>
   </div>
 }

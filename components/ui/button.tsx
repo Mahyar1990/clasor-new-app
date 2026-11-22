@@ -8,7 +8,7 @@ import { LoaderCircle } from "lucide-react"
 import { cn } from "cn"
 
 const buttonVariants = cva(
-  `${glass.interaction} inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border ps-4 pe-4 text-sm font-medium leading-label whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0`,
+  `${glass.interaction} inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border ps-4 pe-4 text-sm font-medium leading-label whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-75 aria-disabled:opacity-75 data-disabled:opacity-75 forced-colors:focus-visible:outline-[Highlight] forced-colors:disabled:text-[GrayText]! forced-colors:aria-disabled:text-[GrayText]! forced-colors:data-disabled:text-[GrayText]! [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0`,
   {
     variants: {
       variant: {

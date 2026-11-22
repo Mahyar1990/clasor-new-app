@@ -1,3 +1,19 @@
+## Catalogue final Firefox audit — 2026/11/22
+
+Manual acceptance reported by the project owner at `44b71e6`: In the existing Firefox window, keyboard entry with Tab showed the focus ring and Left Arrow selected the next RTL tab without Enter, in both Light and Dark. This closes the outstanding tab activation/focus check below; it does not establish contrast or screen-reader acceptance.
+
+Follow-up at `3c3286c`: In a visible temporary Firefox session, the header's solid-material option applied in Light and Dark. The nested menu opened and pointer hover opened its submenu in both themes, including global Dark. Computed `backdrop-filter` was `none` on the dialog and submenu in solid mode, and the submenu resolved to the intended theme. This verifies the selected overlay samples, not all catalogue surfaces or visual contrast. The keyboard retest still could not establish `document.hasFocus()` after foreground activation and a click, so automatic tab activation and the visible focus ring remain unverified in a focused window. No runtime changes were made.
+
+Follow-up at `d3174fa`: WebDriver Tab and ArrowLeft input moved the active element to the expected RTL tab in both themes. The document reported `hasFocus() === false` in both headless and visible temporary sessions. No native `focusin` was observed, so neither automatic activation nor the focus ring can be judged from that run. A diagnostic synthetic `focusin` selected the expected tab in both themes, confirming the activation handler responds. No product fix was made; activation and visible focus still need a manual check in a focused window.
+
+Evidence: `ac8cb3e`, Firefox 160.0.1 on macOS, temporary headless profile, local development build.
+
+- All 14 catalogue routes passed in both light and dark at viewport widths of 390 and 1280 CSS pixels (56 checks): RTL document direction, exactly one page-level heading, and no document-level horizontal overflow. This does not validate every scroller or open overlay at mobile width.
+- The header theme picker stored Dark, retained it when opening another catalogue page, and switched back to Light.
+- In both themes, Left Arrow moved focus to the next RTL tab. Selection stayed on the original tab and the computed outline was none in the scripted keyboard sequence. Click selection passed. Retest using a manual Tab entry before treating the activation and focus results as confirmed defects.
+- With a local dark preview on the light page, the nested dialog, Select and submenu opened in dark mode; Escape returned focus to the dialog trigger and the toast stayed dark after closing the dialog. With global Dark, the dialog and Select passed, but the automated submenu click did not reach the open state. Retest with pointer hover and keyboard routing in the visible browser; a theme defect is not established.
+- Manual contrast, screen-reader, tooltip, reduced-motion and no-transparency acceptance were not completed by this pass. No production build or runtime code changes are claimed.
+
 ## Portable design policies and skill packages — 2026/11/18
 
 Evidence: working tree on `docs/portable-design-system-skills`, based on `6b8089a`.

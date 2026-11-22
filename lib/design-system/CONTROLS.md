@@ -163,6 +163,8 @@ RecordGroup(title, description?, children, testId) is a shared glass composition
 
 ## کنترل‌های جاری — ۲۰۲۶/۱۱/۱۴
 
+فوکوس صفحه‌کلید دکمه و فیلد از توکن `ring` پیروی می‌کند و در رنگ‌های اجباری با Highlight باقی می‌ماند. ورودی، منوی انتخاب و دکمهٔ انتخاب فایل خطا را جدا از فوکوس نشان می‌دهند. متن غیرفعال خوانا می‌ماند و ورودی فقط‌خواندنی با حاشیهٔ خط‌چین از ورودی غیرفعال متمایز است؛ انتخاب و کپی همچنان ممکن است. کاتالوگ دکمه‌ها و ورودی‌ها این حالت‌ها را در هر دو تم نشان می‌دهد.
+
 [Button](../../components/ui/button.tsx)، [Input](../../components/ui/input.tsx)، [Select](../../components/ui/select.tsx) و [SolidForm](../../components/ui/SolidForm.tsx) مرجع اجرا هستند؛ ظاهر و سیاست حالت‌ها قراردادهای Tailwind در [classes.ts](classes.ts) هستند. فایل CSS مستقل کنترل‌ها حذف شده است.
 
 Input پیش از فوکوس white/40 با حاشیه خاکستری و سایه داخلی است؛ در دارک white/10. فوکوس بنفش و خطا معنایی است. دکمه اصلی purple/60 و Hover آن purple/80؛ ثانویه white/50 با حاشیه و سایه پایه؛ Ghost/Close از white/10 به white/20 می‌رود. حرکت Hover فقط برای کنترل فعال است و در کاهش حرکت غیرفعال می‌شود.
@@ -255,6 +257,8 @@ CheckboxField و SwitchField قرارداد Base UI برای `checked/defaultChe
 خود جزء هیچ ارسال شبکه‌ای ندارد. انتخاب فایل uncontrolled است؛ value/defaultValue و multiple در props آن وجود ندارند. اعتبارسنجی محلی موفق به معنی ذخیره یا ارسال فایل نیست.
 
 ### وضعیت و هویت
+
+نشان معنایی فقط یک گونهٔ `Badge` می‌گیرد: `success`، `warning`، `destructive` یا `info`. پیش‌نویس، نسخه و نقش از گونهٔ خنثی استفاده می‌کنند؛ تشخیص وضعیت همچنان به متن وابسته است، نه فقط رنگ. صفحهٔ وضعیت همهٔ نشان‌ها و هویت با تصویر، بدون تصویر، تصویر نامعتبر و هویت نامشخص را در یک قاب روشن/تاریک نشان می‌دهد.
 
 ApprovalBadge از ApprovalStatus، VisibilityBadge از Visibility، LatestBadge از VersionStatus و RoleBadge از DisplayRole مستقل استفاده می‌کنند. previous نشان آخرین نسخه نمی‌سازد. همه نشان‌ها متن دارند و نقش‌ها خنثی‌اند. Badge پایه shadcn به هندسه و رنگ‌های معنایی کلاسور تطبیق داده شده است. DisplayRole برای مصرف محصول، owner (مالک)، admin (مدیر مخزن)، editor، writer، viewer (مشاهده‌گر) و anonymous (بازدیدکننده واردنشده) را جدا می‌کند؛ manager/guest برای سازگاری نمونه‌های قدیمی باقی‌اند. این قرارداد صرفاً نمایشی است و هیچ نقشی را به مجوز واقعی تبدیل نمی‌کند.
 

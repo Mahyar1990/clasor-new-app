@@ -28,6 +28,9 @@ export function GlassControlStatesCatalogue() {
         <p data-test-id="glass-state-select-motion" className="text-xs text-muted-foreground">منوی مخزن بدون لغزش یا زوم محو می‌شود. بازکردن با صفحه‌کلید، حرکت بین گزینه‌ها و بستن با Escape را امتحان کنید.</p>
         <TextField data-test-id="glass-state-text" label="عنوان نمونه" placeholder="راهنمای طراحی" />
         <TextField data-test-id="glass-state-error" label="عنوان نیازمند اصلاح" defaultValue="عنوان ناقص" error="یک عنوان مشخص‌تر وارد کنید." />
+        <TextField data-test-id="glass-state-readonly" label="شناسهٔ فقط‌خواندنی" defaultValue="DOC-1042" readOnly dir="ltr" description="قابل انتخاب و کپی است." />
+        <TextField data-test-id="glass-state-text-disabled" label="عنوان غیرفعال" defaultValue="سند بایگانی‌شده" disabled disabledReason="در حالت بایگانی نمی‌توان عنوان را ویرایش کرد." />
+        <SelectField data-test-id="glass-state-select-error" label="مخزن مقصد" error="یک مخزن مقصد انتخاب کنید." options={[{ value: "design", label: "تیم طراحی" }, { value: "archived", label: "مخزن بایگانی‌شده", disabled: true }]} />
       </div>
     </div>
     <div data-test-id="glass-control-states-buttons" className="flex flex-wrap gap-3">

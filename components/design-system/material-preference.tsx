@@ -24,7 +24,7 @@ export function MaterialPreference() {
       document.documentElement.dataset.material = material
       listeners.forEach(listener => listener())
     }}>
-      <SelectTrigger id={id} data-test-id="catalogue-material-preference" className="w-40"><SelectValue /></SelectTrigger>
+      <SelectTrigger id={id} data-test-id="catalogue-material-preference" className="w-32 sm:w-40"><SelectValue /></SelectTrigger>
       <SelectContent dir="rtl" align="end" alignItemWithTrigger={false} data-test-id="catalogue-material-options">
         <SelectItem value="auto" data-test-id="catalogue-material-auto">شیشه مات</SelectItem>
         <SelectItem value="solid" data-test-id="catalogue-material-solid">بدون شفافیت</SelectItem>
