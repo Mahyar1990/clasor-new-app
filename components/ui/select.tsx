@@ -69,7 +69,7 @@ function SelectContent({
           data-material-variant="clear"
           data-test-id="select-content"
           data-align-trigger={alignItemWithTrigger}
-          className={cn("relative isolate z-[var(--z-menu)] max-h-(--available-height) w-(--anchor-width) min-w-36 max-w-[calc(100vw-2rem)] origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-white/40 bg-white/30 text-popover-foreground shadow-lg backdrop-blur-md ring-1 ring-foreground/10 duration-[var(--clasor-motion-fast)] data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className, glass.floating)}
+          className={cn("relative isolate z-[var(--z-menu)] max-h-(--available-height) w-(--anchor-width) min-w-36 max-w-[calc(100vw-2rem)] overflow-x-hidden overflow-y-auto rounded-lg border border-white/40 bg-white/30 text-popover-foreground shadow-lg backdrop-blur-md ring-1 ring-foreground/10", glass.menuMotion, className, glass.floating)}
           {...props}
         >
           <SelectScrollUpButton data-test-id="select-selectscrollupbutton-6" />

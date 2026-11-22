@@ -89,6 +89,8 @@ Hover لینک و آیتم منو white/20، blur و border-white/30 دارد؛ 
 
 ## تب‌بار مشترک شیشه‌ای — یک ظاهر
 
+در `glass.tab` فقط رنگ زمینهٔ تب طی ۱۲۰ میلی‌ثانیه گذار دارد. حاشیه، سایه، محوشدگی و فوکوس بی‌درنگ تغییر می‌کنند؛ نه نشانگر می‌لغزد و نه محتوای پنل انیمیت می‌شود. در حالت کاهش حرکت و رنگ‌های اجباری گذار حذف می‌شود.
+
 `ClasorTabs` و پایه‌های `TabsList`/`TabsTrigger` فقط یک ظاهر دارند: همان «تب‌های پیش‌فرض؛ سطح و انتخاب شیشه‌ای» انتخاب‌شده توسط مالک پروژه. ریل با tint/30% و blur/12px، حاشیهٔ سفید، شعاع ۱۲px و فاصلهٔ داخلی ۳px است. تب فعال زمینهٔ white/40، حاشیهٔ white/70 و سایهٔ برجستهٔ ملایم دارد؛ در تم تاریک زمینهٔ فعال white/15 است. قراردادهای `glass.tabsList` و `glass.tab` مالک مشترک هندسه و حالت‌ها هستند. گونه‌های line/segmented و قراردادهای نوری اختصاصی آن‌ها حذف شده‌اند؛ underline و گرادیان تزئینی جداگانه وجود ندارد.
 
 API انتخاب کنترل‌شده/کنترل‌نشده، تب غیرفعال، `testIds` و ارتباط semantic تب/پنل حفظ شده است. `variant` دیگر جزو API نیست؛ نام عمومی `tabsListVariants` برای سازگاری import باقی مانده و فقط کلاس‌های همان یک ظاهر را می‌دهد. Base UI مسئول RTL، جهت‌ها، Home/End، انتخاب با فوکوس و دیده‌شدن تب انتخاب‌شده در نوار قابل پیمایش است. در حالت solid، انتخاب با سطح مات و حاشیه/متن اصلی متمایز است؛ forced colors انتخاب را با outline سیستم مشخص می‌کند و کاهش حرکت transition را متوقف می‌کند.
@@ -171,7 +173,7 @@ toast.add({
 | ClasorPagination | page/pageCount/onPageChange؛ شماره ۱ مبنا، مرزها disabled، صفحات زیاد خلاصه می‌شوند؛ داده را مصرف‌کننده تغییر می‌دهد |
 | Feedback | tone، title، description، dataRetained?، action?؛ چهار سه‌تایی رنگ معنایی، متن و آیکون؛ role=status |
 | SystemState | مدل جداگانه empty/permission-denied/partial-success/service-error؛ در موفقیت ناقص نام مورد ساخته‌شده و مرحله ناتمام حفظ می‌شود؛ onRecovery اختیاری |
-| ProgressIndicator | label/value/max؛ progress بومی و عدد مشخص؛ timer داخلی ندارد؛ LoadingSkeleton تزئینات را از دسترس‌پذیری حذف می‌کند |
+| ProgressIndicator | label/value/max و animate اختیاری؛ progress بومی و درصد فوری؛ فقط پُری نوار گذار دارد و timer داخلی ندارد. LoadingSkeleton ثابت است و تزئینات را از دسترس‌پذیری حذف می‌کند. |
 | RowActionMenu | rowLabel/items، open/defaultOpen/onOpenChange؛ نام trigger شامل زمینه ردیف، کلیدهای جهت و Escape، بازگشت فوکوس؛ علت گزینه غیرفعال همیشه خارج منو دیده می‌شود |
 | ConfirmationDialog / DestructiveDialog | trigger، title، description، targetName، confirmLabel، onConfirm؛ open/defaultOpen/onOpenChange، loading/error، fallbackFocusRef اختیاری؛ Promise ناموفق لایه را باز نگه می‌دارد و خطا را نمایش می‌دهد |
 | DetailsSheet | trigger/title/description/children و وضعیت بازبودن؛ width=400، سقف viewport و ارتفاع 100dvh؛ inline-end در RTL سمت چپ است |

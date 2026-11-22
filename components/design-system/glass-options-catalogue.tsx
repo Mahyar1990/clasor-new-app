@@ -19,6 +19,7 @@ export function GlassOptionsCatalogue() {
   return <section data-test-id="glass-options-catalogue" aria-labelledby="glass-options-title" className="space-y-4">
     <h3 data-test-id="glass-options-title" id="glass-options-title" className="text-lg font-bold">گزینه‌های شیشه‌ای سند و مخزن</h3>
     <p data-test-id="glass-options-description" className="text-sm text-muted-foreground">ته‌رنگ ۱۵٪ با محوشدگی ۱۰ پیکسل و لایهٔ ملایم زیر نوشته‌ها؛ رنگ پس‌زمینه حفظ می‌شود و متن‌های پشت کمتر مزاحم خواندن گزینه‌ها می‌شوند.</p>
+    <p data-test-id="glass-options-motion" className="text-sm text-muted-foreground">منو و زیرمنو بدون لغزش یا زوم ظاهر و محو می‌شوند. با کلیدهای جهت‌دار بین گزینه‌ها حرکت کنید و با Escape ببندید. در حالت کاهش حرکت، منو بدون گذار باز و بسته می‌شود.</p>
     <label data-test-id="glass-options-dark-label" className="flex min-h-11 items-center gap-2 text-sm">
       <Checkbox data-test-id="glass-options-dark-toggle" aria-label="پیش‌نمایش تاریک منوها" checked={dark} onCheckedChange={checked => setDark(checked)} />پیش‌نمایش تاریک منوها
     </label>
