@@ -8,6 +8,7 @@ import { GlassFeedbackStatesCatalogue } from "./glass-status-feedback-catalogue"
 import { GlassLayerStatesCatalogue } from "./glass-layer-states-catalogue";
 import { Info } from "lucide-react"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
+import { GlassPreviewFrame } from "./glass-preview-frame";
 import { DocumentDialogsCatalogue } from "./document-dialogs-catalogue";
 import { LibraryPatternsCatalogue } from "./library-patterns-catalogue";
 import { HeaderActionsCatalogue } from "./header-actions-catalogue";
@@ -36,10 +37,11 @@ function Examples({ section }: { section: "navigation" | "feedback" | "overlays"
   return <div data-test-id="navigation-catalogue-div-1" className="space-y-5 pt-10" data-catalogue="navigation">
     {section === "navigation" && <>
     <SectionTitle id="navigation" title="ناوبری" number="08" />
-    <Sample title="مسیر و صفحه‌بندی" description="هر الگو وظیفه جدا دارد؛ صفحه‌بندی این نمونه فقط شماره صفحه را تغییر می‌دهد.">
+    <GlassPreviewFrame title="مسیر و صفحه‌بندی در دو تم" testId="glass-navigation-states">
+      <p data-test-id="glass-navigation-state-description" className="text-xs text-muted-foreground">با Tab فوکوس را دنبال کنید و تا صفحهٔ آخر بروید تا حالت غیرفعالِ بعدی را ببینید. این نمونه دادهٔ جدول را تغییر نمی‌دهد.</p>
       <ClasorBreadcrumb items={[{ id: "home", label: "کتابخانه", href: "/" }, { id: "team", label: "اسناد گروه", href: "#navigation" }, { id: "document", label: "راهنمای همکاری", emphasis: true }, { id: "current", label: "نسخهٔ ۳ (پیش‌نویس)" }]} />
       <ClasorPagination page={page} pageCount={5} onPageChange={setPage} /><p data-test-id="navigation-catalogue-p-2" role="status" className="text-xs text-muted-foreground">صفحه نمایشی: {new Intl.NumberFormat("fa").format(page)}؛ داده جدول تغییر نمی‌کند.</p>
-    </Sample>
+    </GlassPreviewFrame>
     <GlassTabsCatalogue /><HierarchyCatalogue />
     <EditorToolbarCatalogue /><EditorContentsCatalogue />
     <PublishPatternsCatalogue />
