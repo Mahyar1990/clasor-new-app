@@ -191,6 +191,8 @@ z-indexهای dialog/menu/toast و backdrop از مبانی مصرف می‌شو
 انتخابگر Select در portal یک لایه بالاتر از Dialog قرار می‌گیرد (--z-dialog + 2) تا گزینه‌های داخل فرم modal زیر backdrop پنهان نشوند. Popup داخلی در همان stacking context باقی می‌ماند.
 ## Catalogue page headings
 
+The Accessibility catalogue links directly to live focus, contrast, reduced-motion, and solid-material exercises. Each exercise gives a procedure and an expected result in light and dark. Use the header theme and material preferences; use the device setting for reduced motion. The guide is not a report of completed manual testing or accessibility certification.
+
 Each catalogue route has one page-level heading. Colors keeps its hero heading; the other sections use the shared header's route title. Embedded editor, reading and repository examples use subordinate headings and retain their test IDs and focus targets. `ReadingSurface` defaults to an `h1` for standalone use; `titleAs` sets the heading level for an embedded surface. The publication catalogue preserves its six-level outline data independently of the surrounding page's semantic heading levels.
 
 ## Feedback and recovery in both themes

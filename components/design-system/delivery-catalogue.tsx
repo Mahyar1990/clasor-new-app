@@ -2,11 +2,13 @@ import Link from "next/link"
 import { catalogueSections, catalogueHref } from "@/components/design-system/catalogue-sections"
 import { Sample, SectionTitle } from "@/components/design-system/sample"
 import { componentCoverage } from "@/lib/design-system/coverage"
+import { AccessibilityChecksCatalogue } from "./accessibility-checks-catalogue"
 export default function DeliveryCatalogue({ section = "accessibility" }: { section?: "accessibility" | "handoff" }) {
   return <div data-test-id="delivery-catalogue-div-1" className="space-y-5 pt-10" data-catalogue="delivery">
     <p data-test-id="delivery-catalogue-p-2" className="text-sm text-muted-foreground">متریال مشترک نسخه ۰.۳ روی کامپوننت‌های واقعی اعمال شده است؛ بررسی کامل دسترس‌پذیری تأیید نشده است.</p>
     {section === "accessibility" && <>
     <SectionTitle id="accessibility" title="دسترس‌پذیری" number="13" />
+    <AccessibilityChecksCatalogue />
     <Sample title="خوانا، قابل پیمایش، قابل اصلاح" description="این راهنما همراه نمونه‌هاست؛ موفقیت build به‌تنهایی تأیید دسترس‌پذیری نیست.">
       <ul data-test-id="delivery-catalogue-ul-3" className="list-inside list-disc space-y-3 text-sm leading-body text-muted-foreground"><li data-test-id="delivery-catalogue-li-4">با Tab حرکت کنید؛ کنترل‌ها نام دارند و فوکوس قابل مشاهده است. راهنمای ضروری با tooltip پنهان نمی‌شود.</li><li data-test-id="delivery-catalogue-li-5">در تب‌های RTL، جهت چپ بعدی و جهت راست قبلی است؛ Home و End به دو سر فهرست می‌روند.</li><li data-test-id="delivery-catalogue-li-6">در لایه‌ها Escape و انصراف را امتحان کنید؛ فوکوس به زمینه برمی‌گردد و تصمیم مخرب از اقدام امن شروع می‌شود.</li><li data-test-id="delivery-catalogue-li-7">خطای فرم نزدیک فیلد است، مقدار را نگه می‌دارد و راه اصلاح دارد. رنگ تنها حامل وضعیت نیست.</li><li data-test-id="delivery-catalogue-li-8">حالت کاهش حرکت دستگاه رعایت می‌شود؛ پیشرفت مقدار دارد و جدول داخل ظرف خودش اسکرول می‌شود.</li></ul>
       <p data-test-id="delivery-catalogue-p-9" className="rounded-md border bg-muted p-3 text-xs leading-body">بررسی خودکار ساختار، صفحه‌کلید و مرورگر اجرا می‌شود. آزمون انسانی یکپارچه با صفحه‌خوان هنوز تأیید نشده و برای تحویل محصول واقعی لازم است.</p>

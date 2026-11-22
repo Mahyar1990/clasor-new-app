@@ -9,7 +9,7 @@ import { PortalThemeContext } from "@/hooks/use-portal-theme";
 
 export function GlassPreviewFrame({ title, testId, children }: { title: string; testId: string; children: ReactNode }) {
   const [dark, setDark] = useState(false);
-  return <section data-test-id={testId} className={`${glass.panel} overflow-hidden`}>
+  return <section id={testId} data-test-id={testId} className={`${glass.panel} overflow-hidden`}>
     <header data-test-id={`${testId}-header`} className="flex flex-wrap items-center justify-between gap-3 border-b border-white/35 p-4">
       <h3 data-test-id={`${testId}-title`} className="text-sm font-semibold">{title}</h3>
       <Button data-test-id={`${testId}-theme`} variant="outline" size="sm" aria-pressed={dark} onClick={() => setDark(!dark)}>
