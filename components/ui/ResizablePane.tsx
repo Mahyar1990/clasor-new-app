@@ -4,8 +4,9 @@ import { GripVertical } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { glass } from "@/lib/design-system/classes";
 import { clampPane, paneBounds, resizePaneWithKey } from "@/lib/design-system/resize-pane";
-export function ResizablePane({ children, label, testId, defaultWidth = 240, minWidth = 180, maxWidth = 420, minRemainingWidth = 320, direction = "rtl", className }: {
-  children: ReactNode; label: string; testId: string; defaultWidth?: number; minWidth?: number; maxWidth?: number; minRemainingWidth?: number; direction?: "rtl" | "ltr"; className?: string;
+import { AnimatedDisclosure } from "./AnimatedDisclosure";
+export function ResizablePane({ children, label, testId, id, open, defaultWidth = 240, minWidth = 180, maxWidth = 420, minRemainingWidth = 320, direction = "rtl", className }: {
+  children: ReactNode; label: string; testId: string; id?: string; open?: boolean; defaultWidth?: number; minWidth?: number; maxWidth?: number; minRemainingWidth?: number; direction?: "rtl" | "ltr"; className?: string;
 }) {
   const panelId = useId();
   const hintId = useId();
@@ -22,7 +23,7 @@ export function ResizablePane({ children, label, testId, defaultWidth = 240, min
     const observer = new ResizeObserver(() => { const gap = Number.parseFloat(getComputedStyle(container).columnGap) || 0; setAvailable(container.clientWidth - gap); });
     observer.observe(container); return () => observer.disconnect();
   }, []);
-  return <div ref={root} dir={direction} data-test-id={testId} className={cn("flex h-full min-h-0 shrink-0", className)} style={{ width: actual }}>
+  const panel = <div ref={open === undefined ? root : undefined} id={id} dir={direction} data-test-id={testId} className={cn("flex h-full min-h-0 shrink-0", className)} style={{ width: actual }}>
     <div id={panelId} data-test-id={`${testId}-content`} className="min-h-0 min-w-0 flex-1">{children}</div>
     <div data-test-id={`${testId}-resize`} role="separator" tabIndex={0} title="برای تغییر عرض بکشید؛ دوبار کلیک برای بازنشانی" aria-orientation="vertical" aria-label={label} aria-controls={panelId} aria-describedby={hintId} aria-valuemin={bounds.min} aria-valuemax={bounds.max} aria-valuenow={actual} aria-valuetext={`${actual} پیکسل`} data-dragging={dragging} className={glass.resizeSeparator}
       onPointerDown={event => {
@@ -49,4 +50,5 @@ export function ResizablePane({ children, label, testId, defaultWidth = 240, min
     </div>
     <span id={hintId} data-test-id={`${testId}-hint`} className="sr-only">برای تغییر عرض بکشید یا از کلیدهای چپ و راست استفاده کنید. Home و End کمترین و بیشترین عرض را انتخاب می‌کنند. دوبار کلیک برای بازنشانی.</span>
   </div>;
+  return open === undefined ? panel : <AnimatedDisclosure open={open} panel={panel} testId={testId} rootRef={root} slide="inline" />;
 }

@@ -29,12 +29,12 @@ export function PublishedContent({ document, documents, repositoryName, embedded
   function closeContents() {
     setContentsOpen(false);
     const origin = contentsTrigger.current;
-    if (origin?.getClientRects().length) origin.focus({ preventScroll: true });
+    if (origin?.getClientRects().length && !origin.closest("[inert]")) origin.focus({ preventScroll: true });
     else actionsHost.current?.querySelector<HTMLButtonElement>('[data-test-id="publish-action-bar-toggle"]')?.focus({ preventScroll: true });
   }
   return <div data-test-id="publish-reading-stage" className="relative flex min-h-0 min-w-0 flex-1 flex-col">
     <div data-test-id="publish-reading-layout" className="flex min-h-0 min-w-0 flex-1 flex-col gap-2 md:flex-row">
-      <DockedPanel testId="publish-contents-drawer" title="فهرست سند" closeLabel="بستن فهرست سند" open={contentsOpen} onClose={closeContents} className="max-md:h-40 max-md:w-full max-md:max-w-none md:w-44 md:max-w-[30%]">
+      <DockedPanel testId="publish-contents-drawer" title="فهرست سند" closeLabel="بستن فهرست سند" open={contentsOpen} onClose={closeContents} animate className="max-md:h-40 max-md:w-full max-md:max-w-none md:w-44 md:max-w-[30%]">
         <ContentsNavigation testId="publish-contents" items={headings} selectedId={active} onSelect={select} />
       </DockedPanel>
       <GlassScrollArea onScroll={onScroll} ref={contentViewport} key={document.id} data-test-id="publish-content-scroll" label="محتوای سند منتشرشده" contentClassName={`${glass.boundedScrollContent} pb-32`}>

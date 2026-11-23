@@ -20,6 +20,8 @@ The public outline uses shared outlineRow/outlineGroup contracts: smaller labels
 
 FloatingActionBar uses one existing glass.panel around its controls and canonical OptionsButton disclosure. Reactions reuse the existing glass button's aria-pressed, disabled, dark, solid and forced-color states. The section drawer reuses DockedPanel, reserving layout space rather than covering the paper. Header identity uses the shared Avatar and fallback; the independent catalogue demonstrates local dark portals and accessibility preferences.
 
+The publish sidebar, docked contents and floating actions animate opacity and a short translation over 180ms. Base UI holds each region in the layout during exit and releases the space at the end. Closing makes the region inert immediately. Reduced motion makes both state changes immediate. The mobile sidebar uses the existing Sheet transition from the right edge.
+
 ## Public reading surface and floating controls — 2026/11/17
 
 The public portal reuses the fixed AppLayout mesh through GlassBackdrop; public header/sidebar/action chrome uses the existing glass.panel contract. ReadingSurface uses the shared glass.readingSurface contract: a quiet 85% white paper fill (slate in dark mode), white edge and restrained shadow, without backdrop filtering. Long-form content intentionally prioritizes readability; controls retain glass. Solid/forced-color fallbacks reuse the existing contract. FloatingOptions adds no new button/menu appearance; it combines the canonical record control and shared glass menu.

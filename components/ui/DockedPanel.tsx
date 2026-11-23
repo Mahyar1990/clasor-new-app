@@ -4,12 +4,14 @@ import { X } from "lucide-react";
 import { glass } from "@/lib/design-system/classes";
 import { Button } from "./button";
 import { GlassScrollArea } from "./GlassScrollArea";
+import { AnimatedDisclosure } from "./AnimatedDisclosure";
 import { cn } from "@/lib/utils";
 /** A nonmodal surface: its parent flex row reserves real layout space. */
-export function DockedPanel({ open, title, onClose, children, testId, className, closeLabel = "بستن ابزارهای سند" }: { open: boolean; title: string; onClose: () => void; children: ReactNode; testId: string; className?: string; closeLabel?: string }) {
+export function DockedPanel({ open, title, onClose, children, testId, className, animate = false, closeLabel = "بستن ابزارهای سند" }: { open: boolean; title: string; onClose: () => void; children: ReactNode; testId: string; className?: string; animate?: boolean; closeLabel?: string }) {
   const heading = useId();
-  return <aside data-test-id={testId} id={testId} hidden={!open} aria-labelledby={heading} className={cn(glass.dockedPanel, open ? "flex" : "hidden", className)}>
+  const panel = <aside data-test-id={testId} id={testId} {...(animate ? {} : { hidden: !open })} aria-labelledby={heading} className={cn(glass.dockedPanel, animate || open ? "flex" : "hidden", className)}>
     <header data-test-id={`${testId}-header`} className="flex shrink-0 items-center justify-between gap-1 border-b border-white/25 px-2 py-1"><h2 data-test-id={`${testId}-title`} id={heading} className="text-[10px] font-semibold">{title}</h2><Button data-test-id={`${testId}-close`} size="icon-sm" variant="ghost" className="size-6" aria-label={closeLabel} onClick={onClose}><X aria-hidden="true" className="size-3!" /></Button></header>
     <GlassScrollArea data-test-id={`${testId}-scroll`} label={title} contentClassName={glass.boundedScrollContent} className="min-h-0 flex-1"><div data-test-id={`${testId}-content`} className={glass.compactPanelContent}>{children}</div></GlassScrollArea>
   </aside>;
+  return animate ? <AnimatedDisclosure open={open} panel={panel} testId={testId} /> : panel;
 }
