@@ -12,10 +12,10 @@ export function PublishHeaderActions({ appearance }: { appearance?: ReactNode })
   const anchor = useRef<HTMLDivElement>(null);
   function open(kind: "news" | "search" | "profile") { setDialog({ kind, trigger: window.document.activeElement as HTMLElement }); }
   return <div data-test-id="publish-header-actions-anchor" ref={anchor}>
-    <PublicHeaderActions testId="publish-header-actions" user={session.user} guestProfile={!!appearance} panelHref="/clasor-pages/dashboard" onLogin={() => session.requestLogin()} onProfile={() => open("profile")} onNewsletter={() => open("news")} onSearch={() => open("search")} />
+    <PublicHeaderActions testId="publish-header-actions" user={session.user} panelHref="/clasor-pages/dashboard" onLogin={() => session.requestLogin()} onProfile={() => open("profile")} onNewsletter={() => open("news")} onSearch={() => open("search")} />
     {dialog?.kind === "search" && <PublishSearchDialog trigger={dialog.trigger} close={() => setDialog(null)} />}
     {dialog?.kind === "news" && <PublishNewsDialog trigger={dialog.trigger} close={() => setDialog(null)} />}
-    <GlassModal testId="publish-profile-dialog" themeAnchorRef={anchor} open={dialog?.kind === "profile"} title="حساب کاربری" description={session.user?.name ?? "مهمان"} onOpenChange={open => { if (!open) setDialog(null); }}
+    <GlassModal testId="publish-profile-dialog" themeAnchorRef={anchor} open={!!session.user && dialog?.kind === "profile"} title="حساب کاربری" description={session.user?.name} onOpenChange={open => { if (!open) setDialog(null); }}
       finalFocus={() => anchor.current?.querySelector<HTMLButtonElement>('[data-test-id="publish-header-actions-profile"]') ?? anchor.current?.querySelector<HTMLButtonElement>('[data-test-id="publish-header-actions-login"]') ?? true} compact surface="liquid" size="sm">
       <div data-test-id="publish-profile-settings" className="flex flex-wrap items-center justify-between gap-3">
         {appearance}
