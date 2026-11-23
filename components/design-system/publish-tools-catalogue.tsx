@@ -28,16 +28,22 @@ function Examples() {
   const [disabled, setDisabled] = useState(false);
   const [selected, setSelected] = useState(headings[0].id);
   const origin = useRef<HTMLButtonElement>(null);
+  const tools = useRef<HTMLDivElement>(null);
   const article = useRef<HTMLDivElement>(null);
   function select(id: string) { setSelected(id); article.current?.querySelector<HTMLElement>(`[id="${id}"]`)?.focus({ preventScroll: true }); }
+  function closeDock() {
+    setDock(false);
+    const target = expanded ? origin.current : tools.current?.querySelector<HTMLButtonElement>('[data-test-id="publish-demo-bar-toggle"]');
+    target?.focus({ preventScroll: true });
+  }
   return <GlassPreviewFrame testId="publish-tools-catalogue" title="ابزارهای پابلیش؛ هدر مهمان و حساب، جستجو، بازخورد و فهرست سند">
     <PublishHeaderActions />
     <p data-test-id="publish-tools-demo-note" className="text-[11px] text-muted-foreground">ورود نمونه، تصویر حساب را جایگزین ورود می‌کند. خبرنامه و دو حالت جستجو از همین هدر باز می‌شوند.</p>
     <label data-test-id="publish-demo-disabled-label" className="flex min-h-9 items-center gap-2 text-xs"><Checkbox data-test-id="publish-demo-disabled" checked={disabled} onCheckedChange={value => setDisabled(!!value)} />واکنش غیرفعال</label>
     <label data-test-id="publish-demo-empty-label" className="flex min-h-9 items-center gap-2 text-xs"><Checkbox data-test-id="publish-demo-empty" checked={empty} onCheckedChange={value => setEmpty(!!value)} />فهرست خالی</label>
-    <FloatingActionBar testId="publish-demo-bar" open={expanded} onOpenChange={setExpanded}><Button data-test-id="publish-demo-contents-toggle" ref={origin} size="icon-sm" variant="ghost" aria-label="فهرست سند نمونه" aria-expanded={dock} aria-controls="publish-demo-drawer" onClick={() => setDock(current => !current)}><ListTree aria-hidden="true" /></Button><ReactionControl testId="publish-demo-reaction" value={reaction} {...reactionCounts(reaction, 20, 3)} onValueChange={setReaction} disabled={disabled} /></FloatingActionBar>
+    <div data-test-id="publish-demo-tools" ref={tools}><FloatingActionBar testId="publish-demo-bar" open={expanded} onOpenChange={setExpanded}><Button data-test-id="publish-demo-contents-toggle" ref={origin} size="icon-sm" variant="ghost" aria-label="فهرست سند نمونه" aria-expanded={dock} aria-controls="publish-demo-drawer" onClick={() => setDock(current => !current)}><ListTree aria-hidden="true" /></Button><ReactionControl testId="publish-demo-reaction" value={reaction} {...reactionCounts(reaction, 20, 3)} onValueChange={setReaction} disabled={disabled} /></FloatingActionBar></div>
     <div data-test-id="publish-tools-demo-stage" className={publishToolsDemoLayout}>
-      <DockedPanel testId="publish-demo-drawer" title="فهرست سند" closeLabel="بستن فهرست سند" open={dock} onClose={() => { setDock(false); origin.current?.focus(); }} className="max-md:h-40 max-md:w-full max-md:max-w-none"><ContentsNavigation testId="publish-demo-contents" items={empty ? [] : headings} selectedId={selected} onSelect={select} /></DockedPanel>
+      <DockedPanel testId="publish-demo-drawer" title="فهرست سند" closeLabel="بستن فهرست سند" open={dock} onClose={closeDock} animate className="max-md:h-40 max-md:w-full max-md:max-w-none"><ContentsNavigation testId="publish-demo-contents" items={empty ? [] : headings} selectedId={selected} onSelect={select} /></DockedPanel>
       <div ref={article} data-test-id="publish-demo-paper-region" className="min-w-0 flex-1"><ReadingSurface titleAs="h4" testId="publish-demo-paper" width="full" titleId={headings[0].id} title="معرفی" metadata="نمای تمام‌عرض بدون محدودیت خواندن"><h5 id={headings[1].id} tabIndex={-1} data-test-id="publish-demo-start" className="text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring">شروع به کار</h5><p data-test-id="publish-demo-body">فهرست سند در فضای خودش قرار می‌گیرد و محتوا را نمی‌پوشاند.</p><DeepHeadings /><h5 id="catalogue-publish-help" tabIndex={-1} data-test-id="publish-demo-help" className="text-sm font-semibold focus-visible:outline-2 focus-visible:outline-ring">راهنما و پرسش‌ها</h5></ReadingSurface></div>
     </div>
   </GlassPreviewFrame>;

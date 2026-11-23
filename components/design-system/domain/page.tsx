@@ -11,7 +11,7 @@ import { DomainReports } from "./reports";
 import { DomainTags } from "./tags";
 import { DomainRepositories } from "./repositories";
 export function DomainWorkspace() {
-  return <ClasorTabs label="مدیریت دامنه" defaultValue="settings" testIds={{ root: "domain-tabs", list: "domain-tabs-list", tab: value => `domain-tab-${value}` }} items={[
+  return <GlassCard data-test-id="domain-workspace" role="region" aria-label="مدیریت دامنه" tabIndex={0} className="min-h-0 min-w-0 flex-1 overflow-y-auto p-3 md:p-4"><ClasorTabs label="مدیریت دامنه" defaultValue="settings" testIds={{ root: "domain-tabs", list: "domain-tabs-list", tab: value => `domain-tab-${value}` }} items={[
     { value: "settings", label: "تنظیمات", content: <DomainSettingsPanel /> },
     { value: "access", label: "دسترسی", content: <DomainAccess /> },
     { value: "public-news", label: "خبرنامه عمومی", content: <DomainNewsList /> },
@@ -21,8 +21,8 @@ export function DomainWorkspace() {
     { value: "repositories", label: "مدیریت مخزن‌ها", content: <DomainRepositories /> },
     { value: "reports", label: "گزارش تخلف", content: <DomainReports /> },
     { value: "tags", label: "تگ‌ها", content: <DomainTags /> },
-  ]} />;
+  ]} /></GlassCard>;
 }
 export function DomainPage() {
-  return <LibraryShell page="domain-management" title="مدیریت دامنه"><GlassCard data-test-id="domain-workspace" role="region" aria-label="مدیریت دامنه" tabIndex={0} className="min-h-0 min-w-0 flex-1 overflow-y-auto p-3 md:p-4"><DomainWorkspace /></GlassCard></LibraryShell>;
+  return <LibraryShell page="domain-management" title="مدیریت دامنه"><DomainWorkspace /></LibraryShell>;
 }
