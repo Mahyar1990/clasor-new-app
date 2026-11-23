@@ -74,7 +74,7 @@ A representative fictional guide supplies nested headings, two downloadable atta
 
 ## Public publish portal — 2026/11/17
 
-The shared publish header offers light, dark and system appearance to guests and signed-in users. The browser stores this preference for the public landing, repository reader and unavailable states. The system setting follows operating-system changes. The document theme applies to the reading surface, navigation and portalled overlays. The design-system header demonstrates the same selector with its own saved preference.
+The account dialog in the shared publish header offers light, dark and system appearance to guests and signed-in users. The browser stores the choice for the public landing, repository reader and unavailable states. The setting applies immediately across the reading surface, navigation and portalled overlays and remains active after closing the dialog. System appearance follows operating-system changes. The publish tools catalogue demonstrates the account dialog with a local preview.
 
 Two independent previews are linked from the Clasor page registry: “صفحه ای اولیه پابلیش” at `/clasor-pages/publish`, and the document-reading example at `/clasor-pages/publish/dashboard-repository-1`. Repository and document IDs have addressable nested routes with a repository-layout Suspense boundary. The shared repository layout keeps the outline/search/scroll mounted while the selected document segment changes. These pages use public-site chrome rather than the management sidebar. The landing uses existing repository images/tile materials, applied compact search and cumulative loading.
 

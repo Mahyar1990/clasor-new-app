@@ -8,14 +8,14 @@ const options = [
   { value: "light", label: "روشن" },
   { value: "dark", label: "تاریک" },
 ] as const;
-type Preference = (typeof options)[number]["value"];
+export type ThemeMode = (typeof options)[number]["value"];
 const defaultPreference = () => "system" as const;
 
 export function createThemePreference(storageKey: string) {
-  let sessionPreference: Preference | undefined;
+  let sessionPreference: ThemeMode | undefined;
   const listeners = new Set<() => void>();
 
-  function getPreference(): Preference {
+  function getPreference(): ThemeMode {
     if (sessionPreference) return sessionPreference;
     try {
       const value = localStorage.getItem(storageKey);
@@ -37,7 +37,7 @@ export function createThemePreference(storageKey: string) {
     };
   }
 
-  function setPreference(value: Preference) {
+  function setPreference(value: ThemeMode) {
     try {
       localStorage.setItem(storageKey, value);
       sessionPreference = undefined;
@@ -50,11 +50,13 @@ export function createThemePreference(storageKey: string) {
   return { getPreference, subscribe, setPreference };
 }
 
-export function ThemePreference({ store, testId }: { store: ReturnType<typeof createThemePreference>; testId: string }) {
-  const id = useId();
-  const preference = useSyncExternalStore(store.subscribe, store.getPreference, defaultPreference);
+export function useThemePreference(store: ReturnType<typeof createThemePreference>) {
+  return useSyncExternalStore(store.subscribe, store.getPreference, defaultPreference);
+}
 
+export function useDocumentTheme(preference: ThemeMode | undefined) {
   useLayoutEffect(() => {
+    if (!preference) return;
     const root = document.documentElement;
     const wasDark = root.classList.contains("dark");
     const media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -66,11 +68,14 @@ export function ThemePreference({ store, testId }: { store: ReturnType<typeof cr
       root.classList.toggle("dark", wasDark);
     };
   }, [preference]);
+}
 
+export function ThemePreference({ preference, onChange, testId }: { preference: ThemeMode; onChange: (value: ThemeMode) => void; testId: string }) {
+  const id = useId();
   return <div data-test-id={`${testId}-preference`} className="inline-flex min-w-0 items-center gap-2 text-xs">
     <label data-test-id={`${testId}-label`} htmlFor={id}>تم</label>
     <Select items={options} value={preference} onValueChange={value => {
-      if (value) store.setPreference(value);
+      if (value) onChange(value);
     }}>
       <SelectTrigger id={id} data-test-id={`${testId}-trigger`} className="w-29">
         <SelectValue />
