@@ -1,3 +1,15 @@
+## Portable client refactor skills — 2026/11/24
+
+Evidence is the working tree on `docs/portable-client-refactor-skills`, based on `578132b`. The review compared packaged policies with current component contracts and source for themes, account identity, publish sidebar controls and motion.
+
+- Four packages now cover staged refactoring, the glass profile, Clasor behavior and bidirectional page/catalogue auditing. Theme/motion and account references include the final sidebar and login/avatar decisions. The adoption guide maps source files, target-stack choices and the remaining GlassModal motion gap.
+- The skill-creator frontmatter validator passed all four original packages and all four copies in an isolated temporary directory. YAML UI metadata parsed successfully, named the corresponding invocation, and met the description-length constraint.
+- The portable-resource checker passed four packages and 16 Markdown files in both source and copied locations. Injecting a missing reference, an outside-package reference and a symbolic link into the temporary copy each produced the expected failure. After restoring that copy, it passed again.
+- Structural/style guards passed for 327 React files, lint passed, standard documentation links passed for 31 files, and the specification index matched 17 sources. These are checks run for this documentation/tooling change. Application behavior and human accessibility acceptance were not retested.
+- The required production build reached Turbopack and failed at the previously recorded internal CSS-worker port bind with “Operation not permitted”. No new framework feedback candidate was retained. The historical production-CSS and GlassModal limitations remain recorded in the adoption guide.
+
+The transfer checks establish package integrity. They do not establish autonomous refactor quality across arbitrary products. The guide supplies concrete Clasor, unrelated-product and report-only audit requests for scoped trials in each destination.
+
 ## Recent Clasor interactions — documentation review 2026/11/24
 
 The following evidence comes from the implementation turns on 2026/11/22–23. This section preserves their revisions and scope.
