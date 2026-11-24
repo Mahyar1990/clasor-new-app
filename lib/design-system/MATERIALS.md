@@ -8,6 +8,8 @@ The shared catalogue header offers System (default), Light, and Dark. The choice
 
 The Colors, Typography, and Geometry catalogue pages use semantic theme roles for sample surfaces, text, borders and focus. Raw brand and neutral swatches preserve their source values; usage samples follow the active theme. Semantic cards display the active role and copy its rendered text color. Dark status roles define matching text, surface and border.
 
+The complete movement inventory, lifecycle and remaining integration gap are documented in [MOTION.md](MOTION.md).
+
 ## Connected heading lists and distinct floating trigger — 2026/11/18
 
 ContentsNavigation's nested groups use shared contentsBranch/contentsNode rails and elbow connectors. Chevron/leaf cues and native list structure make the parent-child relationship visible across heading levels; leaf glyphs stay at 6px inside compact panels. Logical start borders preserve RTL/LTR and system-color borders remain effective in forced colors.

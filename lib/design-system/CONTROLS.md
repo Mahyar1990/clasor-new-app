@@ -54,6 +54,14 @@ The shared Clasor DocumentList and independent DocumentTableCatalogue use RTL or
 
 RecordDates(createdAt?, updatedAt?, testId) is a product-independent pair of labeled semantic time elements. ISO values are formatted with the Persian calendar and Asia/Tehran time zone consistently on server/client; missing or invalid timestamps display an accessible unknown dash. It does not invent a modification date from creation. The catalogue includes valid and unavailable dates, a long name and independent row/action interactions. Existing row activation, name-cell selection and cumulative loading contracts remain in effect.
 
+## Clasor account appearance
+
+The dashboard account avatar opens a menu with “اطلاعات حساب”. That item opens the account dialog containing the light, dark and system selector. The same header composition serves documents, all repository lists, repository details, organization, domain and admin pages. The standalone internal reader supplies an account control through EditorWorkspace.headerAccount. Publish opens its account dialog directly from the signed-in avatar. Guests see Login, and signing in replaces it with the avatar.
+
+ClasorDocumentTheme in the shared route layout applies the saved choice even while the account dialog is closed. ClasorThemePreference edits the shared store. The browser key remains `clasor.publish.theme` for compatibility with choices saved by the earlier publish-only implementation. System mode subscribes to color-scheme changes. Storage failure retains the choice in memory for the current session.
+
+The catalogue uses `clasor.catalogue.theme`. Independent account examples edit local preview state. ThemePreference is a controlled Select, useThemePreference subscribes to a store, and useDocumentTheme applies the selected mode to the document. The shared hooks keep theme ownership outside a transient dialog. Portal theme inheritance covers menus and modal content.
+
 ## Hierarchical contents and bounded pane resizing — 2026/11/18
 
 ContentsNavigation now builds nested ordered lists from the heading levels rather than applying flat padding. contentsTree attaches each heading to the nearest preceding lower-level heading, handles skipped levels without fake headings and preserves input order/data. Every nested group has a logical start rail and every child an elbow connector; parent chevrons and leaf markers supplement indentation. The independent example reaches heading levels 1–6 and includes returning to a parent level. Anchors, active state, modified clicks, heading activation and empty behavior retain their public contract.

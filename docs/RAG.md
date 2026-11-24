@@ -12,6 +12,8 @@ Updated: 2026-11-18 (Asia/Tehran). Committed baseline: `faa9fdd`; feedback detai
 
 ## Query routing
 
+Recent interaction contracts are indexed in [motion](../lib/design-system/MOTION.md), [account appearance](../lib/design-system/CONTROLS.md#clasor-account-appearance) and [route coverage](../lib/design-system/PATTERNS.md#clasor-route-to-catalogue-coverage). These describe implementation through `920c5e4`. Revision-specific checks and build limitations are recorded in [VALIDATION.md](../lib/design-system/VALIDATION.md).
+
 | Question | Primary source | Supporting context |
 | --- | --- | --- |
 | Portable design policies and reusable skills | [Policy map](../lib/design-system/POLICIES.md), [glass skill](../skills/glass-design-system/SKILL.md), [Clasor skill](../skills/clasor-product-patterns/SKILL.md) | Final conversation decisions, superseded designs, portable material/interaction rules and separately scoped product behavior. Copy complete skill folders with their references; no implicit authorization for external changes. |
