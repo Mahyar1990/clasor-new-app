@@ -197,6 +197,8 @@ Each catalogue route has one page-level heading. Colors keeps its hero heading; 
 
 ## Feedback and recovery in both themes
 
+Current account access and shared appearance are documented in [Clasor account appearance](CONTROLS.md#clasor-account-appearance). Publish sidebar close/reopen placement and its focus behavior are covered in [motion](MOTION.md). The account and publish tools catalogue examples provide local previews of the same interactions.
+
 Empty states stay neutral; permission limits use info, partial success uses warning, and service errors use danger. Titles and descriptions state what happened regardless of color. Recovery controls wrap on narrow screens and the catalogue announces the result of each demo action. Determinate progress uses a matte track and a theme-specific fill; the semantic value, RTL direction and opacity-independent skeleton behavior remain unchanged.
 
 ## Theme ownership in overlay previews

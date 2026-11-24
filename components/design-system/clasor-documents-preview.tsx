@@ -1,6 +1,7 @@
 "use client";
 
 import { ClasorDashboardHeaderActions } from "@/components/design-system/clasor-dashboard-header-actions";
+import { ClasorThemePreference } from "./clasor-appearance";
 import { dashboardViewport } from "@/components/design-system/clasor-dashboard-layout";
 import { LayoutDashboard } from "lucide-react";
 import { AppLayout } from "@/components/ui/AppLayout";
@@ -17,7 +18,7 @@ export function DashboardCollections() {
 
 export function ClasorDashboardPreview() {
   return <section data-test-id="clasor-documents-preview" aria-label="نمونه داشبورد کلاسور" className={dashboardViewport}>
-      <AppLayout density="compact" title="کلاسور · سیستم مدیریت اسناد" contentAs="main" sidebar={<ClasorDashboardSidebar />} profile={<ClasorDashboardHeaderActions />}>
+      <AppLayout density="compact" title="کلاسور · سیستم مدیریت اسناد" contentAs="main" sidebar={<ClasorDashboardSidebar />} profile={<ClasorDashboardHeaderActions appearance={<ClasorThemePreference testId="dashboard-theme" />} />}>
         <div data-test-id="dashboard-overview" id="dashboard-overview" className="mb-3 flex shrink-0 flex-wrap items-start justify-between gap-4">
           <div data-test-id="dashboard-heading" className="space-y-1">
             <p data-test-id="dashboard-eyebrow" className="text-xs text-muted-foreground">فضای کار / داشبورد</p>

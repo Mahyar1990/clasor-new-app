@@ -3,6 +3,8 @@ import { useCallback, useEffect, useMemo, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { readerFolderPath } from "./reader-path";
 import { EditorWorkspace } from "./editor-workspace";
+import { ClasorDashboardHeaderActions } from "../clasor-dashboard-header-actions";
+import { ClasorThemePreference } from "../clasor-appearance";
 import { useLibrary } from "../library/store";
 import { readReaderSnapshot, parseReaderSnapshot, saveReaderSnapshot, subscribeReader } from "./transfer";
 import { useStatusToast } from "@/components/ui/status-toast";
@@ -31,5 +33,6 @@ export function ReaderPage({ documentId }: { documentId: string }) {
   };
   if (!hydrated) return <p data-test-id="reader-hydrating" role="status" className="p-6 text-sm">در حال بازکردن سند…</p>;
   if (!document || document.deleted) return <main data-test-id="reader-unavailable" className="p-6 text-sm"><h1 data-test-id="reader-unavailable-title" className="mb-3">سند در این پیش‌نمایش در دسترس نیست.</h1><Link data-test-id="reader-back-documents" href="/clasor-pages/my-documents" className="text-primary underline">بازگشت به سندها</Link></main>;
-  return <div data-test-id="reader-viewport" className="flex h-dvh min-h-0 flex-col"><EditorWorkspace key={document.id} document={document} repository={repository} folders={folders} onChange={change} onCommit={commit} /></div>;
+  return <div data-test-id="reader-viewport" className="flex h-dvh min-h-0 flex-col"><EditorWorkspace key={document.id} document={document} repository={repository} folders={folders} onChange={change} onCommit={commit}
+    headerAccount={<ClasorDashboardHeaderActions accountOnly appearance={<ClasorThemePreference testId="dashboard-theme" />} />} /></div>;
 }

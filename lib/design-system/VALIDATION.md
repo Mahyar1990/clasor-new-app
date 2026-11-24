@@ -1,3 +1,21 @@
+## Recent Clasor interactions — documentation review 2026/11/24
+
+The following evidence comes from the implementation turns on 2026/11/22–23. This section preserves their revisions and scope.
+
+| Revision | Delivered behavior | Recorded verification |
+| --- | --- | --- |
+| `ceff34c` | Route-to-catalogue inventory and seven shared composition examples | 17 page paths and three redirects responded as expected. Representative desktop light and mobile dark catalogue checks passed in Firefox |
+| `cb27c57` | Animated publish sidebar, contents and floating actions | Firefox recorded opacity/translate transitions on entry and exit, retained resize width, focus restoration and immediate reduced-motion behavior |
+| `b725ecd`, `4c6ee8b` | Stored appearance and relocation into the publish account dialog | Light/dark/system, live system updates, reloads, overlays and catalogue isolation passed in Firefox |
+| `df4b92f` | Shared Clasor appearance across dashboard, libraries, management and reader | Account settings exercised on these route families. Login/avatar exclusivity exercised through sign-in and sign-out |
+| `8ee4dec`, `920c5e4` | Sidebar control placement, followed by in-box close control | Firefox checked bounds, desktop/mobile geometry, entry/exit motion, retained width and focus between close/reopen controls |
+
+At `920c5e4`, the implementation pass recorded 91 passing logic tests, lint, TypeScript, structural/style guards and documentation links. Temporary browser scripts and captures live outside tracked source. These are historical runs, and the complete permission and device matrices have further combinations.
+
+The Turbopack production build repeatedly stopped while binding an internal CSS-processing port with “Operation not permitted”. A prior Webpack build compiled but omitted Tailwind-generated utility CSS. Webpack compilation alone therefore provides insufficient visual validation. Runtime checks above used the development server with generated Tailwind CSS.
+
+The source audit still finds missing motion integration in GlassModal. See [MOTION.md](MOTION.md). Low-end device frame-rate measurement and integrated human screen-reader acceptance remain unverified.
+
 ## Catalogue final Firefox audit — 2026/11/22
 
 Manual acceptance reported by the project owner at `44b71e6`: In the existing Firefox window, keyboard entry with Tab showed the focus ring and Left Arrow selected the next RTL tab without Enter, in both Light and Dark. This closes the outstanding tab activation/focus check below; it does not establish contrast or screen-reader acceptance.

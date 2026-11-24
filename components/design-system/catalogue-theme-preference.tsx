@@ -1,9 +1,11 @@
 "use client";
 
-import { createThemePreference, ThemePreference } from "@/components/ui/theme-preference";
+import { createThemePreference, ThemePreference, useDocumentTheme, useThemePreference } from "@/components/ui/theme-preference";
 
 const catalogueTheme = createThemePreference("clasor.catalogue.theme");
 
 export function CatalogueThemePreference() {
-  return <ThemePreference store={catalogueTheme} testId="catalogue-theme" />;
+  const preference = useThemePreference(catalogueTheme);
+  useDocumentTheme(preference);
+  return <ThemePreference preference={preference} onChange={catalogueTheme.setPreference} testId="catalogue-theme" />;
 }
