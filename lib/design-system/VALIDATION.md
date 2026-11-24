@@ -1,3 +1,26 @@
+## Portable skills follow-up review — 2026/11/24
+
+Evidence is the working tree on `fix/portable-skills-review`, based on `b5f2f62`. The review covered all four skill entry points, references, adoption instructions and the resource checker.
+
+- Two checker defects were reproduced on isolated copies. A symbolic link at a package root and a reference-style Markdown link to an outside file both returned success before correction. Both now return validation failures. Undefined reference labels and malformed URI encoding also receive diagnostics.
+- Seven regression tests cover copied packages, missing resources, reference-style links, normalized labels, malformed encoding, root and nested symbolic links, and omitted packages. The full suite passed 98 tests. Frontmatter and UI metadata passed the skill-creator and YAML checks for source and isolated copies of all four packages.
+- The independent glass profile now includes source-backed typography, line height, control heights, touch target, spacing and field semantics. The adoption instructions describe comparing versions and retired files when updating an installed skill.
+- Structural/style guards passed for 327 React files, lint passed, local documentation links passed for 31 files, the specification index matched 17 sources, and the four-package resource check passed. The required production build again failed at the previously recorded Turbopack CSS-worker port bind. The feedback pass retained no new framework issue.
+
+The resource checker verifies file references and package boundaries. Frontmatter/YAML and behavior of an agent using the instructions require their respective checks. The review adds no new claim of browser, low-end-device or human accessibility acceptance.
+
+## Portable client refactor skills — 2026/11/24
+
+Evidence is the working tree on `docs/portable-client-refactor-skills`, based on `578132b`. The review compared packaged policies with current component contracts and source for themes, account identity, publish sidebar controls and motion.
+
+- Four packages now cover staged refactoring, the glass profile, Clasor behavior and bidirectional page/catalogue auditing. Theme/motion and account references include the final sidebar and login/avatar decisions. The adoption guide maps source files, target-stack choices and the remaining GlassModal motion gap.
+- The skill-creator frontmatter validator passed all four original packages and all four copies in an isolated temporary directory. YAML UI metadata parsed successfully, named the corresponding invocation, and met the description-length constraint.
+- The portable-resource checker passed four packages and 16 Markdown files in both source and copied locations. Injecting a missing reference, an outside-package reference and a symbolic link into the temporary copy each produced the expected failure. After restoring that copy, it passed again.
+- Structural/style guards passed for 327 React files, lint passed, standard documentation links passed for 31 files, and the specification index matched 17 sources. These are checks run for this documentation/tooling change. Application behavior and human accessibility acceptance were not retested.
+- The required production build reached Turbopack and failed at the previously recorded internal CSS-worker port bind with “Operation not permitted”. No new framework feedback candidate was retained. The historical production-CSS and GlassModal limitations remain recorded in the adoption guide.
+
+The transfer checks establish package integrity. They do not establish autonomous refactor quality across arbitrary products. The guide supplies concrete Clasor, unrelated-product and report-only audit requests for scoped trials in each destination.
+
 ## Recent Clasor interactions — documentation review 2026/11/24
 
 The following evidence comes from the implementation turns on 2026/11/22–23. This section preserves their revisions and scope.

@@ -1,6 +1,6 @@
 ---
 name: glass-design-system
-description: Design or revise compact glass interfaces and their reusable component catalogue using the recorded Clasor visual, interaction and delivery policies. Use when this glass design language is requested; preserve the target product's behavior and stack.
+description: Apply the Clasor compact glass design language to an existing or new interface, including light/dark/system themes, RTL, accessible overlays and lightweight motion. Use when this visual profile is selected for the target product.
 ---
 
 # طراحی سیستم شیشه‌ای قابل انتقال
@@ -15,6 +15,7 @@ description: Design or revise compact glass interfaces and their reusable compon
    - [مواد، تراکم و هویت بصری](references/visual-policy.md): شیشه، لایه‌ها، آیکون، تب، رنگ و تم.
    - [چیدمان و رفتار کنترل‌ها](references/interaction-policy.md): جدول، کارت، جستجو، فهرست، دیالوگ، درخت و اسکرول.
    - [رشد سیستم و تحویل](references/delivery-policy.md): مرز کامپوننت‌ها، نمونه‌ها، آزمون و گیت.
+   - [تم و حرکت](references/theme-motion-policy.md): حالت روشن/تاریک/سیستم، پورتال، ورود و خروج، فوکوس و کاهش حرکت.
 4. تغییر جزء را در صفحهٔ واقعی مصرف‌کننده هم اعمال کن؛ حضور در کاتالوگ به‌تنهایی خروجی خواسته‌شده نیست.
 5. نتیجهٔ همان نسخه را بررسی و حدودش را گزارش کن. متن تاریخی «پاس شد» اثبات نسخهٔ فعلی نیست.
 
@@ -23,5 +24,5 @@ description: Design or revise compact glass interfaces and their reusable compon
 - اعداد و نقش‌های بصری در مراجع، پروفایل پذیرفته‌شدهٔ این طراحی‌اند؛ مقادیر را از توکن‌های پروژهٔ مقصد مصرف کن و در صورت انتخاب آگاهانهٔ پروفایل دیگری، یک‌جا تغییر بده.
 - نام فایل، فریم‌ورک و کتابخانهٔ پروژهٔ مبدأ الزام همهٔ پروژه‌ها نیست. از قرارداد بومی مقصد استفاده کن؛ این اسکیل مجوز جایگزینی استک نیست.
 - قوانین سند، مخزن، نسخه و مدیریت سازمانی عمومی نیستند. برای همان دامنهٔ محصول، اسکیل مستقل `clasor-product-patterns` مناسب است؛ این اسکیل به نصب آن وابسته نیست.
-- آخرین انتخاب جای انتخاب قدیمی را می‌گیرد: یک تب‌بار مشترک؛ کارت مخزن مستطیلی؛ وضعیت‌های نسخه زیرهم؛ جزئیات تو‌در‌تو در یک دیالوگ؛ آیکون فهرست داخل قاب ادیتور.
+- وضعیت اجرا و تصمیم طراحی را جدا ثبت کن. در نسخهٔ مرجع، حرکت پایهٔ Dialog وجود دارد و ترکیب GlassModal هنوز آن را دریافت نمی‌کند. هنگام انتقال، اتصال حرکت را در wrapper واقعی مقصد بررسی کن.
 - ظاهر اپل و پروژهٔ Liquid Glass مرجع الهام‌اند؛ ادعای پیاده‌سازی دقیق سیستم‌عامل یا وابستگی اجباری به یک کتابخانه نکن.
