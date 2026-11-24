@@ -8,6 +8,42 @@ const names = ["client-refactor", "glass-design-system", "clasor-product-pattern
 const failures = [];
 let checked = 0;
 
+function checkTarget(target, file, packageRoot) {
+  const resource = target.trim().replace(/^<|>$/g, "").split("#")[0];
+  if (!resource || /^[a-z][a-z\d+.-]*:/i.test(resource) || resource.startsWith("//")) return;
+  let decoded;
+  try {
+    decoded = decodeURIComponent(resource);
+  } catch {
+    failures.push(`${file}: invalid encoded reference: ${resource}`);
+    return;
+  }
+  const destination = path.resolve(path.dirname(file), decoded);
+  const relative = path.relative(packageRoot, destination);
+  if (relative === ".." || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+    failures.push(`${file}: reference leaves the skill package: ${resource}`);
+  } else if (!fs.existsSync(destination)) {
+    failures.push(`${file}: missing reference: ${resource}`);
+  }
+}
+
+function inspectMarkdown(file, packageRoot) {
+  const source = fs.readFileSync(file, "utf8");
+  const definitions = new Set();
+  const normalize = label => label.trim().replace(/\s+/g, " ").toLowerCase();
+  for (const match of source.matchAll(/^[ \t]{0,3}\[([^\]]+)\]:[ \t]*(<[^>]+>|\S+)/gm)) {
+    definitions.add(normalize(match[1]));
+    checkTarget(match[2], file, packageRoot);
+  }
+  for (const match of source.matchAll(/!?\[[^\]]*\]\(([^)]+)\)/g)) {
+    checkTarget(match[1], file, packageRoot);
+  }
+  for (const match of source.matchAll(/!?\[([^\]]+)\]\[([^\]]*)\]/g)) {
+    const label = normalize(match[2] || match[1]);
+    if (!definitions.has(label)) failures.push(`${file}: undefined reference label: ${label}`);
+  }
+}
+
 function inspect(directory, packageRoot) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     const file = path.join(directory, entry.name);
@@ -17,24 +53,18 @@ function inspect(directory, packageRoot) {
       inspect(file, packageRoot);
     } else if (entry.name.endsWith(".md")) {
       checked += 1;
-      const source = fs.readFileSync(file, "utf8");
-      for (const match of source.matchAll(/!?\[[^\]]*\]\(([^)]+)\)/g)) {
-        const target = match[1].trim().replace(/^<|>$/g, "").split("#")[0];
-        if (!target || /^[a-z][a-z\d+.-]*:/i.test(target) || target.startsWith("//")) continue;
-        const destination = path.resolve(path.dirname(file), decodeURIComponent(target));
-        const relative = path.relative(packageRoot, destination);
-        if (relative === ".." || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
-          failures.push(`${file}: reference leaves the skill package: ${target}`);
-        } else if (!fs.existsSync(destination)) {
-          failures.push(`${file}: missing reference: ${target}`);
-        }
-      }
+      inspectMarkdown(file, packageRoot);
     }
   }
 }
 
 for (const name of names) {
   const directory = path.join(root, name);
+  const entry = fs.lstatSync(directory, { throwIfNoEntry: false });
+  if (entry?.isSymbolicLink()) {
+    failures.push(`${name}: symbolic link prevents a self-contained copy`);
+    continue;
+  }
   const required = ["SKILL.md", "agents/openai.yaml"];
   if (!required.every(file => fs.existsSync(path.join(directory, file)))) {
     failures.push(`${name}: expected SKILL.md and agents/openai.yaml`);

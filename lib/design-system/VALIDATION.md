@@ -1,3 +1,14 @@
+## Portable skills follow-up review — 2026/11/24
+
+Evidence is the working tree on `fix/portable-skills-review`, based on `b5f2f62`. The review covered all four skill entry points, references, adoption instructions and the resource checker.
+
+- Two checker defects were reproduced on isolated copies. A symbolic link at a package root and a reference-style Markdown link to an outside file both returned success before correction. Both now return validation failures. Undefined reference labels and malformed URI encoding also receive diagnostics.
+- Seven regression tests cover copied packages, missing resources, reference-style links, normalized labels, malformed encoding, root and nested symbolic links, and omitted packages. The full suite passed 98 tests. Frontmatter and UI metadata passed the skill-creator and YAML checks for source and isolated copies of all four packages.
+- The independent glass profile now includes source-backed typography, line height, control heights, touch target, spacing and field semantics. The adoption instructions describe comparing versions and retired files when updating an installed skill.
+- Structural/style guards passed for 327 React files, lint passed, local documentation links passed for 31 files, the specification index matched 17 sources, and the four-package resource check passed. The required production build again failed at the previously recorded Turbopack CSS-worker port bind. The feedback pass retained no new framework issue.
+
+The resource checker verifies file references and package boundaries. Frontmatter/YAML and behavior of an agent using the instructions require their respective checks. The review adds no new claim of browser, low-end-device or human accessibility acceptance.
+
 ## Portable client refactor skills — 2026/11/24
 
 Evidence is the working tree on `docs/portable-client-refactor-skills`, based on `578132b`. The review compared packaged policies with current component contracts and source for themes, account identity, publish sidebar controls and motion.
